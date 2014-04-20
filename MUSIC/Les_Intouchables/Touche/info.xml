@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<simo>
+  <musicien name="Florent">
+    <instrument>voice</instrument>
+    <twitter>bob10bal</twitter>
+  </musicien>
+  <musicien name="Philippe">
+    <instrument>guitar</instrument>
+    <twitter>xaccrocheur</twitter>
+  </musicien>
+</simo>

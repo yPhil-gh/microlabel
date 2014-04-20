@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<simo>
+  <musicien name="Philippe">
+    <instrument>guitar</instrument>
+    <twitter>xaccrocheur</twitter>
+  </musicien>
+  <video>
+    <name>Grace (J.Buckley)</name>
+    <youtubeid>WOtjl5v9e6Y</youtubeid>
+  </video>
+</simo>

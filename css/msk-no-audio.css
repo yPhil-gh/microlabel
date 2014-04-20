@@ -1,0 +1,60 @@
+/* IE SPECIFICS */
+
+html body {
+    /* background: red; */
+    overflow:auto;
+/* height:100%; */
+}
+
+h3, a.downloadTuneLink {
+    margin: 0 0 0 1em;
+}
+
+h3.no-audio-alert {
+    color:red;
+    font-size:120%;
+}
+
+.no-audio-alert {
+    margin: 0;
+}
+
+.invisible_if_no_audio {
+    display:none;
+}
+
+body > div#controlFooter {
+    position: relative;
+}
+
+#controlFooter {
+    position:relative;
+    margin:0;
+    /* width:60px; */
+/* clear:both; */
+/* display:none; */
+/* width:100%; */
+/* left:0; */
+/* bottom:0; */
+}
+
+
+div#controlFooter {
+    position:relative;
+    /* clear:both; */
+  /* background: none; */
+  /* border-top: 5px solid #FFFFFF; */
+  /* bottom: 0; */
+  /* height: 5em; */
+  /* width: 200px; */
+}
+
+#albumBrowser {
+    margin: 1em 0 0 0;
+}
+
+/*
+ * .desc, h4.albumName, h5, #PagePlayerDescription span.albumName {
+ *     display:none;
+ * }
+ */
