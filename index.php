@@ -1073,7 +1073,7 @@ function fixedFooter($dirList) {
      <div id="osx-modal-title">Help</div>
      <div class="close"><a href="#" class="simplemodal-close">x</a></div>
      <div id="osx-modal-data">
-       <h2>MSK 1.5</h2>
+       <h2>MicroLabel1.5</h2>
        '.TXT_DEBUG_HELP_TXT.'
      </div>
    </div>

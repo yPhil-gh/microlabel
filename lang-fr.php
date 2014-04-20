@@ -37,9 +37,9 @@ define('TXT_DEBUG_ERROR_FOUND', 'Une erreur a été trouvée dans votre installa
 define('TXT_DEBUG_ERRORS_FOUND', 'erreurs ont été trouvées dans votre installation');
 define('TXT_DEBUG_ERRORS_FILE', 'Le fichier');
 define('TXT_DEBUG_ERRORS_FILE_SHOULD_BE_RENAMED', 'devrait être renommé');
-define('TXT_DEBUG_HELP_TXT', '<p>MSK est un <a href="http://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_contenu">CMS</a> conçu pour permettre aux musiciens de présenter, distribuer et même vendre leur musique, puisqu\'il semble qu\'ils sont les seuls à même de le faire correctement et simplement : Un script central et un répertoire de musique, des mp3 ou des ogg-vorbis (qui qui est infiniment préférable)</p>
+define('TXT_DEBUG_HELP_TXT', '<p>MicroLabel est un <a href="http://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_contenu">CMS</a> conçu pour permettre aux musiciens de présenter, distribuer et même vendre leur musique, puisqu\'il semble qu\'ils sont les seuls à même de le faire correctement et simplement : Un script central et un répertoire de musique, des mp3 ou des ogg-vorbis (qui qui est infiniment préférable)</p>
 <ul>
-<li>MSK scanne le répertoire à la recherche de musique, lit les <a href="http://fr.wikipedia.org/wiki/ID3">tags</a> des fichiers qu\'il trouve, et organise tout ça en ARTISTE / ALBUM / TRACK, sur deux pages : Un index qui liste tous les albums, et une page de "lecture" qui liste toutes les chansongs.</li>
+<li>MicroLabel scanne le répertoire à la recherche de musique, lit les <a href="http://fr.wikipedia.org/wiki/ID3">tags</a> des fichiers qu\'il trouve, et organise tout ça en ARTISTE / ALBUM / TRACK, sur deux pages : Un index qui liste tous les albums, et une page de "lecture" qui liste toutes les chansongs.</li>
 <li>Le player lit les chansons en séquence, de la première sélectionnée à la dernière de l\'album.</li>
 <li>Un back-office est disponible pour gèrer / tagger les fichiers en ligne.</li></ul>
 
