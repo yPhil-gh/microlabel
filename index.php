@@ -208,9 +208,9 @@ function getInfo($startPath, $element) {
             return $thisAlbumSleeves;
         }
         else {
-            $thisAlbumSleeves[0] = 'img/beldigital_logo_off.png';
+            $thisAlbumSleeves[0] = 'img/microlabel_logo_off.png';
             return $thisAlbumSleeves;
-            //            return 'img/beldigital_logo_off.png';
+            //            return 'img/microlabel_logo_off.png';
         }
         break;
 
@@ -226,7 +226,7 @@ function getInfo($startPath, $element) {
             return $thisAlbumSleeves[0];
         }
         else {
-            return 'img/beldigital_logo_off.png';
+            return 'img/microlabel_logo_off.png';
         }
         break;
     }
@@ -1013,7 +1013,7 @@ function albumBrowser($labelName) {
         <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse(next, nice).'" /></a>
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
-        <a title="'.$labelName.', '.TXT_BASELINE.'" href="'.$_SERVER[PHP_SELF].'"><img style="width:60px" class="rollover" src="img/beldigital_logo_off.png" alt="beldigital_logo_on.png" /></a>
+        <a title="'.$labelName.', '.TXT_BASELINE.'" href="'.$_SERVER[PHP_SELF].'"><img style="width:60px" class="rollover" src="img/microlabel_logo_off.png" alt="microlabel_logo_on.png" /></a>
     </div>
 </div>
 <p id="footBr">&nbsp;</p>
