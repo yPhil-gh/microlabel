@@ -12,8 +12,12 @@ Installation
 Configuration
 -----
 - Locate the MUSIC directory
-- Drop your files in it
-- (optional)
+- Drop your (correctly tagged) audio files in it
+- That's it
+
+Ooptional config
+------
+
     - Drop an image whose filename begins with `bg-` to make a background for this album's page
     - Put a info.xml with the following syntax :
 
