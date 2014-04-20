@@ -15,11 +15,11 @@ Configuration
 - Drop your (correctly tagged) audio files in it
 - That's it
 
-Ooptional config
+Optional config
 ------
 
-- Drop an image whose filename begins with *bg-* to make a background for this album's page
-- Put a *info.xml* with the following syntax in each album's directory
+- Drop an image whose filename begins with **bg-** to make a background for this album's page
+- Put a **info.xml** with the following syntax in each album's directory
 
 ```
  <?xml version="1.0" encoding="ISO-8859-1"?>
