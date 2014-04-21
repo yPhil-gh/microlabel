@@ -839,13 +839,14 @@ var myNewFlow = new ContentFlow("albumsRotator", {
         $thisAlbumSleeve = getInfo($albumPath, thisAlbumSleeve);
 
         echo '
-            <div class="item">
-                <img class="content" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" src="'.$thisAlbumSleeve.'" />
-                <div class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</div>
-            </div>
+ <div class="item">
+<img class="content" src="'.$thisAlbumSleeve.'" href="'.$script.'?a='.$newAlbumSexyUrl.'"/>
+<a style="display:none" href="'.$script.'?a='.$newAlbumSexyUrl.'">'.$albumName.'</a>
+<div class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</div>
+</div>
 
-                <!--a class="item" href="'.$newAlbumSexyUrl.'"><img class="content" src="'.$thisAlbumSleeve.'"/></a-->
-        ';
+<!--a class="item" href="'.$newAlbumSexyUrl.'"><img class="content" src="'.$thisAlbumSleeve.'"/></a-->
+';
     }
 
     echo '
