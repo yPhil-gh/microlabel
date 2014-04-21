@@ -324,7 +324,8 @@ function xmlInfos($element) {
   <link rel="alternate stylesheet" type="text/css" href="css/msk_RED.css" title="RED" />
 
   <script src="libs/msk_css_switcher.js"></script>
-  <script src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
+  <script src="libs/msk_css_switcher.js"></script>
+  <script src="libs/jquery-1.5.1.min.js"></script>
   <script type="text/javascript" src="libs/jquery.cycle.all.latest.js"></script>
   <script type="text/javascript" src="libs/jquery.livetwitter.min.js"></script>
   <script src="libs/jquery.colorbox-min.js"></script>
@@ -1057,6 +1058,7 @@ function debugFooter($totaltime, $albums, $songs) {
 // fixedFooter($dirList) ////////////////////////////////////////
 // Fixed Footer pane
 
+
 function fixedFooter($dirList) {
     echo '
    </div> <!--end content div-->
@@ -1067,6 +1069,7 @@ function fixedFooter($dirList) {
      <div id="osx-modal-data">
        <h2>MSK 1.5</h2>
        '.TXT_DEBUG_HELP_TXT.'
+plop
      </div>
    </div>
 
@@ -1136,7 +1139,11 @@ if (!$thisPageIsCached) {
   echo '<!-- Un-Cached -->';
 }
 
+
+// Version Control
+
 echo '
+
 </body>
 </html>
 ';
