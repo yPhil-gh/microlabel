@@ -1,24 +1,5 @@
 <?php
 
-if (!isset($_GET['debug']) && !isset($_SERVER['QUERY_STRING'])) {
-    $cachefile = 'cache/'.basename($_SERVER['SCRIPT_URI']);
-    if ($_SERVER['QUERY_STRING']!='') {
-        $cachefile .= '_'.base64_encode($_SERVER['QUERY_STRING']);
-    }
-    /* $cachetime = 120 * 60; // 2 hours */
-    $cachetime = 120 * 60 * 10;
-    // Serve from the cache if it is younger than $cachetime
-    if (file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile))) {
-        $thisPageIsCached = TRUE;
-        include($cachefile);
-        exit;
-    }
-    else {
-        $thisPageIsCached = FALSE;
-        // continue;
-    }
-}
-
 if ( ! defined( "PATH_SEPARATOR" ) ) {
     if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
         define( "PATH_SEPARATOR", ";" );
@@ -45,8 +26,6 @@ if (isset($_GET['lang'])) {
         setcookie("lang", $lang, time() + 365*24*3600);
     }
 }
-
-ob_start(); // C'est parti !
 
 ////////////////////////////////////////////////////////////////////
 // Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
@@ -1133,12 +1112,6 @@ if (isset($_GET['debug'])) {
   /* echo '<br />'; */
 }
 
-if (!$thisPageIsCached) {
-  echo '<!-- Cached on '.date('jS F Y H:i:s').' -->';
-} else {
-  echo '<!-- Un-Cached -->';
-}
-
 
 // Version Control
 
@@ -1148,12 +1121,12 @@ echo '
 </html>
 ';
 
-if (!isset($_GET['debug'])) {
+// if (!isset($_GET['debug'])) {
 
-    $fp = fopen($cachefile, 'w'); // open the cache file for writing
-    fwrite($fp, ob_get_contents()); // save the contents of output buffer to the file
-    fclose($fp); // close the file
-}
-ob_end_flush(); // Send the output to the browser
+//     $fp = fopen($cachefile, 'w'); // open the cache file for writing
+//     fwrite($fp, ob_get_contents()); // save the contents of output buffer to the file
+//     fclose($fp); // close the file
+// }
+// ob_end_flush(); // Send the output to the browser
 
 ?>
