@@ -679,9 +679,9 @@ function audioList($fileList, $albumPath) {
       // Note our use of ===.  Simply == would not work as expected
       // because the position of 'a' was the 0th (first) character.
       if ($pos === false) {
-          $unSafeLink = 'http://'.$host.$script.'?a='.$thisFileNicePath.'&s='.$z++;
+          $unSafeLink = 'http://'.$host.$script.'?a='.$thisFileNicePath.'&amp;s='.$z++;
       } else {
-          $unSafeLink = 'http://'.$host.$myDir.'/?a='.$thisFileNicePath.'&s='.$z++;
+          $unSafeLink = 'http://'.$host.$myDir.'/?a='.$thisFileNicePath.'&amp;s='.$z++;
       }
 
       $shortLink = getTinyUrl($unSafeLink);
