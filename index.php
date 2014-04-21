@@ -856,6 +856,7 @@ var myNewFlow = new ContentFlow("albumsRotator", {
             <div class="slider"><div class="position"></div></div>
         </div-->
     </div>
+    </div>
     ';
 }
 
