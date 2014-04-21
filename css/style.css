@@ -1,4 +1,5 @@
 * {
+    /* vertical-align:middle; */
     margin: 0;
     border:none;
 }
@@ -17,6 +18,7 @@ html {
 }
 
 body {
+    /* background: inherit; */
     color:#fff;
     font-family: Helvetica, Arial, sans-serif;
     text-align: center;
@@ -53,6 +55,7 @@ body {
 
 * html div.content{
     height:100%;
+    /*	overflow:auto;*/
     position: relative;
 }
 
@@ -72,11 +75,58 @@ div#footer{
     overflow-y: hidden;
     width:300px;
     height:200px;
+    /* 	opacity:0.8; */
+    /* 	padding:5px; */
     background: #000;
     border-top: 5px solid #fff;
     border-right: 5px solid #fff;
     border-left: 5px solid #fff;
-    /* radius:1em; */
+    -moz-border-radius-topleft: 15px;
+    -moz-border-radius-topright: 15px;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
+}
+
+div#myOwnPlayerFooter{
+    display: none;
+    z-index: 0;
+    position:absolute;
+    bottom: 0;
+    left:25%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width:600px;
+    height:450px;
+    /* 	opacity:0.8; */
+    /* 	padding:5px; */
+    background: #000;
+    border-top: 5px solid #fff;
+    border-right: 5px solid #fff;
+    border-left: 5px solid #fff;
+    -moz-border-radius-topleft: 15px;
+    -moz-border-radius-topright: 15px;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
+}
+
+#playerDiv, #myOwnPlayerFooter {
+    z-index: 3;
+}
+
+#mskPlayer {
+    z-index: 3;
+}
+
+#playerItself, #myOwnPlayerItself {
+    z-index: 3;
+}
+
+.zindex-zero {
+    z-index: 0;
+}
+
+.zindex-one {
+    z-index: 5;
 }
 
 div#controlFooter {
@@ -110,13 +160,28 @@ div#controlFooter img#close_player {
     margin:1px;
 }
 
-@media screen {
+@media screen{
     body>div#footer{
+	position:fixed;
+    }
+    body>div#myOwnPlayerFooter{
 	position:fixed;
     }
     body>div#controlFooter{
 	position:fixed;
     }
+}
+
+* html body {
+    overflow:hidden;
+}
+
+a:link {
+    /* color:#FAFAD2; */
+}
+
+a:visited {
+    /* color:#FAFAAB; */
 }
 
 a:hover {
@@ -141,7 +206,10 @@ img {
     color:#000;
 }
 
+/*Classe de tous les divs principaux*/
+
 .main {
+    /* width:95%; */
     margin-left:auto;
     margin-right:auto;
     margin-bottom:1em;
@@ -166,6 +234,11 @@ img {
     float:left;
     /* 	width:20%; */
     width:23px;
+}
+
+#header .middle img {
+
+/* 	width:20%; */
 }
 
 #header .right {
@@ -201,15 +274,22 @@ img {
     height: 98px;
     font: bolder 5em helvetica, sans-serif;
 
-    -webkit-text-stroke: 2px black;
-    color: #004080;
-    text-shadow:
-    3px 3px 0 #000,
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+   -webkit-text-stroke: 2px black;
+   color: #004080;
+   text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
 
+
+    /* color: 	#004080; */
+    /*	position: relative;
+	top: 0px;
+	left: 15px;
+        margin-left: 0px;
+	margin-bottom: -70px;*/
     border-bottom:3px solid #fff;
 }
 
@@ -217,18 +297,23 @@ img {
     text-align: left;
     font: lighter italic 2em sans-serif;
     color: #FFF;
-    text-shadow:
-    1px 1px 0 #000,
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+   text-shadow:
+       1px 1px 0 #000,
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
 
     margin: -1.5em 0 0 1em;
+/* 	font-variant: small-caps; */
 }
 
 p#trackComment {
     text-shadow:
+    /* 1px 1px 0 #000, */
+    /* -1px -1px 0 #000, */
+    /* 1px -1px 0 #000, */
+    /* -1px 1px 0 #000, */
     1px 1px 0 #000;
 }
 
@@ -236,16 +321,17 @@ p#trackComment {
     width: 100%;
     margin:0;
     padding:.5em;
+/* border-left:1px solid #fff; */
 }
 
 
 /* Tagger */
-
 #tagger iframe {
     width: 20em;height: 20em;
     border:5px solid #FFF;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
+/* 	background-color:#FFF; */
 }
 
 #taggerTable {
@@ -339,6 +425,7 @@ table.list th {
 #albumBrowser {
     border: #fb0 1px solid;
     height:100px;
+/*	line-height:6em;*/
 }
 
 #albumBrowser .left,
@@ -350,11 +437,13 @@ table.list th {
 }
 
 #albumBrowser .left {
+    /*	position:relative;*/
     float:left;
     text-align:left;
 }
 
 #albumBrowser .right {
+    /*	position:relative;*/
     float:right;
     text-align:right;
 }
@@ -366,6 +455,8 @@ table.list th {
 }
 
 .fadeAlbums {
+    /*     line-height: 1.4em; */
+    /*     padding: 5em 0 0 0; */
     font-size:9pt;
     text-align:left;
     background-attachment:fixed;
@@ -392,8 +483,8 @@ table.footdown {
     color:#FAFAD2;
 }
 
-
 /*index page*/
+
 
 #wrapper {
     width: 760px;
@@ -459,9 +550,31 @@ ul.navigation a:focus {
     outline: none;
 }
 
+.scrollButtons {
+    /*     position: absolute; */
+    /*     cursor: pointer; */
+    border:0;
+    margin: 1em auto;
+    position: relative;
+}
+
+.scrollButtons.left {
+/*     left: 0px; */
+/*     top: -200px; */
+}
+
+.scrollButtons.right {
+/*     right: -170px; */
+/*     left: 0px; */
+/*     top: 250px; */
+
+}
+
 .hide {
     display: none;
 }
+
+/*end index page*/
 
 
 /* Buttons */
@@ -497,7 +610,7 @@ img.video_thumbnail {
 #simoPlayerDescription {
     margin-left: auto;
     margin-right: auto;
-/* text-align:left; */
+    /* text-align:left; */
 }
 
 .songMenu {
@@ -506,10 +619,14 @@ img.video_thumbnail {
     border-top: 1px solid #888;
     margin: 1em 0 0 0;
     text-align:center;
+    /* margin:0px auto; */
     background:#888;
+/*  outline: 1px solid #F00; */
 }
 
 .songMenu div.div1 {
+    /* float:left; */
+    /*     outline: 1px solid #F00; */
     width:50%
 }
 
@@ -534,8 +651,14 @@ img.video_thumbnail {
 }
 
 #simoPlayerDescription h4, #simoPlayerDescription h5, #simoPlayerDescription p , .desc {
+    /* border-bottom: 1px solid #888; */
     font-size:1em;
     margin: 0 .5em;
+}
+
+#simoPlayerDescription span.desc {
+    /* display:inline-block; */
+    /* width:45%; */
 }
 
 #simoPlayerDescription span.albumName {
@@ -543,8 +666,10 @@ img.video_thumbnail {
 }
 
 .desc {
+    /* text-align:left; */
     float:left;
     clear:right;
+    /* padding:0 0 0 1em; */
 }
 
 #simoPlayerDescription h4.artistName {
@@ -597,6 +722,7 @@ div#osx-modal-data a {
 }
 
 #simoPlayerDescription {
+    /*     min-width:30%; */
     width:26%;
     position: relative;
 }
@@ -604,6 +730,11 @@ div#osx-modal-data a {
 span.leftSpan, span.rightSpan, p, form, div.songMenu, #simoPlayerDescription span.albumName * {
     position: relative;
     z-index: 2;
+}
+
+.leftSpan {
+    /* float:left; */
+    /* display:inline-block; */
 }
 
 form.urlFields input {
@@ -617,15 +748,15 @@ form.urlFields input {
 }
 
 span.opaque {
-    display:block;
-    position: absolute;
-    background-color: black;
-    filter:alpha(opacity=55);
-    -moz-opacity:.55;
-    opacity:.55;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
+display:block;
+position: absolute;
+background-color: black;
+filter:alpha(opacity=55);
+-moz-opacity:.55;
+opacity:.55;
+height: 100%;
+width: 100%;
+z-index: 1;
 }
 
 /* Tweets */
@@ -655,9 +786,9 @@ span.opaque {
 }
 
 .tweet .text {
-    font-size: 1em;
-    margin: 0;
-    color:#000;
+    /* font-size: 1em; */
+    /* margin: 0; */
+    /* color:#000; */
 }
 
 .tweet .time a {
@@ -681,6 +812,65 @@ span.opaque {
     margin-left: 32px;
 }
 
+
+/* Impromptu (no-audio popup) */
+.jqifade{
+	position: absolute;
+	background-color: #aaaaaa;
+}
+div.jqi{
+	width: 50%;
+	/* font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; */
+	position: absolute;
+	background-color: #ffffff;
+	/* font-size: 11px; */
+	text-align: left;
+	border: solid 1px #eeeeee;
+	/* border-radius: 10px; */
+	/* -moz-border-radius: 10px; */
+	/* -webkit-border-radius: 10px; */
+	padding: 7px;
+}
+div.jqi .jqicontainer{
+	font-weight: bold;
+}
+div.jqi .jqiclose{
+	position: absolute;
+	top: 4px; right: -2px;
+	width: 18px;
+	cursor: pointer;
+	color: #bbbbbb;
+	font-weight: bold;
+}
+div.jqi .jqimessage{
+	padding: 10px;
+	line-height: 20px;
+	color: #444444;
+}
+div.jqi .jqibuttons{
+	text-align: right;
+	padding: 5px 0 5px 0;
+	border: solid 1px #eeeeee;
+	background-color: #f4f4f4;
+}
+div.jqi button{
+	padding: 3px 10px;
+	margin: 0 10px;
+	background-color: #2F6073;
+	border: solid 1px #f4f4f4;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 12px;
+}
+div.jqi button:hover{
+	background-color: #728A8C;
+}
+div.jqi button.jqidefaultbutton{
+	background-color: #BF5E26;
+}
+.jqiwarning .jqi .jqibuttons{
+	background-color: #BF5E26;
+}
 
 p#searchLinks {
     margin: 1em 0 1em 0;
@@ -718,7 +908,6 @@ p#searchLinks a {
     clear:left;
 }
 
-
 #tweets p.text {
-/* width:90%; */
+    /* width:90%; */
 }
