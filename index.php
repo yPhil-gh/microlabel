@@ -798,7 +798,7 @@ function index($dirList, $labelName) {
     $numberOfAlbums = count($dirList);
     echo '<title>'.$labelName.' - Free Music</title>
     <style type="text/css" media="screen">@import "css/contentflow.css";</style>
-    <script language="JavaScript" type="text/javascript" src="libs/contentflow.js"></script>
+    <script type="text/javascript" src="libs/contentflow.js"></script>
     <script>
 
 var numberOfAlbums = '.$numberOfAlbums.'
