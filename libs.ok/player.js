@@ -1,5 +1,5 @@
 // player.js - Based on the fine
-// PagePlayer v 0.5.2 - copyright 2010 jezra j lickter
+// simoPlayer v 0.5.2 - copyright 2010 jezra j lickter
 // licensed GPL3
 // http://www.gnu.org/licenses/gpl-3.0.html
 // Modified by pX Time-stamp: <2011-12-06 23:37:47 px>
@@ -36,15 +36,15 @@ var opaque_div;
 
 var audio_element=null;
 var current_selected_list_item=null;
-var page_player_list_item_start = "PagePlayerListItem_";
+var page_player_list_item_start = "simoPlayerListItem_";
 //make an easy namer function
 function named(id)
 {
     return document.getElementById(id);
 }
 
-//try create the PagePlayer
-function PagePlayer( list )
+//try create the simoPlayer
+function simoPlayer( list )
 {
 
     var test_audio= document.createElement("audio") //try and create sample audio element
@@ -68,12 +68,12 @@ function PagePlayer( list )
 	//does this div exist?
 	ulist = named(list);
 	if (ulist==null) {
-            PagePlayerError("The ul \""+ulist+"\" does not exist in the web page" );
+            simoPlayerError("The ul \""+ulist+"\" does not exist in the web page" );
 	} else {
             var ulist_parent = ulist.parentNode;
             //create a wrapper for the player components
             var wrapper = document.createElement("div");
-            wrapper.setAttribute("id","PagePlayerWrapper");
+            wrapper.setAttribute("id","simoPlayerWrapper");
 
             /* build the elements */
 
@@ -180,15 +180,15 @@ function PagePlayer( list )
             wrapper.appendChild(volume_control);
             //create a div to hold the list and info
             listDescWrapper = document.createElement("div");
-            listDescWrapper.setAttribute("id","PagePlayerListDescWrapper");
+            listDescWrapper.setAttribute("id","simoPlayerListDescWrapper");
             //append the lIW to the wrapper
             wrapper.appendChild(listDescWrapper);
             //create a div to hold the new list
             listdiv = document.createElement("div");
-            listdiv.setAttribute("id","PagePlayerList");
+            listdiv.setAttribute("id","simoPlayerList");
             //make an Desc for the list info
             description_div = document.createElement("div");
-            description_div.setAttribute("id","PagePlayerDescription");
+            description_div.setAttribute("id","simoPlayerDescription");
             //make an opaque div
             opaque_div = document.createElement("div");
             opaque_div.setAttribute("class","opaque");
@@ -210,7 +210,7 @@ function PagePlayer( list )
                 audio_info[i] = new Array();
                 //create a new div to hold this information
                 list_item = document.createElement("div");
-                list_item.setAttribute("class","PagePlayerListItem");
+                list_item.setAttribute("class","simoPlayerListItem");
                 list_item.setAttribute("id",page_player_list_item_start+i);
                 list_item.onclick=function(){listItemClicked( this.id );}
                 var title = "Unknown";
@@ -272,12 +272,12 @@ function PagePlayer( list )
 	}
     }
 
-    function PagePlayerSetDescriptionHeight()
+    function simoPlayerSetDescriptionHeight()
     {
-	//determine the height of the PagePlayerList
-	var list= named("PagePlayerList");
+	//determine the height of the simoPlayerList
+	var list= named("simoPlayerList");
 	var height = list.offsetHeight;
-	named("PagePlayerDescription").style.height="250px";
+	named("simoPlayerDescription").style.height="250px";
     }
 
 
@@ -310,10 +310,10 @@ function PagePlayer( list )
 	var item = named(page_player_list_item_start+id);
 	if(current_selected_list_item!=null)
 	{
-            current_selected_list_item.setAttribute("class","PagePlayerListItem");
+            current_selected_list_item.setAttribute("class","simoPlayerListItem");
 	}
 	current_selected_list_item = item;
-	item.setAttribute("class","PagePlayerListItemSelected");
+	item.setAttribute("class","simoPlayerListItemSelected");
     }
 
     function playAudio() {
@@ -356,8 +356,8 @@ function PagePlayer( list )
 	playAudio();
     }
 
-    function PagePlayerError( errorMessage ) {
-	alert ("PagePlayer Error:\n"+errorMessage);
+    function simoPlayerError( errorMessage ) {
+	alert ("simoPlayer Error:\n"+errorMessage);
     }
 
     songMenu_div = document.getElementById('songMenu');
@@ -483,10 +483,10 @@ function PagePlayer( list )
 	playAudio();
     }
 
-    function onPagePlayerLoad() {
+    function onsimoPlayerLoad() {
 	if(has_audio)
 	{
-            //PagePlayerSetDescriptionHeight();
+            //simoPlayerSetDescriptionHeight();
             albuminfo = audio_info[0]["myAlbumInfo"];
             //albuminfo = "yowza";
             // alert("plop");
@@ -502,4 +502,3 @@ function PagePlayer( list )
     function comment(str) {
 	named("trackComment").innerHTML=str;
     }
-

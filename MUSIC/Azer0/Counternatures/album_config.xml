@@ -1,0 +1,19 @@
+<infos>
+	<infotext>
+		<presentation>Le bordel (Ruina is Arabic for "désordre") de Les Intouchables, réalisé un peu partout autour du monde. Voir &lt;a href="http://www.dailymotion.com/les_intouchables"&gt;ici&lt;/a&gt; pour encore pire.</presentation>
+		<credits>Florent, Philippe</credits>
+	</infotext>
+	<video>
+		<url>http://www.youtube.com/watch?v=e_ObTc5xdwo</url>
+		<title>This is the title of video one</title>
+		<comment>This is video one</comment>
+	</video>
+	<video>
+		<url>http://www.youtube.com/watch?v=AD7L5T1lpbM</url>
+		<title>This is the title of video two</title>
+		<comment>This is video two</comment>
+	</video>
+	<twitto>
+		<name>xaccrocheur</name>
+	</twitto>
+</infos>

@@ -53,8 +53,6 @@ div#controlFooter {
     margin: 1em 0 0 0;
 }
 
-/*
- * .desc, h4.albumName, h5, #PagePlayerDescription span.albumName {
- *     display:none;
- * }
- */
+.desc, h4.albumName, h5, #PagePlayerDescription span.albumName {
+    display:none;
+}
