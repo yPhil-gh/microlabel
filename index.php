@@ -44,8 +44,8 @@ if (isset($_GET['lang'])) {
 ob_start(); // C'est parti !
 
 /////////////////////////////////////////////////////////////////
-//  Listen & Download copyleft Philippe - pX - Coatmeur-Marin  //
-//               <hallucinet@online.fr>                        //
+//          Microlabel copyright 2010 - 2014 Phil CM           //
+//               <xaccrocheur@gmail.com>                       //
 //  licensed GPL3 - http://www.gnu.org/licenses/gpl-3.0.html   //
 //          Because all music should be free                   //
 //  Please don't harm nobody w/ this code even if they ask to  //
