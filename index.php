@@ -816,10 +816,10 @@ var myNewFlow = new ContentFlow("albumsRotator", {
     echo '
     <body>
    <div class="maincontent">
-<div id="albumsRotator" class="ContentFlow">
+     <div id="albumsRotator" class="ContentFlow">
         <!-- should be place before flow so that contained images will be loaded first -->
         <div class="loadIndicator"><div class="indicator"></div></div>
-          <div class="flow">
+        <div class="flow">
     ';
 
     foreach ($dirList as $key => $albumPath) {
@@ -839,13 +839,11 @@ var myNewFlow = new ContentFlow("albumsRotator", {
         $thisAlbumSleeve = getInfo($albumPath, thisAlbumSleeve);
 
         echo '
- <div class="item">
-<img class="content" src="'.$thisAlbumSleeve.'" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" />
-<a style="display:none" href="'.$script.'?a='.$newAlbumSexyUrl.'">'.$albumName.'</a>
-<div class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</div>
-</div>
-
-<!--a class="item" href="'.$newAlbumSexyUrl.'"><img class="content" src="'.$thisAlbumSleeve.'"/></a-->
+            <div class="item">
+              <img class="content" src="'.$thisAlbumSleeve.'" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" />
+              <a style="display:none" href="'.$script.'?a='.$newAlbumSexyUrl.'">'.$albumName.'</a>
+              <div class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</div>
+            </div>
 ';
     }
 
@@ -855,7 +853,7 @@ var myNewFlow = new ContentFlow("albumsRotator", {
         <!--div class="scrollbar">
             <div class="slider"><div class="position"></div></div>
         </div-->
-    </div>
+        </div>
     </div>
     ';
 }
