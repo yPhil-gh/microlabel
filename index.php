@@ -816,7 +816,7 @@ var myNewFlow = new ContentFlow("albumsRotator", {
     echo '
     <body>
    <div class="maincontent">
-      <div id="albumsRotator" class="ContentFlow">
+<div id="albumsRotator" class="ContentFlow">
         <!-- should be place before flow so that contained images will be loaded first -->
         <div class="loadIndicator"><div class="indicator"></div></div>
           <div class="flow">
@@ -840,7 +840,7 @@ var myNewFlow = new ContentFlow("albumsRotator", {
 
         echo '
             <div class="item">
-                <img class="content" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" src="'.$thisAlbumSleeve.'" href="'.$script.'?a='.$newAlbumSexyUrl.'" />
+                <img class="content" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" src="'.$thisAlbumSleeve.'" href="'.$script.'?a='.$newAlbumSexyUrl.'"/>
                      <a style="display:none" href="'.$script.'?a='.$newAlbumSexyUrl.'">'.$albumName.'</a>
                 <div class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</div>
             </div>
@@ -855,7 +855,6 @@ var myNewFlow = new ContentFlow("albumsRotator", {
         <!--div class="scrollbar">
             <div class="slider"><div class="position"></div></div>
         </div-->
-    </div>
     </div>
     ';
 }
