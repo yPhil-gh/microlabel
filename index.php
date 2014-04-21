@@ -19,14 +19,13 @@ if (!isset($_GET['debug']) && !isset($_SERVER['QUERY_STRING'])) {
     }
 }
 
+// set_include_path("TEXT")
 
 if (isset($_GET['lang'])) {
   if ($_GET['lang']=='en') {
     $lang = 'en';
     include('lang-en.php');
     setcookie("lang", $lang, time() + 365*24*3600);
-    //           header("Location: $HTTP_REFERER");
-    // header('Location: '. $_SERVER['PHP_SELF']);
     //    exit();
   }
   if ($_GET['lang']=='fr') {
