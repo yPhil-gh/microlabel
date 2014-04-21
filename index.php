@@ -20,6 +20,8 @@
     }
 
 
+set_include_path ("./TEXT/");
+
 if (isset($_GET['lang'])) {
     if ($_GET['lang']=='en') {
         $lang = 'en';
