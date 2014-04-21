@@ -840,8 +840,7 @@ var myNewFlow = new ContentFlow("albumsRotator", {
 
         echo '
             <div class="item">
-                <img class="content" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" src="'.$thisAlbumSleeve.'" href="'.$script.'?a='.$newAlbumSexyUrl.'"/>
-                     <a style="display:none" href="'.$script.'?a='.$newAlbumSexyUrl.'">'.$albumName.'</a>
+                <img class="content" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" src="'.$thisAlbumSleeve.'" />
                 <div class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</div>
             </div>
 
