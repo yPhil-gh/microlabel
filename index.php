@@ -20,30 +20,30 @@ if (!isset($_GET['debug']) && !isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ( ! defined( "PATH_SEPARATOR" ) ) {
-  if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
-    define( "PATH_SEPARATOR", ";" );
-  else define( "PATH_SEPARATOR", ":" );
+    if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
+        define( "PATH_SEPARATOR", ";" );
+    else define( "PATH_SEPARATOR", ":" );
 }
 
 set_include_path("./TEXT:./libs/getid3");
 
 if (isset($_GET['lang'])) {
-  if ($_GET['lang']=='en') {
-    $lang = 'en';
-    include('lang-en.php');
-    setcookie("lang", $lang, time() + 365*24*3600);
-    //    exit();
-  }
-  if ($_GET['lang']=='fr') {
-    $lang = 'fr';
-    include('lang-fr.php');
-    setcookie("lang", $lang, time() + 365*24*3600);
-  }
-  if ($_GET['lang']=='es') {
-    $lang = 'es';
-    include('lang-es.php');
-    setcookie("lang", $lang, time() + 365*24*3600);
-  }
+    if ($_GET['lang']=='en') {
+        $lang = 'en';
+        include('lang-en.php');
+        setcookie("lang", $lang, time() + 365*24*3600);
+        //    exit();
+    }
+    if ($_GET['lang']=='fr') {
+        $lang = 'fr';
+        include('lang-fr.php');
+        setcookie("lang", $lang, time() + 365*24*3600);
+    }
+    if ($_GET['lang']=='es') {
+        $lang = 'es';
+        include('lang-es.php');
+        setcookie("lang", $lang, time() + 365*24*3600);
+    }
 }
 
 ob_start(); // C'est parti !
@@ -56,15 +56,12 @@ ob_start(); // C'est parti !
 ////////////////////////////////////////////////////////////////////
 
 require_once('getid3.php');
-// require_once('libs/getID3/getid3/getid3.php');
-
 
 //$labelName = 'beldigital';
 
-
 function getRoot() {
-  $rootMusicDir = 'MUSIC';
-  return $rootMusicDir;
+    $rootMusicDir = 'MUSIC';
+    return $rootMusicDir;
 }
 
 ///////////////////////////////////////////////////////////////// no user-serviceable parts below
@@ -73,178 +70,158 @@ $rootMusicDir = trim(getRoot());
 
 /* Exclude directories from iterator */
 class ExcludeDotDirsFilterIterator extends FilterIterator {
-  public function accept()  {
-    $fileinfo = $this->getInnerIterator()->current();
-    /* if (preg_match("/^[.]/", $fileinfo)) { */
-    if (preg_match(":/tmp/:", $fileinfo)) {
-      return false;
+    public function accept()  {
+        $fileinfo = $this->getInnerIterator()->current();
+        /* if (preg_match("/^[.]/", $fileinfo)) { */
+        if (preg_match(":/tmp/:", $fileinfo)) {
+            return false;
+        }
+        return true;
     }
-    return true;
-  }
 }
 
 function getInfo($startPath, $element) {
-  //    $musicdirs = array();
-  $thisAlbumSleeves = array();
-  $getID3 = new getID3;
-  $sp = '&nbsp;';
-  $ch = 'comments_html';
-  //    $labelName=getLabelName();
-  if (is_file($startPath)) {
-    $fs = pathinfo($startPath);
-    if ($fs['extension'] == 'ogg') {
-      $f = $getID3->analyze($startPath);
-      getid3_lib::CopyTagsToComments($f);
-      $thisFileTitleTag = (!empty($f[$ch]['title']) ? implode($sp, $f[$ch]['title'])  : $sp);
-      $thisFileArtistTag = (!empty($f[$ch]['artist']) ? implode($sp, $f[$ch]['artist'])  : $sp);
-      $thisFileAlbumTag = (!empty($f[$ch]['album']) ? implode($sp, $f[$ch]['album'])  : $sp);
-      $thisFileYearTag = (!empty($f[$ch]['year']) ? implode($sp, $f[$ch]['year'])  : $sp);
-      /* $thisFileTrackTag = (!empty($f[$ch]['track']) ? implode($sp, $f[$ch]['track'])  : $sp); */
+    $thisAlbumSleeves = array();
+    $getID3 = new getID3;
+    $sp = '&nbsp;';
+    $ch = 'comments_html';
+    if (is_file($startPath)) {
+        $fs = pathinfo($startPath);
+        if ($fs['extension'] == 'ogg') {
+            $f = $getID3->analyze($startPath);
+            getid3_lib::CopyTagsToComments($f);
+            $thisFileTitleTag = (!empty($f[$ch]['title']) ? implode($sp, $f[$ch]['title'])  : $sp);
+            $thisFileArtistTag = (!empty($f[$ch]['artist']) ? implode($sp, $f[$ch]['artist'])  : $sp);
+            $thisFileAlbumTag = (!empty($f[$ch]['album']) ? implode($sp, $f[$ch]['album'])  : $sp);
+            $thisFileYearTag = (!empty($f[$ch]['year']) ? implode($sp, $f[$ch]['year'])  : $sp);
 
-      if (empty($f[$ch]['track'])) {
-	$thisFileTrackTag =  (!empty($f[$ch]['tracknumber']) ? implode($sp, $f[$ch]['tracknumber'])  : "plop");
-      } else {
-	$thisFileTrackTag = (!empty($f[$ch]['track']) ? implode($sp, $f[$ch]['track'])  : "plip");
-      }
+            if (empty($f[$ch]['track'])) {
+                $thisFileTrackTag =  (!empty($f[$ch]['tracknumber']) ? implode($sp, $f[$ch]['tracknumber'])  : "plop");
+            } else {
+                $thisFileTrackTag = (!empty($f[$ch]['track']) ? implode($sp, $f[$ch]['track'])  : "plip");
+            }
 
-      /* $thisFileTrackNumberTag = (!empty($f[$ch]['tracknumber']) ? implode($sp, $f[$ch]['tracknumber'])  : $sp); */
-      $thisFileGenreTag = (!empty($f[$ch]['genre']) ? implode($sp, $f[$ch]['genre'])  : $sp);
-      $thisFileOrganizationTag = (!empty($f[$ch]['organization']) ? implode($sp, $f[$ch]['organization'])  :$sp);
-      $thisFileCommentTag = (!empty($f[$ch]['comment']) ? implode($sp, $f[$ch]['comment'])  : $sp);
-      $thisFilePlayTime = (!empty($f['playtime_string']) ? $f['playtime_string'] : $sp);
-      $thisFileSize = (!empty($f['filesize']) ? bytestostring( $f['filesize'], 2 ) : $sp);
-      $thisFileBitRate = (!empty($f['audio']['bitrate']) ? round($f['audio']['bitrate'] / 1000).' kbps' : $sp);
+            $thisFileGenreTag = (!empty($f[$ch]['genre']) ? implode($sp, $f[$ch]['genre'])  : $sp);
+            $thisFileOrganizationTag = (!empty($f[$ch]['organization']) ? implode($sp, $f[$ch]['organization'])  :$sp);
+            $thisFileCommentTag = (!empty($f[$ch]['comment']) ? implode($sp, $f[$ch]['comment'])  : $sp);
+            $thisFilePlayTime = (!empty($f['playtime_string']) ? $f['playtime_string'] : $sp);
+            $thisFileSize = (!empty($f['filesize']) ? bytestostring( $f['filesize'], 2 ) : $sp);
+            $thisFileBitRate = (!empty($f['audio']['bitrate']) ? round($f['audio']['bitrate'] / 1000).' kbps' : $sp);
 
-      $thisFileTags = array('artist' => $thisFileArtistTag, 'title' => $thisFileTitleTag, 'album' => $thisFileAlbumTag, 'year' => $thisFileYearTag, 'track' => $thisFileTrackTag, 'genre' => $thisFileGenreTag, 'comment' => $thisFileCommentTag, 'playtime' => $thisFilePlayTime, 'size' => $thisFileSize, 'bitrate' => $thisFileBitRate, 'organization' => $thisFileOrganizationTag);
+            $thisFileTags = array('artist' => $thisFileArtistTag, 'title' => $thisFileTitleTag, 'album' => $thisFileAlbumTag, 'year' => $thisFileYearTag, 'track' => $thisFileTrackTag, 'genre' => $thisFileGenreTag, 'comment' => $thisFileCommentTag, 'playtime' => $thisFilePlayTime, 'size' => $thisFileSize, 'bitrate' => $thisFileBitRate, 'organization' => $thisFileOrganizationTag);
+        }
+    } else {
+        $iterator = new ExcludeDotDirsFilterIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($startPath), RecursiveIteratorIterator::SELF_FIRST));
+
+        $pathNames = array();
+        $thisAlbumTags = array();
+        foreach ($iterator as $key => $fileObj) {
+            $pathNames[] = $fileObj->getPathname();
+            $fileNames[] = $fileObj->getFilename();
+            $fileTypes[] = $fileObj->getType();
+        }
+
+        foreach ($pathNames as $key => $filePath) {
+            $infos = pathinfo($filePath);
+
+
+            if ($infos['extension'] == 'ogg') {
+
+                $musicDirs[] = $infos['dirname'];
+
+                $f = $getID3->analyze($filePath);
+                getid3_lib::CopyTagsToComments($f);
+                $thisAlbumTitleTag = (!empty($f[$ch]['title']) ? implode($sp, $f[$ch]['title'])  : $sp);
+                $thisAlbumTitleTags[] = $thisAlbumTitleTag;
+                $thisAlbumArtistTag = (!empty($f[$ch]['artist']) ? implode($sp, $f[$ch]['artist'])  : $sp);
+                $thisAlbumAlbumTag = (!empty($f[$ch]['album']) ? implode($sp, $f[$ch]['album'])  : $sp);
+                $thisAlbumYearTag = (!empty($f[$ch]['year']) ? implode($sp, $f[$ch]['year'])  : $sp);
+                $thisAlbumYearTags[] = $thisAlbumYearTag;
+
+                if (empty($f[$ch]['track'])) {
+                    $thisAlbumTrackTag =  (!empty($f[$ch]['tracknumber']) ? implode($sp, $f[$ch]['tracknumber'])  : "plop");
+                } else {
+                    $thisAlbumTrackTag = (!empty($f[$ch]['track']) ? implode($sp, $f[$ch]['track'])  : "plip");
+                }
+
+                $thisAlbumTrackTags[] = $thisAlbumTrackTag;
+                $thisAlbumGenreTag = (!empty($f[$ch]['genre']) ? implode($sp, $f[$ch]['genre'])  : $sp);
+                $thisAlbumGenreTags[] = $thisAlbumGenreTag;
+                $thisAlbumCommentTag = (!empty($f[$ch]['comment']) ? implode($sp, $f[$ch]['comment'])  : $sp);
+                $thisAlbumCommentTags[] = $thisAlbumCommentTag;
+                $thisAlbumOrganizationTags = (!empty($f[$ch]['organization']) ? implode($sp, $f[$ch]['organization']) : $sp);
+                $thisAlbumGenreTags[] = $thisAlbumGenreTag;
+                $musicFiles[$filePath] = $thisMusicFileinfos['basename'];
+
+                $thisAlbumTags[title] = $thisAlbumTitleTags;
+                $thisAlbumTags[artist] = $thisAlbumArtistTag;
+                $thisAlbumTags[album] = $thisAlbumAlbumTag;
+                $thisAlbumTags[year] = $thisAlbumYearTags;
+                $thisAlbumTags[track] = $thisAlbumTrackTags;
+                $thisAlbumTags[genre] = $thisAlbumGenreTags;
+                $thisAlbumTags[organization] = $thisAlbumOrganizationTags;
+                $thisAlbumTags[comment] = $thisAlbumCommentTags;
+            }
+
+            elseif ($infos['extension'] == 'jpg' || $infos['extension'] == 'png'  || $infos['extension'] == 'gif') {
+                $pos = strpos($infos['filename'], 'bg-');
+                if ($pos === false) {
+                    $thisAlbumSleeve = $filePath;
+                    $thisAlbumSleeves[] = $thisAlbumSleeve;
+                } else {
+                    $thisAlbumBackgroundImages[] = $filePath;
+                }
+            }
+        }
     }
-  } else {
-    $iterator = new ExcludeDotDirsFilterIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($startPath), RecursiveIteratorIterator::SELF_FIRST));
 
-    $pathNames = array();
-    $thisAlbumTags = array();
-    foreach ($iterator as $key => $fileObj) {
-      $pathNames[] = $fileObj->getPathname();
-      $fileNames[] = $fileObj->getFilename();
-      $fileTypes[] = $fileObj->getType();
+    sort($thisAlbumSleeves);
+
+    switch ($element) {
+    case 'titles':
+        return $titleTags;
+        break;
+    case 'numberOfSongs':
+        return count($titleTags);
+        break;
+    case 'musicDirs':
+        return array_values(array_unique($musicDirs));
+        break;
+    case 'musicFiles':
+        return $musicFiles;
+        break;
+    case 'thisFileTags':
+        return $thisFileTags;
+        break;
+    case 'thisAlbumTags':
+        return $thisAlbumTags;
+        break;
+    case 'thisAlbumSleeves':
+
+        if(!empty($thisAlbumSleeve)) {
+            return $thisAlbumSleeves;
+        }
+        else {
+            $thisAlbumSleeves[0] = 'img/beldigital_logo_off.png';
+            return $thisAlbumSleeves;
+        }
+        break;
+
+    case 'thisAlbumBackgroundImages':
+        return $thisAlbumBackgroundImages;
+        break;
+
+        break;
+    case 'thisAlbumSleeve':
+
+        if(!empty($thisAlbumSleeve)) {
+            return $thisAlbumSleeves[0];
+        }
+        else {
+            return 'img/beldigital_logo_off.png';
+        }
+        break;
     }
-
-    foreach ($pathNames as $key => $filePath) {
-      $infos = pathinfo($filePath);
-
-
-      if ($infos['extension'] == 'ogg') {
-	/* $thisMusicFileinfos = pathinfo($filePath); */
-	$musicDirs[] = $infos['dirname'];
-
-	$f = $getID3->analyze($filePath);
-	getid3_lib::CopyTagsToComments($f);
-	$thisAlbumTitleTag = (!empty($f[$ch]['title']) ? implode($sp, $f[$ch]['title'])  : $sp);
-	$thisAlbumTitleTags[] = $thisAlbumTitleTag;
-	$thisAlbumArtistTag = (!empty($f[$ch]['artist']) ? implode($sp, $f[$ch]['artist'])  : $sp);
-	$thisAlbumAlbumTag = (!empty($f[$ch]['album']) ? implode($sp, $f[$ch]['album'])  : $sp);
-	$thisAlbumYearTag = (!empty($f[$ch]['year']) ? implode($sp, $f[$ch]['year'])  : $sp);
-	$thisAlbumYearTags[] = $thisAlbumYearTag;
-
-	if (empty($f[$ch]['track'])) {
-	  $thisAlbumTrackTag =  (!empty($f[$ch]['tracknumber']) ? implode($sp, $f[$ch]['tracknumber'])  : "plop");
-	} else {
-	  $thisAlbumTrackTag = (!empty($f[$ch]['track']) ? implode($sp, $f[$ch]['track'])  : "plip");
-	}
-
-	/* $thisAlbumTrackTag = (!empty($f[$ch]['track']) ? implode($sp, $f[$ch]['track'])  : $sp); */
-	$thisAlbumTrackTags[] = $thisAlbumTrackTag;
-	/* $thisAlbumTrackNumberTag = (!empty($f[$ch]['tracknumber']) ? implode($sp, $f[$ch]['tracknumber'])  : $sp); */
-	/* $thisAlbumTrackNumberTags[] = $thisAlbumTrackNumberTag; */
-	$thisAlbumGenreTag = (!empty($f[$ch]['genre']) ? implode($sp, $f[$ch]['genre'])  : $sp);
-	$thisAlbumGenreTags[] = $thisAlbumGenreTag;
-	$thisAlbumCommentTag = (!empty($f[$ch]['comment']) ? implode($sp, $f[$ch]['comment'])  : $sp);
-	$thisAlbumCommentTags[] = $thisAlbumCommentTag;
-	$thisAlbumOrganizationTags = (!empty($f[$ch]['organization']) ? implode($sp, $f[$ch]['organization']) : $sp);
-	$thisAlbumGenreTags[] = $thisAlbumGenreTag;
-	$musicFiles[$filePath] = $thisMusicFileinfos['basename'];
-
-	$thisAlbumTags[title] = $thisAlbumTitleTags;
-	$thisAlbumTags[artist] = $thisAlbumArtistTag;
-	$thisAlbumTags[album] = $thisAlbumAlbumTag;
-	$thisAlbumTags[year] = $thisAlbumYearTags;
-	$thisAlbumTags[track] = $thisAlbumTrackTags;
-	/* $thisAlbumTags[tracknumber] = $thisAlbumTrackNumberTags; */
-	$thisAlbumTags[genre] = $thisAlbumGenreTags;
-	$thisAlbumTags[organization] = $thisAlbumOrganizationTags;
-	$thisAlbumTags[comment] = $thisAlbumCommentTags;
-	//                sort($musicDirs);
-      }
-
-      elseif ($infos['extension'] == 'jpg' || $infos['extension'] == 'png'  || $infos['extension'] == 'gif') {
-	$pos = strpos($infos['filename'], 'bg-');
-	if ($pos === false) {
-	  $thisAlbumSleeve = $filePath;
-	  $thisAlbumSleeves[] = $thisAlbumSleeve;
-	} else {
-	  $thisAlbumBackgroundImages[] = $filePath;
-	}
-      }
-    }
-  }
-
-  /* ksort($thisAlbumTags); */
-  sort($thisAlbumSleeves);
-
-/*   echo '<pre style="text-align:left;">$f : */
-/* '; */
-/*   var_dump($f[$ch]); */
-/*   echo '</pre> */
-/* '; */
-
-
-
-  switch ($element) {
-  case 'titles':
-    return $titleTags;
-    break;
-  case 'numberOfSongs':
-    return count($titleTags);
-    break;
-  case 'musicDirs':
-    return array_values(array_unique($musicDirs));
-    break;
-  case 'musicFiles':
-    return $musicFiles;
-    break;
-  case 'thisFileTags':
-    return $thisFileTags;
-    break;
-  case 'thisAlbumTags':
-    return $thisAlbumTags;
-    break;
-  case 'thisAlbumSleeves':
-    //        $thisAlbumSleeves;
-    if(!empty($thisAlbumSleeve)) {
-      return $thisAlbumSleeves;
-    }
-    else {
-      $thisAlbumSleeves[0] = 'img/beldigital_logo_off.png';
-      return $thisAlbumSleeves;
-      //            return 'img/beldigital_logo_off.png';
-    }
-    break;
-
-  case 'thisAlbumBackgroundImages':
-    return $thisAlbumBackgroundImages;
-    break;
-
-
-    break;
-  case 'thisAlbumSleeve':
-
-    if(!empty($thisAlbumSleeve)) {
-      return $thisAlbumSleeves[0];
-    }
-    else {
-      return 'img/beldigital_logo_off.png';
-    }
-    break;
-  }
 }
 
 $myDumbVar=getInfo($rootMusicDir, musicDirs);
@@ -263,36 +240,36 @@ $cookiePrefs = $HTTP_COOKIE_VARS['lang'];
 // $expire = 365*24*3600;
 
 if (isset($cookiePrefs)) {
-  if ($cookiePrefs == 'en') {
-    $lang = 'en';
-    include('lang-en.php');
-  }
-  if ($cookiePrefs == 'fr') {
-    $lang = 'fr';
-    include('lang-fr.php');
-  }
-  if ($cookiePrefs == 'es') {
-    $lang = 'es';
-    include('lang-es.php');
-  }
+    if ($cookiePrefs == 'en') {
+        $lang = 'en';
+        include('lang-en.php');
+    }
+    if ($cookiePrefs == 'fr') {
+        $lang = 'fr';
+        include('lang-fr.php');
+    }
+    if ($cookiePrefs == 'es') {
+        $lang = 'es';
+        include('lang-es.php');
+    }
 }
 
 else {
-  if (isset($browserPrefs)) {
-    if ($browserPrefs == 'en') {
-      $lang = 'en';
-      include('lang-en.php');
+    if (isset($browserPrefs)) {
+        if ($browserPrefs == 'en') {
+            $lang = 'en';
+            include('lang-en.php');
+        }
+        if ($browserPrefs == 'fr') {
+            $lang = 'fr';
+            include('lang-fr.php');
+        }
+        if ($browserPrefs == 'es') {
+            $lang = 'es';
+            include('lang-es.php');
+        }
     }
-    if ($browserPrefs == 'fr') {
-      $lang = 'fr';
-      include('lang-fr.php');
-    }
-    if ($browserPrefs == 'es') {
-      $lang = 'es';
-      include('lang-es.php');
-    }
-  }
-  include('lang-fr.php');
+    include('lang-fr.php');
 }
 
 ////////////////////////////////
@@ -300,37 +277,37 @@ else {
 $script = $SCRIPT_NAME;
 
 function xmlInfos($element) {
-  $thisAlbumPath = browse(current, mean);
+    $thisAlbumPath = browse(current, mean);
 
-  $file = $thisAlbumPath.'/info.xml';
-  $xml = simplexml_load_file($file);
+    $file = $thisAlbumPath.'/info.xml';
+    $xml = simplexml_load_file($file);
 
-  if (count($xml->video) > 0) {
-    foreach ($xml->video as $video) {
-      $videoObjects[] = $video;
+    if (count($xml->video) > 0) {
+        foreach ($xml->video as $video) {
+            $videoObjects[] = $video;
+        }
     }
-  }
 
-  if (count($xml->musicien) > 0) {
-    foreach ($xml->musicien as $musicien) {
-      foreach ($musicien->twitter as $twitter) {
-	$myTwitters[] = $twitter;
-      }
+    if (count($xml->musicien) > 0) {
+        foreach ($xml->musicien as $musicien) {
+            foreach ($musicien->twitter as $twitter) {
+                $myTwitters[] = $twitter;
+            }
+        }
     }
-  }
-  /* echo $myTwitters[0]; */
+    /* echo $myTwitters[0]; */
 
-  switch ($element) {
-  case 'first_twitter':
-    echo $myTwitters[0];
-    break;
-  case 'all_twitters':
-    return $myTwitters;
-    break;
-  case 'videos_object':
-    return $videoObjects;
-    break;
-  }
+    switch ($element) {
+    case 'first_twitter':
+        echo $myTwitters[0];
+        break;
+    case 'all_twitters':
+        return $myTwitters;
+        break;
+    case 'videos_object':
+        return $videoObjects;
+        break;
+    }
 }
 ?>
 
@@ -385,22 +362,11 @@ var test_video= document.createElement("video") //try and create sample video el
 var mediasupport={audio: (test_audio.play)? true : false, video: (test_video.play)? true : false}
 
 if(mediasupport.audio == false) {
-    // alert("Audio : " + mediasupport.audio + "\n"
-    // 	  + "Video : " + mediasupport.video + "\n\n" +
-    // 	  "Wow. Apparemment otre navigateur ("+navigator.appName+" "+navigator.appVersion+") ne gère pas les formats multimedia. Vous ne pourrez pas écouter les chansons, seulement les télécharger, ce qui n'est déjà pas si mal me direz-vous, mais la plupart des embellissements graphiques seront désactivés, ce qui ne fait pas justice au travail des designers." + "\n\n" +
-    // 	  "si je peux me permettre, vous vous faites du mal à utiliser des outils défaillants ; puis-je vous suggèrer un navigateur standard ?" + "\n" +
-    // 	  "> firefox.com" + "\n" +
-    // 	  "> opera.com" + "\n" +
-    // 	  "> chrome.com" + "\n"
-    // 	 )
     loadjscssfile("css/msk-no-audio.css", "css")
 }
 
 if (songToPlay !== undefined) {
-    /* nextClicked() */
     load_track(songToPlay);
-    //            loaded_index = songToPlay;
-    plop = songToPlay;
     playAudio();
 }
 
@@ -417,8 +383,6 @@ if (!empty($zong)) {
 $(document).ready(function() {
     $(".youtube").colorbox({iframe:true, innerWidth:425, innerHeight:344});
     var plopA = '<? echo TXT_NO_AUDIO_TXT ?>';
-
-	// <strong>'+navigator.appName+' '+navigator.appVersion+'</strong>
 
     var noAudioMsg = '<h2 class="no-audio-alert">Wow.</h2>'+
 	'<hr /><h4 class="no-audio-alert">Audio : '+mediasupport.audio+'</h4>' +
@@ -439,35 +403,28 @@ xmlInfos(first_twitter);
     /* alert(twittoz); */
     /* $("#tweets").liveTwitter("Azer0o0", {limit: 5, imageSize: 32}); */
 
-	$('#tweets').liveTwitter(twittoz, {limit: 5, imageSize: 32}, function(){
-	    $('#tweets .loading').remove();
-	  });
+    $('#tweets').liveTwitter(twittoz, {limit: 5, imageSize: 32}, function(){
+	$('#tweets .loading').remove();
+    });
 
-	$('#searchLinks a').each(function(){
-	    var query = $(this).text();
-	    $(this).click(function(){
-		// Update the search
-		$('#tweets').liveTwitter(query).each(function(){
-		    this.twitter.clear();
-		  });
-		// Update the header
-		$('#searchTerm').text(query);
-		return false;
-	      });
-	  });
+    $('#searchLinks a').each(function(){
+	var query = $(this).text();
+	$(this).click(function(){
+	    // Update the search
+	    $('#tweets').liveTwitter(query).each(function(){
+		this.twitter.clear();
+	    });
+	    // Update the header
+	    $('#searchTerm').text(query);
+	    return false;
+	});
+    });
 
     $('.sleeves').cycle({
 	fx: 'fade',
 	speed:    2500,
 	timeout:  30000
-	//                    pause : 1
     });
-
-    //$('').fancybox();
-
-    //        $('a.sleeve').colorbox();
-
-    //$('a.sec').colorbox({rel:'group1'});
 
     $('a.sleeve').colorbox({
 	rel:"group1",
@@ -496,12 +453,10 @@ xmlInfos(first_twitter);
     var txt_play = "<?php
 echo TXT_PLAY
 ?>";
-    /* alert(songToPlay); */
 
     if (songToPlay !== undefined) {
 	/* nextClicked() */
 	load_track(songToPlay);
-	//            loaded_index = songToPlay;
 	plop = songToPlay;
 	playAudio();
     }
@@ -525,23 +480,6 @@ $(document).keydown(function(e){
     }
 });
 
-/* $(document).keydown(function(e) { */
-/*         if(e.which == 32) { */
-/*             pauseClicked(); */
-/*             e.preventDefault(); */
-/*         } */
-/*         if(e.keyCode == 39) { */
-/*             nextClicked(); */
-/*         } */
-/*         if(e.keyCode == 37) { */
-/*             previousClicked(); */
-/*         } */
-/*         if(e.keyCode == 89) { */
-/*             playIcon(); */
-/*         } */
-/*     }); */
-
-
 </script>
 
 <link rel="shortcut icon" href="img/beldigital_logo_on.png" />
@@ -557,53 +495,45 @@ $(document).keydown(function(e){
 
 function spitTitle($dirList, $fileList) {
 
-  $thisAlbumPath = browse(current, mean);
-  $thisAlbumTags = getInfo($thisAlbumPath, thisAlbumTags);
-  $thisAlbumSleeves = getInfo($thisAlbumPath, thisAlbumSleeves);
-  //    $thisAlbumHQSleeve = getInfo($thisAlbumPath, thisAlbumHQSleeve);
+    $thisAlbumPath = browse(current, mean);
+    $thisAlbumTags = getInfo($thisAlbumPath, thisAlbumTags);
+    $thisAlbumSleeves = getInfo($thisAlbumPath, thisAlbumSleeves);
 
-  //var_dump($thisAlbumTags);
+    $artistName = $thisAlbumTags[artist];
+    $albumName = $thisAlbumTags[album];
+    $albumGenre = $thisAlbumTags[genre];
+    $albumYear = $thisAlbumTags[year];
+    $albumLabel = $thisAlbumTags[organization];
 
-  $artistName = $thisAlbumTags[artist];
-  $albumName = $thisAlbumTags[album];
-  $albumGenre = $thisAlbumTags[genre];
-  $albumYear = $thisAlbumTags[year];
-  $albumLabel = $thisAlbumTags[organization];
+    $genres = array_unique($albumGenre);
+    $years = array_unique($albumYear);
 
-  $genres = array_unique($albumGenre);
-  $years = array_unique($albumYear);
-
-  //     var_dump($albumGenre);
-
-  foreach ($genres as $key => $value) {
-    if (is_null($value) || $value == "" || $value == " " || $value == "&nbsp;") {
-      unset($genres[$key]);
+    foreach ($genres as $key => $value) {
+        if (is_null($value) || $value == "" || $value == " " || $value == "&nbsp;") {
+            unset($genres[$key]);
+        }
     }
-  }
 
-  if (is_array($genres)) {
-    $genre = implode(", ", $genres);
-  } else {
-    $genre = $albumGenre;
-  }
-
-  if (count($years) > 1) {
-    sort($years);
-    foreach ($years as $key) {
-      $earliest = $years[0];
-      $latest =  $years[count($years)-1];
-      $year = $earliest.' => '.$latest;
+    if (is_array($genres)) {
+        $genre = implode(", ", $genres);
+    } else {
+        $genre = $albumGenre;
     }
-  } else {
-    $year = $years[0];
-  }
 
-  //    foreach($infos as $info) {
-  //  $presentation = $info['presentation'];
-  //    }
-  $thisAlbumBackgroundImages = getInfo($thisAlbumPath, thisAlbumBackgroundImages);
+    if (count($years) > 1) {
+        sort($years);
+        foreach ($years as $key) {
+            $earliest = $years[0];
+            $latest =  $years[count($years)-1];
+            $year = $earliest.' => '.$latest;
+        }
+    } else {
+        $year = $years[0];
+    }
 
-  echo '
+    $thisAlbumBackgroundImages = getInfo($thisAlbumPath, thisAlbumBackgroundImages);
+
+    echo '
 <title>'.$artistName. ' "'.$albumName.'" ('.$albumLabel.')</title>
 <link rel="shortcut icon" type="image/x-icon" href="'.str_replace(" ", "%20", $thisAlbumSleeves[0]).'" />
 
@@ -617,7 +547,7 @@ html, body {
         ';
 
 
-  echo '
+    echo '
 </head>
 <body>
 <div id="main">
@@ -636,37 +566,37 @@ html, body {
       <div class="middle" style="font-size:8px;">
 ';
 
-echo '&nbsp;</div>
+    echo '&nbsp;</div>
       <div id="sleeve">
         <div class="right">
           <div class="sleeves">
 ';
 
-  if (count($thisAlbumSleeves) > 1) {
-    foreach ($thisAlbumSleeves as $key => $value) {
-      $thisAlbumSleeve = str_replace(" ", "%20", $value);
-      $path_parts = pathinfo($thisAlbumSleeve);
-      $thisAlbumSleeveFileName = $path_parts['filename'].'.'.$path_parts['extension'];
-      echo '
+    if (count($thisAlbumSleeves) > 1) {
+        foreach ($thisAlbumSleeves as $key => $value) {
+            $thisAlbumSleeve = str_replace(" ", "%20", $value);
+            $path_parts = pathinfo($thisAlbumSleeve);
+            $thisAlbumSleeveFileName = $path_parts['filename'].'.'.$path_parts['extension'];
+            echo '
 <a href="'.$thisAlbumSleeve.'" title="'.$thisAlbumSleeveFileName.'" class="sleeve"><img src="'.$thisAlbumSleeve.'" alt="'.$thisAlbumSleeveFileName.'" /></a>
 ';
-    }
-  } else {
-    $path_parts = pathinfo($thisAlbumSleeves[0]);
-    $thisAlbumSleeveFileName = $path_parts['filename'].'.'.$path_parts['extension'];
-    echo '
+        }
+    } else {
+        $path_parts = pathinfo($thisAlbumSleeves[0]);
+        $thisAlbumSleeveFileName = $path_parts['filename'].'.'.$path_parts['extension'];
+        echo '
         <a href="'.str_replace(" ", "%20", $thisAlbumSleeves[0]).'" title="'.TXT_DOWNLOAD.' '.$thisAlbumSleeveFileName.'" class="sleeve"><img style="height:100%" src="'.str_replace(" ", "%20", $thisAlbumSleeves[0]).'" alt="'.$thisAlbumSleeveFileName.'" /></a>
 ';
 
-  }
-  echo '
+    }
+    echo '
           </div>
         </div>
       </div>
     </div>
 ';
-  echo "\n";
-  echo "\n";
+    echo "\n";
+    echo "\n";
 }
 
 
@@ -682,7 +612,7 @@ function getTinyUrl($url) {
 
 function audioList($fileList, $albumPath) {
 
-  //    Pour le browse() dans page player
+  //    Pour le browse() dans le player
   //   $dirList = getInfo("OGG/", musicDirs);
 
   $script = $_SERVER["SCRIPT_URI"];
@@ -693,34 +623,16 @@ function audioList($fileList, $albumPath) {
 
   $thisAlbumTags = getInfo($albumPath, thisAlbumTags);
 
-  /* array_multisort($thisAlbumTags['track'], $thisAlbumTags['title']); */
-  /* array_multisort($thisAlbumTags['title'], $thisAlbumTags['track']); */
-  /* array_multisort($thisAlbumTags['title'], $thisAlbumTags['tracknumber']); */
-
   foreach ($fileList as $fullFileName => $myFileName) {
     $thisFileTags = getInfo($fullFileName, thisFileTags);
-    /* $trackFileNames[$fullFileName] = $myFileName; */
     $trackNumbers[] = $thisFileTags[track];
     $trackTitles[$fullFileName] = $thisFileTags[title];
-    /* $trackTitles[$fullFileName]['track'] = $thisFileTags[track]; */
     $track['url'] = $fullFileName;
-    /* $trackTitles['track'] = $thisFileTags[track]; */
-    /* $track['title'] = $thisFileTags[title]; */
     $numberOfSongs++;
   }
 
-  /* array_multisort($trackTitles[track], $trackTitles[url]); */
-
-/*   echo '<pre style="text-align:left;">$track : */
-/* '; */
-/*   var_dump($trackTitles); */
-/*   echo '</pre> */
-/* '; */
-
   $genres = array_unique($albumGenre);
   $years = array_unique($albumYear);
-
-  //     var_dump($albumGenre);
 
   foreach ($genres as $key => $value) {
     if (is_null($value) || $value == "" || $value == " " || $value == "&nbsp;") {
@@ -745,62 +657,56 @@ function audioList($fileList, $albumPath) {
     $year = $years[0];
   }
 
-
   echo '
         <ul id="PagePlayer">
         ';
 
-
   ksort($trackTitles);
 
   foreach ($trackTitles as $fullFileName => $trackTitle) {
-    $thisFileTags = getInfo($fullFileName, thisFileTags);
+      $thisFileTags = getInfo($fullFileName, thisFileTags);
 
-    $artistName = $thisAlbumTags[artist];
-    $albumName = $thisAlbumTags[album];
-    $albumGenre = $thisAlbumTags[genre];
-    $albumRecordLabel = $thisFileTags[organization];
-    $albumYear = $thisAlbumTags[year];
+      $artistName = $thisAlbumTags[artist];
+      $albumName = $thisAlbumTags[album];
+      $albumGenre = $thisAlbumTags[genre];
+      $albumRecordLabel = $thisFileTags[organization];
+      $albumYear = $thisAlbumTags[year];
 
-    $artistName = $thisFileTags[artist];
-    $albumName = $thisFileTags[album];
-    $albumGenre = $thisFileTags[genre];
-    $albumYear = $thisFileTags[year];
-    $trackTitle = $thisFileTags[title];
-    $trackPlayTime = $thisFileTags[playtime];
-    $trackFileSize = $thisFileTags[size];
-    $trackBitRate = $thisFileTags[bitrate];
-    $trackNumber = $thisFileTags[track];
-    $trackComment = $thisFileTags[comment];
+      $artistName = $thisFileTags[artist];
+      $albumName = $thisFileTags[album];
+      $albumGenre = $thisFileTags[genre];
+      $albumYear = $thisFileTags[year];
+      $trackTitle = $thisFileTags[title];
+      $trackPlayTime = $thisFileTags[playtime];
+      $trackFileSize = $thisFileTags[size];
+      $trackBitRate = $thisFileTags[bitrate];
+      $trackNumber = $thisFileTags[track];
+      $trackComment = $thisFileTags[comment];
 
-    $thisFilePathElements = explode("/", $fullFileName);
-    $thisFileNicePath = $thisFilePathElements[count($thisFilePathElements)-3].",".$thisFilePathElements[count($thisFilePathElements)-2];
-    $thisFileObfuscatedPath = $thisFilePathElements[count($thisFilePathElements)-3]."/".$thisFilePathElements[count($thisFilePathElements)-2]."/".$thisFilePathElements[count($thisFilePathElements)-1];
+      $thisFilePathElements = explode("/", $fullFileName);
+      $thisFileNicePath = $thisFilePathElements[count($thisFilePathElements)-3].",".$thisFilePathElements[count($thisFilePathElements)-2];
+      $thisFileObfuscatedPath = $thisFilePathElements[count($thisFilePathElements)-3]."/".$thisFilePathElements[count($thisFilePathElements)-2]."/".$thisFilePathElements[count($thisFilePathElements)-1];
 
-    $fileName = $thisFilePathElements[count($thisFilePathElements)-1];
+      $fileName = $thisFilePathElements[count($thisFilePathElements)-1];
 
-    /* $safeLink = urlencode('http://'.$host.$script.'?a='.$thisFileNicePath.'&s='.$z); */
+      $host = $_SERVER["HTTP_HOST"];
+      $script = $_SERVER["PHP_SELF"];
 
-    $host = $_SERVER["HTTP_HOST"];
-    $script = $_SERVER["PHP_SELF"];
+      $pos = strpos($_SERVER["REQUEST_URI"], "/?");
 
-    $pos = strpos($_SERVER["REQUEST_URI"], "/?");
-
-    $myScriptPath = pathinfo($_SERVER["SCRIPT_NAME"]);
+      $myScriptPath = pathinfo($_SERVER["SCRIPT_NAME"]);
       $myDir = $myScriptPath['dirname'];
-    // Note our use of ===.  Simply == would not work as expected
-    // because the position of 'a' was the 0th (first) character.
-    if ($pos === false) {
-      $unSafeLink = 'http://'.$host.$script.'?a='.$thisFileNicePath.'&s='.$z++;
-    } else {
-      $unSafeLink = 'http://'.$host.$myDir.'/?a='.$thisFileNicePath.'&s='.$z++;
-    }
+      // Note our use of ===.  Simply == would not work as expected
+      // because the position of 'a' was the 0th (first) character.
+      if ($pos === false) {
+          $unSafeLink = 'http://'.$host.$script.'?a='.$thisFileNicePath.'&s='.$z++;
+      } else {
+          $unSafeLink = 'http://'.$host.$myDir.'/?a='.$thisFileNicePath.'&s='.$z++;
+      }
 
-    /* $unSafeLink = 'http://'.$host.$script.'?a='.$thisFileNicePath.'&s='.$z++; */
-    /* $safeLink = urlencode($unSafeLink); */
-    $shortLink = getTinyUrl($unSafeLink);
+      $shortLink = getTinyUrl($unSafeLink);
 
-    echo '
+      echo '
         <li>
           <h3>'.$trackTitle.'</h3>
           <h4 class="albumName">'.$artistName.' - '.$albumName.'</h4>
@@ -826,13 +732,13 @@ function audioList($fileList, $albumPath) {
             <p><span class="leftSpan">'.TAGS_RECORD_LABEL.' : </span><span class="rightSpan">'.$albumRecordLabel.'</span></p>
 ';
 
-    $tes = rtrim( $trackComment );
+      $tes = rtrim( $trackComment );
 
-    if (!empty($tes) && ($trackComment !== "&nbsp;" )) {
-	echo '<blockquote><span class="bqstart">“</span>'.$trackComment.'<span class="bqend">”</span></blockquote>';
-    }
+      if (!empty($tes) && ($trackComment !== "&nbsp;" )) {
+          echo '<blockquote><span class="bqstart">“</span>'.$trackComment.'<span class="bqend">”</span></blockquote>';
+      }
 
-echo '
+      echo '
             <form class="urlFields">
               <input type="text" class="loongURL" size="20" name="'.TAGS_SHARE.'" onClick="this.select();" value="'.$unSafeLink.'"><br/>
               <input type="text" class="shortURL" size="20" onClick="this.select();" value="'.$shortLink.'" />
@@ -846,8 +752,8 @@ echo '
         </li>
             ';
 
-    // Feed the tracklist
-    $audioFile[$trackTitle] = $fileName;
+      // Feed the tracklist
+      $audioFile[$trackTitle] = $fileName;
 
   } // End foreach
   echo '
@@ -859,18 +765,18 @@ echo '
   $tweeters = xmlInfos(all_twitters);
 
   foreach ($tweeters as $tweeter) {
-    echo '<a href="#">'.$tweeter.'</a> ';
+      echo '<a href="#">'.$tweeter.'</a> ';
   }
 
 
-echo '
+  echo '
 </p>
 </div>
 ';
 
 
 
-echo '
+  echo '
 <!--	<p id="searchLinks">Try changing it to <a href="#">bacon</a>, <a href="#">pasta</a> or <a href="#">celery</a>.</p> -->
         <script type="text/javascript">
           //set some PagePlaer variables
@@ -887,12 +793,12 @@ echo '
 
 function videoList($fileList, $albumPath) {
 
-  $videos_objects = xmlInfos(videos_object);
+    $videos_objects = xmlInfos(videos_object);
 
-  foreach($videos_objects as $videos_object) {
-    $videoName = $videos_object->name;
-    $videoID = $videos_object->youtubeid;
-    echo '
+    foreach($videos_objects as $videos_object) {
+        $videoName = $videos_object->name;
+        $videoID = $videos_object->youtubeid;
+        echo '
 <div id="videos">
 <p class="video"><a class="youtube" href="http://youtube.com/embed/'.$videoID.'" title="'.$videoName.'">'.$videoName.'</a>
 <img class="video_thumbnail" src="http://img.youtube.com/vi/'.$videoID.'/2.jpg" />
@@ -900,19 +806,7 @@ function videoList($fileList, $albumPath) {
 </div>
 
 ';
-  }
-
-/*   foreach($videoIDs as $videoID) { */
-/*     echo ' */
-/* <div id="videos"> */
-/* <p class="video"><a class="youtube" href="http://youtube.com/embed/'.$videoID.'" title="'.$videoID.'">'.$videoID.'</a> */
-/* <img class="video_thumbnail" src="http://img.youtube.com/vi/'.$videoID.'/2.jpg" /> */
-/* </p> */
-/* </div> */
-
-/* '; */
-/*   } */
-
+    }
 }
 
 
@@ -921,8 +815,8 @@ function videoList($fileList, $albumPath) {
 // Construit la page d'accueil en listant tous les albums
 
 function index($dirList, $labelName) {
-  $numberOfAlbums = count($dirList);
-  echo '<title>'.$labelName.' - Free Music</title>
+    $numberOfAlbums = count($dirList);
+    echo '<title>'.$labelName.' - Free Music</title>
     <style type="text/css" media="screen">@import "css/contentflow.css";</style>
     <script language="JavaScript" type="text/javascript" src="libs/contentflow.js"></script>
     <script>
@@ -939,7 +833,7 @@ var myNewFlow = new ContentFlow("albumsRotator", {
     </head>
     ';
 
-  echo '
+    echo '
     <body>
    <div class="maincontent">
 <div id="albumsRotator" class="ContentFlow">
@@ -948,23 +842,23 @@ var myNewFlow = new ContentFlow("albumsRotator", {
           <div class="flow">
     ';
 
-  foreach ($dirList as $key => $albumPath) {
-    $thisAlbumTags = getInfo($albumPath, thisAlbumTags);
+    foreach ($dirList as $key => $albumPath) {
+        $thisAlbumTags = getInfo($albumPath, thisAlbumTags);
 
-    $artistName = $thisAlbumTags[artist];
-    $albumName = $thisAlbumTags[album];
-    $albumGenre = $thisAlbumTags[genre];
-    $albumYear = $thisAlbumTags[year];
-    $albumYear = $thisAlbumTags[year];
+        $artistName = $thisAlbumTags[artist];
+        $albumName = $thisAlbumTags[album];
+        $albumGenre = $thisAlbumTags[genre];
+        $albumYear = $thisAlbumTags[year];
+        $albumYear = $thisAlbumTags[year];
 
-    $labelName = $thisAlbumTags[organization];
+        $labelName = $thisAlbumTags[organization];
 
-    $album = ltrim(ltrim($album, '.'), '/');
-    $newAlbumSexyUrlElements = explode("/", $dirList[$key]);
-    $newAlbumSexyUrl = $newAlbumSexyUrlElements[1].",".$newAlbumSexyUrlElements[2];
-    $thisAlbumSleeve = getInfo($albumPath, thisAlbumSleeve);
+        $album = ltrim(ltrim($album, '.'), '/');
+        $newAlbumSexyUrlElements = explode("/", $dirList[$key]);
+        $newAlbumSexyUrl = $newAlbumSexyUrlElements[1].",".$newAlbumSexyUrlElements[2];
+        $thisAlbumSleeve = getInfo($albumPath, thisAlbumSleeve);
 
-    echo '
+        echo '
             <div class="item">
                 <img class="content" src="'.$thisAlbumSleeve.'" href="'.$script.'?a='.$newAlbumSexyUrl.'"/>
                      <a style="display:none" href="'.$script.'?a='.$newAlbumSexyUrl.'">'.$albumName.'</a>
@@ -973,9 +867,9 @@ var myNewFlow = new ContentFlow("albumsRotator", {
 
                 <!--a class="item" href="'.$newAlbumSexyUrl.'"><img class="content" src="'.$thisAlbumSleeve.'"/></a-->
         ';
-  }
+    }
 
-  echo '
+    echo '
         </div>
         <div class="globalCaption"></div>
         <!--div class="scrollbar">
@@ -991,95 +885,91 @@ var myNewFlow = new ContentFlow("albumsRotator", {
 
 function browse($position, $pathStyle) {
 
-  $rootMusicDir = getRoot();
-  //$plop
-  $dirList = getInfo($rootMusicDir, musicDirs);
+    $rootMusicDir = getRoot();
+    $dirList = getInfo($rootMusicDir, musicDirs);
 
-  $nicePath = strip_tags($_GET['a']);
-  $slash = "/";
-  $dash = ",";
+    $nicePath = strip_tags($_GET['a']);
+    $slash = "/";
+    $dash = ",";
 
-  $meanPath = $rootMusicDir.'/'.str_replace($dash, $slash, $nicePath);
-  $directoryToScan = $meanPath;
+    $meanPath = $rootMusicDir.'/'.str_replace($dash, $slash, $nicePath);
+    $directoryToScan = $meanPath;
 
-  $dirListSize = count($dirList);
+    $dirListSize = count($dirList);
 
-  $firstDir = trim(rtrim($dirList[0], $slash), $slash);
-  $lastDir = trim(rtrim($dirList[$dirListSize-1], $slash), $slash);
+    $firstDir = trim(rtrim($dirList[0], $slash), $slash);
+    $lastDir = trim(rtrim($dirList[$dirListSize-1], $slash), $slash);
 
-  $currentDir = trim(rtrim($directoryToScan, $slash), $slash);
-  $dirListKey = array_search($currentDir, $dirList);
+    $currentDir = trim(rtrim($directoryToScan, $slash), $slash);
+    $dirListKey = array_search($currentDir, $dirList);
 
-  //    echo $dirListKey;
-  //    var_dump($dirList);
+    $prevPathElements = explode($slash, $dirList[$dirListKey-1]);
+    $herePathElements = explode($slash, $dirList[$dirListKey]);
+    $nextPathElements = explode($slash, $dirList[$dirListKey+1]);
 
-  $prevPathElements = explode($slash, $dirList[$dirListKey-1]);
-  $herePathElements = explode($slash, $dirList[$dirListKey]);
-  $nextPathElements = explode($slash, $dirList[$dirListKey+1]);
+    $firstDirPathElements = explode($slash, $dirList[0]);
+    $lastDirPathElements = explode($slash, $dirList[$dirListSize-1]);
 
-  $firstDirPathElements = explode($slash, $dirList[0]);
-  $lastDirPathElements = explode($slash, $dirList[$dirListSize-1]);
+    $niceFirst = $firstDirPathElements[1].$dash.$firstDirPathElements[2];
+    $niceLast = $lastDirPathElements[1].$dash.$lastDirPathElements[2];
 
-  $niceFirst = $firstDirPathElements[1].$dash.$firstDirPathElements[2];
-  $niceLast = $lastDirPathElements[1].$dash.$lastDirPathElements[2];
+    $nicePrev = $prevPathElements[1].$dash.$prevPathElements[2];
+    $niceHere = $herePathElements[1].$dash.$herePathElements[2];
+    $niceNext = $nextPathElements[1].$dash.$nextPathElements[2];
 
-  $nicePrev = $prevPathElements[1].$dash.$prevPathElements[2];
-  $niceHere = $herePathElements[1].$dash.$herePathElements[2];
-  $niceNext = $nextPathElements[1].$dash.$nextPathElements[2];
+    $meanPrev = $prevPathElements[1].$slash.$prevPathElements[2];
+    $meanNext = $nextPathElements[1].$slash.$nextPathElements[2];
 
-  $meanPrev = $prevPathElements[1].$slash.$prevPathElements[2];
-  $meanNext = $nextPathElements[1].$slash.$nextPathElements[2];
+    switch ($pathStyle) {
+    case 'mean':
+        $prev = ltrim(ltrim($dirList[$dirListKey-1], '.'), $slash);
+        $here = ltrim(ltrim($dirList[$dirListKey], '.'), $slash);
+        $next = ltrim(ltrim($dirList[$dirListKey+1], '.'), $slash);
+        break;
+    case 'nice':
+        $prev = $nicePrev;
+        $here = $niceHere;
+        $next = $niceNext;
+        $firstDir = $niceFirst;
+        $lastDir = $niceLast;
+        break;
+    case 'extraNice':
+        $prev = strtr($nicePrev, "_", " ");
+        $here = strtr($niceHere, "_", " ");
+        $next = strtr($niceNext, "_", " ");
+        $firstDir = strtr($niceFirst, "_", " ");
+        $lastDir = strtr($niceLast, "_", " ");
 
-  switch ($pathStyle) {
-  case 'mean':
-    $prev = ltrim(ltrim($dirList[$dirListKey-1], '.'), $slash);
-    $here = ltrim(ltrim($dirList[$dirListKey], '.'), $slash);
-    $next = ltrim(ltrim($dirList[$dirListKey+1], '.'), $slash);
-    break;
-  case 'nice':
-    $prev = $nicePrev;
-    $here = $niceHere;
-    $next = $niceNext;
-    $firstDir = $niceFirst;
-    $lastDir = $niceLast;
-    break;
-  case 'extraNice':
-    $prev = strtr($nicePrev, "_", " ");
-    $here = strtr($niceHere, "_", " ");
-    $next = strtr($niceNext, "_", " ");
-    $firstDir = strtr($niceFirst, "_", " ");
-    $lastDir = strtr($niceLast, "_", " ");
+        $prev = str_replace(",", " - ", $prev);
+        $here = str_replace(",", " - ", $here);
+        $next = str_replace(",", " - ", $next);
+        $firstDir = str_replace(",", " - ", $firstDir);
+        $lastDir = str_replace(",", " - ", $lastDir);
 
-    $prev = str_replace(",", " - ", $prev);
-    $here = str_replace(",", " - ", $here);
-    $next = str_replace(",", " - ", $next);
-    $firstDir = str_replace(",", " - ", $firstDir);
-    $lastDir = str_replace(",", " - ", $lastDir);
-
-    break;
-  }
-
-  switch ($position) {
-  case 'prev':
-    if ($dirListKey === 0) {
-      return $lastDir;
+        break;
     }
-    else {
-      return $prev;
+
+    switch ($position) {
+    case 'prev':
+        if ($dirListKey === 0) {
+            return $lastDir;
+        }
+        else {
+            return $prev;
+        }
+        break;
+    case 'current':
+        return $here;
+        break;
+    case 'next':
+        if ($dirListKey === $dirListSize-1) {
+            return $firstDir;
+        }
+        else {
+            return $next;
+        }
+        break;
     }
-    break;
-  case 'current':
-    return $here;
-    break;
-  case 'next':
-    if ($dirListKey === $dirListSize-1) {
-      return $firstDir;
-    }
-    else {
-      return $next;
-    }
-    break;
-  }
 }
 
 // bytestostring($size, $precision) ////////////////////////////////////////
@@ -1087,10 +977,10 @@ function browse($position, $pathStyle) {
 // Human-readable filesize
 
 function bytestostring($size, $precision = 0) {
-  $sizes = array('YB', 'ZB', 'EB', 'PB', 'TB', 'GB', 'MB', 'kB', 'B');
-  $total = count($sizes);
-  while($total-- && $size > 1024) $size /= 1024;
-  return round($size, $precision).$sizes[$total];
+    $sizes = array('YB', 'ZB', 'EB', 'PB', 'TB', 'GB', 'MB', 'kB', 'B');
+    $total = count($sizes);
+    while($total-- && $size > 1024) $size /= 1024;
+    return round($size, $precision).$sizes[$total];
 }
 
 // footer() ////////////////////////////////////////
@@ -1099,10 +989,10 @@ function bytestostring($size, $precision = 0) {
 
 function albumBrowser($labelName) {
 
-  $prevAlbumSleeve = getInfo(browse(prev, mean), thisAlbumSleeve);
-  $nextAlbumSleeve = getInfo(browse(next, mean), thisAlbumSleeve);
+    $prevAlbumSleeve = getInfo(browse(prev, mean), thisAlbumSleeve);
+    $nextAlbumSleeve = getInfo(browse(next, mean), thisAlbumSleeve);
 
-  echo '
+    echo '
 <div id="albumBrowser" class="main" style="position: relative;">
 <div class="invisible_if_no_audio" id="semiTransparentDiv" style="position: absolute; background-color: black; filter:alpha(opacity=55);-moz-opacity:.55;opacity:.55; height: 100%; width: 100%; z-index: 1;"></div>
     <div class="left" style="position: relative; z-index: 2;">
@@ -1128,13 +1018,13 @@ function albumBrowser($labelName) {
 // Script exec. time
 
 function indexFooter($totaltime) {
-  echo '
+    echo '
     <div id="debug" class="main">
         <table class="footdown">
             <tr>
                 <td>
                 ';
-  echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp;'.$script.' v0.6 Rendered in: ' . round($totaltime, 4) . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
+    echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp;'.$script.' v0.6 Rendered in: ' . round($totaltime, 4) . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
                 <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>&nbsp;|&nbsp;<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.0/fr/">CC LICENSE</a>&nbsp;|&nbsp;<a href="?lang=fr" onClick="history.go(0)">'.TXT_FRENCH.'</a>&nbsp;|&nbsp;<a href="?lang=en" onClick="history.go(0)">'.TXT_ENGLISH.'</a>
                 </td>
             </tr>
@@ -1149,13 +1039,13 @@ function indexFooter($totaltime) {
 // Script exec. time
 
 function debugFooter($totaltime, $albums, $songs) {
-  echo '
+    echo '
     <div id="debug" class="main">
         <table class="footdown">
             <tr>
                 <td>
                 ';
-  echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp; '.$script. ' v0.7.1 Rendered in: ' . round($totaltime, 4) . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;<a title="'.$cachefile.'" href="'.$cachefile.'">Cached</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
+    echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp; '.$script. ' v0.7.1 Rendered in: ' . round($totaltime, 4) . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;<a title="'.$cachefile.'" href="'.$cachefile.'">Cached</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
                 <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>&nbsp;|&nbsp;<a rel="license" href="'.URL_CCLICENSE.'">'.TXT_LICENSE.'</a>&nbsp;|&nbsp;<a title="stats" href="https://logs.ovh.net/beldigital.net/">stats</a>&nbsp;|&nbsp;<a title="log" href="https://logs.ovh.net/beldigital.net/osl/">acces log</a>&nbsp;|&nbsp;<a title="log" href="https://logs.ovh.net/beldigital.net/osl/error/">error log</a>
                 </td>
             </tr>
@@ -1168,7 +1058,7 @@ function debugFooter($totaltime, $albums, $songs) {
 // Fixed Footer pane
 
 function fixedFooter($dirList) {
-  echo '
+    echo '
    </div> <!--end content div-->
 
    <div id="osx-modal-content">
@@ -1230,14 +1120,9 @@ else {
     debugFooter($totaltime, $albums, $songs);
   }
   fixedFooter($dirList);
-  /* if (isset($songToPlay)) { */
-  /*     shootNow($directoryToScan, $songToPlay); */
-  /* } */
 }
 
 if (isset($_GET['debug'])) {
-  /* echo '$safelink : ['.$safelink.']<br />'; */
-  // echo '$thisAlbumTags : ['.$thisAlbumTags.']<br />';
   /* echo '<pre style="text-align:left;">$GLOBALS : '; */
   /* var_dump($GLOBALS); */
   /* echo '</pre>'; */
@@ -1252,15 +1137,6 @@ if (!$thisPageIsCached) {
 }
 
 echo '
-
-<!--a accesskey="2" href="?style=RED" onclick="setActiveStyleSheet(\'RED\'); return false;">
-red</a> | <a accesskey="2" href="?style=BLUE" onclick="setActiveStyleSheet(\'BLUE\'); return false;">blue</a>
-
-<br />
-<a class="tagger" href="#">plop</a-->
-
-
-
 </body>
 </html>
 ';
