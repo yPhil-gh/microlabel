@@ -589,23 +589,25 @@ text-shadow: red 0 0 8px
 }
 
 .fadeAlbums {
-    /*     line-height: 1.4em; */
-    /*     padding: 5em 0 0 0; */
-    font-size:9pt;
+    font-size:75%;
     text-align:left;
-    background-attachment:fixed;
-    /* background: url(img/arrow-right.png) no-repeat 0 10px; */
-    background: url(img/arrow-right.png) no-repeat left bottom;
-    /* background-position:left bottom; */
-    width: 150px;
-    height: 80px;
-    margin:auto auto;
+    /* margin:auto auto; */
     float:left;
 }
+
+
+.fadeAlbums strong {
+    border-bottom: 1px solid #333;
+}
+
 
 #albumBrowser .thumb {
     width: 80px;
     height: 80px;
+}
+
+#albumBrowser p {
+    margin: .5em 0 0 0;
 }
 
 table.footdown {

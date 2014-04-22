@@ -419,15 +419,13 @@ xmlInfos(first_twitter);
 	close:"esc"
     });
 
-    function pulseAlbums() {
-	$('.fadeAlbums').fadeIn(300);
-	$('.fadeAlbums').fadeOut(2500);
-        $('.moved').fadeIn(800)
+    function pulse() {
+	$('.fadeAlbums').fadeIn(80000);
+	$('.fadeAlbums').fadeOut(8000);
+        $('.moved').fadeIn(150)
         $('.moved').fadeOut(200)
     }
-    pulseAlbums();
-    var pause = 10000;
-    interval = setInterval(pulseAlbums, pause);
+    setInterval(pulse, 5000);
 
     onPagePlayerLoad();
 
@@ -983,7 +981,9 @@ function albumBrowser($labelName) {
         <img class="thumb" src="'.$prevAlbumSleeve.'" alt="'.TXT_PREVIOUS_ALBUM.' = '.browse(prev, nice).'" /></a>
     </div>
     <div class="right" style="position: relative; z-index: 2;">
-        <div class="fadeAlbums"><strong>'.TXT_NEXT_ALBUM.'</strong><br />'.browse(next, extraNice).'</div>
+        <div class="fadeAlbums"><strong>'.TXT_NEXT_ALBUM.'</strong>
+<hr />
+<p>'.browse(next, extraNice).'</p></div>
         <a title="'.TXT_NEXT_ALBUM.' = '.browse(next, extraNice).'" href="'.$script.'?a='.browse(next, nice).'">
         <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse(next, nice).'" /></a>
     </div>
