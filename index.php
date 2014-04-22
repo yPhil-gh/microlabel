@@ -422,7 +422,7 @@ xmlInfos(first_twitter);
     function pulseAlbums() {
 	$('.fadeAlbums').fadeIn(300);
 	$('.fadeAlbums').fadeOut(2500);
-        $('.moved').fadeIn(8000)
+        $('.moved').fadeIn(800)
         $('.moved').fadeOut(200)
     }
     pulseAlbums();
