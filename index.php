@@ -1045,22 +1045,14 @@ function debugFooter($totaltime, $albums, $songs) {
 
 function vc($element) {
 
-    $opts = array(
-        'http'=>array(
-            'method'=>"GET",
-            'header'=>"User-Agent: microlabel"
-        )
-    );
+    $opts = array('http'=>array('method'=>"GET", 'header'=>"User-Agent: microlabel"));
 
     $context = stream_context_create($opts);
-
     $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/microlabel/commits", false, $context);
 
     if ($current_commits !== false) {
-
         $commits = json_decode($current_commits);
-
-        $ref_commit = "9d3a0f4c797330d1d0daecbbf5dc94587a60216f";
+        $ref_commit = "05e2059687be7b4fb4e15fdada1d7c8b3ed8f6cf";
 
         $current_commit_minus1 = $commits[1]->sha;
         $commit_message = "last message : ".$commits[0]->commit->message;
@@ -1085,8 +1077,6 @@ function vc($element) {
         return $version_message;
         break;
     }
-
-
 }
 
 function fixedFooter($dirList) {
