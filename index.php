@@ -1046,7 +1046,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "ef237c07c91763826445447fbc5b5bf22d9688c8";
+        $ref_commit = "c9499f23217159ef1a72837915328596a3ac14ef";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last dev message : ".$commits['0']->commit->message;
