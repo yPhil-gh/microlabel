@@ -422,6 +422,8 @@ xmlInfos(first_twitter);
     function pulseAlbums() {
 	$('.fadeAlbums').fadeIn(300);
 	$('.fadeAlbums').fadeOut(2500);
+        $('.moved').fadeIn(8000)
+        $('.moved').fadeOut(200)
     }
     pulseAlbums();
     var pause = 10000;
@@ -1058,7 +1060,7 @@ function vc($element) {
         // echo "yo";
         $commits = json_decode($current_commits);
 
-        $ref_commit = "094a87a36801809163ab622f05782acbbe472d9b";
+        $ref_commit = "9d3a0f4c797330d1d0daecbbf5dc94587a60216f";
 
         $current_commit_minus1 = $commits[1]->sha;
         $commit_message = "last message : ".$commits[0]->commit->message;
