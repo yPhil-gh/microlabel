@@ -390,10 +390,7 @@ $(document).ready(function() {
 	$.prompt(noAudioMsg);
     }
 
-    var twittoz = "<?php
-xmlInfos(first_twitter);
-//echo 'plop';
-?>";
+    var twittoz = "<?php xmlInfos('first_twitter'); ?>";
 
     /* alert(twittoz); */
     /* $("#tweets").liveTwitter("Azer0o0", {limit: 5, imageSize: 32}); */
@@ -761,6 +758,9 @@ function videoList($fileList, $albumPath) {
 
     $videos_objects = xmlInfos('videos_object');
 
+    // $videos_objects = isset(xmlInfos('videos_object')) ? xmlInfos('videos_object') : '';
+
+if (!empty($videos_objects)) {
     foreach($videos_objects as $videos_object) {
         $videoName = $videos_object->name;
         $videoID = $videos_object->youtubeid;
@@ -773,6 +773,9 @@ function videoList($fileList, $albumPath) {
 
 ';
     }
+}
+
+
 }
 
 
@@ -821,7 +824,7 @@ var myNewFlow = new ContentFlow("albumsRotator", {
 
         $labelName = $thisAlbumTags['organization'];
 
-        $album = ltrim(ltrim($album, '.'), '/');
+        // $album = ltrim(ltrim($album, '.'), '/');
         $newAlbumSexyUrlElements = explode("/", $dirList[$key]);
         $newAlbumSexyUrl = $newAlbumSexyUrlElements[1].",".$newAlbumSexyUrlElements['2'];
         $thisAlbumSleeve = getInfo($albumPath, 'thisAlbumSleeve');
@@ -892,9 +895,9 @@ function browse($position, $pathStyle) {
 
     switch ($pathStyle) {
     case 'mean':
-        $prev = ltrim(ltrim($dirList[$dirListKey-1], '.'), $slash);
+        $prev = ltrim(ltrim($dirList[$dirListKey-'1'], '.'), $slash);
         $here = ltrim(ltrim($dirList[$dirListKey], '.'), $slash);
-        $next = ltrim(ltrim($dirList[$dirListKey+1], '.'), $slash);
+        $next = ltrim(ltrim($dirList[$dirListKey+'1'], '.'), $slash);
         break;
     case 'nice':
         $prev = $nicePrev;
@@ -997,7 +1000,7 @@ function indexFooter($totaltime) {
             <tr>
                 <td>
                 ';
-    echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp;'.$script.' v0.6 Rendered in: ' . round($totaltime, 4) . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
+    echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp;'.$script.' v0.6 Rendered in: ' . round($totaltime, '4') . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
                 <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>&nbsp;|&nbsp;<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.0/fr/">CC LICENSE</a>&nbsp;|&nbsp;<a href="?lang=fr" onClick="history.go(0)">'.TXT_FRENCH.'</a>&nbsp;|&nbsp;<a href="?lang=en" onClick="history.go(0)">'.TXT_ENGLISH.'</a>
                 </td>
             </tr>
@@ -1019,7 +1022,7 @@ function debugFooter($totaltime, $albums, $songs) {
             <tr>
                 <td>
                 ';
-    echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp; '.$script. ' v0.7.1 Rendered in: ' . round($totaltime, 4) . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;<a title="'.$cachefile.'" href="'.$cachefile.'">Cached</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
+    echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp; '.$script. ' v0.7.1 Rendered in: ' . round($totaltime, '4') . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;<a title="'.$cachefile.'" href="'.$cachefile.'">Cached</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
                 <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>&nbsp;|&nbsp;<a rel="license" href="'.URL_CCLICENSE.'">'.TXT_LICENSE.'</a>&nbsp;|&nbsp;<a title="stats" href="https://logs.ovh.net/beldigital.net/">stats</a>&nbsp;|&nbsp;<a title="log" href="https://logs.ovh.net/beldigital.net/osl/">acces log</a>&nbsp;|&nbsp;<a title="log" href="https://logs.ovh.net/beldigital.net/osl/error/">error log</a>
                 </td>
             </tr>
@@ -1045,8 +1048,8 @@ function vc($element) {
         $commits = json_decode($current_commits);
         $ref_commit = "6c3347406ea664624c0ac43e6ce9188f288950ff";
 
-        $current_commit_minus1 = $commits[1]->sha;
-        $commit_message = "last message : ".$commits[0]->commit->message;
+        $current_commit_minus1 = $commits['1']->sha;
+        $commit_message = "last message : ".$commits['0']->commit->message;
 
         if (!strcmp($current_commit_minus1, $ref_commit)) {
             $version_class = "unmoved";
