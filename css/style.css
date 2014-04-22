@@ -1145,14 +1145,10 @@ p#searchLinks a {
 }
 
 
-
 /* Version Checking */
 #version {
-    font-weight: bolder;
-    float:right;
-    font-size:150%;
+    font-size:300%;
     cursor:pointer;
-    height:1.5em;
 }
 
 #version .unknown {
