@@ -9,7 +9,7 @@ A CMS to manage albums
 - Easy link sharing : Copy / paste the link, and the file will [play on click](http://tinyurl.com/k4vkzcp)
 - Nice URLs
 - Displays Youtube videos
-- Displays musicians latest tweets
+- Displays musicians latest tweets (Oops, [nope](https://blog.twitter.com/2013/planning-for-api-v1-retirement))
 - Displays *any* image found in the album's dir as a gallery
 - Full **Valid HTML** / JS / CSS (No flash)
 - Multilingual interface
