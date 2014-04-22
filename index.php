@@ -66,7 +66,11 @@ function getInfo($startPath, $element) {
     $ch = 'comments_html';
     if (is_file($startPath)) {
         $fs = pathinfo($startPath);
-        if ($fs['extension'] == 'ogg') {
+        // $fsExt = $fs['extension'];
+
+        $fsExt = isset($fs['extension']) ? $fs['extension'] : '';
+
+        if ($fsExt == 'ogg') {
             $f = $getID3->analyze($startPath);
             getid3_lib::CopyTagsToComments($f);
             $thisFileTitleTag = (!empty($f[$ch]['title']) ? implode($sp, $f[$ch]['title'])  : $sp);
@@ -103,7 +107,9 @@ function getInfo($startPath, $element) {
         foreach ($pathNames as $key => $filePath) {
             $infos = pathinfo($filePath);
 
-            if ($infos['extension'] == 'ogg') {
+            $infosExt = isset($infos['extension']) ? $infos['extension'] : '';
+
+            if ($infosExt == 'ogg') {
 
                 $musicDirs[] = $infos['dirname'];
 
@@ -131,17 +137,17 @@ function getInfo($startPath, $element) {
                 $thisAlbumGenreTags[] = $thisAlbumGenreTag;
                 $musicFiles[$filePath] = $thisMusicFileinfos['basename'];
 
-                $thisAlbumTags[title] = $thisAlbumTitleTags;
-                $thisAlbumTags[artist] = $thisAlbumArtistTag;
-                $thisAlbumTags[album] = $thisAlbumAlbumTag;
-                $thisAlbumTags[year] = $thisAlbumYearTags;
-                $thisAlbumTags[track] = $thisAlbumTrackTags;
-                $thisAlbumTags[genre] = $thisAlbumGenreTags;
-                $thisAlbumTags[organization] = $thisAlbumOrganizationTags;
-                $thisAlbumTags[comment] = $thisAlbumCommentTags;
+                $thisAlbumTags['title'] = $thisAlbumTitleTags;
+                $thisAlbumTags['artist'] = $thisAlbumArtistTag;
+                $thisAlbumTags['album'] = $thisAlbumAlbumTag;
+                $thisAlbumTags['year'] = $thisAlbumYearTags;
+                $thisAlbumTags['track'] = $thisAlbumTrackTags;
+                $thisAlbumTags['genre'] = $thisAlbumGenreTags;
+                $thisAlbumTags['organization'] = $thisAlbumOrganizationTags;
+                $thisAlbumTags['comment'] = $thisAlbumCommentTags;
             }
 
-            elseif ($infos['extension'] == 'jpg' || $infos['extension'] == 'png'  || $infos['extension'] == 'gif') {
+            elseif ($infosExt == 'jpg' || $infosExt == 'png'  || $infosExt == 'gif') {
                 $pos = strpos($infos['filename'], 'bg-');
                 if ($pos === false) {
                     $thisAlbumSleeve = $filePath;
@@ -476,11 +482,11 @@ function spitTitle($dirList, $fileList) {
     $thisAlbumTags = getInfo($thisAlbumPath, thisAlbumTags);
     $thisAlbumSleeves = getInfo($thisAlbumPath, thisAlbumSleeves);
 
-    $artistName = $thisAlbumTags[artist];
-    $albumName = $thisAlbumTags[album];
-    $albumGenre = $thisAlbumTags[genre];
-    $albumYear = $thisAlbumTags[year];
-    $albumLabel = $thisAlbumTags[organization];
+    $artistName = $thisAlbumTags['artist'];
+    $albumName = $thisAlbumTags['album'];
+    $albumGenre = $thisAlbumTags['genre'];
+    $albumYear = $thisAlbumTags['year'];
+    $albumLabel = $thisAlbumTags['organization'];
 
     $genres = array_unique($albumGenre);
     $years = array_unique($albumYear);
@@ -602,8 +608,8 @@ function audioList($fileList, $albumPath) {
 
   foreach ($fileList as $fullFileName => $myFileName) {
     $thisFileTags = getInfo($fullFileName, thisFileTags);
-    $trackNumbers[] = $thisFileTags[track];
-    $trackTitles[$fullFileName] = $thisFileTags[title];
+    $trackNumbers[] = $thisFileTags['track'];
+    $trackTitles[$fullFileName] = $thisFileTags['title'];
     $track['url'] = $fullFileName;
     $numberOfSongs++;
   }
@@ -643,22 +649,22 @@ function audioList($fileList, $albumPath) {
   foreach ($trackTitles as $fullFileName => $trackTitle) {
       $thisFileTags = getInfo($fullFileName, thisFileTags);
 
-      $artistName = $thisAlbumTags[artist];
-      $albumName = $thisAlbumTags[album];
-      $albumGenre = $thisAlbumTags[genre];
-      $albumRecordLabel = $thisFileTags[organization];
-      $albumYear = $thisAlbumTags[year];
+      $artistName = $thisAlbumTags['artist'];
+      $albumName = $thisAlbumTags['album'];
+      $albumGenre = $thisAlbumTags['genre'];
+      $albumRecordLabel = $thisFileTags['organization'];
+      $albumYear = $thisAlbumTags['year'];
 
-      $artistName = $thisFileTags[artist];
-      $albumName = $thisFileTags[album];
-      $albumGenre = $thisFileTags[genre];
-      $albumYear = $thisFileTags[year];
-      $trackTitle = $thisFileTags[title];
-      $trackPlayTime = $thisFileTags[playtime];
-      $trackFileSize = $thisFileTags[size];
-      $trackBitRate = $thisFileTags[bitrate];
-      $trackNumber = $thisFileTags[track];
-      $trackComment = $thisFileTags[comment];
+      $artistName = $thisFileTags['artist'];
+      $albumName = $thisFileTags['album'];
+      $albumGenre = $thisFileTags['genre'];
+      $albumYear = $thisFileTags['year'];
+      $trackTitle = $thisFileTags['title'];
+      $trackPlayTime = $thisFileTags['playtime'];
+      $trackFileSize = $thisFileTags['size'];
+      $trackBitRate = $thisFileTags['bitrate'];
+      $trackNumber = $thisFileTags['track'];
+      $trackComment = $thisFileTags['comment'];
 
       $thisFilePathElements = explode("/", $fullFileName);
       $thisFileNicePath = $thisFilePathElements[count($thisFilePathElements)-3].",".$thisFilePathElements[count($thisFilePathElements)-2];
@@ -822,13 +828,12 @@ var myNewFlow = new ContentFlow("albumsRotator", {
     foreach ($dirList as $key => $albumPath) {
         $thisAlbumTags = getInfo($albumPath, thisAlbumTags);
 
-        $artistName = $thisAlbumTags[artist];
-        $albumName = $thisAlbumTags[album];
-        $albumGenre = $thisAlbumTags[genre];
-        $albumYear = $thisAlbumTags[year];
-        $albumYear = $thisAlbumTags[year];
+        $artistName = $thisAlbumTags['artist'];
+        $albumName = $thisAlbumTags['album'];
+        $albumGenre = $thisAlbumTags['genre'];
+        $albumYear = $thisAlbumTags['year'];
 
-        $labelName = $thisAlbumTags[organization];
+        $labelName = $thisAlbumTags['organization'];
 
         $album = ltrim(ltrim($album, '.'), '/');
         $newAlbumSexyUrlElements = explode("/", $dirList[$key]);
