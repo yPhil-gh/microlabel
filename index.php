@@ -1057,7 +1057,7 @@ function vc($element) {
     $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/microlabel/commits", false, $context);
 
     if ($current_commits !== false) {
-        // echo "yo";
+
         $commits = json_decode($current_commits);
 
         $ref_commit = "9d3a0f4c797330d1d0daecbbf5dc94587a60216f";
