@@ -1,8 +1,10 @@
-* {
-    /* vertical-align:middle; */
-    margin: 0;
-    border:none;
-}
+/*
+ * * {
+ *     /\* vertical-align:middle; *\/
+ *     margin: 0;
+ *     border:none;
+ * }
+ */
 
 p, li, span, h1, h2, h3, h4, h5  {
     text-align: left;
