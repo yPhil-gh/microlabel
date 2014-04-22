@@ -1,10 +1,8 @@
-microlabel
-==========
+# microlabel
 
 A CMS to manage albums
 
-Features
------
+### Features
 - Baseless : Just drop your correctly tagged music files in the MUSIC dir
     - and Microlabel will build one index page
     - and one page per album
@@ -17,24 +15,20 @@ Features
 - Multilingual interface
 - CMS version check
 
-Installation
------
+### Installation
 - Drop it in a directory
 - Point a web browser to this directory
 
-Configuration
------
+### Configuration
 - Locate the MUSIC directory
 - Drop your (correctly tagged) audio files in it
 - That's it
 
-Optional config
-------
+#### Optional config
 - Rename the microlabel dir with the name of your label
 - Edit the TEXT/* files to replace the text with your own
 
-Optional album config
-------
+#### Optional album config
 - Drop an image whose filename begins with **bg-** to make a background for this album's page
 - Put a **info.xml** with the following syntax in each album's directory
 
