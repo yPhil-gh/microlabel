@@ -1049,7 +1049,7 @@ function vc($element) {
         $ref_commit = "d18afbc10bd5d576a8769bb6e4cbf76628ef1ef0";
 
         $current_commit_minus1 = $commits['1']->sha;
-        $commit_message = "last message : ".$commits['0']->commit->message;
+        $commit_message = "last dev message : ".$commits['0']->commit->message;
 
         if (!strcmp($current_commit_minus1, $ref_commit)) {
             $version_class = "unmoved";

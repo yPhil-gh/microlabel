@@ -6,7 +6,7 @@ A CMS to manage albums
 - Baseless : Just drop your correctly tagged music files in the MUSIC dir
     - and Microlabel will build one index page
     - and one page per album
-- Easy link sharing : Copy / paste the link, and the file will play on click
+- Easy link sharing : Copy / paste the link, and the file will [play on click](http://tinyurl.com/k4vkzcp)
 - Nice URLs
 - Displays Youtube videos
 - Displays musicians latest tweets
