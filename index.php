@@ -36,7 +36,8 @@ if (isset($_GET['lang'])) {
 
 require_once('getid3.php');
 
-//$labelName = 'beldigital';
+$labelName = 'beldigital';
+global $labelName;
 
 function getRoot() {
     $rootMusicDir = 'MUSIC';
@@ -191,7 +192,7 @@ function getInfo($startPath, $element) {
             return $thisAlbumSleeves;
         }
         else {
-            $thisAlbumSleeves[0] = 'img/beldigital_logo_off.png';
+            $thisAlbumSleeves['0'] = 'img/beldigital_logo_off.png';
             return $thisAlbumSleeves;
         }
         break;
@@ -204,7 +205,7 @@ function getInfo($startPath, $element) {
     case 'thisAlbumSleeve':
 
         if(!empty($thisAlbumSleeve)) {
-            return $thisAlbumSleeves[0];
+            return $thisAlbumSleeves['0'];
         }
         else {
             return 'img/beldigital_logo_off.png';
@@ -217,15 +218,17 @@ $myDumbVar=getInfo($rootMusicDir, 'musicDirs');
 
 $mtime = microtime();
 $mtime = explode(" ",$mtime);
-$mtime = $mtime[1] + $mtime[0];
+$mtime = $mtime['1'] + $mtime['0'];
 $starttime = $mtime;
 
 // Permet la lecture du source a volee, cool huh ?
-if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
+if (isset($_GET['code'])) { die(highlight_file(__FILE__, '1')); }
 
 $httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'] : '';
 
-$browserPrefs = substr($httpVars,0,2);
+global $HTTP_COOKIE_VARS;
+
+$browserPrefs = substr($httpVars,'0','2');
 $cookiePrefs = $HTTP_COOKIE_VARS['lang'];
 
 // $expire = 365*24*3600;
@@ -265,7 +268,6 @@ else {
 
 ////////////////////////////////
 
-// $script = $SCRIPT_NAME;
 
 function xmlInfos($element) {
     $videoObjects = '';
@@ -291,7 +293,7 @@ function xmlInfos($element) {
 
     switch ($element) {
     case 'first_twitter':
-        echo $myTwitters[0];
+        echo $myTwitters['0'];
         break;
     case 'all_twitters':
         return $myTwitters;
@@ -441,10 +443,6 @@ xmlInfos(first_twitter);
 
     onPagePlayerLoad();
 
-    var txt_play = "<?php
-echo TXT_PLAY
-?>";
-
     if (songToPlay !== undefined) {
 	/* nextClicked() */
 	load_track(songToPlay);
@@ -515,24 +513,24 @@ function spitTitle($dirList, $fileList) {
     if (count($years) > 1) {
         sort($years);
         foreach ($years as $key) {
-            $earliest = $years[0];
-            $latest =  $years[count($years)-1];
+            $earliest = $years['0'];
+            $latest =  $years[count($years)-'1'];
             $year = $earliest.' => '.$latest;
         }
     } else {
-        $year = $years[0];
+        $year = $years['0'];
     }
 
     $thisAlbumBackgroundImages = getInfo($thisAlbumPath, 'thisAlbumBackgroundImages');
 
     echo '
 <title>'.$artistName. ' "'.$albumName.'" ('.$albumLabel.')</title>
-<link rel="shortcut icon" type="image/x-icon" href="'.str_replace(" ", "%20", $thisAlbumSleeves[0]).'" />
+<link rel="shortcut icon" type="image/x-icon" href="'.str_replace(" ", "%20", $thisAlbumSleeves['0']).'" />
 
 
 <style type="text/css">
 html, body {
-    background: #000528 url('.$thisAlbumBackgroundImages[0].') repeat fixed 0 0;
+    background: #000528 url('.$thisAlbumBackgroundImages['0'].') repeat fixed 0 0;
 }
 </style>
 
@@ -550,8 +548,6 @@ html, body {
         <div class="artistName">'.$artistName.'</div>
         <div class="albumName">'.$albumName.'</div>
         <div class="index_meta">
-          <!-- <p class="index_meta not_important">'.TAGS_GENRE.' : '.$genre.' '.TAGS_YEAR.' = '.$year.'</p> -->
-          <!--p>'.$presentation.'</p-->
           <p id="trackComment"></p>
         </div>
       </div>
@@ -574,10 +570,10 @@ html, body {
 ';
         }
     } else {
-        $path_parts = pathinfo($thisAlbumSleeves[0]);
+        $path_parts = pathinfo($thisAlbumSleeves['0']);
         $thisAlbumSleeveFileName = $path_parts['filename'].'.'.$path_parts['extension'];
         echo '
-        <a href="'.str_replace(" ", "%20", $thisAlbumSleeves[0]).'" title="'.TXT_DOWNLOAD.' '.$thisAlbumSleeveFileName.'" class="sleeve"><img style="height:100%" src="'.str_replace(" ", "%20", $thisAlbumSleeves[0]).'" alt="'.$thisAlbumSleeveFileName.'" /></a>
+        <a href="'.str_replace(" ", "%20", $thisAlbumSleeves['0']).'" title="'.TXT_DOWNLOAD.' '.$thisAlbumSleeveFileName.'" class="sleeve"><img style="height:100%" src="'.str_replace(" ", "%20", $thisAlbumSleeves['0']).'" alt="'.$thisAlbumSleeveFileName.'" /></a>
 ';
 
     }
@@ -602,16 +598,27 @@ function getTinyUrl($url) {
 // Build audio content table
 // Tableau de chansons
 
+// $script = $_SERVER['SCRIPT_URI'];
+// global $script;
+
 function audioList($fileList, $albumPath) {
 
   //    Pour le browse() dans le player
   //   $dirList = getInfo("OGG/", musicDirs);
 
-  $script = $_SERVER['SCRIPT_URI'];
 
   $i = 0;
   $z = $i+1;
   $numberOfSongs = 0;
+
+  $host = $_SERVER["HTTP_HOST"];
+
+  $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
+
+  $pos = strpos($_SERVER["REQUEST_URI"], "/?");
+
+  $myScriptPath = pathinfo($_SERVER["SCRIPT_NAME"]);
+  $myDir = $myScriptPath['dirname'];
 
   $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
 
@@ -621,32 +628,6 @@ function audioList($fileList, $albumPath) {
     $trackTitles[$fullFileName] = $thisFileTags['title'];
     $track['url'] = $fullFileName;
     $numberOfSongs++;
-  }
-
-  $genres = array_unique($albumGenre);
-  $years = array_unique($albumYear);
-
-  foreach ($genres as $key => $value) {
-    if (is_null($value) || $value == "" || $value == " " || $value == "&nbsp;") {
-      unset($genres[$key]);
-    }
-  }
-
-  if (is_array($genres)) {
-    $genre = implode(", ", $genres);
-  } else {
-    $genre = $albumGenre;
-  }
-
-  if (count($years) > 1) {
-    sort($years);
-    foreach ($years as $key) {
-      $earliest = $years[0];
-      $latest =  $years[count($years)-1];
-      $year = $earliest.' => '.$latest;
-    }
-  } else {
-    $year = $years[0];
   }
 
   echo '
@@ -676,25 +657,17 @@ function audioList($fileList, $albumPath) {
       $trackComment = $thisFileTags['comment'];
 
       $thisFilePathElements = explode("/", $fullFileName);
-      $thisFileNicePath = $thisFilePathElements[count($thisFilePathElements)-3].",".$thisFilePathElements[count($thisFilePathElements)-2];
-      $thisFileObfuscatedPath = $thisFilePathElements[count($thisFilePathElements)-3]."/".$thisFilePathElements[count($thisFilePathElements)-2]."/".$thisFilePathElements[count($thisFilePathElements)-1];
+      $thisFileNicePath = $thisFilePathElements[count($thisFilePathElements)-'3'].",".$thisFilePathElements[count($thisFilePathElements)-'2'];
+      $thisFileObfuscatedPath = $thisFilePathElements[count($thisFilePathElements)-'3']."/".$thisFilePathElements[count($thisFilePathElements)-'2']."/".$thisFilePathElements[count($thisFilePathElements)-'1'];
 
-      $fileName = $thisFilePathElements[count($thisFilePathElements)-1];
+      $fileName = $thisFilePathElements[count($thisFilePathElements)-'1'];
 
-      $host = $_SERVER["HTTP_HOST"];
-
-      $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
-
-      $pos = strpos($_SERVER["REQUEST_URI"], "/?");
-
-      $myScriptPath = pathinfo($_SERVER["SCRIPT_NAME"]);
-      $myDir = $myScriptPath['dirname'];
       // Note our use of ===.  Simply == would not work as expected
       // because the position of 'a' was the 0th (first) character.
       if ($pos === false) {
-          $unSafeLink = 'http://'.$host.$script.'?a='.$thisFileNicePath.'&amp;s='.$z++;
+          $unSafeLink = 'http://'.$host.$script.'?a='.$thisFileNicePath.'&s='.$z++;
       } else {
-          $unSafeLink = 'http://'.$host.$myDir.'/?a='.$thisFileNicePath.'&amp;s='.$z++;
+          $unSafeLink = 'http://'.$host.$myDir.'/?a='.$thisFileNicePath.'&s='.$z++;
       }
 
       $shortLink = getTinyUrl($unSafeLink);
@@ -808,7 +781,10 @@ function videoList($fileList, $albumPath) {
 // Construit la page d'accueil en listant tous les albums
 
 function index($dirList, $labelName) {
+
     $numberOfAlbums = count($dirList);
+    $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
+
     echo '<title>'.$labelName.' - Free Music</title>
     <style type="text/css" media="screen">@import "css/contentflow.css";</style>
     <script type="text/javascript" src="libs/contentflow.js"></script>
@@ -1014,6 +990,7 @@ function albumBrowser($labelName) {
 // Script exec. time
 
 function indexFooter($totaltime) {
+    $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
     echo '
     <div id="debug" class="main">
         <table class="footdown">
@@ -1035,6 +1012,7 @@ function indexFooter($totaltime) {
 // Script exec. time
 
 function debugFooter($totaltime, $albums, $songs) {
+    $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
     echo '
     <div id="debug" class="main">
         <table class="footdown">
@@ -1093,6 +1071,7 @@ function vc($element) {
 }
 
 function fixedFooter($dirList) {
+    $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
     echo '
    </div> <!--end content div-->
 
@@ -1141,10 +1120,6 @@ $meanPath = $rootMusicDir.$slash.str_replace($dash, $slash, $friendlyPath);
 $directoryToScan = $meanPath;
 $directoryToScan = trim($directoryToScan, $slash);
 $fileList = getInfo($directoryToScan, 'musicFiles');
-
-if (isset($_GET['a']) && isset($_GET['s'])) {
-  $songToPlay = strip_tags($s);
-}
 
 // Main block
 if (!isset($_GET['a'])) {
