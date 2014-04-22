@@ -37,8 +37,8 @@ define('TXT_DEBUG_ERROR_FOUND', 'One error was found in your setup');
 define('TXT_DEBUG_ERRORS_FOUND', 'errors were found in your setup');
 define('TXT_DEBUG_ERRORS_FILE', 'The file');
 define('TXT_DEBUG_ERRORS_FILE_SHOULD_BE_RENAMED', 'should be renamed');
-define('TXT_DEBUG_HELP_TXT', '<p>MSK is a <a href="http://en.wikipedia.org/wiki/Content_management_system">CMS</a> intended to present music.</p>
-<ul><li>Because now we know what happens when artists let others present, distribute and sell their work, MSK attempt to provide a link, as direct as possible, from musicians to audience.</li></ul>
+define('TXT_DEBUG_HELP_TXT', '<p>MicroLabel is a <a href="http://en.wikipedia.org/wiki/Content_management_system">CMS</a> intended to present music.</p>
+<ul><li>Because now we know what happens when artists let others present, distribute and sell their work, MicroLabel attempt to provide a link, as direct as possible, from musicians to audience.</li></ul>
 
 <p style="margin:1em;text-align:center;color:red">
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>');

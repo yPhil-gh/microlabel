@@ -1095,7 +1095,7 @@ function fixedFooter($dirList) {
      <div id="osx-modal-title">Help</div>
      <div class="close"><a href="#" class="simplemodal-close">x</a></div>
      <div id="osx-modal-data">
-       <h2>MSK 1.5</h2>
+       <h2>MicroLabel 1.5</h2>
        '.TXT_DEBUG_HELP_TXT.'
 
 <span id="version" onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'">

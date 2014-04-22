@@ -37,9 +37,9 @@ define('TXT_DEBUG_ERROR_FOUND', 'Un error fue encontrado en la configuración de
 define('TXT_DEBUG_ERRORS_FOUND', 'errores en su configuración');
 define('TXT_DEBUG_ERRORS_FILE', 'El archivo');
 define('TXT_DEBUG_ERRORS_FILE_SHOULD_BE_RENAMED', 'debería llamarse');
-define('TXT_DEBUG_HELP_TXT', '<p>MSK es un <a href="http://es.wikipedia.org/wiki/Sistema_de_gesti%C3%B3n_de_contenidos">CMS</a> diseñado para presentar la música.</p>
+define('TXT_DEBUG_HELP_TXT', '<p>MicroLabel es un <a href="http://es.wikipedia.org/wiki/Sistema_de_gesti%C3%B3n_de_contenidos">CMS</a> diseñado para presentar la música.</p>
 <ul>
-<li>Debido a que la música debe ser presentado por los músicos, MSK intentos de establecer un vínculo, la ruta más directa posible entre ellos y su público.</li>
+<li>Debido a que la música debe ser presentado por los músicos, MicroLabel intentos de establecer un vínculo, la ruta más directa posible entre ellos y su público.</li>
 <li>El principio es simple: Un guión y un directorio central de la música, que puede contener MP3 u Ogg-Vorbis. No hay base de datos para facilitar la portabilidad y la sencillez.</li></ul>
 
 
