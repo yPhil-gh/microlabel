@@ -64,6 +64,7 @@ function getInfo($startPath, $element) {
     $getID3 = new getID3;
     $sp = '&nbsp;';
     $ch = 'comments_html';
+    $thisMusicFileinfos = '';
     if (is_file($startPath)) {
         $fs = pathinfo($startPath);
         // $fsExt = $fs['extension'];
@@ -135,7 +136,11 @@ function getInfo($startPath, $element) {
                 $thisAlbumCommentTags[] = $thisAlbumCommentTag;
                 $thisAlbumOrganizationTags = (!empty($f[$ch]['organization']) ? implode($sp, $f[$ch]['organization']) : $sp);
                 $thisAlbumGenreTags[] = $thisAlbumGenreTag;
-                $musicFiles[$filePath] = $thisMusicFileinfos['basename'];
+
+
+                $musicFiles[$filePath] = isset($thisMusicFileinfos['basename']) ? $thisMusicFileinfos['basename'] : '';
+
+                // $musicFiles[$filePath] = $thisMusicFileinfos['basename'];
 
                 $thisAlbumTags['title'] = $thisAlbumTitleTags;
                 $thisAlbumTags['artist'] = $thisAlbumArtistTag;
@@ -208,7 +213,7 @@ function getInfo($startPath, $element) {
     }
 }
 
-$myDumbVar=getInfo($rootMusicDir, musicDirs);
+$myDumbVar=getInfo($rootMusicDir, 'musicDirs');
 
 $mtime = microtime();
 $mtime = explode(" ",$mtime);
@@ -218,7 +223,9 @@ $starttime = $mtime;
 // Permet la lecture du source a volee, cool huh ?
 if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 
-$browserPrefs = substr($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'],0,2);
+$httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'] : '';
+
+$browserPrefs = substr($httpVars,0,2);
 $cookiePrefs = $HTTP_COOKIE_VARS['lang'];
 
 // $expire = 365*24*3600;
@@ -258,10 +265,11 @@ else {
 
 ////////////////////////////////
 
-$script = $SCRIPT_NAME;
+// $script = $SCRIPT_NAME;
 
 function xmlInfos($element) {
-    $thisAlbumPath = browse(current, mean);
+    $videoObjects = '';
+    $thisAlbumPath = browse('current', 'mean');
 
     $file = $thisAlbumPath.'/info.xml';
     $xml = simplexml_load_file($file);
@@ -470,7 +478,7 @@ $(document).keydown(function(e){
   <?php
 
 
-  $dirList = getInfo($rootMusicDir, musicDirs);
+  $dirList = getInfo($rootMusicDir, 'musicDirs');
 
 //spitTitle($dirList, $fileList)////////////////////////////////////////
 // Print album Sleeve if any
@@ -478,15 +486,16 @@ $(document).keydown(function(e){
 
 function spitTitle($dirList, $fileList) {
 
-    $thisAlbumPath = browse(current, mean);
-    $thisAlbumTags = getInfo($thisAlbumPath, thisAlbumTags);
-    $thisAlbumSleeves = getInfo($thisAlbumPath, thisAlbumSleeves);
+    $thisAlbumPath = browse('current', 'mean');
+    $thisAlbumTags = getInfo($thisAlbumPath, 'thisAlbumTags');
+    $thisAlbumSleeves = getInfo($thisAlbumPath, 'thisAlbumSleeves');
 
-    $artistName = $thisAlbumTags['artist'];
-    $albumName = $thisAlbumTags['album'];
-    $albumGenre = $thisAlbumTags['genre'];
-    $albumYear = $thisAlbumTags['year'];
-    $albumLabel = $thisAlbumTags['organization'];
+    $artistName = isset($thisAlbumTags['artist']) ? $thisAlbumTags['artist'] : '';
+    $albumName = isset($thisAlbumTags['album']) ? $thisAlbumTags['album'] : '';
+
+    $albumGenre = isset($thisAlbumTags['genre']) ? $thisAlbumTags['genre'] : '';
+    $albumYear = isset($thisAlbumTags['year']) ? $thisAlbumTags['year'] : '';
+    $albumLabel = isset($thisAlbumTags['organization']) ? $thisAlbumTags['organization'] : '';
 
     $genres = array_unique($albumGenre);
     $years = array_unique($albumYear);
@@ -514,7 +523,7 @@ function spitTitle($dirList, $fileList) {
         $year = $years[0];
     }
 
-    $thisAlbumBackgroundImages = getInfo($thisAlbumPath, thisAlbumBackgroundImages);
+    $thisAlbumBackgroundImages = getInfo($thisAlbumPath, 'thisAlbumBackgroundImages');
 
     echo '
 <title>'.$artistName. ' "'.$albumName.'" ('.$albumLabel.')</title>
@@ -598,16 +607,16 @@ function audioList($fileList, $albumPath) {
   //    Pour le browse() dans le player
   //   $dirList = getInfo("OGG/", musicDirs);
 
-  $script = $_SERVER["SCRIPT_URI"];
+  $script = $_SERVER['SCRIPT_URI'];
 
   $i = 0;
   $z = $i+1;
   $numberOfSongs = 0;
 
-  $thisAlbumTags = getInfo($albumPath, thisAlbumTags);
+  $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
 
   foreach ($fileList as $fullFileName => $myFileName) {
-    $thisFileTags = getInfo($fullFileName, thisFileTags);
+    $thisFileTags = getInfo($fullFileName, 'thisFileTags');
     $trackNumbers[] = $thisFileTags['track'];
     $trackTitles[$fullFileName] = $thisFileTags['title'];
     $track['url'] = $fullFileName;
@@ -647,7 +656,7 @@ function audioList($fileList, $albumPath) {
   ksort($trackTitles);
 
   foreach ($trackTitles as $fullFileName => $trackTitle) {
-      $thisFileTags = getInfo($fullFileName, thisFileTags);
+      $thisFileTags = getInfo($fullFileName, 'thisFileTags');
 
       $artistName = $thisAlbumTags['artist'];
       $albumName = $thisAlbumTags['album'];
@@ -673,7 +682,8 @@ function audioList($fileList, $albumPath) {
       $fileName = $thisFilePathElements[count($thisFilePathElements)-1];
 
       $host = $_SERVER["HTTP_HOST"];
-      $script = $_SERVER["PHP_SELF"];
+
+      $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
 
       $pos = strpos($_SERVER["REQUEST_URI"], "/?");
 
@@ -701,7 +711,7 @@ function audioList($fileList, $albumPath) {
 	    <span class="leftSpan desc">'.TAGS_YEAR.' : </span><span class="rightSpan desc">'.$albumYear.'</span>
 	    <span class="leftSpan desc">'.TAGS_GENRE.' : </span><span class="rightSpan desc">'.$albumGenre.'</span>
           </p>
-          <h5>'.$script.'?a='.browse(next, nice).'</h5>
+          <h5>'.$script.'?a='.browse('next', 'nice').'</h5>
           <h1 class="invisible_if_no_audio">'.$trackComment.'</h1>
 
 <div class="invisible_if_no_audio">
@@ -745,7 +755,7 @@ function audioList($fileList, $albumPath) {
 <p id="searchLinks">
 ';
 
-  $tweeters = xmlInfos(all_twitters);
+  $tweeters = xmlInfos('all_twitters');
 
   foreach ($tweeters as $tweeter) {
       echo '<a href="#">'.$tweeter.'</a> ';
@@ -776,7 +786,7 @@ function audioList($fileList, $albumPath) {
 
 function videoList($fileList, $albumPath) {
 
-    $videos_objects = xmlInfos(videos_object);
+    $videos_objects = xmlInfos('videos_object');
 
     foreach($videos_objects as $videos_object) {
         $videoName = $videos_object->name;
@@ -826,7 +836,7 @@ var myNewFlow = new ContentFlow("albumsRotator", {
     ';
 
     foreach ($dirList as $key => $albumPath) {
-        $thisAlbumTags = getInfo($albumPath, thisAlbumTags);
+        $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
 
         $artistName = $thisAlbumTags['artist'];
         $albumName = $thisAlbumTags['album'];
@@ -837,8 +847,8 @@ var myNewFlow = new ContentFlow("albumsRotator", {
 
         $album = ltrim(ltrim($album, '.'), '/');
         $newAlbumSexyUrlElements = explode("/", $dirList[$key]);
-        $newAlbumSexyUrl = $newAlbumSexyUrlElements[1].",".$newAlbumSexyUrlElements[2];
-        $thisAlbumSleeve = getInfo($albumPath, thisAlbumSleeve);
+        $newAlbumSexyUrl = $newAlbumSexyUrlElements[1].",".$newAlbumSexyUrlElements['2'];
+        $thisAlbumSleeve = getInfo($albumPath, 'thisAlbumSleeve');
 
         echo '
 
@@ -870,7 +880,7 @@ var myNewFlow = new ContentFlow("albumsRotator", {
 function browse($position, $pathStyle) {
 
     $rootMusicDir = getRoot();
-    $dirList = getInfo($rootMusicDir, musicDirs);
+    $dirList = getInfo($rootMusicDir, 'musicDirs');
 
     $nicePath = strip_tags($_GET['a']);
     $slash = "/";
@@ -881,28 +891,28 @@ function browse($position, $pathStyle) {
 
     $dirListSize = count($dirList);
 
-    $firstDir = trim(rtrim($dirList[0], $slash), $slash);
-    $lastDir = trim(rtrim($dirList[$dirListSize-1], $slash), $slash);
+    $firstDir = trim(rtrim($dirList['0'], $slash), $slash);
+    $lastDir = trim(rtrim($dirList[$dirListSize-'1'], $slash), $slash);
 
     $currentDir = trim(rtrim($directoryToScan, $slash), $slash);
     $dirListKey = array_search($currentDir, $dirList);
 
-    $prevPathElements = explode($slash, $dirList[$dirListKey-1]);
+    $prevPathElements = explode($slash, $dirList[$dirListKey-'1']);
     $herePathElements = explode($slash, $dirList[$dirListKey]);
-    $nextPathElements = explode($slash, $dirList[$dirListKey+1]);
+    $nextPathElements = explode($slash, $dirList[$dirListKey+'1']);
 
-    $firstDirPathElements = explode($slash, $dirList[0]);
-    $lastDirPathElements = explode($slash, $dirList[$dirListSize-1]);
+    $firstDirPathElements = explode($slash, $dirList['0']);
+    $lastDirPathElements = explode($slash, $dirList[$dirListSize-'1']);
 
-    $niceFirst = $firstDirPathElements[1].$dash.$firstDirPathElements[2];
-    $niceLast = $lastDirPathElements[1].$dash.$lastDirPathElements[2];
+    $niceFirst = $firstDirPathElements[1].$dash.$firstDirPathElements['2'];
+    $niceLast = $lastDirPathElements[1].$dash.$lastDirPathElements['2'];
 
-    $nicePrev = $prevPathElements[1].$dash.$prevPathElements[2];
-    $niceHere = $herePathElements[1].$dash.$herePathElements[2];
-    $niceNext = $nextPathElements[1].$dash.$nextPathElements[2];
+    $nicePrev = $prevPathElements['1'].$dash.$prevPathElements['2'];
+    $niceHere = $herePathElements['1'].$dash.$herePathElements['2'];
+    $niceNext = $nextPathElements['1'].$dash.$nextPathElements['2'];
 
-    $meanPrev = $prevPathElements[1].$slash.$prevPathElements[2];
-    $meanNext = $nextPathElements[1].$slash.$nextPathElements[2];
+    $meanPrev = $prevPathElements['1'].$slash.$prevPathElements['2'];
+    $meanNext = $nextPathElements['1'].$slash.$nextPathElements['2'];
 
     switch ($pathStyle) {
     case 'mean':
@@ -946,7 +956,7 @@ function browse($position, $pathStyle) {
         return $here;
         break;
     case 'next':
-        if ($dirListKey === $dirListSize-1) {
+        if ($dirListKey === $dirListSize-'1') {
             return $firstDir;
         }
         else {
@@ -973,25 +983,25 @@ function bytestostring($size, $precision = 0) {
 
 function albumBrowser($labelName) {
 
-    $prevAlbumSleeve = getInfo(browse(prev, mean), thisAlbumSleeve);
-    $nextAlbumSleeve = getInfo(browse(next, mean), thisAlbumSleeve);
+    $prevAlbumSleeve = getInfo(browse('prev', 'mean'), 'thisAlbumSleeve');
+    $nextAlbumSleeve = getInfo(browse('next', 'mean'), 'thisAlbumSleeve');
 
     echo '
 <div id="albumBrowser" class="main" style="position: relative;">
 <div class="invisible_if_no_audio" id="semiTransparentDiv" style="position: absolute; background-color: black; filter:alpha(opacity=55);-moz-opacity:.55;opacity:.55; height: 100%; width: 100%; z-index: 1;"></div>
     <div class="left" style="position: relative; z-index: 2;">
-        <a title="'.TXT_PREVIOUS_ALBUM.' = '.browse(prev, extraNice).'" href="'.$script.'?a='.browse(prev, nice).'">
-        <img class="thumb" src="'.$prevAlbumSleeve.'" alt="'.TXT_PREVIOUS_ALBUM.' = '.browse(prev, nice).'" /></a>
+        <a title="'.TXT_PREVIOUS_ALBUM.' = '.browse('prev', 'extraNice').'" href="?a='.browse('prev', 'nice').'">
+        <img class="thumb" src="'.$prevAlbumSleeve.'" alt="'.TXT_PREVIOUS_ALBUM.' = '.browse('prev', 'nice').'" /></a>
     </div>
     <div class="right" style="position: relative; z-index: 2;">
         <div class="fadeAlbums"><strong>'.TXT_NEXT_ALBUM.'</strong>
 <hr />
-<p>'.browse(next, extraNice).'</p></div>
-        <a title="'.TXT_NEXT_ALBUM.' = '.browse(next, extraNice).'" href="'.$script.'?a='.browse(next, nice).'">
-        <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse(next, nice).'" /></a>
+<p>'.browse('next', 'extraNice').'</p></div>
+        <a title="'.TXT_NEXT_ALBUM.' = '.browse('next', 'extraNice').'" href="?a='.browse('next', 'nice').'">
+        <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse('next', 'nice').'" /></a>
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
-        <a title="'.$labelName.', '.TXT_BASELINE.'" href="'.$_SERVER[PHP_SELF].'"><img style="width:60px" class="rollover" src="img/beldigital_logo_off.png" alt="beldigital_logo_on.png" /></a>
+        <a title="'.$labelName.', '.TXT_BASELINE.'" href="'.$_SERVER['PHP_SELF'].'"><img style="width:60px" class="rollover" src="img/beldigital_logo_off.png" alt="beldigital_logo_on.png" /></a>
     </div>
 </div>
 <p id="footBr">&nbsp;</p>
@@ -1104,11 +1114,11 @@ function fixedFooter($dirList) {
 
    <div id="controlFooter" class="zindex-one">
      <div id="controlFooter-left">
-       <a title="'.TXT_FRENCH.'" href="'.$script.'?a='.browse(current, nice).'&amp;lang=fr">
+       <a title="'.TXT_FRENCH.'" href="'.$script.'?a='.browse('current', 'nice').'&amp;lang=fr">
          <img class="buttons" alt="'.TXT_FRENCH.'" src="img/flags/fr.png" /></a>
-       <a title="'.TXT_ENGLISH.'" href="'.$script.'?a='.browse(current, nice).'&amp;lang=en">
+       <a title="'.TXT_ENGLISH.'" href="'.$script.'?a='.browse('current', 'nice').'&amp;lang=en">
          <img class="buttons" alt="'.TXT_ENGLISH.'" src="img/flags/uk.png" /></a>
-       <a title="'.TXT_SPANISH.'" href="'.$script.'?a='.browse(current, nice).'&amp;lang=es">
+       <a title="'.TXT_SPANISH.'" href="'.$script.'?a='.browse('current', 'nice').'&amp;lang=es">
          <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/es.png" /></a>
        <a title="'.TXT_HELP.'" class="osx" href="#">
          <img id="helpButton" class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
@@ -1130,7 +1140,7 @@ $dash = ",";
 $meanPath = $rootMusicDir.$slash.str_replace($dash, $slash, $friendlyPath);
 $directoryToScan = $meanPath;
 $directoryToScan = trim($directoryToScan, $slash);
-$fileList = getInfo($directoryToScan, musicFiles);
+$fileList = getInfo($directoryToScan, 'musicFiles');
 
 if (isset($_GET['a']) && isset($_GET['s'])) {
   $songToPlay = strip_tags($s);
