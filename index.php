@@ -103,7 +103,6 @@ function getInfo($startPath, $element) {
         foreach ($pathNames as $key => $filePath) {
             $infos = pathinfo($filePath);
 
-
             if ($infos['extension'] == 'ogg') {
 
                 $musicDirs[] = $infos['dirname'];
@@ -295,10 +294,10 @@ function xmlInfos($element) {
 
 <head>
 <meta charset="UTF-8">
-  <style type="text/css" media="screen">@import "css/PagePlayer.css";</style>
+  <style type="text/css" media="screen">@import "css/player.css";</style>
   <link type='text/css' href='css/osx.css' rel='stylesheet' media='screen' />
 
-  <style type="text/css" media="screen">@import "css/msk.css";</style>
+  <style type="text/css" media="screen">@import "css/style.css";</style>
   <style type="text/css" media="screen">@import "css/colorbox.css";</style>
   <link rel="alternate stylesheet" type="text/css" href="css/msk_RED.css" title="RED" />
 
@@ -1040,6 +1039,41 @@ function debugFooter($totaltime, $albums, $songs) {
 // Fixed Footer pane
 
 
+// Version Control
+
+$opts = array(
+  'http'=>array(
+    'method'=>"GET",
+    'header'=>"User-Agent: microlabel"
+  )
+);
+
+$context = stream_context_create($opts);
+
+$current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/microlabel/commits", false, $context);
+
+if ($current_commits !== false) {
+    // echo "yo";
+    $commits = json_decode($current_commits);
+
+    $ref_commit = "cd71a4c0a51ed96fafa93264e8e56a14d91d1e45";
+
+    $current_commit_minus1 = $commits[1]->sha;
+    $commit_message = "last message : ".$commits[0]->commit->message;
+
+    if (!strcmp($current_commit_minus1, $ref_commit)) {
+        $version_class = "unmoved";
+        $version_message = "NWS version is up-to-date : (".$commit_message.")";
+    } else {
+        $version_class = "moved";
+        $version_message = "New version available : (".$commit_message.")";
+    }
+} else {
+        $version_class = "unknown";
+        $version_message = "Can't read NWS version status";
+}
+
+
 function fixedFooter($dirList) {
     echo '
    </div> <!--end content div-->
@@ -1050,7 +1084,7 @@ function fixedFooter($dirList) {
      <div id="osx-modal-data">
        <h2>MSK 1.5</h2>
        '.TXT_DEBUG_HELP_TXT.'
-plop
+
      </div>
    </div>
 
@@ -1115,9 +1149,11 @@ if (isset($_GET['debug'])) {
 }
 
 
-// Version Control
-
 echo '
+<div id="overlay"> </div>
+<span id="version" onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.$version_message.'">
+    <span class="'.$version_class.'">♼</span>
+</span>
 
 </body>
 </html>
