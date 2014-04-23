@@ -20,11 +20,12 @@
     float:left;
 }
 
-#PagePlayerList h3{
+#PagePlayerList h3 {
     font-size:18pt;
     padding: 0 0 0 .2em;
     text-align:left;
     cursor:pointer;
+    margin:0;
 }
 
 #PagePlayerDescription {
@@ -51,6 +52,7 @@
 .PagePlayerListItem {
     color:#ccc;
     background-color:#555;
+    height: 3em;
 }
 
 .PagePlayerListItem, .PagePlayerListItemSelected {
@@ -195,7 +197,7 @@ blockquote {
      color: #FF0000;
  }
 
- .bqend {
+.bqend {
      float: right;
      /* height: 25px; */
      /* margin-top: 0px; */
@@ -205,3 +207,34 @@ blockquote {
      color: #FF0000;
  }
 
+ul#microlabel {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    width: 42em;
+    height: 28em;
+}
+
+ul#microlabel li {
+    height: 24em;
+    width: 24em;
+    text-align: center;
+    cursor: pointer;
+}
+
+ul#microlabel li img {
+    width: 100%;
+}
+
+ul#microlabel li.roundabout-in-focus {
+    cursor: default;
+}
+
+ul#microlabel li span {
+    display: block;
+    padding-top: 6em;
+}
+
+ul#microlabel li p {
+    text-align:center;
+}

@@ -326,6 +326,7 @@ function xmlInfos($element) {
 
   <script src='libs/jquery.simplemodal.js'></script>
   <script src='libs/osx.js'></script>
+  <script src="libs/jquery.roundabout.js"></script>
 
   <!--[if lt IE 9]>
   <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
@@ -376,6 +377,7 @@ if (!empty($zong)) {
 ?>";
 
 $(document).ready(function() {
+
     $(".youtube").colorbox({iframe:true, innerWidth:425, innerHeight:344});
     var plopA = '<? echo TXT_NO_AUDIO_TXT ?>';
 
@@ -438,6 +440,9 @@ $(document).ready(function() {
     }
     setInterval(pulse, 5000);
 
+    // alert("plop");
+    $("ul#microlabel").roundabout();
+
     onPagePlayerLoad();
 
     if (songToPlay !== undefined) {
@@ -446,6 +451,7 @@ $(document).ready(function() {
 	plop = songToPlay;
 	playAudio();
     }
+
 
 });
 
@@ -789,29 +795,13 @@ function index($dirList, $labelName) {
     $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
 
     echo '<title>'.$labelName.' - Free Music</title>
-    <style type="text/css" media="screen">@import "css/contentflow.css";</style>
-    <script type="text/javascript" src="libs/contentflow.js"></script>
-    <script>
-
-var numberOfAlbums = '.$numberOfAlbums.'
-var randomNumber=Math.floor(Math.random()*numberOfAlbums);
-
-var myNewFlow = new ContentFlow("albumsRotator", {
-    //reflectionHeight: 5,
-    //circularFlow: false,
-    startItem:randomNumber
-});
-        </script>
     </head>
     ';
 
     echo '
     <body>
-   <div class="maincontent">
-     <div id="albumsRotator" class="ContentFlow">
-        <!-- should be place before flow so that contained images will be loaded first -->
-        <div class="loadIndicator"><div class="indicator"></div></div>
-        <div class="flow">
+        <div class="maincontent">
+            <ul id="microlabel">
     ';
 
     foreach ($dirList as $key => $albumPath) {
@@ -822,34 +812,23 @@ var myNewFlow = new ContentFlow("albumsRotator", {
         $albumGenre = $thisAlbumTags['genre'];
         $albumYear = $thisAlbumTags['year'];
 
-        $labelName = $thisAlbumTags['organization'];
+        $labelName = isset($thisAlbumTags['organization']) ? $thisAlbumTags['organization'] : 'No Label';
+        $labelName = ($labelName == " " || $labelName == "&nbsp;") ? 'No Label' : $thisAlbumTags['organization'];
 
-        // $album = ltrim(ltrim($album, '.'), '/');
         $newAlbumSexyUrlElements = explode("/", $dirList[$key]);
         $newAlbumSexyUrl = $newAlbumSexyUrlElements[1].",".$newAlbumSexyUrlElements['2'];
         $thisAlbumSleeve = getInfo($albumPath, 'thisAlbumSleeve');
 
         echo '
-
-
- <div class="item">
-<img class="content" src="'.$thisAlbumSleeve.'" href="'.$script.'?a='.$newAlbumSexyUrl.'"/>
-<a style="display:none" href="'.$script.'?a='.$newAlbumSexyUrl.'">'.$albumName.'</a>
-<div class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</div>
-</div>
-
-<!--a class="item" href="'.$newAlbumSexyUrl.'"><img class="content" src="'.$thisAlbumSleeve.'"/></a-->
+                <li><a href="'.$script.'?a='.$newAlbumSexyUrl.'"><img class="content" src="'.$thisAlbumSleeve.'" /></a>
+                    <p class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</p>
+                </li>
 ';
     }
 
     echo '
+            </ul>
         </div>
-        <div class="globalCaption"></div>
-        <!--div class="scrollbar">
-            <div class="slider"><div class="position"></div></div>
-        </div-->
-        </div>
-    </div>
     ';
 }
 

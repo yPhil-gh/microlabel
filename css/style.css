@@ -1165,3 +1165,37 @@ p#searchLinks a {
     color:red;
     display:invisible;
 }
+
+/* Roundabout */
+
+ul#indexMenu {
+    list-style: none;
+    padding: 0;
+    margin: auto auto;
+    width: 42em;
+    height: 28em;
+}
+
+ul#indexMenu li {
+    height: 24em;
+    width: 24em;
+    text-align: center;
+    cursor: pointer;
+}
+
+ul#indexMenu li img {
+    width: 100%;
+}
+
+ul#indexMenu li.roundabout-in-focus {
+    cursor: default;
+}
+
+ul#indexMenu li span {
+    display: block;
+    padding-top: 6em;
+}
+
+ul#indexMenu li p {
+    text-align:center;
+}
