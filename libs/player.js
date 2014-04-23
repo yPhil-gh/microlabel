@@ -44,7 +44,7 @@ function named(id)
 }
 
 //try create the PagePlayer
-function PagePlayer( list )
+function MlPlayer( list )
 {
 
     var test_audio= document.createElement("audio") //try and create sample audio element
@@ -68,7 +68,7 @@ function PagePlayer( list )
 	//does this div exist?
 	ulist = named(list);
 	if (ulist==null) {
-            PagePlayerError("The ul \""+ulist+"\" does not exist in the web page" );
+            MlPlayerError("The ul \""+ulist+"\" does not exist in the web page" );
 	} else {
             var ulist_parent = ulist.parentNode;
             //create a wrapper for the player components
@@ -272,7 +272,7 @@ function PagePlayer( list )
 	}
     }
 
-    function PagePlayerSetDescriptionHeight()
+    function MlPlayerSetDescriptionHeight()
     {
 	//determine the height of the PagePlayerList
 	var list= named("PagePlayerList");
@@ -356,7 +356,7 @@ function PagePlayer( list )
 	playAudio();
     }
 
-    function PagePlayerError( errorMessage ) {
+    function MlPlayerError( errorMessage ) {
 	alert ("PagePlayer Error:\n"+errorMessage);
     }
 
@@ -483,7 +483,7 @@ function PagePlayer( list )
 	playAudio();
     }
 
-    function onPagePlayerLoad() {
+    function onMlPlayerLoad() {
 	if(has_audio)
 	{
             //PagePlayerSetDescriptionHeight();
@@ -502,4 +502,3 @@ function PagePlayer( list )
     function comment(str) {
 	named("trackComment").innerHTML=str;
     }
-

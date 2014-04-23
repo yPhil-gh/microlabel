@@ -443,7 +443,7 @@ $(document).ready(function() {
     // alert("plop");
     $("ul#microlabel").roundabout();
 
-    onPagePlayerLoad();
+    onMlPlayerLoad();
 
     if (songToPlay !== undefined) {
 	/* nextClicked() */
@@ -751,7 +751,7 @@ function audioList($fileList, $albumPath) {
           //set some PagePlaer variables
           audio_volume=0.85; //default is 0.7
 
-          PagePlayer("PagePlayer");
+          MlPlayer("PagePlayer");
           /*what happens when the page is loaded?
           please see the "body" tag
           */
