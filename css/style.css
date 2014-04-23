@@ -1168,7 +1168,7 @@ p#searchLinks a {
 
 /* Roundabout */
 
-ul#indexMenu {
+ul#microlabel {
     list-style: none;
     padding: 0;
     margin: auto auto;
@@ -1176,26 +1176,36 @@ ul#indexMenu {
     height: 28em;
 }
 
-ul#indexMenu li {
+ul#microlabel li {
     height: 24em;
     width: 24em;
     text-align: center;
     cursor: pointer;
 }
 
-ul#indexMenu li img {
+ul#microlabel li img {
     width: 100%;
 }
 
-ul#indexMenu li.roundabout-in-focus {
+ul#microlabel li.roundabout-in-focus {
     cursor: default;
 }
 
-ul#indexMenu li span {
+ul#microlabel li span {
     display: block;
     padding-top: 6em;
 }
 
-ul#indexMenu li p {
+ul#microlabel li p {
     text-align:center;
+    text-shadow: 1px 0px 20px yellow;
+}
+
+body#microlabel-index a:link {
+    color:#eee;
+    text-decoration:none;
+}
+
+body#microlabel-index a:visited {
+    color:#eee;
 }

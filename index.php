@@ -799,7 +799,7 @@ function index($dirList, $labelName) {
     ';
 
     echo '
-    <body>
+    <body id="microlabel-index">
         <div class="maincontent">
             <ul id="microlabel">
     ';
@@ -820,8 +820,13 @@ function index($dirList, $labelName) {
         $thisAlbumSleeve = getInfo($albumPath, 'thisAlbumSleeve');
 
         echo '
-                <li><a href="'.$script.'?a='.$newAlbumSexyUrl.'"><img class="content" src="'.$thisAlbumSleeve.'" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" /></a>
-                    <p class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</p>
+                <li>
+                    <a href="'.$script.'?a='.$newAlbumSexyUrl.'">
+                        <img class="content" src="'.$thisAlbumSleeve.'" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" />
+                    </a>
+                    <a href="'.$script.'?a='.$newAlbumSexyUrl.'">
+                        <p class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</p>
+                    </a>
                 </li>
 ';
     }
