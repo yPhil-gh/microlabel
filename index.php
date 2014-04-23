@@ -512,7 +512,7 @@ html, body {
 
     echo '
 </head>
-<body>
+<body class="microlabel-body">
 <div id="main">
   <div class="content">
 
@@ -781,7 +781,7 @@ function index($dirList, $labelName) {
     ';
 
     echo '
-    <body id="microlabel-index">
+    <body id="microlabel-index" class="microlabel-body">
         <div id="microlabel-index">
             <ul id="microlabel">
     ';
