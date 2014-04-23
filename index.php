@@ -645,31 +645,41 @@ function audioList($fileList, $albumPath) {
 
       $shortLink = getTinyUrl($unSafeLink);
 
+      // $albumYear = isset($albumYear) ? $albumYear : "N / A";
+
+      $albumYear = (!isset($albumYear) || $albumYear == " " || $albumYear == "&nbsp;") ? 'N / A' : $albumYear;
+      $trackPlayTime = (!isset($trackPlayTime) || $trackPlayTime == " " || $trackPlayTime == "&nbsp;") ? 'N / A' : $trackPlayTime;
+      $trackBitRate = (!isset($trackBitRate) || $trackBitRate == " " || $trackBitRate == "&nbsp;") ? 'N / A' : $trackBitRate;
+      $trackFileSize = (!isset($trackFileSize) || $trackFileSize == " " || $trackFileSize == "&nbsp;") ? 'N / A' : $trackFileSize;
+      $albumRecordLabel = (!isset($albumRecordLabel) || $albumRecordLabel == " " || $albumRecordLabel == "&nbsp;") ? 'N / A' : $albumRecordLabel;
+
       echo '
         <li>
-          <h3>'.$trackTitle.'</h3>
-          <h4 class="albumName">'.$artistName.' - '.$albumName.'</h4>
-	  <p class="invisible_if_no_audio">
-	    <span class="opaque invisible_if_no_audio"></span>
-            <span class="albumName desc">'.$artistName.' - '.$albumName.'</span>
-	    <span class="leftSpan desc">'.TAGS_RECORD_LABEL.' : </span><span class="rightSpan desc">'.$albumRecordLabel.'</span><br />
-	    <span class="leftSpan desc">'.TAGS_TRACK.'s : </span><span class="rightSpan desc">'.$numberOfSongs.'</span>
-	    <span class="leftSpan desc">'.TAGS_YEAR.' : </span><span class="rightSpan desc">'.$albumYear.'</span>
-	    <span class="leftSpan desc">'.TAGS_GENRE.' : </span><span class="rightSpan desc">'.$albumGenre.'</span>
-          </p>
-          <h5>'.$script.'?a='.browse('next', 'nice').'</h5>
-          <h1 class="invisible_if_no_audio">'.$trackComment.'</h1>
+        <h3>'.$trackTitle.'</h3>
+            <div class="visible_if_no_audio">
+                <h4 class="albumName">'.$artistName.' - '.$albumName.'</h4>
+                <table class="album-description">
+                    <tr><td>'.TAGS_RECORD_LABEL.'</td><td class="value">'.$albumRecordLabel.'</td></tr>
+                    <tr><td>'.TAGS_RECORD_LABEL.'</td><td class="value">'.$albumRecordLabel.'</td></tr>
+                    <tr><td>'.TAGS_TRACK.'s</td><td class="value">'.$numberOfSongs.'</td></tr>
+                    <tr><td>'.TAGS_YEAR.'</td><td class="value">'.$albumYear.'</td></tr>
+                    <tr><td>'.TAGS_GENRE.'</td><td class="value">'.$albumGenre.'</td></tr>
+                </table>
+            </div>
 
-<div class="invisible_if_no_audio">
-	    <span class="opaque invisible_if_no_audio"></span>
+            <h1 class="invisible_if_no_audio">'.$trackComment.'</h1>
+
+            <div class="invisible_if_no_audio">
             <h4 class="albumName">'.$artistName.' - '.$albumName.'</h4>
             <p>'.$trackTitle.'</p>
-	    <p><span class="leftSpan">'.TAGS_YEAR.' : </span><span class="rightSpan">'.$albumYear.'</span></p>
-            <p><span class="leftSpan">'.TAGS_PLAYTIME.' : </span><span class="rightSpan">'.$trackPlayTime.'</span></p>
-            <p><span class="leftSpan">'.TAGS_BITRATE.' : </span><span class="rightSpan">'.$trackBitRate.'</span></p>
-            <p><span class="leftSpan">'.TAGS_SIZE.' : </span><span class="rightSpan">'.$trackFileSize.'</span></p>
-            <p><span class="leftSpan">'.TAGS_RECORD_LABEL.' : </span><span class="rightSpan">'.$albumRecordLabel.'</span></p>
-';
+                <table class="album-description">
+                    <tr><td>'.TAGS_YEAR.'</td><td class="value">'.$albumYear.'</td></tr>
+                    <tr><td>'.TAGS_PLAYTIME.'</td><td class="value">'.$trackPlayTime.'</td></tr>
+                    <tr><td>'.TAGS_BITRATE.'</td><td class="value">'.$trackBitRate.'</td></tr>
+                    <tr><td>'.TAGS_SIZE.'</td><td class="value">'.$trackFileSize.'</td></tr>
+                    <tr><td>'.TAGS_RECORD_LABEL.'</td><td class="value">'.$albumRecordLabel.'</td></tr>
+                </table>
+      ';
 
       $tes = rtrim( $trackComment );
 
@@ -923,8 +933,7 @@ function albumBrowser($labelName) {
     $nextAlbumSleeve = getInfo(browse('next', 'mean'), 'thisAlbumSleeve');
 
     echo '
-<div id="albumBrowser" class="main" style="position: relative;">
-<div class="invisible_if_no_audio" id="semiTransparentDiv" style="position: absolute; background-color: black; filter:alpha(opacity=55);-moz-opacity:.55;opacity:.55; height: 100%; width: 100%; z-index: 1;"></div>
+<div id="albumBrowser" class="main transparent" style="position: relative;">
     <div class="left" style="position: relative; z-index: 2;">
         <a title="'.TXT_PREVIOUS_ALBUM.' = '.browse('prev', 'extraNice').'" href="?a='.browse('prev', 'nice').'">
         <img class="thumb" src="'.$prevAlbumSleeve.'" alt="'.TXT_PREVIOUS_ALBUM.' = '.browse('prev', 'nice').'" /></a>

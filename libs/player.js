@@ -32,8 +32,6 @@ var previous;
 var next;
 var description_div;
 
-var opaque_div;
-
 var audio_element=null;
 var current_selected_list_item=null;
 var page_player_list_item_start = "MlPlayerListItem_";
@@ -44,8 +42,7 @@ function named(id)
 }
 
 //try create the MlPlayer
-function MlPlayer( list )
-{
+function MlPlayer( list ) {
 
     var test_audio= document.createElement("audio") //try and create sample audio element
     var mediasupport={audio: (test_audio.play)? true : false, video: (test_video.play)? true : false}
@@ -71,15 +68,11 @@ function MlPlayer( list )
             MlPlayerError("The ul \""+ulist+"\" does not exist in the web page" );
 	} else {
             var ulist_parent = ulist.parentNode;
+
             //create a wrapper for the player components
             var wrapper = document.createElement("div");
             wrapper.setAttribute("id","MlPlayerWrapper");
 
-            /* build the elements */
-
-            //create the loading div
-            //        l = document.createElement("div");
-            //        l.setAttribute("id","loading");
             //create the loading bar
             loading_bar = document.createElement("div");
             loading_bar.setAttribute('id',"loading_bar");
@@ -87,39 +80,30 @@ function MlPlayer( list )
             //create the duration div
             d = document.createElement("div");
             d.setAttribute("id","duration");
+
             //create the duration bar
             duration_bar = document.createElement("div");
             duration_bar.setAttribute('id',"duration_bar");
+
             //create the duration background
             // duration_background = document.createElement("div");
             // duration_background.setAttribute('id',"duration_background");
             d.onclick = function(event){ durationClicked(event); }
+
             // //put the duration elements together
-            // duration_background.appendChild(duration_bar);
-            // duration_background.appendChild(loading_bar);
-            //        d.appendChild(duration_background);
             d.appendChild(loading_bar);
             d.appendChild(duration_bar);
 
-
-            //create the loading background
-            //        loading_background = document.createElement("div");
-            //        loading_background.setAttribute('id',"loading_background");
-            //loading_background.onclick = function(event){ loadingClicked(event); }
-            //put the duration elements together
-            //        loading_background.appendChild(loading_bar);
-            //        d.appendChild(loading_bar);
-            //append the duration to the wrapper
-            //        wrapper.appendChild(l);
-
-
             //append the duration to the wrapper
             wrapper.appendChild(d);
+
             //replace the ul with the wrapper
             ulist.parentNode.replaceChild(wrapper,ulist);
+
             //create a div to hold the "buttons"
             button_bar = document.createElement("div");
             button_bar.setAttribute("id","button_bar");
+
             //add the button bar
             wrapper.appendChild(button_bar);
 
@@ -186,12 +170,9 @@ function MlPlayer( list )
             //create a div to hold the new list
             listdiv = document.createElement("div");
             listdiv.setAttribute("id","MlPlayerList");
-            //make an Desc for the list info
+            //make a desc div for the list info
             description_div = document.createElement("div");
             description_div.setAttribute("id","MlPlayerDescription");
-            //make an opaque div
-            opaque_div = document.createElement("div");
-            opaque_div.setAttribute("class","opaque");
             //append the listdiv to the listDescwrapper
             listDescWrapper.appendChild(listdiv);
             //append the desc to the listDescwrapper
@@ -214,11 +195,10 @@ function MlPlayer( list )
                 list_item.setAttribute("id",page_player_list_item_start+i);
                 list_item.onclick=function(){listItemClicked( this.id );}
                 var title = "Unknown";
-                var desc = "";
-                var myspan = "";
-                var audio_path = "";
+                var desc, myspan, audio_path;
                 var nodes = track_list[i].childNodes;
                 var nodes_len = nodes.length;
+                // var divclass = "";
 
                 //loop through the nodes
                 for(var j=0 ; j< nodes_len ; j++)
@@ -234,11 +214,15 @@ function MlPlayer( list )
                             list_item.appendChild(node);
                             break;
                         case "div":
-                            desc = node.innerHTML;
-                            //list_item.appendChild(node);
-                            break;
-                        case "p":
-                            myAlbumInfo = node.innerHTML;
+                            divattrs=node.attributes;
+                            divclass=divattrs.getNamedItem("class").value;
+                            // alert(divclass);
+                            // divclass = node.attr('class');
+                            if (divclass == "invisible_if_no_audio") {
+                                myDesc = node.innerHTML;
+                            } else if (divclass == "visible_if_no_audio") {
+                                myAlbumInfo = node.innerHTML;
+                            }
                             break;
                         case "h5":
                             myNextAlbum = node.innerHTML;
@@ -258,11 +242,11 @@ function MlPlayer( list )
                     }
                 }
                 audio_info[i]["title"]=title;
-                audio_info[i]["desc"]=desc;
+                audio_info[i]["myDesc"]=myDesc;
                 audio_info[i]["myAlbumInfo"]=myAlbumInfo;
                 audio_info[i]["myTrackComment"]=myTrackComment;
                 audio_info[i]["audio_path"]=audio_path;
-                //                audio_info[i]["trackComment"]=myTrackComment;
+
                 listdiv.appendChild(list_item);
             }
             //load the initial track
@@ -272,12 +256,13 @@ function MlPlayer( list )
 	}
     }
 
-    function MlPlayerSetDescriptionHeight()
-    {
-	//determine the height of the MlPlayerList
-	var list= named("MlPlayerList");
-	var height = list.offsetHeight;
-	named("MlPlayerDescription").style.height="250px";
+
+    function onMlPlayerLoad() {
+	if(has_audio)
+	{
+            albuminfo = audio_info[0]["myAlbumInfo"];
+            description_div.innerHTML = albuminfo;
+	}
     }
 
 
@@ -286,8 +271,7 @@ function MlPlayer( list )
             id = 0;
 	}
 	/* alert(id); */
-	if(id!=loaded_index)
-	{
+	if(id!=loaded_index) {
             highlightListItem(id);
             loaded_index = id;
 
@@ -300,7 +284,8 @@ function MlPlayer( list )
             audio_element.src=audio_path;
             //load the new audio
             audio_element.load();
-            description = audio_info[id]["desc"];
+
+            description = audio_info[id]["myDesc"];
             description_div.innerHTML = description;
 	}
 	// message("loaded_index : "+loaded_index+" lenght : "+audio_info.length);
@@ -325,11 +310,6 @@ function MlPlayer( list )
     function nextClicked() {
 	/* increment the index */
 	var index = loaded_index+1;
-
-	// if(index >= audio_info.length) {
-	//     index=0;
-	// }
-	// message("playing track: "+(index+1));
 
 	if(index >= audio_info.length) {
             /* play the next album */
@@ -370,7 +350,6 @@ function MlPlayer( list )
 	audio_duration = audio_element.duration;
 	//set the volume
 	set_volume(0.7);
-	// songMenu_div.appendChild(opaque_div);
     }
 
     function set_volume(new_volume) {
@@ -414,16 +393,6 @@ function MlPlayer( list )
 	pause.style.display="block";
     }
 
-    // function playClicked() {
-    //     alert(loaded_index);
-    //     if (loaded_index == undefined) {
-    //         load_track(0);
-    //         playAudio();
-    //     } else {
-    //     playAudio();
-    //     }
-    // }
-
     function pauseClicked() {
 	if( $(play).is(":visible") ) {
             if (loaded_index == undefined) {
@@ -441,13 +410,7 @@ function MlPlayer( list )
     }
 
     function trackEnded() {
-	//    alert(myNextAlbum);
 	nextClicked();
-	//alert(loaded_index);
-    }
-
-    function jstest() {
-	alert('myNextAlbum: '+myNextAlbum);
     }
 
     function volumeClicked(event) {
@@ -483,17 +446,17 @@ function MlPlayer( list )
 	playAudio();
     }
 
-    function onMlPlayerLoad() {
-	if(has_audio)
-	{
-            //MlPlayerSetDescriptionHeight();
-            albuminfo = audio_info[0]["myAlbumInfo"];
-            //albuminfo = "yowza";
-            // alert("plop");
-	    // description_div.innerHTML = "&nbsp;";
-            description_div.innerHTML = albuminfo;
-	}
-    }
+
+// //what is the audio_path?
+// audio_path = audio_info[id]["audio_path"];
+// //set the audio_elements src
+// audio_element.src=audio_path;
+// //load the new audio
+// audio_element.load();
+// description = audio_info[id]["desc"];
+// description_div.innerHTML = description;
+
+
 
     function message(str) {
 	named("message").innerHTML=str;

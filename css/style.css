@@ -324,9 +324,13 @@ img {
       1px -1px 0 #000,
       -1px 1px 0 #000,
        1px 1px 0 #000;
-
     margin: -1.5em 0 0 1em;
-/* 	font-variant: small-caps; */
+}
+
+#MlPlayerDescription h4 {
+    background-color:#333;
+    text-align:center;
+    margin:0;
 }
 
 p#trackComment {
@@ -845,6 +849,40 @@ img.buttons {
     /* text-align:left; */
 }
 
+table.album-description {
+    /* background-color: #ccc; */
+    border-spacing: 1px;
+    width: 100%;
+    border-collapse: collapse;
+    padding: 0.5em;
+}
+
+#MlPlayerDescription p {
+    background-color:#333;
+    padding:.3em .1em;
+    text-align:right;
+    text-shadow: 0 0 0.2em #FFBB00, 0 0 0.2em #FFBB00;
+}
+
+table.album-description tr:not(:last-child) {
+    border-bottom: 2px solid #555;
+}
+
+table.album-description td {
+    background-color: #222;
+    width: 50%;
+    text-align:left;
+}
+
+.visible_if_no_audio {
+    width:100%;
+    border:1px solid red;
+}
+
+table.album-description td.value {
+    text-align:right;
+}
+
 .songMenu {
     width: 100%;
     border-top: 1px solid #888;
@@ -911,7 +949,7 @@ div#osx-modal-data a {
     position: relative;
 }
 
-span.leftSpan, span.rightSpan, p, form, div.songMenu, #MlPlayerDescription span.albumName *, table.songMenu {
+span.leftSpan, span.rightSpan, p, form, div.songMenu, #MlPlayerDescription span.albumName *, table.songMenu, table#album-description {
     position: relative;
     z-index: 2;
 }
@@ -929,18 +967,6 @@ form.urlFields input {
     font-size:1.2em;
     text-decoration:bolder;
     background:default;
-}
-
-span.opaque {
-display:block;
-position: absolute;
-background-color: black;
-filter:alpha(opacity=55);
--moz-opacity:.55;
-opacity:.55;
-height: 100%;
-width: 100%;
-z-index: 1;
 }
 
 /* Tweets */
@@ -1056,47 +1082,6 @@ div.jqi button.jqidefaultbutton{
 	background-color: #BF5E26;
 }
 
-p#searchLinks {
-    margin: 1em 0 1em 0;
-}
-
-p#searchLinks a:hover {
-    background: #ccc;
-    color:#000;
-}
-p#searchLinks a {
-    font-weight:bold;
-    text-decoration:none;
-    background: #555;
-    border: 1px solid #FFBB00;
-    border-radius: 4px 4px 4px 4px;
-    margin: 0 .5em 0 0;
-    padding: 0.3em;
-}
-
-#tweets span.time {
-    /* border: 1px solid #FFBB00; */
-    background: #555;
-    border-right: 1px solid #FFBB00;
-    border-top: 1px solid #555;
-    border-left: 1px solid #FFBB00;
-    border-bottom: 1px solid #FFBB00;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-
-    /* height:2em; */
-    margin: 0 0 0 1em;
-    padding:.2em;
-    display:block;
-    float:right;
-    clear:left;
-}
-
-#tweets p.text {
-    /* width:90%; */
-}
-
-
 /* Version Checking */
 #version {
     font-size:300%;
@@ -1168,7 +1153,6 @@ body#microlabel-index a:visited {
     padding:.1em;
 }
 
-
 img.video_thumbnail {
     margin:0;
     width:2em;
@@ -1178,3 +1162,9 @@ img.video_thumbnail {
 a:link {
     text-decoration:none;
 }
+
+.transparent, #MlPlayerDescription {
+    background-color:rgba(17,17,17,0.6);
+}
+
+/* Import */
