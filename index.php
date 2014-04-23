@@ -954,8 +954,7 @@ function albumBrowser($labelName) {
     </div>
     <div class="right" style="position: relative; z-index: 2;">
         <div class="fadeAlbums"><strong>'.TXT_NEXT_ALBUM.'</strong>
-<hr />
-<p>'.browse('next', 'extraNice').'</p></div>
+        <p>'.browse('next', 'extraNice').'</p></div>
         <a title="'.TXT_NEXT_ALBUM.' = '.browse('next', 'extraNice').'" href="?a='.browse('next', 'nice').'">
         <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse('next', 'nice').'" /></a>
     </div>
