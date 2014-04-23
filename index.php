@@ -977,49 +977,6 @@ function albumBrowser($labelName) {
 }
 
 
-// indexFooter($totaltime) ////////////////////////////////////////
-// Temps approx. d'éxecution
-// Script exec. time
-
-function indexFooter($totaltime) {
-    $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
-    echo '
-    <div id="debug" class="main">
-        <table class="footdown">
-            <tr>
-                <td>
-                ';
-    echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp;'.$script.' v0.6 Rendered in: ' . round($totaltime, '4') . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
-                <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>&nbsp;|&nbsp;<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.0/fr/">CC LICENSE</a>&nbsp;|&nbsp;<a href="?lang=fr" onClick="history.go(0)">'.TXT_FRENCH.'</a>&nbsp;|&nbsp;<a href="?lang=en" onClick="history.go(0)">'.TXT_ENGLISH.'</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-    ';
-}
-
-
-// debugFooter($totaltime) ////////////////////////////////////////
-// Temps approx. d'éxecution
-// Script exec. time
-
-function debugFooter($totaltime, $albums, $songs) {
-    $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
-    echo '
-    <div id="debug" class="main">
-        <table class="footdown">
-            <tr>
-                <td>
-                ';
-    echo $songs.' songs in '.$albums.' albums&nbsp;|&nbsp; '.$script. ' v0.7.1 Rendered in: ' . round($totaltime, '4') . ' seconds.' . 'by PHP v'.phpversion().'&nbsp;|&nbsp;<a href="'.$script.'?code">SOURCE [code]</a>&nbsp;|&nbsp;<a title="'.$cachefile.'" href="'.$cachefile.'">Cached</a>&nbsp;|&nbsp;VALIDATE <a href="http://validator.w3.org/check?uri=referer">XHTML</a>&nbsp;|&nbsp;
-                <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>&nbsp;|&nbsp;<a rel="license" href="'.URL_CCLICENSE.'">'.TXT_LICENSE.'</a>&nbsp;|&nbsp;<a title="stats" href="https://logs.ovh.net/beldigital.net/">stats</a>&nbsp;|&nbsp;<a title="log" href="https://logs.ovh.net/beldigital.net/osl/">acces log</a>&nbsp;|&nbsp;<a title="log" href="https://logs.ovh.net/beldigital.net/osl/error/">error log</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-    ';
-}
-
 // fixedFooter($dirList) ////////////////////////////////////////
 // Fixed Footer pane
 
