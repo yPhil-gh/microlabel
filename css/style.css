@@ -859,17 +859,20 @@ table.album-description {
 
 #MlPlayerDescription p {
     background-color:#333;
+    border-top: 1px solid #FFBB00;
+    border-bottom: 1px solid #FFBB00;
     padding:.3em .1em;
+    margin:0;
     text-align:right;
     text-shadow: 0 0 0.2em #FFBB00, 0 0 0.2em #FFBB00;
 }
 
 table.album-description tr:not(:last-child) {
-    border-bottom: 2px solid #555;
+    border-bottom: 1px solid #555;
 }
 
 table.album-description td {
-    background-color: #222;
+    padding:0 .2em;
     width: 50%;
     text-align:left;
 }
