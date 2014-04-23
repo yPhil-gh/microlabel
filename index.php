@@ -319,7 +319,7 @@ function xmlInfos($element) {
   <style type="text/css" media="screen">@import "css/player.css";</style>
     <style type="text/css" media="screen">@import "css/style.css";</style>
     <link type='text/css' href="css/jquery.simplemodal-osx.css" rel='stylesheet' media='screen' />
-    <style type="text/css" media="screen">@import "css/colorbox.css";</style>
+    <style type="text/css" media="screen">@import "css/jquery.colorbox.css";</style>
 
     <script src="libs/player.js"></script>
 
@@ -356,7 +356,7 @@ var test_video= document.createElement("video") //try and create sample video el
 var mediasupport={audio: (test_audio.play)? true : false, video: (test_video.play)? true : false}
 
 if(mediasupport.audio == false) {
-    loadjscssfile("css/msk-no-audio.css", "css")
+    loadjscssfile("css/microlabel-no-audio.css", "css")
 }
 
 if (songToPlay !== undefined) {
