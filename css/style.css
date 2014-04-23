@@ -1,3 +1,7 @@
+* {
+    text-align:left;
+}
+
 p, li, span, h1, h2, h3, h4, h5  {
     text-align: left;
     vertical-align:default;
@@ -12,10 +16,7 @@ html {
 }
 
 body {
-    /* background: inherit; */
-    color:#fff;
     font-family: Helvetica, Arial, sans-serif;
-    text-align: center;
 }
 
 body#microlabel-index {
@@ -335,10 +336,6 @@ img {
 
 p#trackComment {
     text-shadow:
-    /* 1px 1px 0 #000, */
-    /* -1px -1px 0 #000, */
-    /* 1px -1px 0 #000, */
-    /* -1px 1px 0 #000, */
     1px 1px 0 #000;
 }
 
@@ -346,60 +343,32 @@ p#trackComment {
     width: 100%;
     margin:0;
     padding:.5em;
-/* border-left:1px solid #fff; */
 }
 
-
+microlabel-tagger
 /* Tagger */
-#tagger iframe {
-    width: 20em;height: 20em;
-    border:5px solid #FFF;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-/* 	background-color:#FFF; */
+#microlabel-tagger, #microlabel-tagger a:link, #microlabel-tagger a:visited {
+    color:#000;
 }
 
-#taggerTable {
-    background: #000528;
-    width: 100%;height: 100%;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+#microlabel-tagger table {
+width:100%;
+border-collapse:collapse; }
+
+#microlabel-tagger table td {
+padding:.2em;
+border:#fff 1px solid;
 }
 
-#taggerTable td {
-    padding:0 1em;
-    vertical-align:top;
+#microlabel-tagger table tr:nth-child(even) { /*(even) or (2n 0)*/
+background: #2F4F4F;
 }
-
-#taggerTable td.label {
-    width: 30%;
-}
-
-#taggerTable td.field {
-    width: 70%;
-}
-
-#taggerTable td.field .textField {
-    width: 100%;
-    color:#FFF;
-    background:none repeat scroll 0 0 transparent;
-    border:#FFF 1px solid medium;
-}
-
-#taggerTable .button {
-    width: 49%;
-}
-
-
-a.test-sm {
-    cursor:pointer
-}
-
+#microlabel-tagger table tr:nth-child(odd) { /*(odd) or (2n 1)*/
+background: #ccc;
 
 /* tables */
 
 table.list tr td {
-    /* 	padding : .1em .5em; */
     height : 3em;
     padding : 0;
 }
@@ -408,49 +377,17 @@ table.list tr.audio td {
     padding : 0 .5em;
 }
 
-table.list tr.video td {
-/* 	height : 3em; */
-}
-
 table.list td, table.list th {
     border-bottom:1px solid #fff;
     text-align:right;
-}
-
-table.list td.share {
-/* 	width:25px; */
 }
 
 table.list td.filename, table.list th.filename {
     text-align:left;
 }
 
-table.list tr.audio td.filename {
-/* 	width: 90%; */
-}
-
-table.list tr.video td.filename {
-/* 	width:100%; */
-}
-
-table.table_index td.index_info {
-/* vertical-align:top; */
-/* width:100%; */
-}
-
 table.list tbody tr:hover {
     background-color:#2F4F4F;
-}
-
-table.list tr.video td.filename div:hover {
-/* 	background: #F00 url(img/button_play_off.png) no-repeat fixed left; */
-/* 	background: #F00 url(img/button_play_off.png) */
-/* 	z-index: 3; */
-/* 	background-size: 22px; */
-}
-
-table.list tr.video td.filename div {
-/* z-index: 2; */
 }
 
 table.list {
