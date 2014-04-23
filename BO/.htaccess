@@ -1,0 +1,4 @@
+AuthName "Yo"
+AuthType Basic
+AuthUserFile /var/www/microlabel/BO/.htpasswd
+Require valid-user
