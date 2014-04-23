@@ -682,10 +682,13 @@ function audioList($fileList, $albumPath) {
               <input type="text" class="loongURL" size="20" name="'.TAGS_SHARE.'" onClick="this.select();" value="'.$unSafeLink.'"><br/>
               <input type="text" class="shortURL" size="20" onClick="this.select();" value="'.$shortLink.'" />
             </form>
-            <div class="songMenu">
-              <div class="div1"><img src="img/icon_download.png" alt="'.TXT_DOWNLOAD.'" /><a href="'. $fullFileName .'" title="' . $trackTitle.' ('.TXT_DOWNLOAD.')">'.TXT_DOWNLOAD.'</a></div>
-              <div class="div2"><img src="img/icon_love.png" alt="'.TXT_BUY.'" /><a href="#">'.TXT_BUY.'</a></div>
-            </div>
+
+            <table class="songMenu">
+            <tr>
+              <td><img src="img/icon_download.png" alt="'.TXT_DOWNLOAD.'" /><a href="'. $fullFileName .'" title="' . $trackTitle.' ('.TXT_DOWNLOAD.')">'.TXT_DOWNLOAD.'</a></td>
+              <td><img src="img/icon_love.png" alt="'.TXT_BUY.'" /><a href="#">'.TXT_BUY.'</a></td>
+            </tr>
+            </table>
           </div>
           <a class="downloadTuneLink" href="'.$fullFileName.'">'.TXT_DOWNLOAD.' '.$trackTitle .'</a>
         </li>

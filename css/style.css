@@ -845,36 +845,27 @@ img.buttons {
     /* text-align:left; */
 }
 
-.songMenu {
-    overflow: auto;
+table.songMenu {
     width: 100%;
     border-top: 1px solid #888;
-    margin: 1em 0 0 0;
-    text-align:center;
-    /* margin:0px auto; */
-    background:#888;
-/*  outline: 1px solid #F00; */
+    border-spacing:0;
+    border:0;
+    z-index:10;
 }
 
-.songMenu div.div1 {
-    /* float:left; */
-    /*     outline: 1px solid #F00; */
-    width:50%
-}
-
-.songMenu div.div2 {
-    float:right;
-    width:50%
-}
-
-.songMenu div {
-    display:inline;
-    float:left;
+table.songMenu td {
+    width:50%;
     background:#555;
-    text-align: center;
+    /* text-align: center; */
+    margin:0;
+    padding:0;
 }
 
-.songMenu div:hover {
+table.songMenu td * {
+    vertical-align: middle;
+}
+
+table.songMenu td:hover {
     background:#999;
 }
 
@@ -882,14 +873,12 @@ img.buttons {
     margin: 1em 0 0 0;
 }
 
-#songMenu div a {
-    font-size:9pt;
-    text-decoration:none
-}
-
-span.rightSpan {
-    float:right;
-}
+/*
+ * #songMenu div a {
+ *     font-size:9pt;
+ *     text-decoration:none
+ * }
+ */
 
 #osx-container * {
     text-align:left;
@@ -912,7 +901,7 @@ div#osx-modal-data a {
     position: relative;
 }
 
-span.leftSpan, span.rightSpan, p, form, div.songMenu, #MlPlayerDescription span.albumName * {
+span.leftSpan, span.rightSpan, p, form, div.songMenu, #MlPlayerDescription span.albumName *, table.songMenu {
     position: relative;
     z-index: 2;
 }
