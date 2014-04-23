@@ -845,9 +845,17 @@ img.buttons {
     /* text-align:left; */
 }
 
-table.songMenu {
+.songMenu {
     width: 100%;
     border-top: 1px solid #888;
+    margin: 1em 0 0 0;
+    text-align:center;
+    /* margin:0px auto; */
+    background:#888;
+/*  outline: 1px solid #F00; */
+}
+
+table.songMenu {
     border-spacing:0;
     border:0;
     z-index:10;
@@ -873,12 +881,14 @@ table.songMenu td:hover {
     margin: 1em 0 0 0;
 }
 
-/*
- * #songMenu div a {
- *     font-size:9pt;
- *     text-decoration:none
- * }
- */
+#songMenu div a {
+    font-size:9pt;
+    text-decoration:none
+}
+
+span.rightSpan {
+    float:right;
+}
 
 #osx-container * {
     text-align:left;

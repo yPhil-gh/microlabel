@@ -793,10 +793,10 @@ function index($dirList, $labelName) {
 
         echo '
                 <li>
-                    <a href="'.$script.'?a='.$newAlbumSexyUrl.'">
+                    <a href="?a='.$newAlbumSexyUrl.'">
                         <img class="content" src="'.$thisAlbumSleeve.'" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" />
                     </a>
-                    <a href="'.$script.'?a='.$newAlbumSexyUrl.'">
+                    <a href="?a='.$newAlbumSexyUrl.'">
                         <p class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</p>
                     </a>
                 </li>
@@ -1010,13 +1010,13 @@ function fixedFooter($dirList) {
 
    <div id="controlFooter" class="zindex-one">
      <div id="controlFooter-left">
-       <a title="'.TXT_FRENCH.'" href="'.$script.'?a='.browse('current', 'nice').'&amp;lang=fr">
+       <a title="'.TXT_FRENCH.'" href="?a='.browse('current', 'nice').'&amp;lang=fr">
          <img class="buttons" alt="'.TXT_FRENCH.'" src="img/flags/fr.png" /></a>
-       <a title="'.TXT_ENGLISH.'" href="'.$script.'?a='.browse('current', 'nice').'&amp;lang=en">
+       <a title="'.TXT_ENGLISH.'" href="?a='.browse('current', 'nice').'&amp;lang=en">
          <img class="buttons" alt="'.TXT_ENGLISH.'" src="img/flags/uk.png" /></a>
-       <a title="'.TXT_SPANISH.'" href="'.$script.'?a='.browse('current', 'nice').'&amp;lang=es">
+       <a title="'.TXT_SPANISH.'" href="?a='.browse('current', 'nice').'&amp;lang=es">
          <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/es.png" /></a>
-       <a title="'.TXT_GERMAN.'" href="'.$script.'?a='.browse('current', 'nice').'&amp;lang=de">
+       <a title="'.TXT_GERMAN.'" href="?a='.browse('current', 'nice').'&amp;lang=de">
          <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/de.png" /></a>
        <a title="'.TXT_HELP.'" class="osx" href="#">
          <img id="helpButton" class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
