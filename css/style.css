@@ -345,27 +345,51 @@ p#trackComment {
     padding:.5em;
 }
 
-microlabel-tagger
+/* microlabel-tagger */
 /* Tagger */
 #microlabel-tagger, #microlabel-tagger a:link, #microlabel-tagger a:visited {
-    color:#000;
+    font-color:#000;
 }
 
 #microlabel-tagger table {
-width:100%;
-border-collapse:collapse; }
-
-#microlabel-tagger table td {
-padding:.2em;
-border:#fff 1px solid;
+    width:100%;
+    border: 1px solid #FFBB00;
+    border-collapse:collapse;
 }
 
-#microlabel-tagger table tr:nth-child(even) { /*(even) or (2n 0)*/
-background: #2F4F4F;
+#microlabel-tagger table th, #microlabel-tagger table td {
+    font-family: “Trebuchet MS”, Verdana, Arial, Helvetica, sans-serif;
+    border-right: 1px solid #FFBB00;
+    font-weight:bolder;
+    font-size:75%;
+    padding:.2em;
 }
+
+#microlabel-tagger table td.directory, #microlabel-tagger table td.audiofile {
+    min-height:100px;
+}
+
+#microlabel-tagger table td.directory:before {
+    content: "▶ ";
+}
+
+#microlabel-tagger table td.audiofile:before {
+    content: "𝅘𝅥𝅮 ";
+}
+
+
+html body#microlabel-tagger.microlabel-body table.table tbody tr:nth-child(3) {
+    font-size:100%;
+    border-bottom: 1px solid #FFBB00;
+    color:#ccc;
+    background-color:#111;
+}
+
+/* :last-child */
+
 #microlabel-tagger table tr:nth-child(odd) { /*(odd) or (2n 1)*/
-background: #ccc;
-
+    background: #333;
+}
 /* tables */
 
 table.list tr td {
@@ -819,7 +843,7 @@ table.album-description td {
     border:1px solid red;
 }
 
-table.album-description td.value {
+table.album-description td.value, table td.right {
     text-align:right;
 }
 
@@ -1107,4 +1131,17 @@ a:link {
     background-color:rgba(17,17,17,0.6);
 }
 
-/* Import */
+.microlabel-body > * {
+    color:#fff;
+}
+
+.powered-by {
+    float:right;
+    border: 1px #CCCCCC solid;
+    border-radius:5px;
+    padding: 5px;
+    margin: 5px 0px;
+    float: left;
+    font-size: 8pt;
+    font-face: sans-serif;
+}
