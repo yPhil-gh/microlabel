@@ -317,31 +317,23 @@ function xmlInfos($element) {
 <head>
 <meta charset="UTF-8">
   <style type="text/css" media="screen">@import "css/player.css";</style>
-  <link type='text/css' href='css/osx.css' rel='stylesheet' media='screen' />
-
-  <style type="text/css" media="screen">@import "css/style.css";</style>
-  <style type="text/css" media="screen">@import "css/colorbox.css";</style>
-  <link rel="alternate stylesheet" type="text/css" href="css/msk_RED.css" title="RED" />
-
-  <script src="libs/msk_css_switcher.js"></script>
-  <script src="libs/msk_css_switcher.js"></script>
-  <script src="libs/jquery-1.5.1.min.js"></script>
-  <script type="text/javascript" src="libs/jquery.cycle.all.latest.js"></script>
-  <script type="text/javascript" src="libs/jquery.livetwitter.min.js"></script>
-  <script src="libs/jquery.colorbox-min.js"></script>
-
-  <script src='libs/jquery.simplemodal.js'></script>
-  <script src='libs/osx.js'></script>
-  <script src="libs/jquery.roundabout.js"></script>
-
-  <!--[if lt IE 9]>
-  <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
-  <![endif]-->
+    <style type="text/css" media="screen">@import "css/style.css";</style>
+    <link type='text/css' href='css/osx.css' rel='stylesheet' media='screen' />
+    <style type="text/css" media="screen">@import "css/colorbox.css";</style>
 
     <script src="libs/player.js"></script>
 
+    <script src="libs/jquery-1.5.1.min.js"></script>
+    <script src="libs/jquery.colorbox-min.js"></script>
+    <script src="libs/jquery.roundabout.js"></script>
 
-  <script>
+    <script src="libs/jquery.simplemodal.js"></script>
+    <script src="libs/osx.js"></script>
+
+    <!--[if lt IE 9]>
+        <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+        <![endif]-->
+    <script>
 
 function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
@@ -397,34 +389,6 @@ $(document).ready(function() {
     if (mediasupport.audio == false) {
 	$.prompt(noAudioMsg);
     }
-
-    var twittoz = "<?php xmlInfos('first_twitter'); ?>";
-
-    /* alert(twittoz); */
-    /* $("#tweets").liveTwitter("Azer0o0", {limit: 5, imageSize: 32}); */
-
-    $('#tweets').liveTwitter(twittoz, {limit: 5, imageSize: 32}, function(){
-	$('#tweets .loading').remove();
-    });
-
-    $('#searchLinks a').each(function(){
-	var query = $(this).text();
-	$(this).click(function(){
-	    // Update the search
-	    $('#tweets').liveTwitter(query).each(function(){
-		this.twitter.clear();
-	    });
-	    // Update the header
-	    $('#searchTerm').text(query);
-	    return false;
-	});
-    });
-
-    $('.sleeves').cycle({
-	fx: 'fade',
-	speed:    2500,
-	timeout:  30000
-    });
 
     $('a.sleeve').colorbox({
 	rel:"group1",

@@ -35,7 +35,6 @@
     width:18%;
     min-width:150px;
     border:#FB0 1px solid;
-    padding:0;
 }
 
 #MlPlayerListDescWrapper {
@@ -204,3 +203,40 @@ blockquote {
      font-size: 700%;
      color: #FF0000;
  }
+
+/* Import */
+
+#MlPlayerDescription h4, #MlPlayerDescription h5, #MlPlayerDescription p , .desc {
+    /* border-bottom: 1px solid #888; */
+    font-size:1em;
+    margin: 0 .5em;
+}
+
+#MlPlayerDescription span.desc {
+    /* display:inline-block; */
+    /* width:45%; */
+}
+
+#MlPlayerDescription span.albumName {
+    display:block;
+}
+
+.desc {
+    /* text-align:left; */
+    float:left;
+    clear:right;
+    /* padding:0 0 0 1em; */
+}
+
+#MlPlayerDescription h4.artistName {
+    color: #004080;
+}
+
+#MlPlayerDescription .albumName {
+    background:#555;
+    margin: 0 0 .2em 0;
+    font-size:14pt;
+    text-align:center;
+    width:100%;
+    z-index:2;
+}

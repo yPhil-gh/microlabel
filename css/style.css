@@ -839,7 +839,7 @@ img.buttons {
 /* 	outline: 1px solid #F00; */
 }
 
-#PagePlayerDescription {
+#MlPlayerDescription {
     margin-left: auto;
     margin-right: auto;
     /* text-align:left; */
@@ -878,22 +878,18 @@ img.buttons {
     background:#999;
 }
 
-#PagePlayerDescription h4 {
-    margin: .5em 0 0 0;
-}
-
-#PagePlayerDescription h4, #PagePlayerDescription h5, #PagePlayerDescription p , .desc {
+#MlPlayerDescription h4, #MlPlayerDescription h5, #MlPlayerDescription p , .desc {
     /* border-bottom: 1px solid #888; */
     font-size:1em;
     margin: 0 .5em;
 }
 
-#PagePlayerDescription span.desc {
+#MlPlayerDescription span.desc {
     /* display:inline-block; */
     /* width:45%; */
 }
 
-#PagePlayerDescription span.albumName {
+#MlPlayerDescription span.albumName {
     display:block;
 }
 
@@ -904,11 +900,11 @@ img.buttons {
     /* padding:0 0 0 1em; */
 }
 
-#PagePlayerDescription h4.artistName {
+#MlPlayerDescription h4.artistName {
     color: #004080;
 }
 
-#PagePlayerDescription .albumName {
+#MlPlayerDescription .albumName {
     background:#555;
     margin: 0 0 .2em 0;
     font-size:14pt;
@@ -917,11 +913,11 @@ img.buttons {
     z-index:2;
 }
 
-#PagePlayerDescription h5 {
+#MlPlayerDescription h5 {
     color: #004080;
 }
 
-#songMenu, #PagePlayerDescription form {
+#songMenu, #MlPlayerDescription form {
     margin: 1em 0 0 0;
 }
 
@@ -943,19 +939,19 @@ div#osx-modal-data a {
     color: #000;
 }
 
-#PagePlayerList {
+#MlPlayerList {
     min-width:50%;
     width:71%;
     float:left;
 }
 
-#PagePlayerDescription {
+#MlPlayerDescription {
     /*     min-width:30%; */
     width:26%;
     position: relative;
 }
 
-span.leftSpan, span.rightSpan, p, form, div.songMenu, #PagePlayerDescription span.albumName * {
+span.leftSpan, span.rightSpan, p, form, div.songMenu, #MlPlayerDescription span.albumName * {
     position: relative;
     z-index: 2;
 }
