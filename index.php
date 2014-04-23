@@ -820,7 +820,7 @@ function index($dirList, $labelName) {
         $thisAlbumSleeve = getInfo($albumPath, 'thisAlbumSleeve');
 
         echo '
-                <li><a href="'.$script.'?a='.$newAlbumSexyUrl.'"><img class="content" src="'.$thisAlbumSleeve.'" /></a>
+                <li><a href="'.$script.'?a='.$newAlbumSexyUrl.'"><img class="content" src="'.$thisAlbumSleeve.'" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" /></a>
                     <p class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</p>
                 </li>
 ';
