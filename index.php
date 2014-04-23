@@ -771,12 +771,11 @@ if (!empty($videos_objects)) {
         $videoName = $videos_object->name;
         $videoID = $videos_object->youtubeid;
         echo '
-<div id="videos">
-<p class="video"><a class="youtube" href="http://youtube.com/embed/'.$videoID.'" title="'.$videoName.'">'.$videoName.'</a>
+<a class="youtube" href="http://youtube.com/embed/'.$videoID.'" title="'.$videoName.'">
+<div class="MlPlayerListItem MlPlayerVideoItem">'.$videoName.'
 <img class="video_thumbnail" src="http://img.youtube.com/vi/'.$videoID.'/2.jpg" />
-</p>
 </div>
-
+</a>
 ';
     }
 }

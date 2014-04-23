@@ -52,7 +52,8 @@
 .MlPlayerListItem {
     color:#ccc;
     background-color:#555;
-    height: 3em;
+    border: 1px solid #FFBB00;
+    border-radius: 4px;
 }
 
 .MlPlayerListItem, .MlPlayerListItemSelected {
@@ -61,9 +62,6 @@
     margin-bottom:.5em;
     border:#fb0 1px solid;
     padding:.05em;
-    font-size:12px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
 }
 
 .MlPlayerListItem:hover {

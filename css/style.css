@@ -197,11 +197,11 @@ div#controlFooter img#close_player {
 }
 
 a:link {
-    /* color:#FAFAD2; */
+    color:#ccc;
 }
 
 a:visited {
-    /* color:#FAFAAB; */
+    color:#ccc;
 }
 
 a:hover {
@@ -839,12 +839,6 @@ img.buttons {
 /* 	outline: 1px solid #F00; */
 }
 
-
-img.video_thumbnail {
-    width:3em;
-    float:right;
-}
-
 #PagePlayerDescription {
     margin-left: auto;
     margin-right: auto;
@@ -1208,4 +1202,23 @@ body#microlabel-index a:link {
 
 body#microlabel-index a:visited {
     color:#eee;
+}
+
+.MlPlayerVideoItem {
+    /* font-size:90%; */
+    font-weight:bold;
+    cursor: pointer;
+    height:1.5em;
+    padding:.1em;
+}
+
+
+img.video_thumbnail {
+    margin:0;
+    width:2em;
+    float:right;
+}
+
+a:link {
+    text-decoration:none;
 }
