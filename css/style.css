@@ -1,11 +1,3 @@
-/*
- * * {
- *     /\* vertical-align:middle; *\/
- *     margin: 0;
- *     border:none;
- * }
- */
-
 p, li, span, h1, h2, h3, h4, h5  {
     text-align: left;
     vertical-align:default;
@@ -24,6 +16,14 @@ body {
     color:#fff;
     font-family: Helvetica, Arial, sans-serif;
     text-align: center;
+}
+
+body#microlabel-index {
+    text-align:center;
+}
+
+div#microlabel-index {
+    margin:20% auto;
 }
 
 .foregroundText {
@@ -876,45 +876,6 @@ img.buttons {
 
 .songMenu div:hover {
     background:#999;
-}
-
-#MlPlayerDescription h4, #MlPlayerDescription h5, #MlPlayerDescription p , .desc {
-    /* border-bottom: 1px solid #888; */
-    font-size:1em;
-    margin: 0 .5em;
-}
-
-#MlPlayerDescription span.desc {
-    /* display:inline-block; */
-    /* width:45%; */
-}
-
-#MlPlayerDescription span.albumName {
-    display:block;
-}
-
-.desc {
-    /* text-align:left; */
-    float:left;
-    clear:right;
-    /* padding:0 0 0 1em; */
-}
-
-#MlPlayerDescription h4.artistName {
-    color: #004080;
-}
-
-#MlPlayerDescription .albumName {
-    background:#555;
-    margin: 0 0 .2em 0;
-    font-size:14pt;
-    text-align:center;
-    width:100%;
-    z-index:2;
-}
-
-#MlPlayerDescription h5 {
-    color: #004080;
 }
 
 #songMenu, #MlPlayerDescription form {

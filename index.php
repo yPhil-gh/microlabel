@@ -318,7 +318,7 @@ function xmlInfos($element) {
 <meta charset="UTF-8">
   <style type="text/css" media="screen">@import "css/player.css";</style>
     <style type="text/css" media="screen">@import "css/style.css";</style>
-    <link type='text/css' href='css/osx.css' rel='stylesheet' media='screen' />
+    <link type='text/css' href="css/jquery.simplemodal-osx.css" rel='stylesheet' media='screen' />
     <style type="text/css" media="screen">@import "css/colorbox.css";</style>
 
     <script src="libs/player.js"></script>
@@ -328,7 +328,7 @@ function xmlInfos($element) {
     <script src="libs/jquery.roundabout.js"></script>
 
     <script src="libs/jquery.simplemodal.js"></script>
-    <script src="libs/osx.js"></script>
+    <script src="libs/jquery.simplemodal-osx.js"></script>
 
     <!--[if lt IE 9]>
         <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
@@ -769,7 +769,7 @@ function index($dirList, $labelName) {
 
     echo '
     <body id="microlabel-index">
-        <div class="maincontent">
+        <div id="microlabel-index">
             <ul id="microlabel">
     ';
 
@@ -956,7 +956,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "d18afbc10bd5d576a8769bb6e4cbf76628ef1ef0
+        $ref_commit = "33976213b2bbab542cb6e2666f6dd167b68f5781
 ";
 
         $current_commit_minus1 = $commits['1']->sha;
