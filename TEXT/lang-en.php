@@ -20,6 +20,7 @@ define('TXT_BACK_TO_INDEX', 'Back to album list');
 define('TXT_ENGLISH', 'English');
 define('TXT_FRENCH', 'Français');
 define('TXT_SPANISH', 'Español');
+define('TXT_GERMAN', 'Deutsch');
 define('TXT_CLICKTOPLAY', 'play');
 define('TXT_PAUSE', 'pause');
 define('TXT_CLICKTOWATCH', 'Watch');

@@ -9,21 +9,27 @@ if ( ! defined( "PATH_SEPARATOR" ) ) {
 set_include_path("./TEXT:./libs/getid3");
 
 if (isset($_GET['lang'])) {
+    $timeFormula = "365*24*3600";
     if ($_GET['lang']=='en') {
         $lang = 'en';
         include('lang-en.php');
-        setcookie("lang", $lang, time() + 365*24*3600);
+        setcookie("lang", $lang, time() + $timeFormula);
         //    exit();
     }
     if ($_GET['lang']=='fr') {
         $lang = 'fr';
         include('lang-fr.php');
-        setcookie("lang", $lang, time() + 365*24*3600);
+        setcookie("lang", $lang, time() + $timeFormula);
+    }
+    if ($_GET['lang']=='de') {
+        $lang = 'de';
+        include('lang-de.php');
+        setcookie("lang", $lang, time() + $timeFormula);
     }
     if ($_GET['lang']=='es') {
         $lang = 'es';
         include('lang-es.php');
-        setcookie("lang", $lang, time() + 365*24*3600);
+        setcookie("lang", $lang, time() + $timeFormula);
     }
 }
 
@@ -231,7 +237,7 @@ global $HTTP_COOKIE_VARS;
 $browserPrefs = substr($httpVars,'0','2');
 $cookiePrefs = $HTTP_COOKIE_VARS['lang'];
 
-// $expire = 365*24*3600;
+// $expire = $timeFormula;
 
 if (isset($cookiePrefs)) {
     if ($cookiePrefs == 'en') {
@@ -1086,6 +1092,8 @@ function fixedFooter($dirList) {
          <img class="buttons" alt="'.TXT_ENGLISH.'" src="img/flags/uk.png" /></a>
        <a title="'.TXT_SPANISH.'" href="'.$script.'?a='.browse('current', 'nice').'&amp;lang=es">
          <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/es.png" /></a>
+       <a title="'.TXT_GERMAN.'" href="'.$script.'?a='.browse('current', 'nice').'&amp;lang=de">
+         <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/de.png" /></a>
        <a title="'.TXT_HELP.'" class="osx" href="#">
          <img id="helpButton" class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
      </div>
