@@ -836,6 +836,7 @@ table.album-description td {
     padding:0 .2em;
     width: 50%;
     text-align:left;
+    color:#ccc;
 }
 
 .visible_if_no_audio {

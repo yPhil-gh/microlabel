@@ -968,7 +968,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "33976213b2bbab542cb6e2666f6dd167b68f5781
+        $ref_commit = "02f0f4f3fde72beabb26b79b25124a008092f02c
 ";
 
         $current_commit_minus1 = $commits['1']->sha;
