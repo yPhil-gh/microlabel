@@ -8,19 +8,19 @@
     margin-bottom:10px;
 }
 
-#PagePlayerWrapper{
+#MlPlayerWrapper{
     margin-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
 }
 
-#PagePlayerList{
+#MlPlayerList{
     width:80%;
     float:left;
 }
 
-#PagePlayerList h3 {
+#MlPlayerList h3 {
     font-size:18pt;
     padding: 0 0 0 .2em;
     text-align:left;
@@ -28,7 +28,7 @@
     margin:0;
 }
 
-#PagePlayerDescription {
+#MlPlayerDescription {
     overflow:hidden;
     position:relative;
     float:right;
@@ -38,24 +38,24 @@
     padding:0;
 }
 
-#PagePlayerListDescWrapper {
+#MlPlayerListDescWrapper {
     clear:both;
 }
 
-.PagePlayerListItemSelected {
+.MlPlayerListItemSelected {
     text-shadow: 0 0 0.2em #fb0, 0 0 0.2em #fb0;
     color:#fff;
     background-color:#333;
     border:#FB0 1px solid;
 }
 
-.PagePlayerListItem {
+.MlPlayerListItem {
     color:#ccc;
     background-color:#555;
     height: 3em;
 }
 
-.PagePlayerListItem, .PagePlayerListItemSelected {
+.MlPlayerListItem, .MlPlayerListItemSelected {
     cursor:default;
     text-align:left;
     margin-bottom:.5em;
@@ -66,7 +66,7 @@
     -webkit-border-radius: 4px;
 }
 
-.PagePlayerListItem:hover {
+.MlPlayerListItem:hover {
     color:#fff;
     background-color:#888;
 }
@@ -167,16 +167,16 @@
     width:25px;
 }
 
-#PagePlayerList {
+#MlPlayerList {
     text-align:left;
 }
 
-/* #PagePlayerDescription, #albumBrowser { */
+/* #MlPlayerDescription, #albumBrowser { */
 /*     background-color: #000; */
 /*     opacity:0.5; */
 /*     filter:alpha(opacity=60); /\* For IE8 and earlier *\/ */
 /* } */
-/* #PagePlayerDescription .albumName { */
+/* #MlPlayerDescription .albumName { */
 /*     opacity:1; */
 /* } */
 

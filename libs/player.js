@@ -36,14 +36,14 @@ var opaque_div;
 
 var audio_element=null;
 var current_selected_list_item=null;
-var page_player_list_item_start = "PagePlayerListItem_";
+var page_player_list_item_start = "MlPlayerListItem_";
 //make an easy namer function
 function named(id)
 {
     return document.getElementById(id);
 }
 
-//try create the PagePlayer
+//try create the MlPlayer
 function MlPlayer( list )
 {
 
@@ -73,7 +73,7 @@ function MlPlayer( list )
             var ulist_parent = ulist.parentNode;
             //create a wrapper for the player components
             var wrapper = document.createElement("div");
-            wrapper.setAttribute("id","PagePlayerWrapper");
+            wrapper.setAttribute("id","MlPlayerWrapper");
 
             /* build the elements */
 
@@ -180,15 +180,15 @@ function MlPlayer( list )
             wrapper.appendChild(volume_control);
             //create a div to hold the list and info
             listDescWrapper = document.createElement("div");
-            listDescWrapper.setAttribute("id","PagePlayerListDescWrapper");
+            listDescWrapper.setAttribute("id","MlPlayerListDescWrapper");
             //append the lIW to the wrapper
             wrapper.appendChild(listDescWrapper);
             //create a div to hold the new list
             listdiv = document.createElement("div");
-            listdiv.setAttribute("id","PagePlayerList");
+            listdiv.setAttribute("id","MlPlayerList");
             //make an Desc for the list info
             description_div = document.createElement("div");
-            description_div.setAttribute("id","PagePlayerDescription");
+            description_div.setAttribute("id","MlPlayerDescription");
             //make an opaque div
             opaque_div = document.createElement("div");
             opaque_div.setAttribute("class","opaque");
@@ -210,7 +210,7 @@ function MlPlayer( list )
                 audio_info[i] = new Array();
                 //create a new div to hold this information
                 list_item = document.createElement("div");
-                list_item.setAttribute("class","PagePlayerListItem");
+                list_item.setAttribute("class","MlPlayerListItem");
                 list_item.setAttribute("id",page_player_list_item_start+i);
                 list_item.onclick=function(){listItemClicked( this.id );}
                 var title = "Unknown";
@@ -274,10 +274,10 @@ function MlPlayer( list )
 
     function MlPlayerSetDescriptionHeight()
     {
-	//determine the height of the PagePlayerList
-	var list= named("PagePlayerList");
+	//determine the height of the MlPlayerList
+	var list= named("MlPlayerList");
 	var height = list.offsetHeight;
-	named("PagePlayerDescription").style.height="250px";
+	named("MlPlayerDescription").style.height="250px";
     }
 
 
@@ -310,10 +310,10 @@ function MlPlayer( list )
 	var item = named(page_player_list_item_start+id);
 	if(current_selected_list_item!=null)
 	{
-            current_selected_list_item.setAttribute("class","PagePlayerListItem");
+            current_selected_list_item.setAttribute("class","MlPlayerListItem");
 	}
 	current_selected_list_item = item;
-	item.setAttribute("class","PagePlayerListItemSelected");
+	item.setAttribute("class","MlPlayerListItemSelected");
     }
 
     function playAudio() {
@@ -357,7 +357,7 @@ function MlPlayer( list )
     }
 
     function MlPlayerError( errorMessage ) {
-	alert ("PagePlayer Error:\n"+errorMessage);
+	alert ("MlPlayer Error:\n"+errorMessage);
     }
 
     songMenu_div = document.getElementById('songMenu');
@@ -486,7 +486,7 @@ function MlPlayer( list )
     function onMlPlayerLoad() {
 	if(has_audio)
 	{
-            //PagePlayerSetDescriptionHeight();
+            //MlPlayerSetDescriptionHeight();
             albuminfo = audio_info[0]["myAlbumInfo"];
             //albuminfo = "yowza";
             // alert("plop");

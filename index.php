@@ -634,7 +634,7 @@ function audioList($fileList, $albumPath) {
   }
 
   echo '
-        <ul id="PagePlayer">
+        <ul id="MlPlayer">
         ';
 
   ksort($trackTitles);
@@ -751,7 +751,7 @@ function audioList($fileList, $albumPath) {
           //set some PagePlaer variables
           audio_volume=0.85; //default is 0.7
 
-          MlPlayer("PagePlayer");
+          MlPlayer("MlPlayer");
           /*what happens when the page is loaded?
           please see the "body" tag
           */
