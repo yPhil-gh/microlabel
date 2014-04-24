@@ -719,7 +719,7 @@ function audioList($fileList, $albumPath) {
   $tweeters = xmlInfos('all_twitters');
 
   foreach ($tweeters as $tweeter) {
-      echo '<span class="dingbat">☺</span><a href="https://twitter.com/'.$tweeter.'">'.$tweeter.'</a> | ';
+      echo $tweeter.' <a href="https://twitter.com/'.$tweeter.'"><span class="dingbat">☺</span></a>;
   }
 // ⌨ ☺ ☠
 
