@@ -225,18 +225,16 @@ th.path {
     border:0;
 }
 
-#microlabel-tagger table td.directory, #microlabel-tagger table td.audiofile {
-    min-height:100px;
-}
-
-#microlabel-tagger table td.directory:before {
-    content: "▶ ";
+#microlabel-tagger table * {
+    vertical-align: middle;
 }
 
 #microlabel-tagger table td.audiofile:before {
-    content: "𝅘𝅥𝅮 ";
 }
 
+html body#microlabel-tagger.microlabel-body div#main table.microlabel-tagger tbody tr td.navigation form div.right:after {
+    content: " ◀";
+}
 
 /*
  * html body#microlabel-tagger.microlabel-body table.table tbody tr:nth-child(3) {
@@ -253,6 +251,54 @@ th.path {
     background: #333;
 }
 /* tables */
+
+
+/*  Define the background color for all the EVEN table columns  */
+/*
+ * #microlabel-tagger table tr td:nth-child(even), #microlabel-tagger table tr th:nth-child(even) {
+ *     background: #111;
+ * }
+ */
+
+#microlabel-tagger table tr:nth-last-child(-n+2) {
+    background-color:DarkSlateGray;
+}
+
+#microlabel-tagger table.table tr:nth-last-child(2) {
+    border-top: 1px solid #fb0;
+}
+
+html body#microlabel-tagger.microlabel-body div#main table.microlabel-tagger tbody tr td {
+    border-left: 1px solid #fb0;
+}
+
+html body#microlabel-tagger.microlabel-body div#main table.microlabel-tagger tbody tr td table.small-table tbody tr {
+    border: 1px solid #222;
+}
+
+html body#microlabel-tagger.microlabel-body div#main table.microlabel-tagger tbody tr th {
+    border-left: 1px solid #fb0;
+}
+
+html body#microlabel-tagger.microlabel-body div#main table.microlabel-tagger tbody tr td table#small-table tbody tr * {
+    border: 0 solid red;
+}
+
+html body#microlabel-tagger.microlabel-body div#main table.microlabel-tagger tbody tr td.navigation {
+    border-bottom: 1px solid #fb0;
+    border-top: 1px solid #fb0;
+}
+
+#small-table {
+    width:100%;
+    /* border-collapse:collapse; */
+    /* background-color:#ccc; */
+}
+
+#small-table * {
+    border-left: 2px solid red;
+}
+
 
 table.list tbody tr:hover {
     background-color:#2F4F4F;
@@ -542,4 +588,8 @@ div.right {
     margin:.5em;
     display:inline;
     float:right;
+}
+
+.directory * {
+    vertical-align: middle;
 }

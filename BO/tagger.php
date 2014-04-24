@@ -119,7 +119,7 @@ if (isset($_REQUEST['filename'])) {
 	}
 
 	if (strstr($_REQUEST['filename'], 'http://') || strstr($_REQUEST['filename'], 'ftp://')) {
-		echo '<i>Cannot browse remote filesystems</i><br/>';
+		echo '<em>Cannot browse remote filesystems</em><br/>';
 	} else {
 		echo 'Browse: <a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($listdirectory), ENT_QUOTES).'">'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $listdirectory).'</a><br/>';
 	}
@@ -285,10 +285,10 @@ if (isset($_REQUEST['filename'])) {
 							echo htmlentities(realpath($dirname.$filename), ENT_QUOTES);
 						}
 						echo '">
-<div class="right">'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir);
-						echo '</div></form></td>';
+<div class="right click"><span>'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir);
+						echo '</span></div></form></td>';
 					} else {
-						echo '<td class="directory" colspan="'.$columnsintable.'"><span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
+						echo '<td class="directory" colspan="'.$columnsintable.'"><img src="../img/folder.png"/> <span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
 
 </td>';
 					}
@@ -302,7 +302,7 @@ if (isset($_REQUEST['filename'])) {
 				foreach ($DirectoryContents[$dirname]['known'] as $filename => $fileinfo) {
 
 					echo '<tr>';
-					echo '<td class="audiofile"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?filename='.urlencode($dirname.$filename), ENT_QUOTES).'" title="View detailed analysis">'.htmlentities($filename).'</a></td>';
+					echo '<td class="audiofile"><img src="../img/audio-volume-high.png"/> <a href="'.htmlentities($_SERVER['PHP_SELF'].'?filename='.urlencode($dirname.$filename), ENT_QUOTES).'" title="View detailed analysis">'.htmlentities($filename).'</a></td>';
 					echo '<td class="right">'.number_format($fileinfo['filesize']).'</td>';
 					echo '<td class="right">'.NiceDisplayFiletypeFormat($fileinfo).'</td>';
 					echo '<td class="right">'.(isset($fileinfo['playtime_string']) ? $fileinfo['playtime_string'] : '-').'</td>';
@@ -358,7 +358,7 @@ if (isset($_REQUEST['filename'])) {
 				uksort($DirectoryContents[$dirname]['other'], 'MoreNaturalSort');
 				foreach ($DirectoryContents[$dirname]['other'] as $filename => $fileinfo) {
 					echo '<tr>';
-					echo '<td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?filename='.urlencode($dirname.$filename), ENT_QUOTES).'"><i>'.htmlentities($filename).'</i></a></td>';
+					echo '<td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?filename='.urlencode($dirname.$filename), ENT_QUOTES).'"><em>'.htmlentities($filename).'</em></a></td>';
 					echo '<td class="right">'.(isset($fileinfo['filesize']) ? number_format($fileinfo['filesize']) : '-').'</td>';
 					echo '<td class="right">'.NiceDisplayFiletypeFormat($fileinfo).'</td>';
 					echo '<td class="right">'.(isset($fileinfo['playtime_string']) ? $fileinfo['playtime_string'] : '-').'</td>';
@@ -394,7 +394,7 @@ if (isset($_REQUEST['filename'])) {
 			echo '<td>&nbsp;</td>';
 			echo '<td class="right">'.getid3_lib::PlaytimeString($TotalScannedPlaytime / max($TotalScannedPlaytimeFiles, 1)).'</td>';
 			echo '<td class="right">'.BitrateText(round(($TotalScannedBitrate / 1000) / max($TotalScannedBitrateFiles, 1))).'</td>';
-			echo '<td rowspan="2" colspan="'.($columnsintable - 5).'"><table class="table"><tr><th class="right">Identified Files:</th><td class="right">'.number_format($TotalScannedKnownFiles).'</td><td>&nbsp;&nbsp;&nbsp;</td><th class="right">Errors:</th><td class="right">'.number_format($FilesWithErrors).'</td></tr><tr><th class="right">Unknown Files:</th><td class="right">'.number_format($TotalScannedUnknownFiles).'</td><td>&nbsp;&nbsp;&nbsp;</td><th class="right">Warnings:</th><td class="right">'.number_format($FilesWithWarnings).'</td></tr></table>';
+			echo '<td rowspan="2" colspan="'.($columnsintable - 5).'"><table id="small-table"><tr><th class="right">Identified Files:</th><td class="right">'.number_format($TotalScannedKnownFiles).'</td><td>&nbsp;&nbsp;&nbsp;</td><th class="right">Errors:</th><td class="right">'.number_format($FilesWithErrors).'</td></tr><tr><th class="right">Unknown Files:</th><td class="right">'.number_format($TotalScannedUnknownFiles).'</td><td>&nbsp;&nbsp;&nbsp;</td><th class="right">Warnings:</th><td class="right">'.number_format($FilesWithWarnings).'</td></tr></table>';
 			echo '</tr>';
 			echo '<tr>';
 			echo '<td>Total:</td>';

@@ -121,12 +121,11 @@ if (isset($_POST['WriteTags'])) {
 }
 
 
-echo '<a href="'.htmlentities($browsescriptfilename.'?listdirectory='.rawurlencode(realpath(dirname($Filename))), ENT_QUOTES).'">Browse current directory</a><br>';
+echo '<div class="microlabel-message"><a href="'.htmlentities($browsescriptfilename.'?listdirectory='.rawurlencode(realpath(dirname($Filename))), ENT_QUOTES).'">Browse current directory</a> | ';
 if (!empty($Filename)) {
-	echo '<a href="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'">Start Over</a><br><br>';
-	echo '<form action="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'" method="post" enctype="multipart/form-data">';
-	echo '<table>';
-	echo '<tr class="microlabel-table"><th>Filename:</th><td><input type="hidden" name="Filename" value="'.htmlentities($Filename, ENT_QUOTES).'"><a href="'.htmlentities($browsescriptfilename.'?filename='.rawurlencode($Filename), ENT_QUOTES).'" target="_blank">'.$Filename.'</a></td></tr>';
+	echo '<a href="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'">Start Over</a><form action="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'" method="post" enctype="multipart/form-data"></div>
+<table class="table">
+<tr class="microlabel-table"><th>Filename:</th><td><input type="hidden" name="Filename" value="'.htmlentities($Filename, ENT_QUOTES).'"><a href="'.htmlentities($browsescriptfilename.'?filename='.rawurlencode($Filename), ENT_QUOTES).'" target="_blank">'.$Filename.'</a></td></tr>';
 	if (file_exists($Filename)) {
 
 		// Initialize getID3 engine
