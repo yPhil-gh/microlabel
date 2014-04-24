@@ -95,11 +95,6 @@ if (isset($_REQUEST['filename'])) {
 		die(getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $_REQUEST['filename'].' does not exist'));
 	}
 	$starttime = microtime(true);
-
-	//$getID3->setOption(array(
-	//	'option_md5_data'  => $AutoGetHashes,
-	//	'option_sha1_data' => $AutoGetHashes,
-	//));
 	$ThisFileInfo = $getID3->analyze($_REQUEST['filename']);
 	$AutoGetHashes = (bool) (isset($ThisFileInfo['filesize']) && ($ThisFileInfo['filesize'] > 0) && ($ThisFileInfo['filesize'] < (50 * 1048576))); // auto-get md5_data, md5_file, sha1_data, sha1_file if filesize < 50MB, and NOT zero (which may indicate a file>2GB)
 	if ($AutoGetHashes) {
@@ -638,7 +633,7 @@ function microlabelBrowser() {
     <div class="right" style="position: relative; z-index: 2;">
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
-        <a href="."><img style="width:60px" class="rollover" src="../img/beldigital_logo_off.png" alt="beldigital_logo_on.png" /></a>
+        <a href="../"><img style="width:60px" class="rollover" src="../img/beldigital_logo_off.png" alt="beldigital_logo_on.png" /></a>
     </div>
 </div>
 <p id="footBr">&nbsp;</p>

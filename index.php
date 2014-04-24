@@ -1009,7 +1009,7 @@ function fixedFooter($dirList) {
        '.TXT_DEBUG_HELP_TXT.'
 
 <span id="version" onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'">
-    <span class="'.vc("class").'">♼</span>
+    <a href="https://github.com/xaccrocheur/microlabel">Microlabel</a> <span class="'.vc("class").'">♼</span>
 </span>
 
 
