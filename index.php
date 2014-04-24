@@ -719,7 +719,7 @@ function audioList($fileList, $albumPath) {
   $tweeters = xmlInfos('all_twitters');
 
   foreach ($tweeters as $tweeter) {
-      echo $tweeter.' <a href="https://twitter.com/'.$tweeter.'"><span class="dingbat">☺</span></a>';
+      echo $tweeter.' <a title="Twitter account of '.$tweeter.'" href="https://twitter.com/'.$tweeter.'"><span class="dingbat">☺</span></a>';
   }
 // ⌨ ☺ ☠
 
@@ -970,7 +970,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "4563b0fc98a20b1865390c3f5a6999424c2cb178
+        $ref_commit = "29d05ad63de2ded8c97d5075403a1afcd80c5edf
 ";
 
         $current_commit_minus1 = $commits['1']->sha;

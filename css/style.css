@@ -597,3 +597,7 @@ div.tagger-path:after {
 .directory * {
     vertical-align: middle;
 }
+
+.dingbat {
+    font-size:150%;
+}
