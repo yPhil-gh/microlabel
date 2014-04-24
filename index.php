@@ -784,7 +784,7 @@ function index($dirList, $labelName) {
 
     echo '
     <body id="microlabel-index" class="microlabel-body">
-        <div id="microlabel-index">
+        <div class="microlabel-index">
             <ul id="microlabel">
     ';
 
@@ -970,7 +970,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "12a747a9ac3006bccb9cb93022d108b70bc3ba87";
+        $ref_commit = "ddca770144ab97ca23efc50616866744e6611100";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
