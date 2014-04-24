@@ -280,7 +280,7 @@ if (isset($_REQUEST['filename'])) {
 							echo htmlentities(realpath($dirname.$filename), ENT_QUOTES);
 						}
 						echo '">
-<div class="right click"><span>'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir);
+<div class="tagger-path"><span>'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir);
 						echo '</span></div></form></td>';
 					} else {
 						echo '<td class="directory" colspan="'.$columnsintable.'"><img src="../img/icon_folder.png"/> <span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>

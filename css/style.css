@@ -232,10 +232,6 @@ th.path {
 #microlabel-tagger table td.audiofile:before {
 }
 
-html body#microlabel-tagger.microlabel-body div#main table.microlabel-tagger tbody tr td.navigation form div.right:after {
-    content: " ◀";
-}
-
 /*
  * html body#microlabel-tagger.microlabel-body table.table tbody tr:nth-child(3) {
  *     font-size:100%;
@@ -583,6 +579,17 @@ a:link {
     float: left;
     font-size: 8pt;
     font-face: sans-serif;
+}
+
+div.tagger-path {
+    margin:.5em;
+    display:inline;
+    float:right;
+}
+
+
+div.tagger-path:after {
+    content: " ◀";
 }
 
 .directory * {
