@@ -21,10 +21,11 @@ header('Content-Type: text/html; charset='.$TaggingFormat);
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>getID3() - Sample tag writer</title></head>
-<style type="text/css" media="screen">@import "../css/style.css";</style>
-<body id="microlabel-tagger" class="microlabel-body">';
-
+    <title>Microlabel - Tag writer</title>
+    <style type="text/css" media="screen">@import "../css/style.css";</style>
+    <body id="microlabel-tagger" class="microlabel-body">
+<div id="main">
+';
 require_once('../libs/getid3/getid3.php');
 // Initialize getID3 engine
 $getID3 = new getID3;
@@ -116,12 +117,10 @@ if (isset($_POST['WriteTags'])) {
 		echo 'WARNING: no tag formats selected for writing - nothing written';
 
 	}
-	echo '<HR>';
-
+	echo '<hr>';
 }
 
 
-echo '<div>Sample tag editor/writer</div>';
 echo '<a href="'.htmlentities($browsescriptfilename.'?listdirectory='.rawurlencode(realpath(dirname($Filename))), ENT_QUOTES).'">Browse current directory</a><br>';
 if (!empty($Filename)) {
 	echo '<a href="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'">Start Over</a><br><br>';
@@ -264,8 +263,10 @@ if (!empty($Filename)) {
 		echo '<tr><td>Error</td><td>'.htmlentities($Filename).' does not exist</td></tr>';
 
 	}
-	echo '</table>';
-	echo '</form>';
+	echo '
+          </div>
+          </table>
+          </form>';
 
 }
 

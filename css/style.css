@@ -2,6 +2,14 @@
     text-align:left;
 }
 
+html {
+    background: #000528;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
 img {
     border: 0;
 }
@@ -15,16 +23,17 @@ p#footBr {
     height:3em;
 }
 
-html {
-    background: #000528;
+a:link {
+    color:#ccc;
+    text-decoration:none;
 }
 
-body {
-    font-family: Helvetica, Arial, sans-serif;
+a:hover {
+    color:#FFBB00;
 }
 
-body#microlabel-index {
-    text-align:center;
+a:visited {
+    color:#ccc;
 }
 
 div#microlabel-index {
@@ -64,24 +73,6 @@ img.buttons {
 .iconClose:hover {
     background: #f00;
     background: #f00 url(img/button_close_on.png) no-repeat 100% 100%;
-}
-
-a:link {
-    color:#ccc;
-}
-
-a:visited {
-    color:#ccc;
-}
-
-a:hover {
-    color:#FFBB00;
-    text-decoration:none;
-}
-
-a:active {
-    color:#fff;
-    text-decoration:none;
 }
 
 /*Classe de tous les divs principaux*/
@@ -188,23 +179,45 @@ p#trackComment {
 }
 
 /* microlabel-tagger */
-/* Tagger */
 #microlabel-tagger, #microlabel-tagger a:link, #microlabel-tagger a:visited {
     font-color:#000;
 }
 
-#microlabel-tagger table {
+.microlabel-message {
+    color:#ccc;
+    font-size:75%;
+}
+
+.input {
+    display:none;
+}
+
+#microlabel-tagger table.table {
     width:100%;
     border: 1px solid #FFBB00;
     border-collapse:collapse;
 }
 
-#microlabel-tagger table th, #microlabel-tagger table td {
-    font-family: “Trebuchet MS”, Verdana, Arial, Helvetica, sans-serif;
-    border-right: 1px solid #FFBB00;
+#microlabel-tagger table.table th:not(.path), #microlabel-tagger table.table td {
     font-weight:bolder;
     font-size:75%;
-    padding:.2em;
+    /* padding:.2em; */
+}
+
+th.path {
+    font-size:110%;
+    text-align:right;
+    padding:0 1em 0 0;
+}
+
+#microlabel-tagger table.table td {
+    border-right: 1px solid #FFBB00;
+}
+
+#microlabel-tagger table.navigation {
+    width:100%;
+    border-collapse:collapse;
+    border:0;
 }
 
 #microlabel-tagger table td.directory, #microlabel-tagger table td.audiofile {
@@ -407,11 +420,6 @@ div#osx-modal-data a {
     position: relative;
 }
 
-.leftSpan {
-    /* float:left; */
-    /* display:inline-block; */
-}
-
 form.urlFields input {
     width:90%;
     border:#FB0 1px solid;
@@ -421,9 +429,6 @@ form.urlFields input {
     text-decoration:bolder;
     background:default;
 }
-
-/* Tweets */
-
 
 /* Version Checking */
 #version {

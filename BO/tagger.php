@@ -126,7 +126,9 @@ if (isset($_REQUEST['filename'])) {
 
 		ob_end_clean();
 		echo str_repeat(' ', 300); // IE buffers the first 300 or so chars, making this progressive display useless - fill the buffer with spaces
-		echo 'Processing';
+		echo '
+        <div id="main">
+        <div class="microlabel-message">Processing';
 
 		$starttime = microtime(true);
 
@@ -214,14 +216,15 @@ if (isset($_REQUEST['filename'])) {
 		}
 		$endtime = microtime(true);
 		closedir($handle);
-		echo 'done<br/>';
-		echo 'Directory scanned in '.number_format($endtime - $starttime, 2).' seconds.<br/>';
+		echo ' Done - Directory scanned in '.number_format($endtime - $starttime, 2).' seconds.<br/>
+        </div>
+        ';
 		flush();
 
 		$columnsintable = 14;
-		echo '<table class="table">';
 
-		echo '<tr><th colspan="'.$columnsintable.'">Files in '.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir).'</th></tr>';
+		echo '<table class="microlabel-tagger table">';
+
 		$rowcounter = 0;
 		foreach ($DirectoryContents as $dirname => $val) {
 			if (isset($DirectoryContents[$dirname]['dir']) && is_array($DirectoryContents[$dirname]['dir'])) {
@@ -229,17 +232,16 @@ if (isset($_REQUEST['filename'])) {
 				foreach ($DirectoryContents[$dirname]['dir'] as $filename => $fileinfo) {
 					echo '<tr>';
 					if ($filename == '..') {
-						echo '<td colspan="'.$columnsintable.'">';
-						echo '<form action="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'" method="get">';
-						echo 'Parent directory: ';
-						echo '<input type="text" name="listdirectory" size="50" value="';
-						if (GETID3_OS_ISWINDOWS) {
-							echo htmlentities(str_replace('\\', '/', realpath($dirname.$filename)), ENT_QUOTES);
-						} else {
-							echo htmlentities(realpath($dirname.$filename), ENT_QUOTES);
-						}
-						echo '"> <input type="submit" value="▲ Up">';
-						echo '</form></td>';
+						echo '<td colspan="'.$columnsintable.'">
+<form action="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'" method="get">';
+echo '
+<input class="input" type="text" name="listdirectory" size="50" value="">
+<table class="navigation">
+<tr>
+<th><input type="submit" value="▲ Up"></td><th class="path">'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir).'</td>
+</tr>
+</table>
+</form></td>';
 					} else {
 						echo '<td class="directory" colspan="'.$columnsintable.'"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></td>';
 					}
@@ -257,15 +259,15 @@ if (isset($_REQUEST['filename'])) {
             <th>Artist</th>
             <th>Title</th>';
 			if (isset($_REQUEST['ShowMD5'])) {
-				echo '<th>MD5&nbsp;File (File) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">disable</a>)</th>';
-				echo '<th>MD5&nbsp;Data (File) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">disable</a>)</th>';
-				echo '<th>MD5&nbsp;Data (Source) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">disable</a>)</th>';
+				echo '<th>MD5 (File) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">on</a>)</th>';
+				echo '<th>MD5 (File) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">on</a>)</th>';
+				echo '<th>MD5 (Source) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">on</a>)</th>';
 			} else {
-				echo '<th colspan="3">MD5&nbsp;Data (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'&ShowMD5=1', ENT_QUOTES).'">enable</a>)</th>';
+				echo '<th colspan="3">MD5&nbsp;<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'&ShowMD5=1', ENT_QUOTES).'">off</a></th>';
 			}
 			echo '
             <th>Tags</th>
-            <th>Errors &amp; Warnings</th>
+            <th>Errors</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>';
@@ -435,7 +437,7 @@ function BitrateColor($bitrate, $BitrateMaxScale=768) {
 }
 
 function BitrateText($bitrate, $decimals=0, $vbr=false) {
-	return '<span style="color: #'.BitrateColor($bitrate).($vbr ? '; font-weight: bold;' : '').'">'.number_format($bitrate, $decimals).' kbps</span>';
+	return '<span style="color: #'.BitrateColor($bitrate).($vbr ? '; font-weight: bold;' : '').'">'.number_format($bitrate, $decimals).' k</span>';
 }
 
 function string_var_dump($variable) {
@@ -512,7 +514,10 @@ function table_var_dump($variable, $wrap_in_td=false, $encoding='ISO-8859-1') {
 				$returnstring .= '<tr><td>type</td><td>'.getid3_lib::ImageTypesLookup($imagechunkcheck[2]).'</td></tr>';
 				$returnstring .= '<tr><td>width</td><td>'.number_format($imagechunkcheck[0]).' px</td></tr>';
 				$returnstring .= '<tr><td>height</td><td>'.number_format($imagechunkcheck[1]).' px</td></tr>';
-				$returnstring .= '<tr><td>size</td><td>'.number_format(strlen($variable)).' bytes</td></tr></table>';
+				$returnstring .= '<tr><td>size</td><td>'.number_format(strlen($variable)).' bytes</td></tr>
+                </table>
+                </div>
+';
 				$returnstring .= ($wrap_in_td ? '</td>' : '');
 			} else {
 				$returnstring .= ($wrap_in_td ? '<td>' : '').nl2br(htmlspecialchars(str_replace("\x00", ' ', $variable))).($wrap_in_td ? '</td>' : '');
