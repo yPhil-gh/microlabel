@@ -48,8 +48,28 @@ echo '<!doctype html>
 <head>
     <title>Microlabel - Tagger</title>
 <style type="text/css" media="screen">@import "../css/style.css";</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../libs/jquery.expandable.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+$("input.input").expandable({
+	    		width: 500,
+	    		duration: 300,
+	    		action: function(val){
+	    			alert(val);
+	    		}
+	    	});
+
+});
+
+    </script>
+
 </head>
-<body id="microlabel-tagger" class="microlabel-body">';
+<body id="microlabel-tagger" class="microlabel-body">
+';
+
 
 if (isset($_REQUEST['deletefile'])) {
 	if (file_exists($_REQUEST['deletefile'])) {
@@ -223,33 +243,8 @@ if (isset($_REQUEST['filename'])) {
 
 		$columnsintable = 14;
 
-		echo '<table class="microlabel-tagger table">';
+		echo '<table class="microlabel-tagger table">
 
-		$rowcounter = 0;
-		foreach ($DirectoryContents as $dirname => $val) {
-			if (isset($DirectoryContents[$dirname]['dir']) && is_array($DirectoryContents[$dirname]['dir'])) {
-				uksort($DirectoryContents[$dirname]['dir'], 'MoreNaturalSort');
-				foreach ($DirectoryContents[$dirname]['dir'] as $filename => $fileinfo) {
-					echo '<tr>';
-					if ($filename == '..') {
-						echo '<td colspan="'.$columnsintable.'">
-<form action="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'" method="get">';
-echo '
-<input class="input" type="text" name="listdirectory" size="50" value="">
-<table class="navigation">
-<tr>
-<th><input type="submit" value="▲ Up"></td><th class="path">'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir).'</td>
-</tr>
-</table>
-</form></td>';
-					} else {
-						echo '<td class="directory" colspan="'.$columnsintable.'"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></td>';
-					}
-					echo '</tr>';
-				}
-			}
-
-			echo '
         <tr>
             <th>Filename</th>
             <th>File Size</th>
@@ -263,14 +258,44 @@ echo '
 				echo '<th>MD5 (File) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">on</a>)</th>';
 				echo '<th>MD5 (Source) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">on</a>)</th>';
 			} else {
-				echo '<th colspan="3">MD5&nbsp;<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'&ShowMD5=1', ENT_QUOTES).'">off</a></th>';
+				echo '<th colspan="3">MD5&nbsp<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'&ShowMD5=1', ENT_QUOTES).'">off</a></th>';
 			}
 			echo '
             <th>Tags</th>
             <th>Errors</th>
             <th>Edit</th>
             <th>Delete</th>
-        </tr>';
+        </tr>
+';
+
+		$rowcounter = 0;
+		foreach ($DirectoryContents as $dirname => $val) {
+			if (isset($DirectoryContents[$dirname]['dir']) && is_array($DirectoryContents[$dirname]['dir'])) {
+				uksort($DirectoryContents[$dirname]['dir'], 'MoreNaturalSort');
+				foreach ($DirectoryContents[$dirname]['dir'] as $filename => $fileinfo) {
+					echo '<tr>';
+					if ($filename == '..') {
+						echo '<td class="navigation" colspan="'.$columnsintable.'">
+<form action="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'" method="get">
+<img src="../img/folder.png"/>
+<input type="submit" value="▲ Up"/><input class="input" style="width:50px;" type="text" name="listdirectory" value="';
+						if (GETID3_OS_ISWINDOWS) {
+							echo htmlentities(str_replace('\\', '/', realpath($dirname.$filename)), ENT_QUOTES);
+						} else {
+							echo htmlentities(realpath($dirname.$filename), ENT_QUOTES);
+						}
+						echo '">
+<div class="right">'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir);
+						echo '</div></form></td>';
+					} else {
+						echo '<td class="directory" colspan="'.$columnsintable.'"><span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
+
+</td>';
+					}
+					echo '</tr>';
+				}
+
+			}
 
 			if (isset($DirectoryContents[$dirname]['known']) && is_array($DirectoryContents[$dirname]['known'])) {
 				uksort($DirectoryContents[$dirname]['known'], 'MoreNaturalSort');

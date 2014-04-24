@@ -188,9 +188,11 @@ p#trackComment {
     font-size:75%;
 }
 
-.input {
-    display:none;
-}
+/*
+ * .input {
+ *     display:none;
+ * }
+ */
 
 #microlabel-tagger table.table {
     width:100%;
@@ -204,13 +206,16 @@ p#trackComment {
     /* padding:.2em; */
 }
 
-th.path {
-    font-size:110%;
-    text-align:right;
-    padding:0 1em 0 0;
+td.navigation * {
+    vertical-align: middle;
 }
 
-#microlabel-tagger table.table td {
+th.path {
+    text-align:right;
+    padding:1em;
+}
+
+#microlabel-tagger table.table > td {
     border-right: 1px solid #FFBB00;
 }
 
@@ -233,12 +238,14 @@ th.path {
 }
 
 
-html body#microlabel-tagger.microlabel-body table.table tbody tr:nth-child(3) {
-    font-size:100%;
-    border-bottom: 1px solid #FFBB00;
-    color:#ccc;
-    background-color:#111;
-}
+/*
+ * html body#microlabel-tagger.microlabel-body table.table tbody tr:nth-child(3) {
+ *     font-size:100%;
+ *     border-bottom: 1px solid #FFBB00;
+ *     color:#ccc;
+ *     background-color:#111;
+ * }
+ */
 
 /* :last-child */
 
@@ -529,4 +536,10 @@ a:link {
     float: left;
     font-size: 8pt;
     font-face: sans-serif;
+}
+
+div.right {
+    margin:.5em;
+    display:inline;
+    float:right;
 }
