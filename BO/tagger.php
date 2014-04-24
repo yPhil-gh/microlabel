@@ -277,7 +277,7 @@ if (isset($_REQUEST['filename'])) {
 					if ($filename == '..') {
 						echo '<td class="navigation" colspan="'.$columnsintable.'">
 <form action="'.htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES).'" method="get">
-<img src="../img/folder.png"/>
+<img src="../img/icon_folder.png"/>
 <input type="submit" value="▲ Up"/><input class="input" style="width:50px;" type="text" name="listdirectory" value="';
 						if (GETID3_OS_ISWINDOWS) {
 							echo htmlentities(str_replace('\\', '/', realpath($dirname.$filename)), ENT_QUOTES);
@@ -288,7 +288,7 @@ if (isset($_REQUEST['filename'])) {
 <div class="right click"><span>'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir);
 						echo '</span></div></form></td>';
 					} else {
-						echo '<td class="directory" colspan="'.$columnsintable.'"><img src="../img/folder.png"/> <span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
+						echo '<td class="directory" colspan="'.$columnsintable.'"><img src="../img/icon_folder.png"/> <span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
 
 </td>';
 					}
@@ -302,7 +302,7 @@ if (isset($_REQUEST['filename'])) {
 				foreach ($DirectoryContents[$dirname]['known'] as $filename => $fileinfo) {
 
 					echo '<tr>';
-					echo '<td class="audiofile"><img src="../img/audio-volume-high.png"/> <a href="'.htmlentities($_SERVER['PHP_SELF'].'?filename='.urlencode($dirname.$filename), ENT_QUOTES).'" title="View detailed analysis">'.htmlentities($filename).'</a></td>';
+					echo '<td class="audiofile"><img src="../img/icon_audiofile.png"/> <a href="'.htmlentities($_SERVER['PHP_SELF'].'?filename='.urlencode($dirname.$filename), ENT_QUOTES).'" title="View detailed analysis">'.htmlentities($filename).'</a></td>';
 					echo '<td class="right">'.number_format($fileinfo['filesize']).'</td>';
 					echo '<td class="right">'.NiceDisplayFiletypeFormat($fileinfo).'</td>';
 					echo '<td class="right">'.(isset($fileinfo['playtime_string']) ? $fileinfo['playtime_string'] : '-').'</td>';
