@@ -261,7 +261,7 @@ html body#microlabel-tagger.microlabel-body div#main table.microlabel-tagger tbo
  */
 
 #microlabel-tagger table tr:nth-last-child(-n+2) {
-    background-color:DarkSlateGray;
+    background-color:#000;
 }
 
 #microlabel-tagger table.table tr:nth-last-child(2) {
