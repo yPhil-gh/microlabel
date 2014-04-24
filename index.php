@@ -324,8 +324,10 @@ function xmlInfos($element) {
     <script src="libs/player.js"></script>
 
     <script src="libs/jquery-1.5.1.min.js"></script>
+    <script src="libs/jquery.easing.1.3.js"></script>
     <script src="libs/jquery.colorbox-min.js"></script>
     <script src="libs/jquery.roundabout.js"></script>
+    <script src="libs/jquery.roundabout-shapes.js"></script>
 
     <script src="libs/jquery.simplemodal.js"></script>
     <script src="libs/jquery.simplemodal-osx.js"></script>
@@ -410,8 +412,11 @@ $(document).ready(function() {
     }
     setInterval(pulse, 5000);
 
-    // alert("plop");
-    $("ul#microlabel").roundabout();
+    $('ul#microlabel').roundabout({
+	duration: 500,
+        easing: 'easeOutQuint',
+        shape: 'tearDrop'
+    });
 
     onMlPlayerLoad();
 
@@ -421,8 +426,6 @@ $(document).ready(function() {
 	plop = songToPlay;
 	playAudio();
     }
-
-
 });
 
 
@@ -447,7 +450,6 @@ $(document).keydown(function(e){
 <link rel="shortcut icon" href="img/beldigital_logo_on.png" />
 
   <?php
-
 
   $dirList = getInfo($rootMusicDir, 'musicDirs');
 
@@ -945,7 +947,7 @@ function albumBrowser($labelName) {
         <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse('next', 'nice').'" /></a>
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
-        <a title="'.$labelName.', '.TXT_BASELINE.'" href="'.$_SERVER['PHP_SELF'].'"><img style="width:60px" class="rollover" src="img/beldigital_logo_off.png" alt="beldigital_logo_on.png" /></a>
+        <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img style="width:60px" class="rollover" src="img/beldigital_logo_off.png" alt="beldigital_logo_on.png" /></a>
     </div>
 </div>
 <p id="footBr">&nbsp;</p>
