@@ -200,6 +200,12 @@ p#trackComment {
     border-collapse:collapse;
 }
 
+
+#microlabel-tagger table.table td {
+    padding:0 .3em;
+}
+
+
 #microlabel-tagger table.table th:not(.path), #microlabel-tagger table.table td {
     font-weight:bolder;
     font-size:75%;
