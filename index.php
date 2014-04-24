@@ -758,7 +758,7 @@ if (!empty($videos_objects)) {
         echo '
 <a class="youtube" href="http://youtube.com/embed/'.$videoID.'" title="'.$videoName.'">
 <div class="MlPlayerListItem MlPlayerVideoItem">'.$videoName.'
-<img class="video_thumbnail" src="http://img.youtube.com/vi/'.$videoID.'/2.jpg" />
+<img class="video_thumbnail" alt="Video : '.$videoName.'" src="http://img.youtube.com/vi/'.$videoID.'/2.jpg" />
 </div>
 </a>
 ';
@@ -970,8 +970,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "29d05ad63de2ded8c97d5075403a1afcd80c5edf
-";
+        $ref_commit = "12a747a9ac3006bccb9cb93022d108b70bc3ba87";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
