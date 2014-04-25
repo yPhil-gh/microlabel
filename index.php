@@ -1124,12 +1124,15 @@ $directoryToScan = $meanPath;
 $directoryToScan = trim($directoryToScan, $slash);
 $fileList = getInfo($directoryToScan, 'musicFiles');
 
+    echo "damned";
+    die('aaarg');
+
+
 // Main block
 if (!isset($_GET['a'])) {
     index($dirList, $labelName);
 } else {
-    echo "damned";
-    die('aaarg');
+
     $thereIsMusic = index($dirList, $labelName, 'ask');
     if (!$thereIsMusic) {
         echo "damned";
