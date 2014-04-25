@@ -835,13 +835,12 @@ function index($dirList, $labelName) {
     ';
 
     if ($numberOfAlbums < 1) {
-
-echo '
+        echo '
 		<div id="horizon">
 			<div id="error">
 			<img src="img/instruments/horns.png"/>
 				<h1 id="error">Uh-ho</h1>
-                Something quite wrong happenned. I think you just deleted your Music directory :(
+                Something quite wrong just happenned. I think you deleted your Music directory :(
 			</div>
 		</div>
 ';
@@ -850,7 +849,7 @@ echo '
         echo '
             <ul id="microlabel">
 ';
-}
+    }
 
     foreach ($dirList as $key => $albumPath) {
         $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
@@ -880,7 +879,7 @@ echo '
     }
 
     if ($numberOfAlbums > 1) {
-    echo '
+        echo '
             </ul>
 ';
     }
