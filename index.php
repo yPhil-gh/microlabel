@@ -776,7 +776,7 @@ function audioList($fileList, $albumPath) {
               }
           }
           if ($key == 'twitter') {
-              $thisContacts = '<a href="http://twitter.com/'.$value.'"><img class="instrument" title="Twitter account of '.$zicos['name'].'" title="Twitter account of '.$zicos['name'].'" src="img/contacts/twitter.png"></a>';
+              $thisContacts = '<a href="http://twitter.com/'.$value.'"><img class="instrument" title="Twitter account of '.$zicos['name'].'" src="img/contacts/twitter.png"></a>';
           }
           if ($key == 'email') {
                   $hash = md5(strtolower(trim($value)));
@@ -1049,7 +1049,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "85ac3d46e5d31e8d6aeac267ab3c5680ba0f5f10";
+        $ref_commit = "dfd1d0a5736f5bfa565eb5d4a1b125ef8d24fe0d";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
