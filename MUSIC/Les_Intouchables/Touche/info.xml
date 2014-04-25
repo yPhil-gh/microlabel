@@ -5,7 +5,13 @@
     <twitter>bob10bal</twitter>
   </musicien>
   <musicien name="Philippe">
+    <instrument>leadvocal</instrument>
+    <instrument>vocal</instrument>
     <instrument>guitar</instrument>
+    <instrument>bass</instrument>
+    <instrument>other</instrument>
+    <instrument>drums</instrument>
     <twitter>xaccrocheur</twitter>
+    <email>xaccrocheur@gmail.com</email>
   </musicien>
 </microlabel>

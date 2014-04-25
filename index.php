@@ -770,6 +770,9 @@ function audioList($fileList, $albumPath) {
               if ($value == 'research') {
                   $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' helped on this album" alt="'.$zicos['name'].' helped on this album" src="img/instruments/research.png">';
               }
+              if ($value == 'recording') {
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' recorded this album" alt="'.$zicos['name'].' recorded this album" src="img/instruments/jack.png">';
+              }
           }
           if ($key == 'twitter') {
               $thisContacts = '<a href="http://twitter.com/'.$value.'"><img class="instrument" title="Twitter account of '.$zicos['name'].'" title="Twitter account of '.$zicos['name'].'" src="img/contacts/twitter.png"></a>';
@@ -1045,7 +1048,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "1558189050db40fc3fad7cc67b6800a10d5c4d56";
+        $ref_commit = "fc9d14ef0f5a47fb4edf46f4997a388e823adaca";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
