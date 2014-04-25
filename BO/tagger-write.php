@@ -26,6 +26,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www
     <body id="microlabel-tagger" class="microlabel-body">
 <div id="main">
 ';
+
 require_once('../libs/getid3/getid3.php');
 // Initialize getID3 engine
 $getID3 = new getID3;
