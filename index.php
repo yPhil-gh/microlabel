@@ -429,6 +429,11 @@ $(document).keydown(function(e){
 
   <?php
 
+
+echo "damned";
+die('aaarg');
+
+
   $dirList = getInfo($rootMusicDir, 'musicDirs');
 
 //spitTitle($dirList, $fileList)////////////////////////////////////////
@@ -546,11 +551,6 @@ function getTinyUrl($url) {
   return $tinyurl;
   //     return "plop";
 }
-
-
-
-echo "damned";
-die('aaarg');
 
 
 // audioList($fileList) ////////////////////////////////////////
