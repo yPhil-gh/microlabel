@@ -701,5 +701,6 @@ div#error
 }
 
 h1#error {
+    margin:0;
     text-align:center;
 }
