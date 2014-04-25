@@ -1,5 +1,9 @@
 <?php
 
+echo "damned";
+die('aaarg');
+
+
  if (!defined("PATH_SEPARATOR")) {
     if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
         define( "PATH_SEPARATOR", ";" );
@@ -1126,7 +1130,6 @@ $fileList = getInfo($directoryToScan, 'musicFiles');
 
 // Main block
 if (!isset($_GET['a'])) {
-    die('aaarg');
     $thereIsMusic = index($dirList, $labelName, 'ask');
     if (!$thereIsMusic) {
         echo "damned";
