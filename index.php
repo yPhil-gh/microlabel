@@ -378,12 +378,12 @@ $(document).ready(function() {
 
     $('div.musicien').hover(function () {
         $(this).stop(true,true).animate({
-            width: '+=250',
+            width: '+=300',
             height: '+=45'
         }, 500);
     }, function () {
         $(this).stop(true,true).animate({
-            width: '-=250',
+            width: '-=300',
             height: '-=45'
         },500)
     });
@@ -591,7 +591,6 @@ function audioList($fileList, $albumPath) {
   //    Pour le browse() dans le player
   //   $dirList = getInfo("OGG/", musicDirs);
 
-
   $i = 0;
   $z = $i+1;
   $numberOfSongs = 0;
@@ -604,6 +603,8 @@ function audioList($fileList, $albumPath) {
 
   $myScriptPath = pathinfo($_SERVER["SCRIPT_NAME"]);
   $myDir = $myScriptPath['dirname'];
+
+  $numberOfSongsInThisDirectory = getInfo($albumPath, 'numberOfSongs');
 
   $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
 
@@ -779,10 +780,10 @@ function audioList($fileList, $albumPath) {
           }
           if ($key == 'email') {
                   $hash = md5(strtolower(trim($value)));
-                  $thisContacts = $thisContacts.'<a href="mailto:'.$value.'"><img class="contact" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="img/contacts/email.png"></a>';
-                  $thisGravatar = '<a href="mailto:'.$value.'"><img class="gravatar" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="http://www.gravatar.com/avatar/'.$hash.'?d=retro"></a>';
+                  $thisContacts = $thisContacts.'<a href="mailto:'.$value.'"><img class="contact" title="Email '.$zicos['name'].'" src="img/contacts/email.png"></a>';
+                  $thisGravatar = '<a href="mailto:'.$value.'"><img class="gravatar" title="Email '.$zicos['name'].'" src="http://www.gravatar.com/avatar/'.$hash.'?d=retro"></a>';
           } else {
-              $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].' is a sad musician, doesn\'t have an email :(" title="'.$zicos['name'].'" src="img/contacts/nomail.png">';
+              $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].' is a sad musician, doesn\'t have an email :(" src="img/contacts/nomail.png">';
           }
           // echo '<pre>';
           // var_dump($thisInstruments);
@@ -1048,7 +1049,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "efebc6079e75a63025fbd6a48d98e4ebb5d358ba";
+        $ref_commit = "aa6a4980ad486c95b778b6af09069a083f8814ad";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
