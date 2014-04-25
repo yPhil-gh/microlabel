@@ -728,14 +728,21 @@ function audioList($fileList, $albumPath) {
   $musiciens = xmlInfos('all_musicians');
 
   // echo '<pre>';
-  // var_dump($_SERVER);
+  // var_dump($musiciens);
   // echo '</pre>';
 
-
   foreach ($musiciens as $zicos) {
-      if (!array_search('email', $zicos)) {
-          $email = false;
-      }
+
+  // $test = array_search('mail', $zicos);
+  // echo '('.$test.')';
+
+  //     if (!array_search('mail', $musiciens)) {
+  //             echo "now";
+  //         $email = false;
+  //     } else {
+  //             echo "yow";
+  //         $email = true;
+  //     }
 
       echo '
     <div class="musicien">
@@ -767,14 +774,12 @@ function audioList($fileList, $albumPath) {
           if ($key == 'twitter') {
               $thisContacts = '<a href="http://twitter.com/'.$value.'"><img class="instrument" title="Twitter account of '.$zicos['name'].'" title="Twitter account of '.$zicos['name'].'" src="img/contacts/twitter.png"></a>';
           }
-          if ($email) {
-              if ($key == 'email') {
+          if ($key == 'email') {
                   $hash = md5(strtolower(trim($value)));
                   $thisContacts = $thisContacts.'<a href="mailto:'.$value.'"><img class="contact" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="img/contacts/email.png"></a>';
                   $thisGravatar = '<a href="mailto:'.$value.'"><img class="gravatar" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="http://www.gravatar.com/avatar/'.$hash.'?d=retro"></a>';
-              }
           } else {
-              $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].'" title="'.$zicos['name'].'" src="img/contacts/nomail.png">';
+              $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].' is a sad musician, doesn\'t have an email :(" title="'.$zicos['name'].'" src="img/contacts/nomail.png">';
           }
 
           // echo '<pre>';
@@ -1041,7 +1046,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "29887d0adcc5a8f20b18b12cff698ed15d589169";
+        $ref_commit = "f3355d009828d88ba1b78722226f8dce16c8a295";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
