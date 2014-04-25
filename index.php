@@ -1109,6 +1109,11 @@ function fixedFooter($dirList) {
     ';
 }
 
+
+echo "damned";
+die('aaarg');
+
+
 $mtime = microtime();
 $mtime = explode(" ",$mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -1124,9 +1129,6 @@ $meanPath = $rootMusicDir.$slash.str_replace($dash, $slash, $friendlyPath);
 $directoryToScan = $meanPath;
 $directoryToScan = trim($directoryToScan, $slash);
 
-
-echo "damned";
-die('aaarg');
 
 
 $fileList = getInfo($directoryToScan, 'musicFiles');
