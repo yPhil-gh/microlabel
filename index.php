@@ -832,13 +832,11 @@ function index($dirList, $labelName) {
     echo '
     <body id="microlabel-index" class="microlabel-body">
         <div class="microlabel-index">
-            <ul id="microlabel">
     ';
 
     if ($numberOfAlbums < 1) {
 
 echo '
-
 		<div id="horizon">
 			<div id="content">
 					<span class="headline">Uh-ho</span><br>
@@ -847,8 +845,11 @@ Something wrong happenned. I think you just deleted your Music directory :(
 		</div>
 ';
 
-        echo 'Uh-oh :(';
-    }
+    } else {
+        echo '
+            <ul id="microlabel">
+';
+}
 
     foreach ($dirList as $key => $albumPath) {
         $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
@@ -877,8 +878,13 @@ Something wrong happenned. I think you just deleted your Music directory :(
 ';
     }
 
+    if ($numberOfAlbums > 1) {
     echo '
             </ul>
+';
+    }
+
+    echo '
         </div>
     ';
 }
@@ -1033,7 +1039,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "8fc63f95b8428169865c5203d304ea3adbf5925a";
+        $ref_commit = "61adfad92e7cb04439a5139a560ff2efdfc156c1";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
