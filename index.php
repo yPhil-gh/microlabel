@@ -1,5 +1,6 @@
 <?php
 
+
 if ( ! defined( "PATH_SEPARATOR" ) ) {
     if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
         define( "PATH_SEPARATOR", ";" );
