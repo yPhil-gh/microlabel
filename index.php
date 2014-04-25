@@ -1,9 +1,5 @@
 <?php
 
-echo "damned";
-die('aaarg');
-
-
  if (!defined("PATH_SEPARATOR")) {
     if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
         define( "PATH_SEPARATOR", ";" );
@@ -1130,32 +1126,34 @@ $fileList = getInfo($directoryToScan, 'musicFiles');
 
 // Main block
 if (!isset($_GET['a'])) {
+    index($dirList, $labelName);
+} else {
+    echo "damned";
+    die('aaarg');
     $thereIsMusic = index($dirList, $labelName, 'ask');
     if (!$thereIsMusic) {
         echo "damned";
     } else {
         index($dirList, $labelName);
     }
-}
 
-else {
-  /* twit('AzerOo0'); */
-  spitTitle($dirList, $fileList);
-  audioList($fileList, $directoryToScan);
-  videoList($fileList, $directoryToScan);
-  albumBrowser($labelName);
-  if (isset($_GET['debug'])) {
-    debugFooter($totaltime, $albums, $songs);
-  }
-  fixedFooter($dirList);
+    /* twit('AzerOo0'); */
+    spitTitle($dirList, $fileList);
+    audioList($fileList, $directoryToScan);
+    videoList($fileList, $directoryToScan);
+    albumBrowser($labelName);
+    if (isset($_GET['debug'])) {
+        debugFooter($totaltime, $albums, $songs);
+    }
+    fixedFooter($dirList);
 }
 
 if (isset($_GET['debug'])) {
-  /* echo '<pre style="text-align:left;">$GLOBALS : '; */
-  /* var_dump($GLOBALS); */
-  /* echo '</pre>'; */
-  /* var_dump($_SERVER["SCRIPT_URI"]); */
-  /* echo '<br />'; */
+    /* echo '<pre style="text-align:left;">$GLOBALS : '; */
+    /* var_dump($GLOBALS); */
+    /* echo '</pre>'; */
+    /* var_dump($_SERVER["SCRIPT_URI"]); */
+    /* echo '<br />'; */
 }
 
 
