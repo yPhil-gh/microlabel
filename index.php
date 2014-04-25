@@ -547,6 +547,12 @@ function getTinyUrl($url) {
   //     return "plop";
 }
 
+
+
+echo "damned";
+die('aaarg');
+
+
 // audioList($fileList) ////////////////////////////////////////
 // Build audio content table
 // Tableau de chansons
@@ -1109,9 +1115,6 @@ function fixedFooter($dirList) {
     ';
 }
 
-
-echo "damned";
-die('aaarg');
 
 
 $mtime = microtime();
