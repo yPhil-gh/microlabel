@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <microlabel>
-  <musicien name="Florent">
-    <instrument>voice</instrument>
-    <twitter>bob10bal</twitter>
-  </musicien>
   <musicien name="Philippe">
     <instrument>leadvocal</instrument>
     <instrument>vocal</instrument>
@@ -11,7 +7,17 @@
     <instrument>bass</instrument>
     <instrument>other</instrument>
     <instrument>drums</instrument>
+    <instrument>recording</instrument>
     <twitter>xaccrocheur</twitter>
     <email>xaccrocheur@gmail.com</email>
+  </musicien>
+  <musicien name="Florent">
+    <instrument>leadvocal</instrument>
+    <instrument>vocal</instrument>
+    <instrument>guitar</instrument>
+    <instrument>bass</instrument>
+    <instrument>other</instrument>
+    <twitter>bob10bal</twitter>
+    <email>bob10bal@gmail.com</email>
   </musicien>
 </microlabel>

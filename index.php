@@ -624,22 +624,22 @@ function audioList($fileList, $albumPath) {
   foreach ($trackTitles as $fullFileName => $trackTitle) {
       $thisFileTags = getInfo($fullFileName, 'thisFileTags');
 
-      $artistName = $thisAlbumTags['artist'];
-      $albumName = $thisAlbumTags['album'];
-      $albumGenre = $thisAlbumTags['genre'];
-      $albumRecordLabel = $thisFileTags['organization'];
+      $artistName = rawurldecode($thisAlbumTags['artist']);
+      $albumName = rawurldecode($thisAlbumTags['album']);
+      $albumGenre = rawurldecode($thisAlbumTags['genre']);
+      $albumRecordLabel = rawurldecode($thisFileTags['organization']);
       $albumYear = $thisAlbumTags['year'];
 
-      $artistName = $thisFileTags['artist'];
-      $albumName = $thisFileTags['album'];
-      $albumGenre = $thisFileTags['genre'];
+      $artistName = rawurldecode($thisFileTags['artist']);
+      $albumName = rawurldecode($thisFileTags['album']);
+      $albumGenre = rawurldecode($thisFileTags['genre']);
       $albumYear = $thisFileTags['year'];
-      $trackTitle = $thisFileTags['title'];
+      $trackTitle = rawurldecode($thisFileTags['title']);
       $trackPlayTime = $thisFileTags['playtime'];
       $trackFileSize = $thisFileTags['size'];
       $trackBitRate = $thisFileTags['bitrate'];
       $trackNumber = $thisFileTags['track'];
-      $trackComment = $thisFileTags['comment'];
+      $trackComment = rawurldecode($thisFileTags['comment']);
 
       $thisFilePathElements = explode("/", $fullFileName);
       $thisFileNicePath = $thisFilePathElements[count($thisFilePathElements)-'3'].",".$thisFilePathElements[count($thisFilePathElements)-'2'];
@@ -696,7 +696,7 @@ function audioList($fileList, $albumPath) {
       $tes = rtrim( $trackComment );
 
       if (!empty($tes) && ($trackComment !== "&nbsp;" )) {
-          echo '<blockquote><span class="bqstart">“</span>'.$trackComment.'<span class="bqend">”</span></blockquote>';
+          echo '<blockquote>'.$trackComment.'</blockquote>';
       }
 
       echo '
@@ -1048,7 +1048,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "5167b2ded62a46096cf810ad0cb34ff16244851b";
+        $ref_commit = "efebc6079e75a63025fbd6a48d98e4ebb5d358ba";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

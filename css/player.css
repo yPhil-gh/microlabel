@@ -160,39 +160,3 @@
 #MlPlayerList {
     text-align:left;
 }
-
-/* #MlPlayerDescription, #albumBrowser { */
-/*     background-color: #000; */
-/*     opacity:0.5; */
-/*     filter:alpha(opacity=60); /\* For IE8 and earlier *\/ */
-/* } */
-/* #MlPlayerDescription .albumName { */
-/*     opacity:1; */
-/* } */
-
-blockquote {
-    position:relative;
-    text-align:left;
-    z-index:2;
-    font-size: 120%;
-}
-
-.bqstart {
-     float: left;
-     /* height: 45px; */
-     margin-top: -20px;
-     /* padding: 0 0 0 .1em; */
-     margin-bottom: -50px;
-     font-size: 700%;
-     color: #FF0000;
- }
-
-.bqend {
-     float: right;
-     /* height: 25px; */
-     /* margin-top: 0px; */
-     padding:0;
-     /* padding: 0 .1em 0 0; */
-     font-size: 700%;
-     color: #FF0000;
- }
