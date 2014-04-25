@@ -819,7 +819,11 @@ if (!empty($videos_objects)) {
 // Build label "home" index page with all the CD Sleeves
 // Construit la page d'accueil en listant tous les albums
 
-function index($dirList, $labelName) {
+function index($dirList, $labelName, $question) {
+
+    if (isset($question)) {
+        return $thereIsMusic;
+    }
 
     $numberOfAlbums = count($dirList);
 
@@ -835,7 +839,7 @@ function index($dirList, $labelName) {
     ';
 
     if ($numberOfAlbums < 1) {
-
+        $thereIsMusic = false;
 echo '
 		<div id="horizon">
 			<div id="error">
@@ -1122,7 +1126,13 @@ $fileList = getInfo($directoryToScan, 'musicFiles');
 
 // Main block
 if (!isset($_GET['a'])) {
-  index($dirList, $labelName);
+    $thereIsMusic = index($dirList, $labelName, 'ask');
+    if (!$thereIsMusic) {
+        echo "damned";
+    } else {
+
+        index($dirList, $labelName);
+    }
 }
 
 else {
