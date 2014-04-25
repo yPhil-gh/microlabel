@@ -1,5 +1,6 @@
 <?php
 
+
  if (!defined("PATH_SEPARATOR")) {
     if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
         define( "PATH_SEPARATOR", ";" );
@@ -1041,7 +1042,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "d959e899cdd7085e305acbf134c00d497d5a4d58";
+        $ref_commit = "22286eb1d9cfc7a36c0f537e0cb16f96a83f6fb7";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
