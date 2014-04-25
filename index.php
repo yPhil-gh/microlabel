@@ -830,7 +830,6 @@ function index($dirList, $labelName) {
     </head>
     ';
 
-
     echo '
     <body id="microlabel-index" class="microlabel-body">
         <div class="microlabel-index">
