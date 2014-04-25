@@ -781,9 +781,9 @@ function audioList($fileList, $albumPath) {
           if ($key == 'email') {
                   $hash = md5(strtolower(trim($value)));
                   $thisContacts = $thisContacts.'<a href="mailto:'.$value.'"><img class="contact" title="Email '.$zicos['name'].'" src="img/contacts/email.png"></a>';
-                  $thisGravatar = '<a href="mailto:'.$value.'"><img class="gravatar" title="Email '.$zicos['name'].'" src="http://www.gravatar.com/avatar/'.$hash.'?d=retro"></a>';
+                  $thisGravatar = '<a href="mailto:'.$value.'"><img class="gravatar" alt="Email" title="Email '.$zicos['name'].'" src="http://www.gravatar.com/avatar/'.$hash.'?d=retro"></a>';
           } else {
-              $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].' is a sad musician, doesn\'t have an email :(" src="img/contacts/nomail.png">';
+              $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].' is a sad musician, doesn\'t have an email :(" alt="No email" src="img/contacts/nomail.png">';
           }
           // echo '<pre>';
           // var_dump($thisInstruments);
@@ -1049,7 +1049,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "aa6a4980ad486c95b778b6af09069a083f8814ad";
+        $ref_commit = "85ac3d46e5d31e8d6aeac267ab3c5680ba0f5f10";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
