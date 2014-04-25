@@ -685,7 +685,7 @@ img.gravatar {
     display: block
 }
 
-#error
+div#error
 {
     font-family: Verdana, Geneva, Arial, sans-serif;
     border:2px solid red;
