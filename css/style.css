@@ -607,7 +607,7 @@ div.tagger-path:after {
 
 div.musicien {
     background-color:#ccc;
-    width:30px;
+    width:50px;
     height:28px;
     overflow:hidden;
     margin:0 0 .5em 0;
@@ -615,8 +615,6 @@ div.musicien {
     border:1px solid #ccc;
     border-radius:5px;
 }
-
-
 
 h5.musicien {
     background-color:#333;
