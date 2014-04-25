@@ -839,6 +839,15 @@ function index($dirList, $labelName) {
 
 echo '
                 <div class="error">
+
+
+		<div id="horizon">
+			<div id="content">
+					<span class="headline">Uh-ho</span><br>
+					and stays there!
+			</div>
+		</div>
+
 Something wrong happenned. I think you just deleted your Music directory :(
                 </div>
 ';
@@ -1029,7 +1038,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "20e7960fafcbe6c1c2c364ac59e43bcb0c461f1c";
+        $ref_commit = "736c6e4457049f154105f458fdebd644605b4d60";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
