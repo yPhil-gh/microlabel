@@ -1115,6 +1115,11 @@ $mtime = $mtime[1] + $mtime[0];
 $endtime = $mtime;
 $totaltime = ($endtime - $starttime);
 
+
+echo "damned";
+die('aaarg');
+
+
 // Query string
 $friendlyPath = strip_tags($_GET['a']);
 $slash = "/";
@@ -1123,9 +1128,6 @@ $meanPath = $rootMusicDir.$slash.str_replace($dash, $slash, $friendlyPath);
 $directoryToScan = $meanPath;
 $directoryToScan = trim($directoryToScan, $slash);
 $fileList = getInfo($directoryToScan, 'musicFiles');
-
-    echo "damned";
-    die('aaarg');
 
 
 // Main block
