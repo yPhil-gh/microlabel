@@ -759,7 +759,7 @@ function audioList($fileList, $albumPath) {
                   $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays bass on this album" alt="'.$zicos['name'].' plays drums on this album" src="img/instruments/drums.png">';
               }
               if ($value == 'other') {
-                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays bass on this album" alt="'.$zicos['name'].' plays music on this album" src="img/instruments/other.png">';
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays all kinds of stuff on this album" alt="'.$zicos['name'].' plays all kinds of stuff on this album" src="img/instruments/other.png">';
               }
               if ($value == 'vocal') {
                   $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' sings on this album" alt="'.$zicos['name'].' sings on this album" src="img/instruments/vocal.png">';
@@ -1048,7 +1048,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "f141f809a8f9197cdf7b4361f4c6242009bd903d";
+        $ref_commit = "1330fe1a82761f1d48fade198b22b3874af32440";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
