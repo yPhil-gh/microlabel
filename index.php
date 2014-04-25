@@ -822,6 +822,7 @@ if (!empty($videos_objects)) {
 function index($dirList, $labelName) {
 
     $numberOfAlbums = count($dirList);
+
     $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
 
     echo '<title>'.$labelName.' - Free Music</title>
@@ -833,6 +834,11 @@ function index($dirList, $labelName) {
         <div class="microlabel-index">
             <ul id="microlabel">
     ';
+
+
+    if ($numberOfAlbums < 1) {
+        echo 'Uh-oh :(';
+    }
 
     foreach ($dirList as $key => $albumPath) {
         $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
@@ -1017,7 +1023,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "74e2ac5afa2de6fb8372d38b8da315cc7b1bf24f";
+        $ref_commit = "9527c6b095c4c4c03ceb41b2bacf37558b7ae55a";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
