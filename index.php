@@ -819,7 +819,6 @@ if (!empty($videos_objects)) {
 // Build label "home" index page with all the CD Sleeves
 // Construit la page d'accueil en listant tous les albums
 
-
 function index($dirList, $labelName) {
 
     $numberOfAlbums = count($dirList);
@@ -836,12 +835,13 @@ function index($dirList, $labelName) {
     ';
 
     if ($numberOfAlbums < 1) {
-        echo '
+
+echo '
 		<div id="horizon">
 			<div id="error">
 			<img src="img/instruments/horns.png"/>
 				<h1 id="error">Uh-ho</h1>
-                Something quite wrong just happenned. I think you deleted your Music directory :(
+                Something quite wrong happenned. I think you just deleted your Music directory :(
 			</div>
 		</div>
 ';
@@ -850,7 +850,7 @@ function index($dirList, $labelName) {
         echo '
             <ul id="microlabel">
 ';
-    }
+}
 
     foreach ($dirList as $key => $albumPath) {
         $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
@@ -880,7 +880,7 @@ function index($dirList, $labelName) {
     }
 
     if ($numberOfAlbums > 1) {
-        echo '
+    echo '
             </ul>
 ';
     }
@@ -1040,7 +1040,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "3ca1c0976454c5e459fd74420e45ed3d62f5643f";
+        $ref_commit = "61adfad92e7cb04439a5139a560ff2efdfc156c1";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
