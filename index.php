@@ -838,18 +838,13 @@ function index($dirList, $labelName) {
     if ($numberOfAlbums < 1) {
 
 echo '
-                <div class="error">
-
 
 		<div id="horizon">
 			<div id="content">
 					<span class="headline">Uh-ho</span><br>
-					and stays there!
+Something wrong happenned. I think you just deleted your Music directory :(
 			</div>
 		</div>
-
-Something wrong happenned. I think you just deleted your Music directory :(
-                </div>
 ';
 
         echo 'Uh-oh :(';
@@ -1038,7 +1033,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "736c6e4457049f154105f458fdebd644605b4d60";
+        $ref_commit = "8fc63f95b8428169865c5203d304ea3adbf5925a";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
