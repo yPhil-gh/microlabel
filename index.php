@@ -335,29 +335,8 @@ function xmlInfos($element) {
         <![endif]-->
     <script>
 
-function loadjscssfile(filename, filetype){
-    if (filetype=="js"){ //if filename is a external JavaScript file
-	var fileref=document.createElement('script')
-	fileref.setAttribute("type","text/javascript")
-	fileref.setAttribute("src", filename)
-    }
-    else if (filetype=="css"){ //if filename is an external CSS file
-	var fileref=document.createElement("link")
-	fileref.setAttribute("rel", "stylesheet")
-	fileref.setAttribute("type", "text/css")
-	fileref.setAttribute("href", filename)
-    }
-    if (typeof fileref!="undefined")
-	document.getElementsByTagName("head")[0].appendChild(fileref)
-}
-
 var test_audio= document.createElement("audio") //try and create sample audio element
 var test_video= document.createElement("video") //try and create sample video element
-var mediasupport={audio: (test_audio.play)? true : false, video: (test_video.play)? true : false}
-
-if(mediasupport.audio == false) {
-    loadjscssfile("css/microlabel-no-audio.css", "css")
-}
 
 if (songToPlay !== undefined) {
     load_track(songToPlay);
@@ -390,17 +369,6 @@ $(document).ready(function() {
 
     $(".youtube").colorbox({iframe:true, innerWidth:425, innerHeight:344});
     var plopA = '<? echo TXT_NO_AUDIO_TXT ?>';
-
-    var noAudioMsg = '<h2 class="no-audio-alert">Wow.</h2>'+
-	'<hr /><h4 class="no-audio-alert">Audio : '+mediasupport.audio+'</h4>' +
-	'<h4 class="no-audio-alert">Video : '+mediasupport.video+'</h4>' +
-	' <h3 class="no-audio-alert">'+navigator.appName+' '+navigator.appVersion+'</h3>' +
-	plopA +
-	'<hr /><a href="http://www.mozilla.com/firefox/"><img src="img/logo-ffox.jpg" /></a> <img src="img/logo-opera.png" /> <img src="img/logo-safari.png" /> <img src="img/logo-chrome.jpg" /></p>'
-
-    if (mediasupport.audio == false) {
-	$.prompt(noAudioMsg);
-    }
 
     $('a.sleeve').colorbox({
 	rel:"group1",
@@ -1049,7 +1017,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "ac43ea1ce4bfb113f7941ce66eb25847be4dfc9f";
+        $ref_commit = "03c81b64eeb86d2a24886975ed95e620b23e63f6";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
