@@ -835,10 +835,14 @@ function index($dirList, $labelName) {
             <ul id="microlabel">
     ';
 
-
-    echo $numberOfAlbums;
-
     if ($numberOfAlbums < 1) {
+
+echo '
+                <div class="error">
+Something wrong happenned. I think you just deleted your Music directory :(
+                </div>
+';
+
         echo 'Uh-oh :(';
     }
 
@@ -1025,7 +1029,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "214558fcbc2dd1c6e31558b3a28e799f6c48b6e1";
+        $ref_commit = "20e7960fafcbe6c1c2c364ac59e43bcb0c461f1c";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
