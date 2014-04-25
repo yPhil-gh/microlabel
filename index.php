@@ -500,6 +500,7 @@ html, body {
     echo '
 </head>
 <body class="microlabel-body">
+plop
 <div id="main">
   <div class="content">
 
