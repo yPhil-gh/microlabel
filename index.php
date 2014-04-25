@@ -1124,6 +1124,7 @@ $directoryToScan = $meanPath;
 $directoryToScan = trim($directoryToScan, $slash);
 $fileList = getInfo($directoryToScan, 'musicFiles');
 
+
 // Main block
 if (!isset($_GET['a'])) {
     $thereIsMusic = index($dirList, $labelName, 'ask');
