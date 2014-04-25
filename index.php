@@ -781,7 +781,6 @@ function audioList($fileList, $albumPath) {
           } else {
               $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].' is a sad musician, doesn\'t have an email :(" title="'.$zicos['name'].'" src="img/contacts/nomail.png">';
           }
-
           // echo '<pre>';
           // var_dump($thisInstruments);
           // echo '</pre>'.$thisInstruments;
@@ -1046,7 +1045,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "f3355d009828d88ba1b78722226f8dce16c8a295";
+        $ref_commit = "1558189050db40fc3fad7cc67b6800a10d5c4d56";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
