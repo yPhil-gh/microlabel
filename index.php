@@ -308,9 +308,6 @@ function xmlInfos($element) {
 }
 
 
-echo "damned";
-die('aaarg');
-
 
 ?>
 
