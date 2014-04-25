@@ -764,8 +764,8 @@ function audioList($fileList, $albumPath) {
 
       }
       echo '<h5 class="musicien">'.$thisGravatar.' '.$zicos['name'].'</h5>';
-      echo $thisInstruments;
-      echo '<div>'.$thisContacts.'</div>';
+      echo '<span class="">'.$thisInstruments.'</span>';
+      echo '<span style="display:block;float:right;background-color:#333">'.$thisContacts.'</span>';
       echo '
     </div>
 ';
