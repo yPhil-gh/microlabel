@@ -497,7 +497,6 @@ html, body {
     echo '
 </head>
 <body class="microlabel-body">
-plop
 <div id="main">
   <div class="content">
 
@@ -1141,13 +1140,6 @@ $fileList = getInfo($directoryToScan, 'musicFiles');
 if (!isset($_GET['a'])) {
     index($dirList, $labelName);
 } else {
-
-    $thereIsMusic = index($dirList, $labelName, 'ask');
-    if (!$thereIsMusic) {
-        echo "damned";
-    } else {
-        index($dirList, $labelName);
-    }
 
     /* twit('AzerOo0'); */
     spitTitle($dirList, $fileList);
