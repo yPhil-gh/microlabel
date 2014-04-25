@@ -1130,7 +1130,6 @@ if (!isset($_GET['a'])) {
     if (!$thereIsMusic) {
         echo "damned";
     } else {
-
         index($dirList, $labelName);
     }
 }
