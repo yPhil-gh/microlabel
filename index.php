@@ -836,6 +836,8 @@ function index($dirList, $labelName) {
     ';
 
 
+    echo $numberOfAlbums;
+
     if ($numberOfAlbums < 1) {
         echo 'Uh-oh :(';
     }
@@ -1023,7 +1025,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "9527c6b095c4c4c03ceb41b2bacf37558b7ae55a";
+        $ref_commit = "214558fcbc2dd1c6e31558b3a28e799f6c48b6e1";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
