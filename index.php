@@ -307,6 +307,11 @@ function xmlInfos($element) {
     }
 }
 
+
+echo "damned";
+die('aaarg');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -429,9 +434,6 @@ $(document).keydown(function(e){
 
   <?php
 
-
-echo "damned";
-die('aaarg');
 
 
   $dirList = getInfo($rootMusicDir, 'musicDirs');
