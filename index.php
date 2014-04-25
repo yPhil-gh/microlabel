@@ -837,8 +837,8 @@ function index($dirList, $labelName) {
     if ($numberOfAlbums < 1) {
 
 echo '
-		<div id="horizon">
 			<img src="img/instruments/horns.png"/>
+		<div id="horizon">
 			<div id="error">
 				<h1 id="error">Uh-ho</h1>
                 Something wrong happenned. I think you just deleted your Music directory :(
