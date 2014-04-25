@@ -819,6 +819,7 @@ if (!empty($videos_objects)) {
 // Build label "home" index page with all the CD Sleeves
 // Construit la page d'accueil en listant tous les albums
 
+
 function index($dirList, $labelName) {
 
     $numberOfAlbums = count($dirList);
