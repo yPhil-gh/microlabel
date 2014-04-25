@@ -699,3 +699,7 @@ img.gravatar {
     height: 100px;
     visibility: visible
 }
+
+h1#error {
+    text-align:center;
+}
