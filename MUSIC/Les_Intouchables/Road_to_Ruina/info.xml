@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <simo>
   <musicien name="Philippe">
+    <instrument>leadvocal</instrument>
+    <instrument>vocal</instrument>
     <instrument>guitar</instrument>
+    <instrument>bass</instrument>
+    <instrument>other</instrument>
+    <instrument>drums</instrument>
     <twitter>xaccrocheur</twitter>
+    <email>xaccrocheur@gmail.com</email>
   </musicien>
   <musicien name="Florent">
-    <instrument>voice</instrument>
+    <instrument>leadvocal</instrument>
+    <instrument>guitar</instrument>
+    <instrument>bass</instrument>
+    <instrument>research</instrument>
     <twitter>bob10bal</twitter>
+    <email>bob10bal@gmail.com</email>
   </musicien>
   <video>
     <name>Beta2vista (Tu fais le malin avec ta)</name>

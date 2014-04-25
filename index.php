@@ -288,21 +288,18 @@ function xmlInfos($element) {
         }
     }
 
+
     if (count($xml->musicien) > 0) {
+
         foreach ($xml->musicien as $musicien) {
-            foreach ($musicien->twitter as $twitter) {
-                $myTwitters[] = $twitter;
-            }
+            $myMusicians[] = $musicien;
         }
     }
-    /* echo $myTwitters[0]; */
+
 
     switch ($element) {
-    case 'first_twitter':
-        echo $myTwitters['0'];
-        break;
-    case 'all_twitters':
-        return $myTwitters;
+    case 'all_musicians':
+        return $myMusicians;
         break;
     case 'videos_object':
         return $videoObjects;
@@ -377,6 +374,18 @@ if (!empty($zong)) {
 ?>";
 
 $(document).ready(function() {
+
+    $('div.musicien').hover(function () {
+        $(this).stop(true,true).animate({
+            width: '+=200',
+            height: '+=30'
+        }, 500);
+    }, function () {
+        $(this).stop(true,true).animate({
+            width: '-=200',
+            height: '-=30'
+        },500)
+    });
 
     $(".youtube").colorbox({iframe:true, innerWidth:425, innerHeight:344});
     var plopA = '<? echo TXT_NO_AUDIO_TXT ?>';
@@ -712,19 +721,75 @@ function audioList($fileList, $albumPath) {
   } // End foreach
   echo '
         </ul>
-    <div id="tweets"></div>
-<p id="searchLinks">
+    <div id="musiciens">
 ';
 
-  $tweeters = xmlInfos('all_twitters');
+  $musiciens = xmlInfos('all_musicians');
 
-  foreach ($tweeters as $tweeter) {
-      echo $tweeter.' <a title="Twitter account of '.$tweeter.'" href="https://twitter.com/'.$tweeter.'"><span class="dingbat">☺</span></a>';
+  // echo '<pre>';
+  // var_dump($_SERVER);
+  // echo '</pre>';
+
+
+  foreach ($musiciens as $zicos) {
+
+
+  echo '
+    <div class="musicien">
+';
+      foreach ($zicos as $key => $value) {
+          if ($key == 'instrument') {
+              if ($value == 'guitar') {
+                  $thisInstruments = '<img class="instrument" title="'.$zicos['name'].' plays guitar on this album" alt="'.$zicos['name'].' plays guitar on this album" src="img/instruments/guitar.png">';
+              }
+              if ($value == 'bass') {
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays bass on this album" alt="'.$zicos['name'].' plays guitar on this album" src="img/instruments/bass.png">';
+              }
+              if ($value == 'drums') {
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays bass on this album" alt="'.$zicos['name'].' plays drums on this album" src="img/instruments/drums.png">';
+              }
+              if ($value == 'other') {
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays bass on this album" alt="'.$zicos['name'].' plays music on this album" src="img/instruments/other.png">';
+              }
+              if ($value == 'vocal') {
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' sings on this album" alt="'.$zicos['name'].' sings on this album" src="img/instruments/vocal.png">';
+              }
+              if ($value == 'leadvocal') {
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' sings lead vocals on this album" alt="'.$zicos['name'].' sings lead vocals on this album" src="img/instruments/leadvocal.png">';
+              }
+              if ($value == 'research') {
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' helped on this album" alt="'.$zicos['name'].' helped on this album" src="img/instruments/research.png">';
+              }
+          }
+          if ($key == 'twitter') {
+                  $thisContacts = '<a href="http://twitter.com/'.$value.'"><img class="instrument" title="Twitter account of '.$zicos['name'].'" title="Twitter account of '.$zicos['name'].'" src="img/contacts/twitter.png"></a>';
+          }
+          if ($key == 'email') {
+              $hash = md5(strtolower(trim($value)));
+              $thisContacts = $thisContacts.'<a href="mailto:'.$value.'"><img class="contact" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="img/contacts/email.png"></a>';
+              $thisGravatar = '<a href="mailto:'.$value.'"><img class="gravatar" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="http://www.gravatar.com/avatar/'.$hash.'?d=retro"></a>';
+
+          }
+
+  // echo '<pre>';
+  // var_dump($thisInstruments);
+  // echo '</pre>'.$thisInstruments;
+
+
+      }
+      echo '<h5 class="musicien">'.$thisGravatar.' '.$zicos['name'].'</h5>';
+      echo $thisInstruments;
+      echo $thisContacts;
+  echo '
+    </div>
+';
   }
+
+
 // ⌨ ☺ ☠
 
   echo '
-</p>
+</div>
 </div>
 ';
 
@@ -758,7 +823,7 @@ if (!empty($videos_objects)) {
         echo '
 <a class="youtube" href="http://youtube.com/embed/'.$videoID.'" title="'.$videoName.'">
 <div class="MlPlayerListItem MlPlayerVideoItem">'.$videoName.'
-<img class="video_thumbnail" alt="Video : '.$videoName.'" src="http://img.youtube.com/vi/'.$videoID.'/2.jpg" />
+<img class="video_thumbnail" alt="Video" src="http://img.youtube.com/vi/'.$videoID.'/2.jpg" />
 </div>
 </a>
 ';
@@ -970,7 +1035,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "ddca770144ab97ca23efc50616866744e6611100";
+        $ref_commit = "05c2c2f63a7a2eccca0948e69775329541f67848";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

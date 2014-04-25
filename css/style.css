@@ -598,6 +598,37 @@ div.tagger-path:after {
     vertical-align: middle;
 }
 
-.dingbat {
+.dingbats {
     font-size:150%;
+}
+
+div.musicien {
+    width:30px;
+    height:28px;
+    overflow:hidden;
+    margin:0 0 .5em 0;
+    padding:0 0 .2em 0;
+    background-color:#333;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+h5.musicien {
+    padding:.2em;
+    height:25px;
+    background-color:#ccc;
+    color:#333;
+    margin:0;
+    font-size:110%;
+}
+
+img.instrument, img.contact {
+    width:24px;
+    margin:.2em;
+}
+
+img.gravatar {
+    width:24px;
+    /* float:right; */
+    margin:0 .2em 0 0;
 }
