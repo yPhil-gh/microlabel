@@ -703,4 +703,5 @@ h1#error {
     color:red;
     margin:0;
     text-align:center;
+    text-shadow: 1px 0px 20px black;
 }
