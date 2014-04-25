@@ -450,15 +450,6 @@ table.songMenu td:hover {
     margin: 1em 0 0 0;
 }
 
-#osx-container * {
-    text-align:left;
-}
-
-div#osx-modal-data a {
-    text-decoration:underline;
-    color: #000;
-}
-
 #MlPlayerList {
     min-width:50%;
     width:71%;
@@ -483,20 +474,32 @@ form.urlFields input {
 
 
 /* Version Checking */
-#version * {
-    font-size:300%;
-    cursor:pointer;
+
+#osx-container a {
+color:#333;
+text-decoration:underline;
+font-weight:bold;
 }
 
-#version .unknown {
+#version a, #version span {
+    font-size:300%;
+    font-weight:lighter;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+
+div#version span.unknown {
     color:orange;
 }
 
-#version .unmoved {
+/* html body.microlabel-body div#osx-container.simplemodal-container div.simplemodal-wrap div#osx-modal-content.simplemodal-data div#osx-modal-data */
+
+div#version span.unmoved {
     color:green;
 }
 
-#version .moved {
+div#version span.moved {
     color:red;
     display:invisible;
 }

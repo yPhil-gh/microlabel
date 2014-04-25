@@ -315,8 +315,8 @@ function xmlInfos($element) {
 <head>
 <meta charset="UTF-8">
   <style type="text/css" media="screen">@import "css/player.css";</style>
-    <style type="text/css" media="screen">@import "css/style.css";</style>
     <link type='text/css' href="css/jquery.simplemodal-osx.css" rel='stylesheet' media='screen' />
+    <style type="text/css" media="screen">@import "css/style.css";</style>
     <style type="text/css" media="screen">@import "css/jquery.colorbox.css";</style>
 
     <script src="libs/player.js"></script>
@@ -1041,7 +1041,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "7c3f8e72ca22382b7db83379bd131746199188fc";
+        $ref_commit = "77bd8ce7022e6974e89f981fc77b1be5fea7e1aa";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -1080,9 +1080,9 @@ function fixedFooter($dirList) {
        <h2>MicroLabel 1.5</h2>
        '.TXT_DEBUG_HELP_TXT.'
 
-<span id="version" onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'">
+<div id="version" onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'">
     <a href="https://github.com/xaccrocheur/microlabel">Microlabel</a> <span class="'.vc("class").'">♼</span>
-</span>
+</div>
 
 
      </div>
