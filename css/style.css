@@ -617,7 +617,8 @@ div.musicien {
 }
 
 h5.musicien {
-    padding:.2em;
+    line-height: 2em;
+    padding:.2em .2em .5em .2em;
     height:25px;
     background-color:#ccc;
     color:#333;
@@ -627,7 +628,7 @@ h5.musicien {
 
 img.instrument, img.contact {
     width:24px;
-    margin:.2em;
+    margin:.5em;
 }
 
 img.gravatar {
