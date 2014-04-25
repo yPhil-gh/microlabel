@@ -839,6 +839,7 @@ function index($dirList, $labelName) {
 echo '
 		<div id="horizon">
 			<div id="error">
+			<img src="img/instruments/horns.png">
 					<h1 id="error">Uh-ho</h1>
 Something wrong happenned. I think you just deleted your Music directory :(
 			</div>
