@@ -306,6 +306,7 @@ function xmlInfos($element) {
         break;
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -732,9 +733,11 @@ function audioList($fileList, $albumPath) {
 
 
   foreach ($musiciens as $zicos) {
+      if (!array_search('email', $zicos)) {
+          $email = false;
+      }
 
-
-  echo '
+      echo '
     <div class="musicien">
 ';
       foreach ($zicos as $key => $value) {
@@ -762,25 +765,27 @@ function audioList($fileList, $albumPath) {
               }
           }
           if ($key == 'twitter') {
-                  $thisContacts = '<a href="http://twitter.com/'.$value.'"><img class="instrument" title="Twitter account of '.$zicos['name'].'" title="Twitter account of '.$zicos['name'].'" src="img/contacts/twitter.png"></a>';
+              $thisContacts = '<a href="http://twitter.com/'.$value.'"><img class="instrument" title="Twitter account of '.$zicos['name'].'" title="Twitter account of '.$zicos['name'].'" src="img/contacts/twitter.png"></a>';
           }
-          if ($key == 'email') {
-              $hash = md5(strtolower(trim($value)));
-              $thisContacts = $thisContacts.'<a href="mailto:'.$value.'"><img class="contact" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="img/contacts/email.png"></a>';
-              $thisGravatar = '<a href="mailto:'.$value.'"><img class="gravatar" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="http://www.gravatar.com/avatar/'.$hash.'?d=retro"></a>';
-
+          if ($email) {
+              if ($key == 'email') {
+                  $hash = md5(strtolower(trim($value)));
+                  $thisContacts = $thisContacts.'<a href="mailto:'.$value.'"><img class="contact" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="img/contacts/email.png"></a>';
+                  $thisGravatar = '<a href="mailto:'.$value.'"><img class="gravatar" title="Email '.$zicos['name'].'" title="Email '.$zicos['name'].'" src="http://www.gravatar.com/avatar/'.$hash.'?d=retro"></a>';
+              }
+          } else {
+              $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].'" title="'.$zicos['name'].'" src="img/contacts/nomail.png">';
           }
 
-  // echo '<pre>';
-  // var_dump($thisInstruments);
-  // echo '</pre>'.$thisInstruments;
-
+          // echo '<pre>';
+          // var_dump($thisInstruments);
+          // echo '</pre>'.$thisInstruments;
 
       }
       echo '<h5 class="musicien">'.$thisGravatar.' '.$zicos['name'].'</h5>';
       echo $thisInstruments;
       echo $thisContacts;
-  echo '
+      echo '
     </div>
 ';
   }
@@ -1035,7 +1040,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "05c2c2f63a7a2eccca0948e69775329541f67848";
+        $ref_commit = "3536afb4c6768572eaf6e043e0962ebe180a5eb5";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
