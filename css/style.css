@@ -670,12 +670,11 @@ img.gravatar {
 
 /* Error handling */
 
-#horizon
-{
-    color: #ccc;
-    background-color: #0ff;
-    text-align: center;
+#horizon {
     position: absolute;
+    color: #ccc;
+    background-color: red;
+    text-align: center;
     top: 50%;
     left: 0px;
     width: 100%;
@@ -685,14 +684,14 @@ img.gravatar {
     display: block
 }
 
-div#error
-{
+div#error {
+    position: absolute;
     font-family: Verdana, Geneva, Arial, sans-serif;
     border:2px solid red;
     border-radius:15px;
     background-color: #333;
+    padding:.5em;
     margin-left: -125px;
-    position: absolute;
     top: -125px;
     left: 50%;
     width: 250px;
@@ -701,6 +700,7 @@ div#error
 }
 
 h1#error {
+    color:red;
     margin:0;
     text-align:center;
 }
