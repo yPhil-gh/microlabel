@@ -378,12 +378,12 @@ $(document).ready(function() {
 
     $('div.musicien').hover(function () {
         $(this).stop(true,true).animate({
-            width: '+=200',
+            width: '+=250',
             height: '+=45'
         }, 500);
     }, function () {
         $(this).stop(true,true).animate({
-            width: '-=200',
+            width: '-=250',
             height: '-=45'
         },500)
     });
@@ -1048,7 +1048,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "3ada23046738b954118ad9d80d9febef3de23041";
+        $ref_commit = "5167b2ded62a46096cf810ad0cb34ff16244851b";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
