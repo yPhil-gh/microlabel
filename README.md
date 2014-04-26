@@ -9,7 +9,7 @@ A CMS to manage albums
 - Easy link sharing : Copy / paste the link, and the file will [play on click](http://tinyurl.com/k4vkzcp)
 - Nice URLs
 - Displays Youtube videos
-- Displays musicians latest tweets (Oops, [nope](https://blog.twitter.com/2013/planning-for-api-v1-retirement))
+- Displays musicians album-basis [meta-info][plop]
 - Displays *any* image found in the album's dir as a gallery
 - Full **Valid HTML** / JS / CSS (No flash)
 - Multilingual interface
@@ -29,7 +29,7 @@ A CMS to manage albums
 - Rename the microlabel dir with the name of your label
 - Edit the TEXT/* files to replace the text with your own
 
-#### Optional album config
+[plop]: #### Optional album config
 - Drop an image whose filename begins with **bg-** to make a background for this album's page
 - Put a **info.xml** with the following syntax in each album's directory
 
