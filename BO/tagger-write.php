@@ -15,18 +15,6 @@
 
 //die('Due to a security issue, this demo has been disabled. It can be enabled by removing line '.__LINE__.' in '.$_SERVER['PHP_SELF']);
 
-function microlabelError($text) {
-echo '
-		<div id="horizon">
-			<div id="error">
-			<img src="../img/instruments/horns.png"/>
-				<h1 id="error">Uh-oh</h1>
-                ERROR: '.$text.' :(
-			</div>
-		</div>
-';
-}
-
 $TaggingFormat = 'UTF-8';
 
 header('Content-Type: text/html; charset='.$TaggingFormat);
@@ -40,6 +28,8 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www
 ';
 
 require_once('../libs/getid3/getid3.php');
+require_once('../libs/microlabel.php');
+
 // Initialize getID3 engine
 $getID3 = new getID3;
 $getID3->setOption(array('encoding'=>$TaggingFormat));

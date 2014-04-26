@@ -41,6 +41,7 @@ if (isset($_GET['lang'])) {
 ////////////////////////////////////////////////////////////////////
 
 require_once('getid3.php');
+require_once('../libs/microlabel.php');
 
 $labelName = 'beldigital';
 global $labelName;
@@ -820,18 +821,6 @@ if (!empty($videos_objects)) {
 
 }
 
-function microlabelError($text) {
-echo '
-		<div id="horizon">
-			<div id="error">
-			<img src="img/instruments/horns.png"/>
-				<h1 id="error">Uh-oh</h1>
-                ERROR: '.$text.' :(
-			</div>
-		</div>
-';
-}
-
 // index($dirList) ////////////////////////////////////////
 // Build label "home" index page with all the CD Sleeves
 // Construit la page d'accueil en listant tous les albums
@@ -1061,7 +1050,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "60d8e753d536ada0cfcaee8499ca2dbd4477903a";
+        $ref_commit = "bf0619307274ac22ab8f335b7c528727a546af8c";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

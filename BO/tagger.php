@@ -16,18 +16,6 @@
 //die('Due to a security issue, this demo has been disabled. It can be enabled by removing line '.__LINE__.' in demos/'.basename(__FILE__));
 
 
-function microlabelError($text) {
-echo '
-		<div id="horizon">
-			<div id="error">
-			<img src="../img/instruments/horns.png"/>
-				<h1 id="error">Uh-oh</h1>
-                ERROR: '.$text.' :(
-			</div>
-		</div>
-';
-}
-
 /////////////////////////////////////////////////////////////////
 // die if magic_quotes_runtime or magic_quotes_gpc are set
 if (function_exists('get_magic_quotes_runtime') && get_magic_quotes_runtime()) {
@@ -43,6 +31,7 @@ $PageEncoding = 'UTF-8';
 $writescriptfilename = 'tagger-write.php';
 
 require_once('../libs/getid3/getid3.php');
+require_once('../libs/microlabel.php');
 
 // Needed for windows only
 define('GETID3_HELPERAPPSDIR', 'C:/helperapps/');
