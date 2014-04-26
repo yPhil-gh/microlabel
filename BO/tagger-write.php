@@ -27,7 +27,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www
 <div id="main">
 ';
 
-require_once('../libs/plop/getid3.php');
+require_once('../libs/getid3/getid3.php');
 // require_once('../libs/microlabel.php');
 
 // Initialize getID3 engine

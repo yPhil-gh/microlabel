@@ -7,7 +7,7 @@
 }
 
 // set_include_path("./TEXT:./libs:./libs/getid3:.libs/getID3-1.9.7/getid3");
-set_include_path("./TEXT:./libs:./libs/plop");
+set_include_path("./TEXT:./libs:./libs/getid3");
 
 if (isset($_GET['lang'])) {
     $timeFormula = "365*24*3600";
@@ -1050,7 +1050,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "f85e6b31856b58d0788e3898674fe94cfc122a57";
+        $ref_commit = "ad4f0b2e31965b2acb2b33836a02aa389cea9011";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

@@ -30,7 +30,7 @@ $PageEncoding = 'UTF-8';
 
 $writescriptfilename = 'tagger-write.php';
 
-require_once('../libs/plop/getid3.php');
+require_once('../libs/getid3/getid3.php');
 // require_once('../libs/microlabel.php');
 
 // Needed for windows only
