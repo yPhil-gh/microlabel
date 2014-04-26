@@ -31,7 +31,7 @@ A CMS to manage albums
 #### Optional config
 - Rename the microlabel dir with the name of your label
 - Edit the TEXT/* files to replace the text with your own
-- Rename the MUSIC directory, and edit the focllowing files accordingly
+- Rename the MUSIC directory, and edit the following files accordingly
     - index.php
     - dl.php
     - BO/tagger.php
