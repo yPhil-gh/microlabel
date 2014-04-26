@@ -5,6 +5,8 @@ if (isset($_GET['errorcode'])) {
     $errorString = $_GET['errorcode'];
 }
 
+$suggestion = '';
+
 if ($errorString == '401') {
     $path = "../";
     $suggestion = "Something must be wrong with your .ht* files. Better check 'em now.";
