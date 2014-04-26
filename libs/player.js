@@ -80,6 +80,7 @@ function MlPlayer( list ) {
             //create the duration div
             d = document.createElement("div");
             d.setAttribute("id","duration");
+            d.setAttribute("title","Click to skip");
 
             //create the duration bar
             duration_bar = document.createElement("div");
@@ -150,9 +151,10 @@ function MlPlayer( list ) {
             //create the volume div
             volume_control = document.createElement("div");
             volume_control.setAttribute("id","volume_control");
+            volume_control.setAttribute("title","Volume");
             //create the volume bar
             volume_bar = document.createElement("div");
-            volume_bar.setAttribute('id',"volume_bar");
+            volume_bar.setAttribute("id","volume_bar");
             //create the volume background
             volume_background = document.createElement("div");
             volume_background.setAttribute('id',"volume_background");
