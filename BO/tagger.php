@@ -16,6 +16,18 @@
 //die('Due to a security issue, this demo has been disabled. It can be enabled by removing line '.__LINE__.' in demos/'.basename(__FILE__));
 
 
+function microlabelError($text) {
+echo '
+		<div id="horizon">
+			<div id="error">
+			<img src="../img/instruments/horns.png"/>
+				<h1 id="error">Uh-oh</h1>
+                ERROR: '.$text.' :(
+			</div>
+		</div>
+';
+}
+
 /////////////////////////////////////////////////////////////////
 // die if magic_quotes_runtime or magic_quotes_gpc are set
 if (function_exists('get_magic_quotes_runtime') && get_magic_quotes_runtime()) {
@@ -403,7 +415,8 @@ if (isset($_REQUEST['filename'])) {
 	} else {
 		$errormessage = ob_get_contents();
 		ob_end_clean();
-		echo 'ERROR: Could not open directory: <u>'.$currentfulldir.'</u><br/>';
+        $errorString = 'Could not open directory <strong>'.$_GET['listdirectory'].'</strong>';
+        microlabelError($errorString);
 	}
 }
 echo PoweredBygetID3().'<br clear="all">';
@@ -624,22 +637,5 @@ function PoweredBygetID3($string='') {
 	}
 	return str_replace('<!--GETID3VER-->', $getID3->version(), $string);
 }
-
-function microlabelBrowser() {
-    echo '
-<div id="albumBrowser" class="main transparent" style="position: relative;">
-    <div class="left" style="position: relative; z-index: 2;">
-    </div>
-    <div class="right" style="position: relative; z-index: 2;">
-    </div>
-    <div class="middle" style="position: relative; z-index: 2;">
-        <a href="../"><img style="width:60px" class="rollover" src="../img/beldigital_logo_off.png" alt="beldigital_logo_on.png" /></a>
-    </div>
-</div>
-<p id="footBr">&nbsp;</p>
-    ';
-}
-
-microlabelBrowser()
 
 ?>

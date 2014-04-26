@@ -171,7 +171,7 @@ img.buttons {
 }
 
 
-blockquote {
+blockquote.comment {
     font-family: "New York", "DejaVu Serif", serif;
     font-style:italic;
     position:relative;
@@ -181,7 +181,7 @@ blockquote {
     margin:.5em .5em 2.5em .5em;
 }
 
-blockquote:after {
+blockquote.comment:after {
     z-index:1;
     background: rgba(150,150,150,0.8);
     width: 1em;
@@ -480,12 +480,6 @@ table.songMenu td:hover {
     background:#999;
 }
 
-
-#MlPlayerList {
-    min-width:50%;
-    width:71%;
-    float:left;
-}
 
 #MlPlayerDescription {
     /*     min-width:30%; */

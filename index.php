@@ -52,6 +52,11 @@ function getRoot() {
 
 ///////////////////////////////////////////////////////////////// no user-serviceable parts below
 
+if (isset($_GET['tag'])) {
+    header("Location: ./BO/?listdirectory=../".$rootMusicDir);
+exit;
+}
+
 $rootMusicDir = trim(getRoot());
 
 /* Exclude directories from iterator */
@@ -78,7 +83,7 @@ function getInfo($startPath, $element) {
 
         $fsExt = isset($fs['extension']) ? $fs['extension'] : '';
 
-        if ($fsExt == 'ogg') {
+        if ($fsExt == 'ogg' || $fsExt == 'mp3') {
             $f = $getID3->analyze($startPath);
             getid3_lib::CopyTagsToComments($f);
             $thisFileTitleTag = (!empty($f[$ch]['title']) ? implode($sp, $f[$ch]['title'])  : $sp);
@@ -117,7 +122,7 @@ function getInfo($startPath, $element) {
 
             $infosExt = isset($infos['extension']) ? $infos['extension'] : '';
 
-            if ($infosExt == 'ogg') {
+            if ($infosExt == 'ogg' || $infosExt == 'mp3') {
 
                 $musicDirs[] = $infos['dirname'];
 
@@ -670,7 +675,7 @@ function audioList($fileList, $albumPath) {
       $tes = rtrim( $trackComment );
 
       if (!empty($tes) && ($trackComment !== "&nbsp;" )) {
-          echo '<blockquote>'.$trackComment.'</blockquote>';
+          echo '<blockquote class="comment">'.$trackComment.'</blockquote>';
       }
 
       echo '
@@ -815,6 +820,17 @@ if (!empty($videos_objects)) {
 
 }
 
+function microlabelError($text) {
+echo '
+		<div id="horizon">
+			<div id="error">
+			<img src="img/instruments/horns.png"/>
+				<h1 id="error">Uh-oh</h1>
+                ERROR: '.$text.' :(
+			</div>
+		</div>
+';
+}
 
 // index($dirList) ////////////////////////////////////////
 // Build label "home" index page with all the CD Sleeves
@@ -845,7 +861,7 @@ echo '
 		<div id="horizon">
 			<div id="error">
 			<img src="img/instruments/horns.png"/>
-				<h1 id="error">Uh-ho</h1>
+				<h1 id="error">Uh-oh</h1>
                 Something quite wrong happenned. I think you just deleted your Music directory :(
 			</div>
 		</div>
@@ -913,34 +929,34 @@ function browse($position, $pathStyle) {
 
     $dirListSize = count($dirList);
 
-    $firstDir = trim(rtrim($dirList['0'], $slash), $slash);
-    $lastDir = trim(rtrim($dirList[$dirListSize-'1'], $slash), $slash);
+    $firstDir = trim(rtrim($dirList[0], $slash), $slash);
+    $lastDir = trim(rtrim($dirList[$dirListSize-1], $slash), $slash);
 
     $currentDir = trim(rtrim($directoryToScan, $slash), $slash);
     $dirListKey = array_search($currentDir, $dirList);
 
-    $prevPathElements = explode($slash, $dirList[$dirListKey-'1']);
+    $prevPathElements = explode($slash, $dirList[$dirListKey-1]);
     $herePathElements = explode($slash, $dirList[$dirListKey]);
-    $nextPathElements = explode($slash, $dirList[$dirListKey+'1']);
+    $nextPathElements = explode($slash, $dirList[$dirListKey+1]);
 
-    $firstDirPathElements = explode($slash, $dirList['0']);
-    $lastDirPathElements = explode($slash, $dirList[$dirListSize-'1']);
+    $firstDirPathElements = explode($slash, $dirList[0]);
+    $lastDirPathElements = explode($slash, $dirList[$dirListSize-1]);
 
-    $niceFirst = $firstDirPathElements[1].$dash.$firstDirPathElements['2'];
-    $niceLast = $lastDirPathElements[1].$dash.$lastDirPathElements['2'];
+    $niceFirst = $firstDirPathElements[1].$dash.$firstDirPathElements[2];
+    $niceLast = $lastDirPathElements[1].$dash.$lastDirPathElements[2];
 
-    $nicePrev = $prevPathElements['1'].$dash.$prevPathElements['2'];
-    $niceHere = $herePathElements['1'].$dash.$herePathElements['2'];
-    $niceNext = $nextPathElements['1'].$dash.$nextPathElements['2'];
+    $nicePrev = $prevPathElements[1].$dash.$prevPathElements[2];
+    $niceHere = $herePathElements[1].$dash.$herePathElements[2];
+    $niceNext = $nextPathElements[1].$dash.$nextPathElements[2];
 
-    $meanPrev = $prevPathElements['1'].$slash.$prevPathElements['2'];
-    $meanNext = $nextPathElements['1'].$slash.$nextPathElements['2'];
+    $meanPrev = $prevPathElements[1].$slash.$prevPathElements[2];
+    $meanNext = $nextPathElements[1].$slash.$nextPathElements[2];
 
     switch ($pathStyle) {
     case 'mean':
-        $prev = ltrim(ltrim($dirList[$dirListKey-'1'], '.'), $slash);
+        $prev = ltrim(ltrim($dirList[$dirListKey-1], '.'), $slash);
         $here = ltrim(ltrim($dirList[$dirListKey], '.'), $slash);
-        $next = ltrim(ltrim($dirList[$dirListKey+'1'], '.'), $slash);
+        $next = ltrim(ltrim($dirList[$dirListKey+1], '.'), $slash);
         break;
     case 'nice':
         $prev = $nicePrev;
@@ -978,7 +994,7 @@ function browse($position, $pathStyle) {
         return $here;
         break;
     case 'next':
-        if ($dirListKey === $dirListSize-'1') {
+        if ($dirListKey === $dirListSize-1) {
             return $firstDir;
         }
         else {
@@ -1104,6 +1120,8 @@ function fixedFooter($dirList) {
        <a title="'.TXT_GERMAN.'" href="?a='.browse('current', 'nice').'&amp;lang=de">
          <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/de.png" /></a>
        <a title="'.TXT_HELP.'" class="osx" href="#">
+         <img id="helpButton" class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
+       <a title="Tag!" href="./?tag">
          <img id="helpButton" class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
      </div>
    </div>

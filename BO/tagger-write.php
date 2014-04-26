@@ -15,6 +15,18 @@
 
 //die('Due to a security issue, this demo has been disabled. It can be enabled by removing line '.__LINE__.' in '.$_SERVER['PHP_SELF']);
 
+function microlabelError($text) {
+echo '
+		<div id="horizon">
+			<div id="error">
+			<img src="../img/instruments/horns.png"/>
+				<h1 id="error">Uh-oh</h1>
+                ERROR: '.$text.' :(
+			</div>
+		</div>
+';
+}
+
 $TaggingFormat = 'UTF-8';
 
 header('Content-Type: text/html; charset='.$TaggingFormat);
@@ -47,7 +59,7 @@ if (isset($_POST['WriteTags'])) {
 		$tagwriter = new getid3_writetags;
 		$tagwriter->filename       = $Filename;
 		$tagwriter->tagformats     = $TagFormatsToWrite;
-		$tagwriter->overwrite_tags = false;
+		$tagwriter->overwrite_tags = true;
 		$tagwriter->tag_encoding   = $TaggingFormat;
 		if (!empty($_POST['remove_other_tags'])) {
 			$tagwriter->remove_other_tags = true;
@@ -110,7 +122,8 @@ if (isset($_POST['WriteTags'])) {
 				echo 'There were some warnings:<blockquote style="background-color:#FFCC33; padding: 10px;">'.implode('<BR><BR>', $tagwriter->warnings).'</BLOCKQUOTE>';
 			}
 		} else {
-			echo 'Failed to write tags!<BLOCKQUOTE STYLE="background-color:#FF9999; padding: 10px;">'.implode('<BR><BR>', $tagwriter->errors).'</BLOCKQUOTE>';
+            $errorString = 'Failed to write tags! '.implode('<br />', $tagwriter->errors);
+            microlabelError($errorString);
 		}
 
 	} else {
