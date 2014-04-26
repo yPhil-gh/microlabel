@@ -419,7 +419,6 @@ class getid3_writetags
 		if ($this->overwrite_tags) {
 			// do nothing - ignore previous data
 		} else {
-throw new Exception('$this->overwrite_tags=false is known to be buggy in this version of getID3. Will be fixed in the near future, check www.getid3.org for a newer version.');
 			if (!isset($this->ThisFileInfo['tags'][$TagFormat])) {
 				return false;
 			}
