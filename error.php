@@ -18,8 +18,8 @@
 <?php
 
 
-if (isset($_GET['error_code'])) {
-    $errorString = $_GET['error_code']
+if (isset($_GET['errorcode'])) {
+    $errorString = $_GET['errorcode']
 }
 
 require_once('libs/microlabel.php');

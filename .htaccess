@@ -1,4 +1,4 @@
-ErrorDocument 401 /microlabel/error.php?error_code=401
-ErrorDocument 403 /microlabel/error.php?error_code=403
-ErrorDocument 404 /microlabel/error.php?error_code=404
-ErrorDocument 500 /microlabel/error.php?error_code=500
+ErrorDocument 401 /microlabel/error.php?errorcode=401
+ErrorDocument 403 /microlabel/error.php?errorcode=403
+ErrorDocument 404 /microlabel/error.php?errorcode=404
+ErrorDocument 500 /microlabel/error.php?errorcode=500
