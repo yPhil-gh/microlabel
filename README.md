@@ -36,6 +36,8 @@ A CMS to manage albums
     - dl.php
     - BO/tagger.php
 - Edit BO/.htpasswd and change your login / password (default is admin / demo)
+- Install [vorbiscomment](https://wiki.xiph.org/VorbisComment) to be able to **write** tags in the back-office
+    - sudo apt-get install [vorbis-tools](https://wiki.xiph.org/Vorbis-tools)
 
 #### Optional album config
 - Drop an image whose filename begins with **bg-** to make a background for this album's page
