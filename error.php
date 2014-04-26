@@ -7,7 +7,7 @@ if (isset($_GET['errorcode'])) {
 
 $suggestion = '';
 
-if ($errorString == '401') {
+if ($errorString == '401' || $errorString == '500') {
     $path = "../";
     $suggestion = "Something must be wrong with your .ht* files. Better check 'em now.";
 } else {
@@ -32,6 +32,9 @@ echo '
     </head>
 
 <body class="microlabel-body">
+
+plop
+
 ';
 
 if (isset($_GET['errorcode'])) {
