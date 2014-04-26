@@ -30,7 +30,7 @@ $PageEncoding = 'UTF-8';
 
 $writescriptfilename = 'tagger-write.php';
 
-require_once('../libs/getid3/getid3.php');
+require_once('../libs/plop/getid3.php');
 // require_once('../libs/microlabel.php');
 
 // Needed for windows only
@@ -48,10 +48,11 @@ echo '<!doctype html>
 <html>
 <head>
     <title>Microlabel - Tagger</title>
-<style type="text/css" media="screen">@import "../css/style.css";</style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="../libs/jquery.expandable.js"></script>
-<script type="text/javascript">
+    <link rel="shortcut icon" href="../img/beldigital_logo_on.png" />
+    <style type="text/css" media="screen">@import "../css/style.css";</style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../libs/jquery.expandable.js"></script>
+    <script type="text/javascript">
 
 $(document).ready(function() {
 

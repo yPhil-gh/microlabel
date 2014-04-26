@@ -7,7 +7,7 @@
 }
 
 // set_include_path("./TEXT:./libs:./libs/getid3:.libs/getID3-1.9.7/getid3");
-set_include_path("./TEXT:./libs:./libs/getID3-1.9.7/getid3");
+set_include_path("./TEXT:./libs:./libs/plop");
 
 if (isset($_GET['lang'])) {
     $timeFormula = "365*24*3600";
