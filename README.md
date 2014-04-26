@@ -12,6 +12,7 @@ A CMS to manage albums
     - Youtube videos
     - Twitter link
     - Mail link
+    - Gravatar
 - Displays *any* image found in the album's dir as a gallery
 - Full **Valid HTML** / JS / CSS (No flash)
     - Multilingual interface
@@ -48,6 +49,7 @@ A CMS to manage albums
     <instrument>guitar</instrument>
     <instrument>bass</instrument>
     <twitter>twittername</twitter>
+    <email>name@domain.ext</email>
   </musicien>
   <musicien name="Other Name">
     <instrument>voice</instrument>
