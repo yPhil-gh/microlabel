@@ -8,13 +8,15 @@ A CMS to manage albums
     - and one page per album
 - Easy link sharing : Copy / paste the link, and the file will [play on click](http://tinyurl.com/k4vkzcp)
 - Nice URLs
-- Displays Youtube videos
-- Displays musicians album-basis [meta-info][plop]
+- Displays musicians album-basis meta-info (See *Optional album config*)
+    - Youtube videos
+    - Twitter link
+    - Mail link
 - Displays *any* image found in the album's dir as a gallery
 - Full **Valid HTML** / JS / CSS (No flash)
-- Multilingual interface
-- Version checking
-- Secure download
+    - Multilingual interface
+    - Version checking
+    - Secure: Your music dir location is concealed
 
 ### Installation
 - Drop it in a directory
@@ -28,8 +30,13 @@ A CMS to manage albums
 #### Optional config
 - Rename the microlabel dir with the name of your label
 - Edit the TEXT/* files to replace the text with your own
+- Rename the MUSIC directory, and edit the focllowing files accordingly
+    - index.php
+    - dl.php
+    - BO/tagger.php
+- Edit BO/.htpasswd and change your login / password (default is admin / demo)
 
-[plop]: #### Optional album config
+#### Optional album config
 - Drop an image whose filename begins with **bg-** to make a background for this album's page
 - Put a **info.xml** with the following syntax in each album's directory
 
