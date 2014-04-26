@@ -172,6 +172,8 @@ img.buttons {
 
 
 blockquote {
+    font-family: "New York", "DejaVu Serif", serif;
+    font-style:italic;
     position:relative;
     text-align:right;
     z-index:2;
@@ -181,7 +183,6 @@ blockquote {
 
 blockquote:after {
     z-index:1;
-    /* font-family: 'icons'; */
     background: rgba(150,150,150,0.8);
     width: 1em;
     height: 1em;
@@ -190,7 +191,6 @@ blockquote:after {
     position: absolute;
     left: 12%;
     font-size: 70px;
-    font-weight:italic;
     text-align: center;
     margin-left: -65px;
     color: rgba(255,255,255,0.5);

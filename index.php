@@ -359,12 +359,12 @@ $(document).ready(function() {
 
     $('div.musicien').hover(function () {
         $(this).stop(true,true).animate({
-            width: '+=300',
+            width: '+=400',
             height: '+=45'
         }, 500);
     }, function () {
         $(this).stop(true,true).animate({
-            width: '-=300',
+            width: '-=400',
             height: '-=45'
         },500)
     });
@@ -724,7 +724,7 @@ function audioList($fileList, $albumPath) {
       foreach ($zicos as $key => $value) {
           if ($key == 'instrument') {
               if ($value == 'guitar') {
-                  $thisInstruments = '<img class="instrument" title="'.$zicos['name'].' plays guitar on this album" alt="'.$zicos['name'].' plays guitar on this album" src="img/instruments/guitar.png">';
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays guitar on this album" alt="'.$zicos['name'].' plays guitar on this album" src="img/instruments/guitar.png">';
               }
               if ($value == 'bass') {
                   $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays bass on this album" alt="'.$zicos['name'].' plays guitar on this album" src="img/instruments/bass.png">';
@@ -758,9 +758,6 @@ function audioList($fileList, $albumPath) {
           } else {
               $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].' is a sad musician, doesn\'t have an email :(" alt="No email" src="img/contacts/nomail.png">';
           }
-          // echo '<pre>';
-          // var_dump($thisInstruments);
-          // echo '</pre>'.$thisInstruments;
 
       }
       echo '<h5 class="musicien">'.$thisGravatar.' '.$zicos['name'].'</h5>';
@@ -770,7 +767,6 @@ function audioList($fileList, $albumPath) {
     </div>
 ';
   }
-
 
 // ⌨ ☺ ☠
 
@@ -1049,7 +1045,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "a38337033a1c8d146176d31c3ededee9d324aecd";
+        $ref_commit = "c505abb5107da6f9052ec1f7ad1735186aeeda4e";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
