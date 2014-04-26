@@ -32,9 +32,6 @@ echo '
     </head>
 
 <body class="microlabel-body">
-
-plop
-
 ';
 
 if (isset($_GET['errorcode'])) {
