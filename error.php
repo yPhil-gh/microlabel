@@ -7,6 +7,7 @@ if (isset($_GET['errorcode'])) {
 
 if ($errorString == '401') {
     $path = "../";
+    $suggestion = "Something must be wrong with your .ht* files. Better check 'em now.";
 } else {
     $path = "./";
 }
@@ -39,7 +40,7 @@ require_once('libs/microlabel.php');
 
 $errorString = 'A much infortunate '.$errorString.' error has occured.';
 
-microlabelError($errorString);
+microlabelError($errorString, $suggestion);
 
 ?>
 
