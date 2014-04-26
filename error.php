@@ -6,9 +6,9 @@ if (isset($_GET['errorcode'])) {
 }
 
 if ($errorString == '401') {
-    $path = "../"
+    $path = "../";
 } else {
-    $path = "./"
+    $path = "./";
 }
 
 
@@ -17,12 +17,12 @@ echo '
 
 <head>
 <meta charset="UTF-8">
-    <link type='text/css' href="'.$path.'css/style.css" rel='stylesheet' media='screen' />
+    <link type="text/css" href="'.$path.'css/style.css" rel="stylesheet" media="screen" />
     <style type="text/css" media="screen">@import "css/style.css";</style>
     <script src="libs/jquery-1.5.1.min.js"></script>
     <script>
     $(document).ready(function () {
-        $('.microlabel-index').hide();
+        $(".microlabel-index").hide();
     });
     </script>
 
