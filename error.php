@@ -17,9 +17,16 @@
 
 <?php
 
+
+if (isset($_GET['error_code'])) {
+    $errorString = $_GET['error_code']
+}
+
 require_once('libs/microlabel.php');
 
-microlabelError("Access denied");
+$errorString = 'Error :'.$errorString;
+
+microlabelError($errorString);
 
 ?>
 

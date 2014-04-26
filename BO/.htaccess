@@ -1,7 +1,9 @@
 AuthName "Microlabel Back Office"
 DirectoryIndex tagger.php
-ErrorDocument 401 /microlabel/error.php
-ErrorDocument 403 /microlabel/error.php
+ErrorDocument 401 /microlabel/error.php?error_code=401
+ErrorDocument 403 /microlabel/error.php?error_code=403
+ErrorDocument 404 /microlabel/error.php?error_code=404
+ErrorDocument 500 /microlabel/error.php?error_code=500
 AuthType Basic
 AuthUserFile /var/www/microlabel/BO/.htpasswd
 Require valid-user
