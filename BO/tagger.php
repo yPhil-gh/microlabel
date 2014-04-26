@@ -405,7 +405,7 @@ if (isset($_REQUEST['filename'])) {
 		$errormessage = ob_get_contents();
 		ob_end_clean();
         $errorString = 'Could not open directory <strong>'.$_GET['listdirectory'].'</strong>';
-        microlabelError($errorString);
+        // microlabelError($errorString);
 	}
 }
 echo PoweredBygetID3().'<br clear="all">';

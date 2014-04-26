@@ -113,7 +113,7 @@ if (isset($_POST['WriteTags'])) {
 			}
 		} else {
             $errorString = 'Failed to write tags! '.implode('<br />', $tagwriter->errors);
-            microlabelError($errorString);
+            // microlabelError($errorString);
 		}
 
 	} else {
