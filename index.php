@@ -681,7 +681,7 @@ function audioList($fileList, $albumPath) {
 
             <table class="songMenu">
             <tr>
-              <td><img src="img/icon_download.png" alt="'.TXT_DOWNLOAD.'" /><a href="'. $fullFileName .'" title="' . $trackTitle.' ('.TXT_DOWNLOAD.')">'.TXT_DOWNLOAD.'</a></td>
+              <td><img src="img/icon_download.png" alt="'.TXT_DOWNLOAD.'" /><a title="' . $trackTitle.' ('.TXT_DOWNLOAD.')" href="dl.php?d='.$thisFileNicePath.','.$fileName.'">'.TXT_DOWNLOAD.'</a></td>
               <td><img src="img/icon_love.png" alt="'.TXT_BUY.'" /><a href="#">'.TXT_BUY.'</a></td>
             </tr>
             </table>
@@ -1049,7 +1049,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "06d3a1426f712a60c7931a4cac3988d612b4443e";
+        $ref_commit = "9e5910c350c0f769080bf1f8dc6711c36f2d5421";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
