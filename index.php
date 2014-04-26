@@ -730,7 +730,7 @@ function audioList($fileList, $albumPath) {
                   $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays bass on this album" alt="'.$zicos['name'].' plays guitar on this album" src="img/instruments/bass.png">';
               }
               if ($value == 'drums') {
-                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays bass on this album" alt="'.$zicos['name'].' plays drums on this album" src="img/instruments/drums.png">';
+                  $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays drums on this album" alt="'.$zicos['name'].' plays drums on this album" src="img/instruments/drums.png">';
               }
               if ($value == 'other') {
                   $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicos['name'].' plays all kinds of stuff on this album" alt="'.$zicos['name'].' plays all kinds of stuff on this album" src="img/instruments/other.png">';
@@ -764,8 +764,8 @@ function audioList($fileList, $albumPath) {
 
       }
       echo '<h5 class="musicien">'.$thisGravatar.' '.$zicos['name'].'</h5>';
-      echo '<span class="">'.$thisInstruments.'</span>';
-      echo '<span style="display:block;float:right;background-color:#333">'.$thisContacts.'</span>';
+      echo '<span class="instruments">'.$thisInstruments.'</span>';
+      echo '<span class="contacts">'.$thisContacts.'</span>';
       echo '
     </div>
 ';
@@ -1049,7 +1049,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "61adfad92e7cb04439a5139a560ff2efdfc156c1";
+        $ref_commit = "b2e950b83a64a3c3acb5dde427cb38420903b399";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

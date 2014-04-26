@@ -637,12 +637,12 @@ div.tagger-path:after {
 }
 
 div.musicien {
-    background-color:#ccc;
-    width:30px;
-    height:28px;
+    background-color:#333;
+    width:32px;
+    height:32px;
     overflow:hidden;
     margin:0 0 .5em 0;
-    padding:0 0 .2em 0;
+    /* padding:0 0 .2em 0; */
     border:1px solid #ccc;
     border-radius:5px;
 }
@@ -666,6 +666,21 @@ img.gravatar {
     width:24px;
     /* float:right; */
     margin:0 .2em 0 0;
+}
+
+span.instruments {
+    background-color:#ccc;
+    display:block;
+    float:left;
+    width:75%;
+    border:1px solid #ccc;
+    border-radius:0 5px 0 0;
+}
+
+span.contacts {
+    display:block;
+    float:right;
+    background-color:#333;
 }
 
 /* Error handling */

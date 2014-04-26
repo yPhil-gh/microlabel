@@ -122,17 +122,16 @@
 }
 
 .button{
-    color: black;
+    background-color:#000;
     border: 2px solid #FFBB00;
     cursor:pointer;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border-radius: 5px;
     background:no-repeat center;
     height:20px;
 }
 
 .button:hover {
-    border: 2px solid #006918;
+    background-color:#000;
 }
 
 /* add the images to the backgrounds of the buttons */
