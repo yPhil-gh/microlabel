@@ -552,9 +552,8 @@ html, body {
 
 
 function getTinyUrl($url) {
-  $tinyurl = file_get_contents("http://tinyurl.com/api-create.php?url=".$url);
-  return $tinyurl;
-  //     return "plop";
+    $tinyurl = file_get_contents("http://tinyurl.com/api-create.php?url=".html_entity_decode($url));
+    return $tinyurl;
 }
 
 
@@ -1050,7 +1049,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "909c2b98013c04885958de1e3b80d129184e64b8";
+        $ref_commit = "a101b5c4374257c30b7d2f9e6f7674d627a93cda";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
