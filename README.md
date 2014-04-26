@@ -18,6 +18,7 @@ A CMS to manage albums
     - Multilingual interface
     - Version checking
     - Secure: Your music dir location is concealed
+- Back Office to manage / tag audio files
 
 ### Installation
 - Drop it in a directory
@@ -26,16 +27,13 @@ A CMS to manage albums
 ### Configuration
 - Locate the MUSIC directory
 - Drop your (correctly tagged) audio files in it
+- Edit *BO/.htpasswd* and [change your login / password](https://httpd.apache.org/docs/current/programs/htpasswd.html) (default is admin / demo)
 - That's it
 
 #### Optional config
-- Rename the microlabel dir with the name of your label
+- Rename the microlabel dir with the name of your label (and keep on *git pull* from there)
 - Edit the TEXT/* files to replace the text with your own
-- Rename the MUSIC directory, and edit the following files accordingly
-    - index.php
-    - dl.php
-    - BO/tagger.php
-- Edit BO/.htpasswd and change your login / password (default is admin / demo)
+- Rename the MUSIC directory, and edit *libs/microlabel.php* accordingly
 - Install [vorbiscomment](https://wiki.xiph.org/VorbisComment) to be able to **write** tags in the back-office
     - sudo apt-get install [vorbis-tools](https://wiki.xiph.org/Vorbis-tools)
 

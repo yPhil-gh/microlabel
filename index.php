@@ -47,11 +47,6 @@ require_once('libs/microlabel.php');
 $labelName = 'beldigital';
 global $labelName;
 
-function getRoot() {
-    $rootMusicDir = 'MUSIC';
-    return $rootMusicDir;
-}
-
 ///////////////////////////////////////////////////////////////// no user-serviceable parts below
 
 if (isset($_GET['tag'])) {
@@ -1050,7 +1045,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "7c5c2ce97216343e838e7b8365e8169dc3c215a0";
+        $ref_commit = "64197c6ddfbbfa246b47282846b782b511b33bc9";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

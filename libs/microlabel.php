@@ -1,5 +1,10 @@
 <?php
 
+function getRoot() {
+    $rootMusicDir = 'MUSIC';
+    return $rootMusicDir;
+}
+
 function microlabelError($text, $suggestion) {
 echo '
 <p class="thought bubble">'.$suggestion.'</p>
