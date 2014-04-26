@@ -1,7 +1,23 @@
+<?php
+
+
+if (isset($_GET['errorcode'])) {
+    $errorString = $_GET['errorcode'];
+}
+
+if ($errorString == '401') {
+    $path = "../"
+} else {
+    $path = "./"
+}
+
+
+echo '
 <html>
 
 <head>
 <meta charset="UTF-8">
+    <link type='text/css' href="'.$path.'css/style.css" rel='stylesheet' media='screen' />
     <style type="text/css" media="screen">@import "css/style.css";</style>
     <script src="libs/jquery-1.5.1.min.js"></script>
     <script>
@@ -13,8 +29,7 @@
     </head>
 
 <body class="microlabel-body">
-<?php
-
+';
 
 if (isset($_GET['errorcode'])) {
     $errorString = $_GET['errorcode'];
