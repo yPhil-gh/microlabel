@@ -748,26 +748,6 @@ p.bubble:before, p.bubble:after
 	height: 0;
 }
 
-/*
- * p.speech:before
- * {
- * 	left: 30px;
- * 	top: 100px;
- * 	border: 12px solid;
- * 	/\* border-color: #666 transparent transparent #666; *\/
- * }
- */
-
-/*
- * p.speech:after
- * {
- * 	left: 38px;
- * 	top: 200px;
- * 	border: 8px solid;
- * 	border-color: #fff transparent transparent #fff;
- * }
- */
-
 p.thought:before, p.thought:after
 {
 	left: 0;
@@ -788,4 +768,16 @@ p.thought:after
 	left: 0px;
 	top: 140px;
 	border-radius: 18px;
+}
+
+#back_home {
+    padding:0 0 0 0;
+    font-size:250%;
+    clear:both;
+    line-height:1em;
+}
+
+
+#back_home:hover {
+    color:orange;
 }

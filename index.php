@@ -330,10 +330,8 @@ function xmlInfos($element) {
     <script src="libs/player.js"></script>
 
     <script src="libs/jquery-1.5.1.min.js"></script>
-    <script src="libs/jquery.easing.1.3.js"></script>
     <script src="libs/jquery.colorbox-min.js"></script>
     <script src="libs/jquery.roundabout.js"></script>
-    <script src="libs/jquery.roundabout-shapes.js"></script>
 
     <script src="libs/jquery.simplemodal.js"></script>
     <script src="libs/jquery.simplemodal-osx.js"></script>
@@ -399,9 +397,7 @@ $(document).ready(function() {
     setInterval(pulse, 5000);
 
     $('ul#microlabel').roundabout({
-	duration: 500,
-        easing: 'easeOutQuint',
-        shape: 'tearDrop'
+	duration: 500
     });
 
     onMlPlayerLoad();
@@ -1050,7 +1046,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "db98302834545157e1dad4369daac3298cd4f221";
+        $ref_commit = "ad426c9165e957526e7f81dcb137b0162544e8b5";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

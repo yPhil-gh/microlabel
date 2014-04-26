@@ -7,7 +7,10 @@ echo '
 			<div id="error">
 			<img src="/microlabel/img/instruments/horns.png"/>
 				<h1 id="error">Uh-oh</h1>
-                ERROR: '.$text.' :(
+                '.$text.' :(
+			    <div id="back_home">
+                <a href="/">&#8962;</a>
+			    </div>
 			</div>
 		</div>
 ';
