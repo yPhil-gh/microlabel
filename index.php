@@ -6,7 +6,7 @@
     else define( "PATH_SEPARATOR", ":" );
 }
 
-set_include_path("./TEXT:./libs/getid3");
+set_include_path("./TEXT:./libs:./libs/getid3");
 
 if (isset($_GET['lang'])) {
     $timeFormula = "365*24*3600";
@@ -41,7 +41,7 @@ if (isset($_GET['lang'])) {
 ////////////////////////////////////////////////////////////////////
 
 require_once('getid3.php');
-require_once('../libs/microlabel.php');
+require_once('libs/microlabel.php');
 
 $labelName = 'beldigital';
 global $labelName;
@@ -1050,7 +1050,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "bf0619307274ac22ab8f335b7c528727a546af8c";
+        $ref_commit = "8d3c97b5749209f58a4af290710937bb4c3fb417";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
