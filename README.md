@@ -13,7 +13,8 @@ A CMS to manage albums
 - Displays *any* image found in the album's dir as a gallery
 - Full **Valid HTML** / JS / CSS (No flash)
 - Multilingual interface
-- CMS version check
+- Version checking
+- Secure download
 
 ### Installation
 - Drop it in a directory

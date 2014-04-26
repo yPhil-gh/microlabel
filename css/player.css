@@ -55,6 +55,7 @@
 }
 
 .MlPlayerListItem, .MlPlayerListItemSelected {
+    border-radius: 4px;
     cursor:default;
     text-align:left;
     margin-bottom:.5em;
@@ -72,8 +73,7 @@
     width:30%;
     height:20px;
     border: 2px solid #FFBB00;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border-radius: 5px;
     float:left;
 }
 
