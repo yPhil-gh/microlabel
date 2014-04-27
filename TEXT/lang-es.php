@@ -31,6 +31,7 @@ define('TXT_LICENSE', 'Licencia');
 define('TXT_BASELINE', 'Un vencejo más allá de la luna');
 define('TXT_LABEL', 'Sello');
 define('TXT_MORE_INFO', 'Más información acerca de');
+define('TXT_ERROR', 'Errore');
 define('TXT_DEBUG_ERRORS', 'Errore(s)');
 define('TXT_DEBUG_FILE_ERRORS', 'Errore de archivo');
 define('TXT_DEBUG_SHOW_ERRORS', 'Mostrar todos los errores');

@@ -31,6 +31,7 @@ define('TXT_LICENSE', 'Lizens');
 define('TXT_BASELINE', 'Ein Mauersegler zog am Mond vorbei');
 define('TXT_LABEL', 'Label');
 define('TXT_MORE_INFO', 'Mehr Infos &uuml;ber');
+define('TXT_ERROR', 'Fehler');
 define('TXT_DEBUG_ERRORS', 'Fehler');
 define('TXT_DEBUG_FILE_ERRORS', 'Dateifehler');
 define('TXT_DEBUG_SHOW_ERRORS', 'Anzeigefehler');
