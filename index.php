@@ -1104,9 +1104,9 @@ function fixedFooter($dirList) {
        <a title="'.TXT_GERMAN.'" href="?a='.browse('current', 'nice').'&amp;lang=de">
          <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/de.png" /></a>
        <a title="'.TXT_HELP.'" class="osx" href="#">
-         <img id="helpButton" class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
+         <img class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
        <a title="Tag!" href="./?tag">
-         <img id="helpButton" class="buttons" src="img/button_tag.png" alt="'.TXT_HELP.'" /></a>
+         <img class="buttons" src="img/button_tag.png" alt="'.TXT_HELP.'" /></a>
      </div>
    </div>
     ';
