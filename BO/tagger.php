@@ -138,7 +138,7 @@ echo '<!doctype html>
     <title>Microlabel - Tagger</title>
     <link rel="shortcut icon" href="../img/beldigital_logo_on.png" />
     <style type="text/css" media="screen">@import "../css/style.css";</style>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../libs/jquery-1.5.1.min.js"></script>
     <script src="../libs/jquery.expandable.js"></script>
     <script type="text/javascript">
 
@@ -512,6 +512,11 @@ if (isset($_REQUEST['filename'])) {
 	}
 }
 echo '
+</div>
+<div id="back_home">
+    <a href="'.getLabelRoot().'/">&#8962;</a>
+</div>
+
 </body>
 </html>';
 

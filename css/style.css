@@ -24,12 +24,12 @@ a:link {
     text-decoration:none;
 }
 
-a:hover {
-    color:#FFBB00;
+a:visited {
+    color:#aaa;
 }
 
-a:visited {
-    color:#ccc;
+a:hover {
+    color:#FFBB00;
 }
 
 div#main {
@@ -206,11 +206,6 @@ p#trackComment {
 .urlFields {
     margin:1em 0;
     text-align:center;
-}
-
-/* microlabel-tagger */
-#microlabel-tagger, #microlabel-tagger a:link, #microlabel-tagger a:visited {
-    font-color:#000;
 }
 
 .microlabel-message {
@@ -556,10 +551,6 @@ body#microlabel-index a:link {
     text-decoration:none;
 }
 
-body#microlabel-index a:visited {
-    color:#eee;
-}
-
 .MlPlayerVideoItem {
     /* font-size:90%; */
     font-weight:bold;
@@ -572,10 +563,6 @@ img.video_thumbnail {
     margin:0;
     width:2em;
     float:right;
-}
-
-a:link {
-    text-decoration:none;
 }
 
 .transparent, #MlPlayerDescription {
@@ -720,6 +707,7 @@ h1#error {
 
 #back_home {
     padding:0 0 0 0;
+    text-align:center;
     font-size:250%;
     clear:both;
     line-height:1em;

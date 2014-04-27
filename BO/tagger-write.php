@@ -24,7 +24,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www
     <title>Microlabel - Tag writer</title>
     <style type="text/css" media="screen">@import "../css/style.css";</style>
     <body id="microlabel-tagger" class="microlabel-body">
-<div id="main">
+<div id="tagger-main">
 ';
 
 require_once('../libs/getid3/getid3.php');

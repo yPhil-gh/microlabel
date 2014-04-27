@@ -1046,7 +1046,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "8bfa1c10100f61cea167121febf3d9f2efb25b32";
+        $ref_commit = "fe2e533eed936d434a56c7d2b56955cba1a83257";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -1107,7 +1107,7 @@ function fixedFooter($dirList) {
        <a title="'.TXT_HELP.'" class="osx" href="#">
          <img id="helpButton" class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
        <a title="Tag!" href="./?tag">
-         <img id="helpButton" class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
+         <img id="helpButton" class="buttons" src="img/button_tag.png" alt="'.TXT_HELP.'" /></a>
      </div>
    </div>
     ';
