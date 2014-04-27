@@ -54,7 +54,7 @@ if (isset($_GET['tag'])) {
 exit;
 }
 
-$rootMusicDir = trim(getRoot());
+$rootMusicDir = trim(getMusicRoot());
 
 /* Exclude directories from iterator */
 class ExcludeDotDirsFilterIterator extends FilterIterator {
@@ -901,7 +901,8 @@ echo '
 
 function browse($position, $pathStyle) {
 
-    $rootMusicDir = getRoot();
+    $rootMusicDir = getMusicRoot();
+
     $dirList = getInfo($rootMusicDir, 'musicDirs');
 
     $nicePath = strip_tags($_GET['a']);
@@ -1045,7 +1046,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "64197c6ddfbbfa246b47282846b782b511b33bc9";
+        $ref_commit = "8bfa1c10100f61cea167121febf3d9f2efb25b32";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

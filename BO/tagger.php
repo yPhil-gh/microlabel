@@ -42,6 +42,94 @@ $getID3->setOption(array('encoding' => $PageEncoding));
 
 ///////////////////////////////////////////////////////////////////////////////
 
+function rrmdir($dir) {
+    if (is_dir($dir)) {
+        $objects = scandir($dir);
+        foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+
+                if (is_writable($object)) {
+                    return true;
+                } else {
+                    microlabelError('Permission error', 'You do not have the right to delete that file');
+                }
+
+                if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+            }
+        }
+        reset($objects);
+        rmdir($dir);
+    }
+}
+
+function delTree($dir) {
+    $files = array_diff(scandir($dir), array('.','..'));
+    foreach ($files as $file) {
+        (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
+    }
+    return rmdir($dir);
+}
+
+function deleteDirectory($dir) {
+    if (!file_exists($dir)) return true;
+    if (is_writable($dir . $file)) {
+        return true;
+    } else {
+        microlabelError('Permission error', 'You do not have the right to delete that file');
+    }
+    if (!is_dir($dir) || is_link($dir)) return unlink($dir);
+    foreach (scandir($dir) as $item) {
+        if ($item == '.' || $item == '..') continue;
+        if (!deleteDirectory($dir . "/" . $item)) {
+            chmod($dir . "/" . $item, 0777);
+            if (!deleteDirectory($dir . "/" . $item)) return false;
+        };
+    }
+    return rmdir($dir);
+}
+
+function deleteDir($dir) {
+
+    // if (is_dir($dir)) {
+    //     if ($dh = opendir($dir)) {
+    //         while (($file = readdir($dh)) !== false ) {
+    //             if( $file != "." && $file != ".." ) {
+    //                 if( is_dir( $dir . $file ) ) {
+    //                     echo "Entering Directory: $dir$file<br/>";
+    //                     if (is_writable($dir . $file)) {
+    //                         recursive_delete( $dir . $file . "/" );
+    //                         echo "Removing Directory: $dir$file<br/><br/>";
+    //                         rmdir( $dir . $file );
+    //                     } else {
+    //                         microlabelError('Oh shit', 'You do not have the right to delete that directory');
+    //                     }
+    //                 }
+    //                 else {
+
+    //                     if (is_writable($dir . $file)) {
+    //                         echo "I'm Deleting file: $dir$file<br/>";
+    //                         unlink( $dir . $file );
+    //                     } else {
+    //                         microlabelError('Oh shit', 'You do not have the right to delete that file');
+    //                     }
+
+    //                 }
+    //             }
+    //         }
+    //         closedir($dh);
+    //     }
+    // }
+    if (is_dir($dir)) {
+        $objects = scandir($dir);
+        foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+                if (filetype($dir."/".$object) == "dir") rmdir($dir."/".$object); else unlink($dir."/".$object);
+            }
+        }
+        reset($objects);
+        rmdir($dir);
+    }
+}
 
 header('Content-Type: text/html; charset=UTF-8');
 echo '<!doctype html>
@@ -72,6 +160,20 @@ $("input.input").expandable({
 <body id="microlabel-tagger" class="microlabel-body">
 ';
 
+
+if (isset($_REQUEST['deletedir'])) {
+    rrmdir($_REQUEST['deletedir']);
+
+    // if (file_exists($_REQUEST['deletedir'])) {
+	// } else {
+	// 	$deletefilemessage = 'FAILED to delete '.addslashes($_REQUEST['deletefile']).' - file does not exist';
+	// }
+	// if (isset($_REQUEST['noalert'])) {
+	// 	echo $deletefilemessage;
+	// } else {
+	// 	echo '<script type="text/javascript">alert("'.$deletefilemessage.'");</script>';
+	// }
+}
 
 if (isset($_REQUEST['deletefile'])) {
 	if (file_exists($_REQUEST['deletefile'])) {
@@ -144,7 +246,7 @@ if (isset($_REQUEST['filename'])) {
 		ob_end_clean();
 		echo str_repeat(' ', 300); // IE buffers the first 300 or so chars, making this progressive display useless - fill the buffer with spaces
 		echo '
-        <div id="main">
+        <div id="tagger-main">
         <div class="microlabel-message">Processing';
 
 		$starttime = microtime(true);
@@ -264,8 +366,8 @@ if (isset($_REQUEST['filename'])) {
             <th>Delete</th>
         </tr>
 ';
-
-		$rowcounter = 0;
+            $columnsintableMinusOne = $columnsintable - 1;
+            $rowcounter = 0;
 		foreach ($DirectoryContents as $dirname => $val) {
 			if (isset($DirectoryContents[$dirname]['dir']) && is_array($DirectoryContents[$dirname]['dir'])) {
 				uksort($DirectoryContents[$dirname]['dir'], 'MoreNaturalSort');
@@ -285,9 +387,9 @@ if (isset($_REQUEST['filename'])) {
 <div class="tagger-path"><span>'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $currentfulldir);
 						echo '</span></div></form></td>';
 					} else {
-						echo '<td class="directory" colspan="'.$columnsintable.'"><img src="../img/icon_folder.png"/> <span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
+						echo '<td class="directory" colspan="'.$columnsintableMinusOne.'"><img src="../img/icon_folder.png"/> <span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
 
-</td>';
+</td><td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?deletedir='.urlencode($dirname.$filename), ENT_QUOTES).'">del</a></td>';
 					}
 					echo '</tr>';
 				}
@@ -409,8 +511,9 @@ if (isset($_REQUEST['filename'])) {
         // microlabelError($errorString);
 	}
 }
-echo PoweredBygetID3().'<br clear="all">';
-echo '</body></html>';
+echo '
+</body>
+</html>';
 
 
 /////////////////////////////////////////////////////////////////
