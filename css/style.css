@@ -589,6 +589,9 @@ div.tagger-path {
     margin:.5em;
     display:inline;
     float:right;
+    font-size:100%;
+    font-weight:bold;
+    color:yellow;
 }
 
 
