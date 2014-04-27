@@ -4,8 +4,8 @@ A CMS to manage albums
 
 ### Features
 - Baseless : Just drop your correctly tagged music files in the MUSIC dir
-    - and µlabel will build one index page
-    - and one page per album
+    - and µlabel will build one [index page](http://opensimo.org/play/)
+    - and [one page per album](http://opensimo.org/play/?a=Les_Intouchables,Touche)
 - Easy link sharing : Copy / paste the link, and the file will [play on click](http://tinyurl.com/k4vkzcp)
 - Nice URLs
 - Displays musicians album-basis meta-info (See *Optional album config*)
