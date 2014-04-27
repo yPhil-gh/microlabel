@@ -1,4 +1,4 @@
-AuthName "Microlabil Back Office"
+AuthName "Microlabel Back Office"
 DirectoryIndex tagger.php
 AuthType Basic
 AuthUserFile /var/www/microlabel/BO/.htpasswd

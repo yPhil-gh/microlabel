@@ -389,7 +389,7 @@ if (isset($_REQUEST['filename'])) {
 					} else {
 						echo '<td class="directory" colspan="'.$columnsintableMinusOne.'"><img src="../img/icon_folder.png"/> <span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
 
-</td><td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?deletedir='.urlencode($dirname.$filename), ENT_QUOTES).'">del</a></td>';
+</td><td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?deletedir='.urlencode($dirname.$filename), ENT_QUOTES).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes(htmlentities($dirname.$filename)).'? \n(this action cannot be un-done)\');">delete</a></td>';
 					}
 					echo '</tr>';
 				}

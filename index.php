@@ -388,11 +388,7 @@ $(document).ready(function() {
 	close:"esc"
     });
 
-    function pulse() {
-	$('.fadeAlbums').fadeIn(80000);
-	$('.fadeAlbums').fadeOut(8000);
-    }
-    setInterval(pulse, 5000);
+    $('.fadeAlbums').fadeOut(4000);
 
     $('ul#microlabel').roundabout({
 	duration: 500,
@@ -1046,7 +1042,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "2ce986d5d7560b99f03ecb0c6c2b54f16f4f2979";
+        $ref_commit = "52194d7bf865de3899c4d3d9ef5b0b4ae1b1cd29";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

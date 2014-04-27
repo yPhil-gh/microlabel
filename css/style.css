@@ -211,6 +211,8 @@ p#trackComment {
 .microlabel-message {
     color:#ccc;
     font-size:75%;
+    text-align:right;
+    border-bottom: 1px solid #fb0;
 }
 
 #microlabel-tagger table.table {
@@ -305,14 +307,7 @@ html body#microlabel-tagger.microlabel-body div#main table.microlabel-tagger tbo
 
 #small-table {
     width:100%;
-    /* border-collapse:collapse; */
-    /* background-color:#ccc; */
 }
-
-#small-table * {
-    border-left: 2px solid red;
-}
-
 
 table.list tbody tr:hover {
     background-color:#2F4F4F;
