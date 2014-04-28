@@ -570,11 +570,10 @@ function audioList($fileList, $albumPath) {
             <div class="visible_if_no_audio">
                 <h4 class="albumName">'.$artistName.' - '.$albumName.'</h4>
                 <table class="album-description">
-                    <tr><td>'.TAGS_RECORD_LABEL.'</td><td class="value">'.$albumRecordLabel.'</td></tr>
-                    <tr><td>'.TAGS_RECORD_LABEL.'</td><td class="value">'.$albumRecordLabel.'</td></tr>
                     <tr><td>'.TAGS_TRACK.'s</td><td class="value">'.$numberOfSongs.'</td></tr>
                     <tr><td>'.TAGS_YEAR.'</td><td class="value">'.$albumYear.'</td></tr>
                     <tr><td>'.TAGS_GENRE.'</td><td class="value">'.$albumGenre.'</td></tr>
+                    <tr><td>'.TAGS_RECORD_LABEL.'</td><td class="value">'.$albumRecordLabel.'</td></tr>
                 </table>
             </div>
 
@@ -947,7 +946,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "280a71acc4eb4a08811fb501b033fc93e0f0882e";
+        $ref_commit = "1ecdbcbca0c3962ac6b0aeb7e40b094c200561df";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
