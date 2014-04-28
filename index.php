@@ -946,7 +946,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "c32b21bb8972f2b072575ac1adae671e3744b3d3";
+        $ref_commit = "ed507d2924e818318b07768d6deaebb753d17126";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -995,7 +995,6 @@ function fixedFooter($dirList) {
 
 
    <div id="controlFooter" class="zindex-one">
-     <div id="controlFooter-left">
        <a title="'.TXT_FRENCH.'" href="?a='.browse('current', 'nice').'&amp;lang=fr">
          <img class="buttons" alt="'.TXT_FRENCH.'" src="img/flags/FR.png" /></a>
        <a title="'.TXT_ENGLISH.'" href="?a='.browse('current', 'nice').'&amp;lang=en">
@@ -1008,7 +1007,6 @@ function fixedFooter($dirList) {
          <img class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
        <a title="Tag!" href="./?tag">
          <img class="buttons" src="img/button_tag.png" alt="'.TXT_HELP.'" /></a>
-     </div>
    </div>
     ';
 }

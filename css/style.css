@@ -43,12 +43,22 @@ div#main {
 }
 
 div#controlFooter {
-    padding:.2em;
+    margin:0;
+    padding:0 0 0 .5em;
     position:absolute;
     bottom: 0;
     width:100%;
-    background: #000;
-    border-top: 5px solid #fff;
+    border-top: 2px solid #ccc;
+
+background-image: -webkit-gradient(
+  linear, left top, left bottom, from(rgba(50,50,50,0.8)),
+  to(rgba(80,80,80,0.2)), color-stop(.5,#333333)
+);
+
+background-image: -moz-linear-gradient(
+  rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 95%
+);
+
 }
 
 /* Buttons */
