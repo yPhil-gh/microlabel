@@ -946,7 +946,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "ed507d2924e818318b07768d6deaebb753d17126";
+        $ref_commit = "2c82020b9c68ab93723a906db0cf87c44b0d3be8";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -977,22 +977,17 @@ function fixedFooter($dirList) {
     $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
     echo '
    </div> <!--end content div-->
-
    <div id="osx-modal-content">
      <div id="osx-modal-title">Help</div>
      <div class="close"><a href="#" class="simplemodal-close">x</a></div>
      <div id="osx-modal-data">
        <h2>MicroLabel 1.5</h2>
        '.TXT_DEBUG_HELP_TXT.'
-
-<div id="version" onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'">
-    <a href="https://github.com/xaccrocheur/microlabel">Microlabel</a> <span class="'.vc("class").'">♼</span>
-</div>
-
-
+        <div id="version" onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'">
+            <a href="https://github.com/xaccrocheur/microlabel">Microlabel</a> <span class="'.vc("class").'">♼</span>
+        </div>
      </div>
    </div>
-
 
    <div id="controlFooter" class="zindex-one">
        <a title="'.TXT_FRENCH.'" href="?a='.browse('current', 'nice').'&amp;lang=fr">
@@ -1010,8 +1005,6 @@ function fixedFooter($dirList) {
    </div>
     ';
 }
-
-
 
 $mtime = microtime();
 $mtime = explode(" ",$mtime);
