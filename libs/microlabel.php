@@ -17,6 +17,8 @@ function getLabelRoot() {
 
 ///////////////////////////////////////////////////////////////// no user-serviceable parts below
 
+set_include_path('TEXT'.PATH_SEPARATOR.'../TEXT'.PATH_SEPARATOR.'libs'.PATH_SEPARATOR.'libs/getid3');
+
 $httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'] : '';
 
 $browserPrefs = substr($httpVars,'0','2');
@@ -28,42 +30,32 @@ $timeFormula = 3600;
 if (!isset($lang) || !empty($lang)) {
     if (isset($_GET['lang']) && !empty($_GET['lang'])) {
         $lang = $_GET['lang'];
+        $method = 'get';
     } elseif (isset($browserPrefs) && !empty($browserPrefs)) {
         $lang = $browserPrefs;
+        $method = 'browser';
     } elseif (isset($cookiePrefs) && !empty($cookiePrefs)) {
         $lang = $cookiePrefs;
+        $method = 'cookie';
     } else {
+        $method = 'default';
         $lang = 'en';
     }
 } else {
+    $method = 'fallback';
     $lang = 'en';
 }
 
 if (isset($lang)) {
     $textFile = 'lang-'.$lang.'.php';
-    setcookie("lang", $lang, time() + $timeFormula);
+    setcookie('lang', $lang, strtotime( '+30 days' ), '/', '', 0);
 } else {
     $textFile = 'lang-en.php';
 }
 
-include($textFile);
-
-
-if (!defined("PATH_SEPARATOR")) {
-    if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
-        define( "PATH_SEPARATOR", ";" );
-    else define( "PATH_SEPARATOR", ":" );
-}
-
-if (!defined("FILE_SEPARATOR")) {
-    if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
-        define( "FILE_SEPARATOR", "\\" );
-    else define( "FILE_SEPARATOR", "/" );
-}
-
 function microlabelError($text, $suggestion) {
 echo '
-<p id="suggestion">'.$suggestion.'</p>
+        <p id="suggestion">'.$suggestion.'</p>
 		<div id="horizon">
 			<div id="error">
 			<img src="/microlabel/img/instruments/horns.png"/>
@@ -77,4 +69,5 @@ echo '
 ';
 }
 
+include($textFile);
 ?>

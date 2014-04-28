@@ -15,9 +15,8 @@ if (!defined("PATH_SEPARATOR")) {
 }
 
 // set_include_path("./TEXT:./libs:./libs/getid3:.libs/getID3-1.9.7/getid3");
-set_include_path('./TEXT'.PATH_SEPARATOR.'./libs'.PATH_SEPARATOR.'./libs/getid3');
 
-require_once('getid3.php');
+require_once('libs/getid3/getid3.php');
 require_once('libs/microlabel.php');
 
 $labelName = 'beldigital';
@@ -917,20 +916,12 @@ function browse($position, $pathStyle) {
     }
 }
 
-// bytestostring($size, $precision) ////////////////////////////////////////
-// Présentation de la taille du fichier pour les humains
-// Human-readable filesize
-
 function bytestostring($size, $precision = 0) {
     $sizes = array('YB', 'ZB', 'EB', 'PB', 'TB', 'GB', 'MB', 'kB', 'B');
     $total = count($sizes);
     while($total-- && $size > 1024) $size /= 1024;
     return round($size, $precision).$sizes[$total];
 }
-
-// footer() ////////////////////////////////////////
-// Pied de page avec navigation précédent/suivant
-// Build page footer and prev/next browser
 
 function albumBrowser($labelName) {
 
@@ -958,10 +949,6 @@ function albumBrowser($labelName) {
 }
 
 
-// fixedFooter($dirList) ////////////////////////////////////////
-// Fixed Footer pane
-
-
 // Version Control
 
 function vc($element) {
@@ -974,7 +961,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "b07a8d09cc9315afa4c692a71adf25546ce34a8c";
+        $ref_commit = "7c789a3029cbbc4fa7a0708a3b035f5063c16feb";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

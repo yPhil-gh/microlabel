@@ -7,15 +7,14 @@ if (isset($_GET['errorcode'])) {
 }
 
 $suggestion = '';
-$path = "./";
 
 if ($errorString == '401' || $errorString == '500') {
     $path = "../";
-    $suggestion = "Something must be wrong with your .ht* files. Better check 'em now.";
+    $suggestion = TXT_ERROR_401_SUGGESTION;
 } else if ($errorString == '404') {
-    $suggestion = "Dude, I looked everywhere for that file, and could <strong>not</strong> find it.";
+    $suggestion = TXT_ERROR_404_SUGGESTION;
 } else {
-
+    $suggestion = '';
 }
 
 
@@ -38,7 +37,6 @@ echo '
 if (isset($_GET['errorcode'])) {
     $errorString = $_GET['errorcode'];
 }
-
 
 $errorString = TXT_SERVER_ERROR.' : <strong>'.$errorString.'</strong>';
 

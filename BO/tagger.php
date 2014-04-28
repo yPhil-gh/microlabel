@@ -31,7 +31,8 @@ $PageEncoding = 'UTF-8';
 $writescriptfilename = 'tagger-write.php';
 
 require_once('../libs/getid3/getid3.php');
-require_once('../libs/microlabel.php');
+
+include('../libs/microlabel.php');
 
 // Needed for windows only
 define('GETID3_HELPERAPPSDIR', 'C:/helperapps/');
@@ -51,7 +52,7 @@ function rrmdir($dir) {
                 if (is_writable($object)) {
                     return true;
                 } else {
-                    microlabelError('Permission error', 'You do not have the right to delete that file');
+                    microlabelError(TXT_TAGGER_ERROR_PERMISSION, TXT_TAGGER_ERROR_PERMISSION_SUGGESTION);
                 }
 
                 if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
@@ -160,6 +161,7 @@ $("input.input").expandable({
 <body id="microlabel-tagger" class="microlabel-body">
 ';
 
+// echo '('.$lang.')'.$method;
 
 if (isset($_REQUEST['deletedir'])) {
     rrmdir($_REQUEST['deletedir']);
@@ -389,7 +391,7 @@ if (isset($_REQUEST['filename'])) {
 					} else {
 						echo '<td class="directory" colspan="'.$columnsintableMinusOne.'"><img src="../img/icon_folder.png"/> <span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
 
-</td><td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?deletedir='.urlencode($dirname.$filename), ENT_QUOTES).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes(htmlentities($dirname.$filename)).'? \n(this action cannot be un-done)\');">delete</a></td>';
+</td><td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?deletedir='.urlencode($dirname.$filename), ENT_QUOTES).'" onClick="return confirm(\''.TXT_TAGGER_WARNING_DELETE.' ('.addslashes(htmlentities($dirname.$filename)).')\');">delete</a></td>';
 					}
 					echo '</tr>';
 				}
