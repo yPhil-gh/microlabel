@@ -60,8 +60,6 @@ define('TXT_DEBUG_HELP_TXT', '<p>MicroLabel est un <a href="http://fr.wikipedia.
 <p style="margin:1em;text-align:center;color:red">
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />Ces oeuvres sont licenciées sous <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
 </p>
-
-<p>Icons from http://www.icondrawer.com/.</p>
 ');
 
 define('TXT_NO_AUDIO_TXT', 'Apparemment votre navigateur ne gère pas les formats multimedia. Vous ne pourrez pas écouter les chansons sur le site, seulement les télécharger, ce qui n"est déjà pas si mal me direz-vous, mais la plupart des embellissements graphiques seront désactivés, ce qui ne fait pas justice au travail des designers.</p><br /><p>Si je peux me permettre, vous vous faites du mal à utiliser des outils défaillants ; puis-je vous suggèrer un navigateur standard ?');

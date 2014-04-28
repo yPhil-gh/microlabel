@@ -56,9 +56,6 @@ define('TXT_DEBUG_HELP_TXT', '<p>MicroLabel ist ein <a href="http://de.wikipedia
 
 <p style="margin:1em;text-align:center;color:red">
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.de"><img alt="Creative Commons Lizens" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />Dieses Werk steht unter einer <a rel="Lizens" href="http://creativecommons.org/licenses/by-sa/3.0/deed.de">Creative Commons Attribution-ShareAlike 3.0 Unported Lizens</a>.</p>
-
-<p>Icons from http://www.icondrawer.com/.</p>
-
 ');
 
 define('TXT_NO_AUDIO_TXT', '<p>Anscheinend unterst&uuml;tzt Dein Browser keine Multimediaformate. Du kannst die Musik auf dieser Seite nicht h&ouml;ren; lade sie einfach herunter, was nicht schlecht ist (sagst Du), aber die meisten grafischen Zierden werden nicht dargestellt, was den Designer gegen&uuml;ber unfair ist.</p><p>D&uuml;rfte ich einen Standard Browser empfehlen?</p>');
