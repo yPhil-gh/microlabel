@@ -2,6 +2,8 @@
 
 A CMS to manage albums
 
+![Screenshot](https://raw.githubusercontent.com/xaccrocheur/microlabel/master/img/screenshot-album-page.png)
+
 ### Features
 - Baseless : Just drop your correctly tagged music files in the MUSIC dir
     - and µlabel will build one [index page](http://opensimo.org/play/)
