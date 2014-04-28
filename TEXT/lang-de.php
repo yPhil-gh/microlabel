@@ -1,4 +1,8 @@
 <?php
+define('TAGS_FILE_NAME', 'Dateiname');
+define('TAGS_ARTIST', 'Künstler');
+define('TAGS_TITLE', 'Titel');
+define('TAGS_FORMAT', 'Format');
 define('TAGS_YEAR', 'Jahr');
 define('TAGS_GENRE', 'Genre');
 define('TAGS_TRACK', 'Lied');
@@ -10,6 +14,9 @@ define('TAGS_BITRATE', 'Bitrate');
 define('TAGS_VIDEO_VIDEO', 'Video');
 define('TAGS_VIDEO_PREVIEW', 'Vorschau');
 define('TAGS_DOWNLOAD', 'Herunterladen');
+define('TXT_TAGS', 'Tags');
+define('TXT_DELETE', 'Löschen');
+define('TXT_EDIT', 'Bearbeiten');
 define('TXT_NODOWNLOAD', 'Auf wunsch des K&uuml;nstlers ist der Download f&uuml;r dieses Album nicht erlaubt');
 define('TXT_DOWNLOAD', 'Herunterladen');
 define('TXT_SHARE', 'Teilen');
@@ -37,13 +44,13 @@ define('TXT_ERROR_401_SUGGESTION', 'Es muss etwas falsch mit Ihrem .ht* Dateien 
 define('TXT_TAGGER_ERROR_PERMISSION', 'Schreibfehler');
 define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'Sie haben wahrscheinlich nicht die Rechte an dem übergeordneten Verzeichnis.');
 define('TXT_TAGGER_WARNING_DELETE', 'Dauerhaft diese Datei löschen?');
-define('TXT_DEBUG_ERRORS', 'Fehler');
+define('TXT_ERRORS', 'Fehler');
 define('TXT_DEBUG_FILE_ERRORS', 'Dateifehler');
 define('TXT_DEBUG_SHOW_ERRORS', 'Anzeigefehler');
 define('TXT_DEBUG_ERROR_FOUND', 'Ein Fehler wurde in Deinem Setup gefunden');
-define('TXT_DEBUG_ERRORS_FOUND', 'Fehler wurden in Deinem Setup gefunden');
-define('TXT_DEBUG_ERRORS_FILE', 'Die Datei');
-define('TXT_DEBUG_ERRORS_FILE_SHOULD_BE_RENAMED', 'sollte umbenannt werden');
+define('TXT_ERRORS_FOUND', 'Fehler wurden in Deinem Setup gefunden');
+define('TXT_ERRORS_FILE', 'Die Datei');
+define('TXT_ERRORS_FILE_SHOULD_BE_RENAMED', 'sollte umbenannt werden');
 define('TXT_DEBUG_HELP_TXT', '<p>MicroLabel ist ein <a href="http://de.wikipedia.org/w/index.php?title=Content-Management-System">CMS</a> um Musik zu pr&auml;sentieren.</p>
 <ul><li>Weil wir jetzt wissen, was passiert, wenn K&uuml;nstler andere ihre Musik pr&auml;sentieren, verteilen und verkaufen lassen, versucht MicroLabel eine m&ouml;glichst direkte Verbindung zwischen Musikern und H&ouml;rern zu schaffen.</li></ul>
 

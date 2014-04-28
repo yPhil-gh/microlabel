@@ -1,4 +1,8 @@
 <?php
+define('TAGS_FILE_NAME', 'Archivo');
+define('TAGS_TITLE', 'título');
+define('TAGS_ARTIST', 'Artista');
+define('TAGS_FORMAT', 'Formato');
 define('TAGS_YEAR', 'Año');
 define('TAGS_GENRE', 'Género');
 define('TAGS_TRACK', 'Song');
@@ -10,6 +14,9 @@ define('TAGS_BITRATE', 'Codificación');
 define('TAGS_VIDEO_VIDEO', 'Video');
 define('TAGS_VIDEO_PREVIEW', 'vista previa');
 define('TAGS_DOWNLOAD', 'Descargar');
+define('TXT_TAGS', 'Etiquetas');
+define('TXT_DELETE', 'Borrar');
+define('TXT_EDIT', 'Editar');
 define('TXT_NODOWNLOAD', 'Descargar este álbum es bajar en la solicitud de la artista');
 define('TXT_DOWNLOAD', 'Descargar');
 define('TXT_SHARE', 'Compartir');
@@ -37,13 +44,13 @@ define('TXT_ERROR_401_SUGGESTION', 'Algo debe estar mal con sus archivos .ht*  M
 define('TXT_TAGGER_ERROR_PERMISSION', 'Error de escritura');
 define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'Usted probablemente no tiene derechos sobre el directorio padre.');
 define('TXT_TAGGER_WARNING_DELETE', 'Eliminar permanentemente este archivo?');
-define('TXT_DEBUG_ERRORS', 'Errore(s)');
+define('TXT_ERRORS', 'Errore(s)');
 define('TXT_DEBUG_FILE_ERRORS', 'Errore de archivo');
 define('TXT_DEBUG_SHOW_ERRORS', 'Mostrar todos los errores');
 define('TXT_DEBUG_ERROR_FOUND', 'Un error fue encontrado en la configuración de su');
-define('TXT_DEBUG_ERRORS_FOUND', 'errores en su configuración');
-define('TXT_DEBUG_ERRORS_FILE', 'El archivo');
-define('TXT_DEBUG_ERRORS_FILE_SHOULD_BE_RENAMED', 'debería llamarse');
+define('TXT_ERRORS_FOUND', 'errores en su configuración');
+define('TXT_ERRORS_FILE', 'El archivo');
+define('TXT_ERRORS_FILE_SHOULD_BE_RENAMED', 'debería llamarse');
 define('TXT_DEBUG_HELP_TXT', '<p>MicroLabel es un <a href="http://es.wikipedia.org/wiki/Sistema_de_gesti%C3%B3n_de_contenidos">CMS</a> diseñado para presentar la música.</p>
 <ul>
 <li>Debido a que la música debe ser presentado por los músicos, MicroLabel intentos de establecer un vínculo, la ruta más directa posible entre ellos y su público.</li>

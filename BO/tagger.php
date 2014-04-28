@@ -63,75 +63,6 @@ function rrmdir($dir) {
     }
 }
 
-function delTree($dir) {
-    $files = array_diff(scandir($dir), array('.','..'));
-    foreach ($files as $file) {
-        (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
-    }
-    return rmdir($dir);
-}
-
-function deleteDirectory($dir) {
-    if (!file_exists($dir)) return true;
-    if (is_writable($dir . $file)) {
-        return true;
-    } else {
-        microlabelError('Permission error', 'You do not have the right to delete that file');
-    }
-    if (!is_dir($dir) || is_link($dir)) return unlink($dir);
-    foreach (scandir($dir) as $item) {
-        if ($item == '.' || $item == '..') continue;
-        if (!deleteDirectory($dir . "/" . $item)) {
-            chmod($dir . "/" . $item, 0777);
-            if (!deleteDirectory($dir . "/" . $item)) return false;
-        };
-    }
-    return rmdir($dir);
-}
-
-function deleteDir($dir) {
-
-    // if (is_dir($dir)) {
-    //     if ($dh = opendir($dir)) {
-    //         while (($file = readdir($dh)) !== false ) {
-    //             if( $file != "." && $file != ".." ) {
-    //                 if( is_dir( $dir . $file ) ) {
-    //                     echo "Entering Directory: $dir$file<br/>";
-    //                     if (is_writable($dir . $file)) {
-    //                         recursive_delete( $dir . $file . "/" );
-    //                         echo "Removing Directory: $dir$file<br/><br/>";
-    //                         rmdir( $dir . $file );
-    //                     } else {
-    //                         microlabelError('Oh shit', 'You do not have the right to delete that directory');
-    //                     }
-    //                 }
-    //                 else {
-
-    //                     if (is_writable($dir . $file)) {
-    //                         echo "I'm Deleting file: $dir$file<br/>";
-    //                         unlink( $dir . $file );
-    //                     } else {
-    //                         microlabelError('Oh shit', 'You do not have the right to delete that file');
-    //                     }
-
-    //                 }
-    //             }
-    //         }
-    //         closedir($dh);
-    //     }
-    // }
-    if (is_dir($dir)) {
-        $objects = scandir($dir);
-        foreach ($objects as $object) {
-            if ($object != "." && $object != "..") {
-                if (filetype($dir."/".$object) == "dir") rmdir($dir."/".$object); else unlink($dir."/".$object);
-            }
-        }
-        reset($objects);
-        rmdir($dir);
-    }
-}
-
 header('Content-Type: text/html; charset=UTF-8');
 echo '<!doctype html>
 <html>
@@ -347,13 +278,13 @@ if (isset($_REQUEST['filename'])) {
 		echo '<table class="microlabel-tagger table">
 
         <tr>
-            <th>Filename</th>
-            <th>File Size</th>
-            <th>Format</th>
-            <th>Playtime</th>
-            <th>Bitrate</th>
-            <th>Artist</th>
-            <th>Title</th>';
+            <th>'.TAGS_FILE_NAME.'</th>
+            <th>'.TAGS_SIZE.'</th>
+            <th>'.TAGS_FORMAT.'</th>
+            <th>'.TAGS_PLAYTIME.'</th>
+            <th>'.TAGS_BITRATE.'</th>
+            <th>'.TAGS_ARTIST.'</th>
+            <th>'.TAGS_TITLE.'</th>';
 			if (isset($_REQUEST['ShowMD5'])) {
 				echo '<th>MD5 (File) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">on</a>)</th>';
 				echo '<th>MD5 (File) (<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.'), ENT_QUOTES).'">on</a>)</th>';
@@ -362,10 +293,10 @@ if (isset($_REQUEST['filename'])) {
 				echo '<th colspan="3">MD5&nbsp<a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'&ShowMD5=1', ENT_QUOTES).'">off</a></th>';
 			}
 			echo '
-            <th>Tags</th>
-            <th>Errors</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>'.TXT_TAGS.'</th>
+            <th>'.TXT_ERRORS.'</th>
+            <th>'.TXT_EDIT.'</th>
+            <th>'.TXT_DELETE.'</th>
         </tr>
 ';
             $columnsintableMinusOne = $columnsintable - 1;
@@ -391,7 +322,7 @@ if (isset($_REQUEST['filename'])) {
 					} else {
 						echo '<td class="directory" colspan="'.$columnsintableMinusOne.'"><img src="../img/icon_folder.png"/> <span class="right"><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename), ENT_QUOTES).'">'.htmlentities($filename).'</a></span>
 
-</td><td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?deletedir='.urlencode($dirname.$filename), ENT_QUOTES).'" onClick="return confirm(\''.TXT_TAGGER_WARNING_DELETE.' ('.addslashes(htmlentities($dirname.$filename)).')\');">delete</a></td>';
+</td><td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?deletedir='.urlencode($dirname.$filename), ENT_QUOTES).'" onClick="return confirm(\''.TXT_TAGGER_WARNING_DELETE.' ('.addslashes(htmlentities($dirname.$filename)).')\');">'.TXT_DELETE.'</a></td>';
 					}
 					echo '</tr>';
 				}
@@ -450,7 +381,7 @@ if (isset($_REQUEST['filename'])) {
 							break;
 					}
 					echo '</td>';
-					echo '<td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($listdirectory).'&deletefile='.urlencode($dirname.$filename), ENT_QUOTES).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes(htmlentities($dirname.$filename)).'? \n(this action cannot be un-done)\');" title="'.htmlentities('Permanently delete '."\n".$filename."\n".' from'."\n".' '.$dirname, ENT_QUOTES).'">delete</a></td>';
+					echo '<td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($listdirectory).'&deletefile='.urlencode($dirname.$filename), ENT_QUOTES).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes(htmlentities($dirname.$filename)).'? \n(this action cannot be un-done)\');" title="'.htmlentities('Permanently delete '."\n".$filename."\n".' from'."\n".' '.$dirname, ENT_QUOTES).'">'.TXT_DELETE.'</a></td>';
 					echo '</tr>';
 				}
 			}
@@ -484,7 +415,7 @@ if (isset($_REQUEST['filename'])) {
 					echo '</td>';
 
 					echo '<td></td>'; // Edit
-					echo '<td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($listdirectory).'&deletefile='.urlencode($dirname.$filename), ENT_QUOTES).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes($dirname.$filename).'? \n(this action cannot be un-done)\');" title="Permanently delete '.addslashes($dirname.$filename).'">delete</a></td>';
+					echo '<td><a href="'.htmlentities($_SERVER['PHP_SELF'].'?listdirectory='.urlencode($listdirectory).'&deletefile='.urlencode($dirname.$filename), ENT_QUOTES).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes($dirname.$filename).'? \n(this action cannot be un-done)\');" title="Permanently delete '.addslashes($dirname.$filename).'">'.TXT_DELETE.'</a></td>';
 					echo '</tr>';
 				}
 			}

@@ -615,9 +615,6 @@ function audioList($fileList, $albumPath) {
         </li>
             ';
 
-      // Feed the tracklist
-      $audioFile[$trackTitle] = $fileName;
-
   } // End foreach
   echo '
         </ul>
@@ -626,21 +623,7 @@ function audioList($fileList, $albumPath) {
 
   $musiciens = xmlInfos('all_musicians');
 
-  // echo '<pre>';
-  // var_dump($musiciens);
-  // echo '</pre>';
-
   foreach ($musiciens as $zicos) {
-
-  // echo '<pre>';
-  // var_dump($value);
-  // echo '</pre>';
-
-  // foreach ($value as $zico) {
-  //     $zicosName = $zico['name'];
-  // }
-
-      // echo $key.' : '.$value.' ';
 
           echo '
     <div class="musicien">
@@ -650,16 +633,6 @@ function audioList($fileList, $albumPath) {
           $thisInstruments = '';
           $thisContacts = '';
           $zicosName = $zicos['name'];
-          // $test = array_search('mail', $zicos);
-          // echo '('.$test.')';
-
-          //     if (!array_search('mail', $musiciens)) {
-          //             echo "now";
-          //         $email = false;
-          //     } else {
-          //             echo "yow";
-          //         $email = true;
-          //     }
           foreach ($zicos as $key => $value) {
               // echo 'name is '.$zicosName;
               if ($key == 'instrument') {
@@ -974,7 +947,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "0abb501b3f00b99beaae59a82b1c81fe028af992";
+        $ref_commit = "280a71acc4eb4a08811fb501b033fc93e0f0882e";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

@@ -1,4 +1,8 @@
 <?php
+define('TAGS_FILE_NAME', 'Fichier');
+define('TAGS_TITLE', 'Titre');
+define('TAGS_FORMAT', 'Format');
+define('TAGS_ARTIST', 'Artist');
 define('TAGS_YEAR', 'Année');
 define('TAGS_GENRE', 'Genre');
 define('TAGS_TRACK', 'Piste');
@@ -10,6 +14,9 @@ define('TAGS_BITRATE', 'Encodage');
 define('TAGS_VIDEO_VIDEO', 'Vidéo');
 define('TAGS_VIDEO_PREVIEW', 'Aperçu');
 define('TAGS_DOWNLOAD', 'Téléchargement');
+define('TXT_TAGS', 'Tags');
+define('TXT_DELETE', 'Effacer');
+define('TXT_EDIT', 'Editer');
 define('TXT_NODOWNLOAD', 'Le téléchargement de cet album est désactivé à la demande de l\'artiste');
 define('TXT_DOWNLOAD', 'Télécharger');
 define('TXT_SHARE', 'Partager');
@@ -37,13 +44,13 @@ define('TXT_ERROR_401_SUGGESTION', 'Un truc ne va pas avec les fichier .ht* à t
 define('TXT_TAGGER_ERROR_PERMISSION', 'Erreur d\'écriture');
 define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'Tu n\'as probablement pas les droits sur le répertoire parent.');
 define('TXT_TAGGER_WARNING_DELETE', 'Détruire définitivement ce fichier ?');
-define('TXT_DEBUG_ERRORS', 'Erreur(s)');
+define('TXT_ERRORS', 'Erreur(s)');
 define('TXT_DEBUG_FILE_ERRORS', 'Erreurs de fichier');
 define('TXT_DEBUG_SHOW_ERRORS', 'Voir les erreurs');
 define('TXT_DEBUG_ERROR_FOUND', 'Une erreur a été trouvée dans votre installation');
-define('TXT_DEBUG_ERRORS_FOUND', 'erreurs ont été trouvées dans votre installation');
-define('TXT_DEBUG_ERRORS_FILE', 'Le fichier');
-define('TXT_DEBUG_ERRORS_FILE_SHOULD_BE_RENAMED', 'devrait être renommé');
+define('TXT_ERRORS_FOUND', 'erreurs ont été trouvées dans votre installation');
+define('TXT_ERRORS_FILE', 'Le fichier');
+define('TXT_ERRORS_FILE_SHOULD_BE_RENAMED', 'devrait être renommé');
 define('TXT_DEBUG_HELP_TXT', '<p>MicroLabel est un <a href="http://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_contenu">CMS</a> conçu pour permettre aux musiciens de présenter, distribuer et même vendre leur musique, puisqu\'il semble qu\'ils sont les seuls à même de le faire correctement et simplement : Un script central et un répertoire de musique, des mp3 ou des ogg-vorbis (qui qui est infiniment préférable)</p>
 <ul>
 <li>MicroLabel scanne le répertoire à la recherche de musique, lit les <a href="http://fr.wikipedia.org/wiki/ID3">tags</a> des fichiers qu\'il trouve, et organise tout ça en ARTISTE / ALBUM / TRACK, sur deux pages : Un index qui liste tous les albums, et une page de "lecture" qui liste toutes les chansongs.</li>

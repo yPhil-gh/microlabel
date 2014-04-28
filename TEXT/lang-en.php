@@ -1,4 +1,7 @@
 <?php
+define('TAGS_FILE_NAME', 'File');
+define('TAGS_ARTIST', 'Artist');
+define('TAGS_FORMAT', 'Format');
 define('TAGS_YEAR', 'Year');
 define('TAGS_GENRE', 'Genre');
 define('TAGS_TRACK', 'Track');
@@ -38,13 +41,13 @@ define('TXT_TAGGER_ERROR_PERMISSION', 'Write error');
 define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'You probably do not have rights to the parent directory.');
 define('TXT_TAGGER_WARNING_DELETE', 'Do you really want to permanently delete this file?');
 
-define('TXT_DEBUG_ERRORS', 'Error(s)');
+define('TXT_ERRORS', 'Error(s)');
 define('TXT_DEBUG_FILE_ERRORS', 'File errors');
 define('TXT_DEBUG_SHOW_ERRORS', 'Show errors');
 define('TXT_DEBUG_ERROR_FOUND', 'One error was found in your setup');
-define('TXT_DEBUG_ERRORS_FOUND', 'errors were found in your setup');
-define('TXT_DEBUG_ERRORS_FILE', 'The file');
-define('TXT_DEBUG_ERRORS_FILE_SHOULD_BE_RENAMED', 'should be renamed');
+define('TXT_ERRORS_FOUND', 'errors were found in your setup');
+define('TXT_ERRORS_FILE', 'The file');
+define('TXT_ERRORS_FILE_SHOULD_BE_RENAMED', 'should be renamed');
 define('TXT_DEBUG_HELP_TXT', '<p>MicroLabel is a <a href="http://en.wikipedia.org/wiki/Content_management_system">CMS</a> intended to present music.</p>
 <ul><li>Because now we know what happens when artists let others present, distribute and sell their work, MicroLabel attempt to provide a link, as direct as possible, from musicians to audience.</li></ul>
 
