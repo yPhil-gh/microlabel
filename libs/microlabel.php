@@ -7,12 +7,13 @@
 // Change the root label /directory                               //
 ////////////////////////////////////////////////////////////////////
 
-function getMusicRoot() {
-    return 'MUSIC';
-}
+define('MICROLABEL_MUSIC_DIR', 'MUSIC');
+define('MICROLABEL_ROOT_DIR', '/microlabel');
 
-function getLabelRoot() {
-    return '/microlabel';
+if (!defined("PATH_SEPARATOR")) {
+    if (strpos($_ENV[ "OS" ], "Win") !== false )
+        define("PATH_SEPARATOR", ";");
+    else define("PATH_SEPARATOR", ":");
 }
 
 ///////////////////////////////////////////////////////////////// no user-serviceable parts below
@@ -22,10 +23,7 @@ set_include_path('TEXT'.PATH_SEPARATOR.'../TEXT'.PATH_SEPARATOR.'libs'.PATH_SEPA
 $httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'] : '';
 
 $browserPrefs = substr($httpVars,'0','2');
-
 $cookiePrefs = htmlspecialchars($_COOKIE["lang"]);
-
-$timeFormula = 3600;
 
 if (!isset($lang) || !empty($lang)) {
     if (isset($_GET['lang']) && !empty($_GET['lang'])) {

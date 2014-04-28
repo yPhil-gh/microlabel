@@ -27,7 +27,7 @@ if (isset($_GET['tag'])) {
 exit;
 }
 
-$rootMusicDir = trim(getMusicRoot());
+$rootMusicDir = MICROLABEL_MUSIC_DIR;
 
 /* Exclude directories from iterator */
 class ExcludeDotDirsFilterIterator extends FilterIterator {
@@ -813,7 +813,7 @@ echo '
 
 function browse($position, $pathStyle) {
 
-    $rootMusicDir = getMusicRoot();
+    $rootMusicDir = MICROLABEL_MUSIC_DIR;
 
     $dirList = getInfo($rootMusicDir, 'musicDirs');
 
@@ -946,7 +946,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "2c82020b9c68ab93723a906db0cf87c44b0d3be8";
+        $ref_commit = "4ffb26f6f33c7d96cb9307a9b2c3624987f3f40a";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

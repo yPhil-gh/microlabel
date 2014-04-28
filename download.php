@@ -2,7 +2,7 @@
 
 require_once('libs/microlabel.php');
 
-$path =  trim(getMusicRoot());
+$path =  MICROLABEL_MUSIC_DIR;
 
 $URI = (isset($_GET['d'])) ? explode(",", $_GET['d']) : die("arg");
 
