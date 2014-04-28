@@ -946,7 +946,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "1ecdbcbca0c3962ac6b0aeb7e40b094c200561df";
+        $ref_commit = "c32b21bb8972f2b072575ac1adae671e3744b3d3";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -997,13 +997,13 @@ function fixedFooter($dirList) {
    <div id="controlFooter" class="zindex-one">
      <div id="controlFooter-left">
        <a title="'.TXT_FRENCH.'" href="?a='.browse('current', 'nice').'&amp;lang=fr">
-         <img class="buttons" alt="'.TXT_FRENCH.'" src="img/flags/fr.png" /></a>
+         <img class="buttons" alt="'.TXT_FRENCH.'" src="img/flags/FR.png" /></a>
        <a title="'.TXT_ENGLISH.'" href="?a='.browse('current', 'nice').'&amp;lang=en">
-         <img class="buttons" alt="'.TXT_ENGLISH.'" src="img/flags/uk.png" /></a>
+         <img class="buttons" alt="'.TXT_ENGLISH.'" src="img/flags/GB.png" /></a>
        <a title="'.TXT_SPANISH.'" href="?a='.browse('current', 'nice').'&amp;lang=es">
-         <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/es.png" /></a>
+         <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/ES.png" /></a>
        <a title="'.TXT_GERMAN.'" href="?a='.browse('current', 'nice').'&amp;lang=de">
-         <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/de.png" /></a>
+         <img class="buttons" alt="'.TXT_SPANISH.'" src="img/flags/DE.png" /></a>
        <a title="'.TXT_HELP.'" class="osx" href="#">
          <img class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
        <a title="Tag!" href="./?tag">
