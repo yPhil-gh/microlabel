@@ -31,7 +31,7 @@ define('TXT_LICENSE', 'Licence');
 define('TXT_BASELINE', 'Un martinet passe devant la lune');
 define('TXT_LABEL', 'Label');
 define('TXT_MORE_INFO', 'Plus d\'info sur');
-define('TXT_ERROR', 'Erreur');
+define('TXT_SERVER_ERROR', 'Une erreur regrettable vient de se produire');
 define('TXT_DEBUG_ERRORS', 'Erreur(s)');
 define('TXT_DEBUG_FILE_ERRORS', 'Erreurs de fichier');
 define('TXT_DEBUG_SHOW_ERRORS', 'Voir les erreurs');

@@ -1,5 +1,6 @@
 <?php
 
+require_once('libs/microlabel.php');
 
 if (isset($_GET['errorcode'])) {
     $errorString = $_GET['errorcode'];
@@ -38,9 +39,8 @@ if (isset($_GET['errorcode'])) {
     $errorString = $_GET['errorcode'];
 }
 
-require_once('libs/microlabel.php');
 
-$errorString = 'A much infortunate '.$errorString.' error has occured.';
+$errorString = TXT_SERVER_ERROR.' : <strong>'.$errorString.'</strong>';
 
 microlabelError($errorString, $suggestion);
 

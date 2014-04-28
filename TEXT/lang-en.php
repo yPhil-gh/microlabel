@@ -31,7 +31,7 @@ define('TXT_LICENSE', 'License');
 define('TXT_BASELINE', 'A (common) swift past the moon');
 define('TXT_LABEL', 'Label');
 define('TXT_MORE_INFO', 'More info about');
-define('TXT_ERROR', 'Error');
+define('TXT_SERVER_ERROR', 'A much infortunate error has occured');
 define('TXT_DEBUG_ERRORS', 'Error(s)');
 define('TXT_DEBUG_FILE_ERRORS', 'File errors');
 define('TXT_DEBUG_SHOW_ERRORS', 'Show errors');

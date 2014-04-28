@@ -1,39 +1,5 @@
 <?php
 
- if (!defined("PATH_SEPARATOR")) {
-    if ( strpos( $_ENV[ "OS" ], "Win" ) !== false )
-        define( "PATH_SEPARATOR", ";" );
-    else define( "PATH_SEPARATOR", ":" );
-}
-
-// set_include_path("./TEXT:./libs:./libs/getid3:.libs/getID3-1.9.7/getid3");
-set_include_path("./TEXT:./libs:./libs/getid3");
-
-if (isset($_GET['lang'])) {
-    $timeFormula = "365*24*3600";
-    if ($_GET['lang']=='en') {
-        $lang = 'en';
-        include('lang-en.php');
-        setcookie("lang", $lang, time() + $timeFormula);
-        //    exit();
-    }
-    if ($_GET['lang']=='fr') {
-        $lang = 'fr';
-        include('lang-fr.php');
-        setcookie("lang", $lang, time() + $timeFormula);
-    }
-    if ($_GET['lang']=='de') {
-        $lang = 'de';
-        include('lang-de.php');
-        setcookie("lang", $lang, time() + $timeFormula);
-    }
-    if ($_GET['lang']=='es') {
-        $lang = 'es';
-        include('lang-es.php');
-        setcookie("lang", $lang, time() + $timeFormula);
-    }
-}
-
 ////////////////////////////////////////////////////////////////////
 // Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
 // licensed GPL3 - http://www.gnu.org/licenses/gpl-3.0.html       //
@@ -41,13 +7,21 @@ if (isset($_GET['lang'])) {
 // Please don't harm nobody w/ this code even if they ask to      //
 ////////////////////////////////////////////////////////////////////
 
+
+if (!defined("PATH_SEPARATOR")) {
+    if (strpos($_ENV[ "OS" ], "Win") !== false )
+        define("PATH_SEPARATOR", ";");
+    else define("PATH_SEPARATOR", ":");
+}
+
+// set_include_path("./TEXT:./libs:./libs/getid3:.libs/getID3-1.9.7/getid3");
+set_include_path('./TEXT'.PATH_SEPARATOR.'./libs'.PATH_SEPARATOR.'./libs/getid3');
+
 require_once('getid3.php');
 require_once('libs/microlabel.php');
 
 $labelName = 'beldigital';
 global $labelName;
-
-///////////////////////////////////////////////////////////////// no user-serviceable parts below
 
 if (isset($_GET['tag'])) {
     header("Location: ./BO/?listdirectory=../".$rootMusicDir);
@@ -228,51 +202,6 @@ $mtime = microtime();
 $mtime = explode(" ",$mtime);
 $mtime = $mtime['1'] + $mtime['0'];
 $starttime = $mtime;
-
-// Permet la lecture du source a volee, cool huh ?
-if (isset($_GET['code'])) { die(highlight_file(__FILE__, '1')); }
-
-$httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'] : '';
-
-global $HTTP_COOKIE_VARS;
-
-$browserPrefs = substr($httpVars,'0','2');
-$cookiePrefs = $HTTP_COOKIE_VARS['lang'];
-
-// $expire = $timeFormula;
-
-if (isset($cookiePrefs)) {
-    if ($cookiePrefs == 'en') {
-        $lang = 'en';
-        include('lang-en.php');
-    }
-    if ($cookiePrefs == 'fr') {
-        $lang = 'fr';
-        include('lang-fr.php');
-    }
-    if ($cookiePrefs == 'es') {
-        $lang = 'es';
-        include('lang-es.php');
-    }
-}
-
-else {
-    if (isset($browserPrefs)) {
-        if ($browserPrefs == 'en') {
-            $lang = 'en';
-            include('lang-en.php');
-        }
-        if ($browserPrefs == 'fr') {
-            $lang = 'fr';
-            include('lang-fr.php');
-        }
-        if ($browserPrefs == 'es') {
-            $lang = 'es';
-            include('lang-es.php');
-        }
-    }
-    include('lang-fr.php');
-}
 
 ////////////////////////////////
 
