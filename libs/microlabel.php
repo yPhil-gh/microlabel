@@ -60,7 +60,7 @@ echo '
 				<h1 id="error">Uh-oh</h1>
                 '.$text.' :(
 			    <div id="back_home">
-                <a href="'.getLabelRoot().'/">&#8962;</a>
+                <a href="/">&#8962;</a>
 			    </div>
 			</div>
 		</div>

@@ -9,7 +9,7 @@ if (isset($_GET['errorcode'])) {
 $suggestion = '';
 
 if ($errorString == '401' || $errorString == '500') {
-    $path = "../";
+    // $path = "../";
     $suggestion = TXT_ERROR_401_SUGGESTION;
 } else if ($errorString == '404') {
     $suggestion = TXT_ERROR_404_SUGGESTION;
@@ -33,6 +33,7 @@ echo '
 </head>
 <body class="microlabel-body">
 ';
+
 
 if (isset($_GET['errorcode'])) {
     $errorString = $_GET['errorcode'];
