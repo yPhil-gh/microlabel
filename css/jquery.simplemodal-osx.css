@@ -22,6 +22,6 @@
 #osx-container .close {display:none; position:absolute; right:0; top:0;}
 #osx-container .close a {display:block; color:#777; font-weight:bold; padding:6px 12px 0; text-decoration:none; text-shadow:0 1px 0 #f4f4f4;}
 #osx-container .close a:hover {color:#000;}
-#osx-container #osx-modal-data {font-size:12px; padding:6px 12px;}
+#osx-container #osx-modal-data {padding:0;}
 #osx-container h2 {margin:10px 0 6px;}
 #osx-container p {margin-bottom:10px;}

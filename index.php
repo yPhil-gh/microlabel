@@ -939,7 +939,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "682bdc07ce6f9f79ae3cbd2c8e4439a333ec2eec";
+        $ref_commit = "0bbd1ce9426469e9f5c99a7070f278184c32086b";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -974,19 +974,30 @@ function fixedFooter($dirList) {
      <div id="osx-modal-title">Help</div>
      <div class="close"><a href="#" class="simplemodal-close">x</a></div>
      <div id="osx-modal-data">
-       <h2>MicroLabel 1.5</h2>
+
        '.TXT_DEBUG_HELP_TXT.'
-        <div id="version" onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'">
-            <a href="https://github.com/xaccrocheur/microlabel">Microlabel</a> <span class="'.vc("class").'">♼</span>
-        </div>
+
+<table id="microlabel-controls">
+<tr>
+<td>
+<a class="microlabel-logo" href="https://github.com/xaccrocheur/microlabel">Microlabel</a>
+</td>
+<td style="text-align:right;">
+<span onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'" class="version '.vc("class").'">♼</span>
+
+<form title="Donate to the microlabel dev team so it can be better and stay free" style="display:inline;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="3ZYW9UL7GACBE">
+<input type="image" src="img/icon_love.png" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+</form>
 
 
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-        <input type="hidden" name="cmd" value="_s-xclick">
-        <input type="hidden" name="hosted_button_id" value="F8EGFRQX8Y6VG">
-        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-        </form>
+</td>
+</tr>
+
+
+</table>
 
 
      </div>
