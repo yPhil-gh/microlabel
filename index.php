@@ -939,7 +939,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "0bbd1ce9426469e9f5c99a7070f278184c32086b";
+        $ref_commit = "2b8092b93cb552f510e15abf102794449a2c2ddd";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -985,11 +985,10 @@ function fixedFooter($dirList) {
 <td style="text-align:right;">
 <span onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'" class="version '.vc("class").'">♼</span>
 
-<form title="Donate to the microlabel dev team so it can be better and stay free" style="display:inline;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<form title="Donate to the μLabel dev team, so it can be better and stay free" style="display:inline;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="3ZYW9UL7GACBE">
-<input type="image" src="img/icon_love.png" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
-<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+<input type="image" class="love" src="img/icon_love.png" border="0" name="submit" alt="PayPal">
 </form>
 
 

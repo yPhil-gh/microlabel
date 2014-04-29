@@ -495,14 +495,12 @@ table#microlabel-controls {
 }
 
 table#microlabel-controls * {
-    /* width:100%; */
     vertical-align: middle;
 }
 
 #osx-container a {
 color:#333;
 text-decoration:underline;
-/* font-weight:bold; */
 }
 
 #osx-modal-data {
@@ -515,10 +513,18 @@ text-decoration:underline;
 }
 
 #version a, #version span, #microlabel-controls a, span.version {
-    font-size:300%;
+    font-size:220%;
     font-weight:lighter;
     cursor:pointer;
     text-decoration:none;
+}
+
+input.love:hover {
+    filter: brightness(0.7);
+    -webkit-filter: brightness(0.7);
+    -moz-filter: brightness(0.7);
+    -o-filter: brightness(0.7);
+    -ms-filter: brightness(0.7);
 }
 
 span.unknown {
