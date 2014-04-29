@@ -6,15 +6,9 @@
 // Because all music should be free                               //
 // Please don't harm nobody w/ this code even if they ask to      //
 ////////////////////////////////////////////////////////////////////
-
-
-if (!defined("PATH_SEPARATOR")) {
-    if (strpos($_ENV[ "OS" ], "Win") !== false )
-        define("PATH_SEPARATOR", ";");
-    else define("PATH_SEPARATOR", ":");
-}
-
-// set_include_path("./TEXT:./libs:./libs/getid3:.libs/getID3-1.9.7/getid3");
+// Please see libs/microlabel.php for config options,             //
+// and leave this file alone. That is, unless you find a bug ;)   //
+////////////////////////////////////////////////////////////////////
 
 require_once('libs/getid3/getid3.php');
 require_once('libs/microlabel.php');
@@ -29,7 +23,6 @@ exit;
 
 $rootMusicDir = MICROLABEL_MUSIC_DIR;
 
-/* Exclude directories from iterator */
 class ExcludeDotDirsFilterIterator extends FilterIterator {
     public function accept()  {
         $fileinfo = $this->getInnerIterator()->current();
@@ -946,7 +939,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "c22229dde23b6942f0e55b37d09e625f0a41b891";
+        $ref_commit = "682bdc07ce6f9f79ae3cbd2c8e4439a333ec2eec";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -986,6 +979,16 @@ function fixedFooter($dirList) {
         <div id="version" onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'">
             <a href="https://github.com/xaccrocheur/microlabel">Microlabel</a> <span class="'.vc("class").'">♼</span>
         </div>
+
+
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="F8EGFRQX8Y6VG">
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+        </form>
+
+
      </div>
    </div>
 
