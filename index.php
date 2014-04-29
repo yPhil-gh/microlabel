@@ -939,7 +939,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "2b8092b93cb552f510e15abf102794449a2c2ddd";
+        $ref_commit = "96a15690345b4323d6d01fdd08433f17b55c1c3a";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -984,6 +984,8 @@ function fixedFooter($dirList) {
 </td>
 <td style="text-align:right;">
 <span onClick="document.location.href=\'https://github.com/xaccrocheur/microlabel\'" title="'.vc("message").'" class="version '.vc("class").'">♼</span>
+
+<script id="fbhu2f8">(function(i){var f,s=document.getElementById(i);f=document.createElement("iframe");f.src="//api.flattr.com/button/view/?uid=xaccrocheur&button=compact&url="+encodeURIComponent(document.URL);f.title="Flattr";f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})("fbhu2f8");</script>
 
 <form title="Donate to the μLabel dev team, so it can be better and stay free" style="display:inline;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
