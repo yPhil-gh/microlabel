@@ -138,23 +138,23 @@
 
 /* add the images to the backgrounds of the buttons */
 #play{
-    background-image:url("../img/player/play.png");
+    background-image:url("../../img/player/play.png");
     width:20px;
 }
 
 #pause{
-    background-image:url("../img/player/pause.png");
+    background-image:url("../../img/player/pause.png");
     width:20px;
     display:none;
 }
 
 #previous{
-    background-image:url("../img/player/previous.png");
+    background-image:url("../../img/player/previous.png");
     width:25px;
 }
 
 #next{
-    background-image:url("../img/player/next.png");
+    background-image:url("../../img/player/next.png");
     width:25px;
 }
 
