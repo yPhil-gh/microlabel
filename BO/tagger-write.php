@@ -22,7 +22,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www
 <html>
 <head>
     <title>Microlabel - Tag writer</title>
-    <style type="text/css" media="screen">@import "../css/style.css";</style>
+    <style type="text/css" media="screen">@import "../libs/css/style.css";</style>
     <body id="microlabel-tagger" class="microlabel-body">
 <div id="tagger-main">
 ';

@@ -239,10 +239,10 @@ function xmlInfos($element) {
 
 <head>
 <meta charset="UTF-8">
-  <style type="text/css" media="screen">@import "css/player.css";</style>
-    <link type='text/css' href="css/jquery.simplemodal-osx.css" rel='stylesheet' media='screen' />
-    <style type="text/css" media="screen">@import "css/style.css";</style>
-    <style type="text/css" media="screen">@import "css/jquery.colorbox.css";</style>
+  <style type="text/css" media="screen">@import "libs/css/player.css";</style>
+    <link type='text/css' href="libs/css/jquery.simplemodal-osx.css" rel='stylesheet' media='screen' />
+    <style type="text/css" media="screen">@import "libs/css/style.css";</style>
+    <style type="text/css" media="screen">@import "libs/css/jquery.colorbox.css";</style>
 
     <script src="libs/player.js"></script>
 
@@ -939,7 +939,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "90d16f61d9f74471c7f717a57785daf117cdf03b";
+        $ref_commit = "d828ab7e67c74dfabc31a0e117648d50bdb9eaf8";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

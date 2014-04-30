@@ -69,7 +69,7 @@ echo '<!doctype html>
 <head>
     <title>Microlabel - Tagger</title>
     <link rel="shortcut icon" href="../img/beldigital_logo_on.png" />
-    <style type="text/css" media="screen">@import "../css/style.css";</style>
+    <style type="text/css" media="screen">@import "../libs/css/style.css";</style>
     <script src="../libs/jquery-1.10.2.min.js"></script>
     <script src="../libs/jquery.expandable.js"></script>
     <script type="text/javascript">
