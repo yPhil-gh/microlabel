@@ -6,6 +6,12 @@ body {
     font-family: Helvetica, Arial, sans-serif;
 }
 
+@font-face {
+font-family: Starry;
+src: url('../libs/fonts/one_starry_night/One Starry Night.ttf');
+}
+
+
 img {
     border: 0;
 }
@@ -182,17 +188,15 @@ img.buttons {
 
 
 blockquote.comment {
-    font-family: "New York", "DejaVu Serif", serif;
-    font-style:italic;
+    font-family: Starry;
+    /* font-style:italic; */
     position:relative;
     text-align:right;
-    z-index:2;
-    font-size: 120%;
-    margin:.5em .5em 2.5em .5em;
+    font-size: 300%;
+    margin:.5em;
 }
 
-blockquote.comment:after {
-    z-index:1;
+blockquote.comment:before {
     background: rgba(150,150,150,0.8);
     width: 1em;
     height: 1em;
@@ -202,7 +206,7 @@ blockquote.comment:after {
     left: 12%;
     font-size: 70px;
     text-align: center;
-    margin-left: -65px;
+    margin-left: -1.2em;
     color: rgba(255,255,255,0.5);
 }
 
