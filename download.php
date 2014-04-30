@@ -6,6 +6,7 @@ $path =  MICROLABEL_MUSIC_DIR;
 
 $URI = (isset($_GET['d'])) ? explode(",", $_GET['d']) : die("arg");
 
+
 foreach ($URI as $step) {
     $path = $path.'/'.$step;
 }

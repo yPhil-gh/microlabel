@@ -939,7 +939,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "96a15690345b4323d6d01fdd08433f17b55c1c3a";
+        $ref_commit = "b7a6a3b88b294c9118773cfc6c78812b0c5165c6";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -1056,15 +1056,6 @@ if (!isset($_GET['a'])) {
     }
     fixedFooter($dirList);
 }
-
-if (isset($_GET['debug'])) {
-    /* echo '<pre style="text-align:left;">$GLOBALS : '; */
-    /* var_dump($GLOBALS); */
-    /* echo '</pre>'; */
-    /* var_dump($_SERVER["SCRIPT_URI"]); */
-    /* echo '<br />'; */
-}
-
 
 echo '
 
