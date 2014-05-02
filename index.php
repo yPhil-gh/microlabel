@@ -518,7 +518,7 @@ function audioList($fileList, $albumPath) {
 
       $artistName = rawurldecode($thisAlbumTags['artist']);
       $albumName = rawurldecode($thisAlbumTags['album']);
-      $albumGenre = rawurldecode($thisAlbumTags['genre']);
+      $albumGenre = $thisAlbumTags['genre'];
       $albumRecordLabel = rawurldecode($thisFileTags['organization']);
       $albumYear = $thisAlbumTags['year'];
 
@@ -725,11 +725,7 @@ if (!empty($videos_objects)) {
 // Build label "home" index page with all the CD Sleeves
 // Construit la page d'accueil en listant tous les albums
 
-function index($dirList, $labelName, $question) {
-
-    if (isset($question)) {
-        return $thereIsMusic;
-    }
+function index($dirList, $labelName) {
 
     $numberOfAlbums = count($dirList);
 
@@ -745,7 +741,6 @@ function index($dirList, $labelName, $question) {
     ';
 
     if ($numberOfAlbums < 1) {
-        $thereIsMusic = false;
 echo '
 		<div id="horizon">
 			<div id="error">

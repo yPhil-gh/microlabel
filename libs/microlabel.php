@@ -5,8 +5,10 @@ define('MICROLABEL_ROOT_DIR', '/microlabel');
 
 ///////////////////////////////////////////////////////////////// no user-serviceable parts below
 
-// $tz = date_default_timezone_get();
 date_default_timezone_set('UTC');
+
+// $tz = date_default_timezone_get();
+// date_default_timezone_set($tz);
 
 set_include_path('TEXT'.PATH_SEPARATOR.'../TEXT'.PATH_SEPARATOR.'libs'.PATH_SEPARATOR.'libs/getid3');
 
@@ -15,39 +17,35 @@ $httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS[
 $browserPrefs = substr($httpVars,'0','2');
 $cookiePrefs = htmlspecialchars($_COOKIE["lang"]);
 
-$cacheit = true;
-
 if (!isset($lang) || !empty($lang)) {
     if (isset($_GET['lang']) && !empty($_GET['lang'])) {
-        $cacheit = false;
         $lang = $_GET['lang'];
+        $method = 'get';
+        setcookie('lang', $lang, strtotime( '+30 days' ), '/', '', 0);
     } elseif (isset($browserPrefs) && !empty($browserPrefs)) {
         $lang = $browserPrefs;
+        $method = 'browser';
     } elseif (isset($cookiePrefs) && !empty($cookiePrefs)) {
         $lang = $cookiePrefs;
+        $method = 'cookie';
     } else {
+        $method = 'default';
         $lang = 'en';
     }
 } else {
+    $method = 'fallback';
     $lang = 'en';
 }
 
-if (isset($lang)) {
-    $textFile = 'lang-'.$lang.'.php';
-    setcookie('lang', $lang, strtotime( '+30 days' ), '/', '', 0);
-} else {
-    $textFile = 'lang-en.php';
-}
+$textFile = 'lang-'.$lang.'.php';
 
+include($textFile);
 
-$tz = date_default_timezone_get();
-date_default_timezone_set($tz);
-
-$cachefile = './CACHE/'.basename($_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
+$cachefile = './CACHE/'.basename($_SERVER['PHP_SELF'].'-lang-'.$lang.'.'.$_SERVER['QUERY_STRING']);
 
 $cachetime = 120 * 60; // 2 hours
 // Serve from the cache if it is younger than $cachetime
-if (file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile)) && !$cacheit) {
+if (file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile))) {
     include($cachefile);
     echo "<!-- Cached ".date('jS F Y H:i', filemtime($cachefile))." -->";
     exit;
@@ -83,5 +81,4 @@ echo '
 ';
 }
 
-include($textFile);
 ?>
