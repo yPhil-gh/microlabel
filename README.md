@@ -2,7 +2,7 @@
 
 A CMS to manage albums
 
-![Screenshot](https://raw.githubusercontent.com/xaccrocheur/microlabel/master/img/microlabel-album_page.png)
+![Screenshot](https://raw.githubusercontent.com/xaccrocheur/microlabel/master/img/screenshot-album_page.png)
 
 ### Features
 - Baseless : Just drop your correctly tagged music files in the MUSIC dir
