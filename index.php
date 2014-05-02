@@ -179,7 +179,7 @@ function getInfo($startPath, $element) {
             return $thisAlbumSleeves;
         }
         else {
-            $thisAlbumSleeves['0'] = 'img/beldigital_logo_off.png';
+            $thisAlbumSleeves['0'] = 'img/label_logo_off.png';
             return $thisAlbumSleeves;
         }
         break;
@@ -195,7 +195,7 @@ function getInfo($startPath, $element) {
             return $thisAlbumSleeves['0'];
         }
         else {
-            return 'img/beldigital_logo_off.png';
+            return 'img/label_logo_off.png';
         }
         break;
     }
@@ -359,7 +359,7 @@ $(document).keydown(function(e){
 
 </script>
 
-<link rel="shortcut icon" href="img/beldigital_logo_on.png" />
+<link rel="shortcut icon" href="img/label_logo_on.png" />
 
   <?php
 
@@ -932,7 +932,7 @@ function albumBrowser($labelName) {
         <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse('next', 'nice').'" /></a>
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
-        <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img style="width:60px" class="rollover" src="img/beldigital_logo_off.png" alt="beldigital_logo_on.png" /></a>
+        <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img style="width:60px" class="rollover" src="img/label_logo_off.png" alt="labe_logo_on.png" /></a>
     </div>
 </div>
 <p id="footBr">&nbsp;</p>
@@ -952,7 +952,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "f97015fc24d0a9ae6549fa1868a8ef1612d5a536";
+        $ref_commit = "4220f089fbda1caf8597a865ef905cda80ae2043";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

@@ -35,7 +35,8 @@ A CMS to manage albums
 #### Optional config
 - *chown .www-data CACHE && chmod g+w CACHE* to activate the caching system (faaaaster)
 - Rename the microlabel dir with the name of your label (and keep on *git pull* from there)
-- Edit the TEXT/* files to replace the text with your own
+- Replace *img/label/label_logo_** with your record company's ;) logo
+- Edit the TEXT/* files to replace the text(s) with your own blurb
 - Rename the MUSIC directory, and edit *libs/microlabel.php* accordingly
 - Install [vorbiscomment](https://wiki.xiph.org/VorbisComment) to be able to **write** tags in the back-office
     - sudo apt-get install [vorbis-tools](https://wiki.xiph.org/Vorbis-tools)
