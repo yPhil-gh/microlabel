@@ -15,22 +15,20 @@ $httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS[
 $browserPrefs = substr($httpVars,'0','2');
 $cookiePrefs = htmlspecialchars($_COOKIE["lang"]);
 
+$cacheit = true;
+
 if (!isset($lang) || !empty($lang)) {
     if (isset($_GET['lang']) && !empty($_GET['lang'])) {
+        $cacheit = false;
         $lang = $_GET['lang'];
-        $method = 'get';
     } elseif (isset($browserPrefs) && !empty($browserPrefs)) {
         $lang = $browserPrefs;
-        $method = 'browser';
     } elseif (isset($cookiePrefs) && !empty($cookiePrefs)) {
         $lang = $cookiePrefs;
-        $method = 'cookie';
     } else {
-        $method = 'default';
         $lang = 'en';
     }
 } else {
-    $method = 'fallback';
     $lang = 'en';
 }
 
@@ -49,7 +47,7 @@ $cachefile = './CACHE/'.basename($_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
 
 $cachetime = 120 * 60; // 2 hours
 // Serve from the cache if it is younger than $cachetime
-if (file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile))) {
+if (file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile)) && !$cacheit) {
     include($cachefile);
     echo "<!-- Cached ".date('jS F Y H:i', filemtime($cachefile))." -->";
     exit;
