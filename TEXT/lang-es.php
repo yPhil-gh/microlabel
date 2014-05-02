@@ -16,6 +16,7 @@ define('TAGS_VIDEO_PREVIEW', 'vista previa');
 define('TAGS_DOWNLOAD', 'Descargar');
 define('TXT_TAGS', 'Etiquetas');
 define('TXT_DELETE', 'Borrar');
+define('TXT_EMPTY_CACHE_DIR', 'Vacío / restablecer el directorio CACHE');
 define('TXT_EDIT', 'Editar');
 define('TXT_NODOWNLOAD', 'Descargar este álbum es bajar en la solicitud de la artista');
 define('TXT_DOWNLOAD', 'Descargar');

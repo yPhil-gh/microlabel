@@ -16,6 +16,8 @@ define('TAGS_DOWNLOAD', 'Download');
 define('TXT_NODOWNLOAD', 'Download is disabled for this album by request of the artist');
 define('TXT_DOWNLOAD', 'Download');
 define('TXT_SHARE', 'Share');
+define('TXT_DELETE', 'Delete');
+define('TXT_EMPTY_CACHE_DIR', 'Empty/reset the CACHE directory');
 define('TXT_BUY', 'Buy');
 define('TXT_NEXT_ALBUM', 'Next album');
 define('TXT_PREVIOUS_ALBUM', 'Previous album');
@@ -40,7 +42,6 @@ define('TXT_ERROR_401_SUGGESTION', 'Something must be wrong with your .ht* files
 define('TXT_TAGGER_ERROR_PERMISSION', 'Write error');
 define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'You probably do not have rights to the parent directory.');
 define('TXT_TAGGER_WARNING_DELETE', 'Do you really want to permanently delete this file?');
-
 define('TXT_ERRORS', 'Error(s)');
 define('TXT_DEBUG_FILE_ERRORS', 'File errors');
 define('TXT_DEBUG_SHOW_ERRORS', 'Show errors');

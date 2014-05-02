@@ -16,6 +16,7 @@ define('TAGS_VIDEO_PREVIEW', 'Aperçu');
 define('TAGS_DOWNLOAD', 'Téléchargement');
 define('TXT_TAGS', 'Tags');
 define('TXT_DELETE', 'Effacer');
+define('TXT_EMPTY_CACHE_DIR', 'Vider le répertoire CACHE');
 define('TXT_EDIT', 'Editer');
 define('TXT_NODOWNLOAD', 'Le téléchargement de cet album est désactivé à la demande de l\'artiste');
 define('TXT_DOWNLOAD', 'Télécharger');

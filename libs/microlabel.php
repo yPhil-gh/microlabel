@@ -18,6 +18,9 @@ if (!defined("PATH_SEPARATOR")) {
 
 ///////////////////////////////////////////////////////////////// no user-serviceable parts below
 
+// $tz = date_default_timezone_get();
+date_default_timezone_set('UTC');
+
 set_include_path('TEXT'.PATH_SEPARATOR.'../TEXT'.PATH_SEPARATOR.'libs'.PATH_SEPARATOR.'libs/getid3');
 
 $httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'] : '';

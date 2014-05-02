@@ -43,23 +43,23 @@ $getID3->setOption(array('encoding' => $PageEncoding));
 
 ///////////////////////////////////////////////////////////////////////////////
 
-function rrmdir($dir) {
+function rrmdir($dir, $keep) {
     if (is_dir($dir)) {
         $objects = scandir($dir);
         foreach ($objects as $object) {
             if ($object != "." && $object != "..") {
-
                 if (is_writable($object)) {
                     return true;
                 } else {
                     microlabelError(TXT_TAGGER_ERROR_PERMISSION, TXT_TAGGER_ERROR_PERMISSION_SUGGESTION);
                 }
-
                 if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
             }
         }
         reset($objects);
-        rmdir($dir);
+        if (!$keep) {
+            rmdir($dir);
+        }
     }
 }
 
@@ -95,17 +95,11 @@ $("input.input").expandable({
 // echo '('.$lang.')'.$method;
 
 if (isset($_REQUEST['deletedir'])) {
-    rrmdir($_REQUEST['deletedir']);
-
-    // if (file_exists($_REQUEST['deletedir'])) {
-	// } else {
-	// 	$deletefilemessage = 'FAILED to delete '.addslashes($_REQUEST['deletefile']).' - file does not exist';
-	// }
-	// if (isset($_REQUEST['noalert'])) {
-	// 	echo $deletefilemessage;
-	// } else {
-	// 	echo '<script type="text/javascript">alert("'.$deletefilemessage.'");</script>';
-	// }
+    if (isset($_REQUEST['keep'])) {
+        rrmdir($_REQUEST['deletedir'], true);
+    } else {
+        rrmdir($_REQUEST['deletedir'], false);
+    }
 }
 
 if (isset($_REQUEST['deletefile'])) {
@@ -441,13 +435,14 @@ if (isset($_REQUEST['filename'])) {
 		$errormessage = ob_get_contents();
 		ob_end_clean();
         $errorString = 'Could not open directory <strong>'.$_GET['listdirectory'].'</strong>';
-        // microlabelError($errorString);
+        microlabelError($errorString);
 	}
 }
+
 echo '
 </div>
 <div id="back_home">
-    <a href="'.getLabelRoot().'/">&#8962;</a>
+    <a class="house" href="'.MICROLABEL_ROOT_DIR.'/">&#8962;</a> - <a href="'.htmlentities($_SERVER['PHP_SELF']).'?deletedir='.MICROLABEL_ROOT_DIR.'/CACHE&keep=false" onClick="return confirm(\''.TXT_TAGGER_WARNING_DELETE.' ('.MICROLABEL_ROOT_DIR.'/CACHE)\');">'.TXT_EMPTY_CACHE_DIR.'</a>
 </div>
 
 </body>

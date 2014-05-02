@@ -16,6 +16,7 @@ define('TAGS_VIDEO_PREVIEW', 'Vorschau');
 define('TAGS_DOWNLOAD', 'Herunterladen');
 define('TXT_TAGS', 'Tags');
 define('TXT_DELETE', 'Löschen');
+define('TXT_EMPTY_CACHE_DIR', 'Leer / Reset-Cache-Verzeichnis');
 define('TXT_EDIT', 'Bearbeiten');
 define('TXT_NODOWNLOAD', 'Auf wunsch des K&uuml;nstlers ist der Download f&uuml;r dieses Album nicht erlaubt');
 define('TXT_DOWNLOAD', 'Herunterladen');
