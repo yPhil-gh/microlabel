@@ -179,7 +179,7 @@ function getInfo($startPath, $element) {
             return $thisAlbumSleeves;
         }
         else {
-            $thisAlbumSleeves['0'] = 'img/label_logo_off.png';
+            $thisAlbumSleeves['0'] = 'img/label/label_logo_off.png';
             return $thisAlbumSleeves;
         }
         break;
@@ -195,7 +195,7 @@ function getInfo($startPath, $element) {
             return $thisAlbumSleeves['0'];
         }
         else {
-            return 'img/label_logo_off.png';
+            return 'img/label/label_logo_off.png';
         }
         break;
     }
@@ -359,7 +359,7 @@ $(document).keydown(function(e){
 
 </script>
 
-<link rel="shortcut icon" href="img/label_logo_on.png" />
+<link rel="shortcut icon" href="img/label/label_logo_on.png" />
 
   <?php
 
@@ -932,7 +932,7 @@ function albumBrowser($labelName) {
         <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse('next', 'nice').'" /></a>
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
-        <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img style="width:60px" class="rollover" src="img/label_logo_off.png" alt="label_logo_on.png" /></a>
+        <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img style="width:60px" class="rollover" src="img/label/label_logo_off.png" alt="label logo" /></a>
     </div>
 </div>
 <p id="footBr">&nbsp;</p>
