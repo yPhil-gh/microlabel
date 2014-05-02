@@ -33,6 +33,7 @@ A CMS to manage albums
 - That's it
 
 #### Optional config
+- *chown .www-data CACHE && chmod g+w CACHE* to activate the caching system (faaaaster)
 - Rename the microlabel dir with the name of your label (and keep on *git pull* from there)
 - Edit the TEXT/* files to replace the text with your own
 - Rename the MUSIC directory, and edit *libs/microlabel.php* accordingly
