@@ -1,4 +1,17 @@
 <?php
+$tz = date_default_timezone_get();
+date_default_timezone_set($tz);
+
+$cachefile = './CACHE/'.basename($_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
+
+$cachetime = 120 * 60; // 2 hours
+// Serve from the cache if it is younger than $cachetime
+if (file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile))) {
+    include($cachefile);
+    echo "<!-- Cached ".date('jS F Y H:i', filemtime($cachefile))." -->";
+    exit;
+}
+ob_start(); // start the output buffer
 
 ////////////////////////////////////////////////////////////////////
 // Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
@@ -939,7 +952,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "afb194d9fc88c66a849ca87c7642ef46c1bb4055";
+        $ref_commit = "3d643da84ca53eb9c3ac36e45e538681c9466012";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -1063,12 +1076,8 @@ echo '
 </html>
 ';
 
-// if (!isset($_GET['debug'])) {
-
-//     $fp = fopen($cachefile, 'w'); // open the cache file for writing
-//     fwrite($fp, ob_get_contents()); // save the contents of output buffer to the file
-//     fclose($fp); // close the file
-// }
-// ob_end_flush(); // Send the output to the browser
-
+$fp = fopen($cachefile, 'w');
+fwrite($fp, ob_get_contents());
+fclose($fp);
+ob_end_flush(); // Send the output to the browser
 ?>
