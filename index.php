@@ -1,17 +1,7 @@
 <?php
-$tz = date_default_timezone_get();
-date_default_timezone_set($tz);
 
-$cachefile = './CACHE/'.basename($_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
-
-$cachetime = 120 * 60; // 2 hours
-// Serve from the cache if it is younger than $cachetime
-if (file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile))) {
-    include($cachefile);
-    echo "<!-- Cached ".date('jS F Y H:i', filemtime($cachefile))." -->";
-    exit;
-}
-ob_start(); // start the output buffer
+require_once('libs/microlabel.php');
+require_once('libs/getid3/getid3.php');
 
 ////////////////////////////////////////////////////////////////////
 // Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
@@ -22,9 +12,6 @@ ob_start(); // start the output buffer
 // Please see libs/microlabel.php for config options,             //
 // and leave this file alone. That is, unless you find a bug ;)   //
 ////////////////////////////////////////////////////////////////////
-
-require_once('libs/getid3/getid3.php');
-require_once('libs/microlabel.php');
 
 $labelName = 'beldigital';
 global $labelName;
@@ -952,7 +939,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "7a661b4c00476fe5a0cb539cea8e27813314da66";
+        $ref_commit = "57e1ef870c070404d62ba07818d70b54ec76da57";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

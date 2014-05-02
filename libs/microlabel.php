@@ -1,20 +1,7 @@
 <?php
 
-////////////////////////////////////////////////////////////////////
-// Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
-// licensed GPL3 - http://www.gnu.org/licenses/gpl-3.0.html       //
-// Change the MUSIC directory                                     //
-// Change the root label /directory                               //
-////////////////////////////////////////////////////////////////////
-
 define('MICROLABEL_MUSIC_DIR', 'MUSIC');
 define('MICROLABEL_ROOT_DIR', '/microlabel');
-
-if (!defined("PATH_SEPARATOR")) {
-    if (strpos($_ENV[ "OS" ], "Win") !== false )
-        define("PATH_SEPARATOR", ";");
-    else define("PATH_SEPARATOR", ":");
-}
 
 ///////////////////////////////////////////////////////////////// no user-serviceable parts below
 
@@ -52,6 +39,34 @@ if (isset($lang)) {
     setcookie('lang', $lang, strtotime( '+30 days' ), '/', '', 0);
 } else {
     $textFile = 'lang-en.php';
+}
+
+
+$tz = date_default_timezone_get();
+date_default_timezone_set($tz);
+
+$cachefile = './CACHE/'.basename($_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
+
+$cachetime = 120 * 60; // 2 hours
+// Serve from the cache if it is younger than $cachetime
+if (file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile))) {
+    include($cachefile);
+    echo "<!-- Cached ".date('jS F Y H:i', filemtime($cachefile))." -->";
+    exit;
+}
+ob_start(); // start the output buffer
+
+////////////////////////////////////////////////////////////////////
+// Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
+// licensed GPL3 - http://www.gnu.org/licenses/gpl-3.0.html       //
+// Change the MUSIC directory                                     //
+// Change the root label /directory                               //
+////////////////////////////////////////////////////////////////////
+
+if (!defined("PATH_SEPARATOR")) {
+    if (strpos($_ENV[ "OS" ], "Win") !== false )
+        define("PATH_SEPARATOR", ";");
+    else define("PATH_SEPARATOR", ":");
 }
 
 function microlabelError($text, $suggestion) {
