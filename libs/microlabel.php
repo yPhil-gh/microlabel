@@ -1,21 +1,29 @@
 <?php
 
-define('MICROLABEL_MUSIC_DIR', 'MUSIC');
-define('MICROLABEL_ROOT_DIR', '/microlabel');
-
-///////////////////////////////////////////////////////////////// no user-serviceable parts below
+if (!defined("PATH_SEPARATOR")) {
+    if (strpos($_ENV[ "OS" ], "Win") !== false )
+        define("PATH_SEPARATOR", ";");
+    else define("PATH_SEPARATOR", ":");
+}
 
 date_default_timezone_set('UTC');
 
-// $tz = date_default_timezone_get();
-// date_default_timezone_set($tz);
-
 set_include_path('TEXT'.PATH_SEPARATOR.'../TEXT'.PATH_SEPARATOR.'libs'.PATH_SEPARATOR.'libs/getid3');
+
+include('microlabel-config-EDIT_ME.php');
 
 $httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'] : '';
 
 $browserPrefs = substr($httpVars,'0','2');
 $cookiePrefs = htmlspecialchars($_COOKIE["lang"]);
+
+$cache = true;
+
+global $nocache;
+
+if (isset($_GET['nocache'])) {
+    $cache = false;
+}
 
 if (!isset($lang) || !empty($lang)) {
     if (isset($_GET['lang']) && !empty($_GET['lang'])) {
@@ -45,25 +53,13 @@ $cachefile = './CACHE/'.basename($_SERVER['PHP_SELF'].'-lang-'.$lang.'.'.$_SERVE
 
 $cachetime = 120 * 60; // 2 hours
 // Serve from the cache if it is younger than $cachetime
-if (file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile))) {
+
+if ($cache && file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile))) {
     include($cachefile);
     echo "<!-- Cached ".date('jS F Y H:i', filemtime($cachefile))." -->";
     exit;
 }
 ob_start(); // start the output buffer
-
-////////////////////////////////////////////////////////////////////
-// Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
-// licensed GPL3 - http://www.gnu.org/licenses/gpl-3.0.html       //
-// Change the MUSIC directory                                     //
-// Change the root label /directory                               //
-////////////////////////////////////////////////////////////////////
-
-if (!defined("PATH_SEPARATOR")) {
-    if (strpos($_ENV[ "OS" ], "Win") !== false )
-        define("PATH_SEPARATOR", ";");
-    else define("PATH_SEPARATOR", ":");
-}
 
 function microlabelError($text, $suggestion) {
 echo '

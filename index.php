@@ -166,7 +166,7 @@ function getInfo($startPath, $element) {
             return $thisAlbumSleeves;
         }
         else {
-            $thisAlbumSleeves['0'] = 'img/label/label_logo_off.png';
+            $thisAlbumSleeves['0'] = MICROLABEL_LABEL_LOGO;
             return $thisAlbumSleeves;
         }
         break;
@@ -182,7 +182,7 @@ function getInfo($startPath, $element) {
             return $thisAlbumSleeves['0'];
         }
         else {
-            return 'img/label/label_logo_off.png';
+            return MICROLABEL_LABEL_LOGO;
         }
         break;
     }
@@ -346,11 +346,10 @@ $(document).keydown(function(e){
 
 </script>
 
-<link rel="shortcut icon" href="img/label/label_logo_on.png" />
 
   <?php
 
-
+echo '<link rel="shortcut icon" href="'.MICROLABEL_LABEL_LOGO.'" />'
 
   $dirList = getInfo($rootMusicDir, 'musicDirs');
 
@@ -914,7 +913,7 @@ function albumBrowser($labelName) {
         <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse('next', 'nice').'" /></a>
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
-        <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img style="width:60px" class="rollover" src="img/label/label_logo_off.png" alt="label logo" /></a>
+        <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img style="width:60px" src="'.MICROLABEL_LABEL_LOGO.'" alt="label logo" /></a>
     </div>
 </div>
 <p id="footBr">&nbsp;</p>
@@ -934,7 +933,7 @@ function vc($element) {
 
     if ($current_commits !== false) {
         $commits = json_decode($current_commits);
-        $ref_commit = "ebd1c17af32d4c6ecba64b7baa88521b6baaa4f9";
+        $ref_commit = "3d8ba3b12a415b11a7475c3aceb03f6f3083ddc4";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -1058,8 +1057,11 @@ echo '
 </html>
 ';
 
-$fp = fopen($cachefile, 'w');
-fwrite($fp, ob_get_contents());
-fclose($fp);
-ob_end_flush(); // Send the output to the browser
+if ($cache) {
+    $fp = fopen($cachefile, 'w');
+    fwrite($fp, ob_get_contents());
+    fclose($fp);
+    ob_end_flush(); // Send the output to the browser
+}
+
 ?>
