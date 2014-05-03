@@ -13,8 +13,7 @@ require_once('libs/getid3/getid3.php');
 // and leave this file alone. That is, unless you find a bug ;)   //
 ////////////////////////////////////////////////////////////////////
 
-$labelName = 'beldigital';
-global $labelName;
+$labelName = MICROLABEL_LABEL_NAME;
 
 if (isset($_GET['tag'])) {
     header("Location: ./BO/?listdirectory=../".$rootMusicDir);
@@ -349,9 +348,9 @@ $(document).keydown(function(e){
 
   <?php
 
-echo '<link rel="shortcut icon" href="'.MICROLABEL_LABEL_LOGO.'" />'
+echo '<link rel="shortcut icon" href="'.MICROLABEL_LABEL_LOGO.'" />';
 
-  $dirList = getInfo($rootMusicDir, 'musicDirs');
+$dirList = getInfo($rootMusicDir, 'musicDirs');
 
 //spitTitle($dirList, $fileList)////////////////////////////////////////
 // Print album Sleeve if any
@@ -894,6 +893,7 @@ function bytestostring($size, $precision = 0) {
     while($total-- && $size > 1024) $size /= 1024;
     return round($size, $precision).$sizes[$total];
 }
+
 
 function albumBrowser($labelName) {
 
