@@ -931,9 +931,9 @@ function vc($element) {
     $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/microlabel/commits", false, $context);
 
 
-    if ($current_commits !== false) {
+    if ($current_commits) {
         $commits = json_decode($current_commits);
-        $ref_commit = "3bd017d606e88133938d8d4d37dc2a11852c81a6";
+        $ref_commit = "472bb857f3c78589c78c34f75ac846c92debe881";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
