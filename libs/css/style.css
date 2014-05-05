@@ -665,7 +665,7 @@ h5.musicien {
 
 img.instrument, img.contact {
     width:24px;
-    /* margin:.5em; */
+    margin:2px;
 }
 
 img.gravatar {
