@@ -628,15 +628,14 @@ function audioList($fileList, $albumPath) {
   foreach ($muzikos as $name => $muziko) {
       $myName = $name;
       $thisZikoInstrs = array();
+      $numberOfIntruments = 0;
+      $myEmail = $muziko['email'][0];
+      $myTwitter = $muziko['twitter'][0];
+      $hash = md5(strtolower(trim($myEmail)));
+      $thisGravatar = 'http://www.gravatar.com/avatar/'.$hash.'?d=retro';
       foreach($muziko as $key => $value) {
           foreach ($value as $val)
-              if ($key == 'twitter') {
-                  $myTwitter = $val;
-              } else if ($key == 'email') {
-                  $myEmail = $val;
-                  $hash = md5(strtolower(trim($val)));
-                  $thisGravatar = 'http://www.gravatar.com/avatar/'.$hash.'?d=retro';
-              } else {
+              if ($key == 'instrument') {
                   $thisZikoInstrs[] = $val;
               }
       }
@@ -644,19 +643,18 @@ function audioList($fileList, $albumPath) {
       echo '
     <div class="musicien">
 ';
-      echo '<h5 class="musicien"><a href="mailto:plop"><img class="gravatar" alt="Email" title="Email '.$myName.'" src="'.$thisGravatar.'"></a>'.$myName.'</h5>';
-      echo '<span class="instruments">';
+      echo '<h5 class="musicien"><a href="mailto:'.$myEmail.'"><img class="gravatar" alt="Email" title="Email '.$myName.'" src="'.$thisGravatar.'"></a>'.$myName.'</h5>
+            <span class="instruments">';
       foreach ($thisZikoInstrs as $instrument) {
           echo '<img class="instrument" title="'.$myName.' plays '.$instrument.' on this album" alt="'.$myName.' plays '.$instrument.' on this album" src="img/instruments/'.$instrument.'.png">';
       }
-      echo '</span>';
-      echo '<span class="contacts">';
-      echo '<a href="http://twitter.com/'.$myTwitter.'"><img class="instrument" alt="Twitter" title="Twitter account of '.$myName.'" src="img/contacts/twitter.png"></a>';
-      echo '<a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>';
-      echo '</span>';
-      echo '</div>';
+      echo '</span>
+            <span class="contacts">
+            <a href="http://twitter.com/'.$myTwitter.'"><img class="instrument" alt="Twitter" title="Twitter account of '.$myName.'" src="img/contacts/twitter.png"></a>
+            <a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>
+            </span>
+        </div>';
   }
-
 
 // ⌨ ☺ ☠
 
