@@ -51,7 +51,7 @@ include($textFile);
 
 $cachefile = './CACHE/'.basename($_SERVER['PHP_SELF'].'-lang-'.$lang.'.'.$_SERVER['QUERY_STRING']);
 
-$cachetime = 120 * 60; // 2 hours
+$cachetime = 365 * 24 * 3600;
 // Serve from the cache if it is younger than $cachetime
 
 if ($cache && file_exists($cachefile) && (time() - $cachetime < filemtime($cachefile))) {
