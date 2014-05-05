@@ -211,9 +211,13 @@ function xmlInfos($element) {
     }
 
 
+
     if (count($xml->musicien) > 0) {
 
         foreach ($xml->musicien as $musicien) {
+
+            $xml = json_decode(json_encode((array) simplexml_load_string($musicien)), 1);
+
             $myMusicians[] = $musicien;
         }
     }
@@ -612,65 +616,47 @@ function audioList($fileList, $albumPath) {
 ';
 
   $musiciens = xmlInfos('all_musicians');
+  $xml = xmlInfos('all_musicians');
 
-  foreach ($musiciens as $zicos) {
+  foreach ($xml as $musicien) {
+      foreach($musicien as $key => $value) {
+          $muzikos[(string) $musicien['name']][(string) $key][] = (string) $value;
+      }
+  }
 
-          echo '
+
+  foreach ($muzikos as $name => $muziko) {
+      $myName = $name;
+      $thisZikoInstrs = array();
+      foreach($muziko as $key => $value) {
+          foreach ($value as $val)
+              if ($key == 'twitter') {
+                  $myTwitter = $val;
+              } else if ($key == 'email') {
+                  $myEmail = $val;
+                  $hash = md5(strtolower(trim($val)));
+                  $thisGravatar = 'http://www.gravatar.com/avatar/'.$hash.'?d=retro';
+              } else {
+                  $thisZikoInstrs[] = $val;
+              }
+      }
+
+      echo '
     <div class="musicien">
 ';
-
-      foreach ($zicos as $zico) {
-          $thisInstruments = '';
-          $thisContacts = '';
-          $zicosName = $zicos['name'];
-          foreach ($zicos as $key => $value) {
-              // echo 'name is '.$zicosName;
-              if ($key == 'instrument') {
-                  if ($value == 'guitar') {
-                      $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicosName.' plays guitar on this album" alt="'.$zicos['name'].' plays guitar on this album" src="img/instruments/guitar.png">';
-                  }
-                  if ($value == 'bass') {
-                      $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicosName.' plays bass on this album" alt="'.$zicos['name'].' plays guitar on this album" src="img/instruments/bass.png">';
-                  }
-                  if ($value == 'drums') {
-                      $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicosName.' plays drums on this album" alt="'.$zicos['name'].' plays drums on this album" src="img/instruments/drums.png">';
-                  }
-                  if ($value == 'other') {
-                      $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicosName.' plays all kinds of stuff on this album" alt="'.$zicos['name'].' plays all kinds of stuff on this album" src="img/instruments/other.png">';
-                  }
-                  if ($value == 'vocal') {
-                      $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicosName.' sings on this album" alt="'.$zicos['name'].' sings on this album" src="img/instruments/vocal.png">';
-                  }
-                  if ($value == 'leadvocal') {
-                      $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicosName.' sings lead vocals on this album" alt="'.$zicos['name'].' sings lead vocals on this album" src="img/instruments/leadvocal.png">';
-                  }
-                  if ($value == 'research') {
-                      $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicosName.' helped on this album" alt="'.$zicos['name'].' helped on this album" src="img/instruments/research.png">';
-                  }
-                  if ($value == 'recording') {
-                      $thisInstruments = $thisInstruments.'<img class="instrument" title="'.$zicosName.' recorded this album" alt="'.$zicos['name'].' recorded this album" src="img/instruments/jack.png">';
-                  }
-              }
-              if ($key == 'twitter') {
-                  $thisContacts = '<a href="http://twitter.com/'.$value.'"><img class="instrument" alt="Twitter" title="Twitter account of '.$zicos['name'].'" src="img/contacts/twitter.png"></a>';
-              }
-              if ($key == 'email') {
-                  $hash = md5(strtolower(trim($value)));
-                  $thisContacts = $thisContacts.'<a href="mailto:'.$value.'"><img class="contact" alt="Email" title="Email '.$zicos['name'].'" src="img/contacts/email.png"></a>';
-                  $thisGravatar = '<a href="mailto:'.$value.'"><img class="gravatar" alt="Email" title="Email '.$zicos['name'].'" src="http://www.gravatar.com/avatar/'.$hash.'?d=retro"></a>';
-              } else {
-                  $thisGravatar = '<img class="gravatar" title="'.$zicos['name'].' is a sad musician, doesn\'t have an email :(" alt="No email" src="img/contacts/nomail.png">';
-              }
-
-          }
+      echo '<h5 class="musicien"><a href="mailto:plop"><img class="gravatar" alt="Email" title="Email '.$myName.'" src="'.$thisGravatar.'"></a>'.$myName.'</h5>';
+      echo '<span class="instruments">';
+      foreach ($thisZikoInstrs as $instrument) {
+          echo '<img class="instrument" title="'.$myName.' plays '.$instrument.' on this album" alt="'.$myName.' plays '.$instrument.' on this album" src="img/instruments/'.$instrument.'.png">';
       }
-      echo '<h5 class="musicien">'.$thisGravatar.' '.$zicos['name'].'</h5>';
-      echo '<span class="instruments">'.$thisInstruments.'</span>';
-      echo '<span class="contacts">'.$thisContacts.'</span>';
-      echo '
-    </div>
-';
+      echo '</span>';
+      echo '<span class="contacts">';
+      echo '<a href="http://twitter.com/'.$myTwitter.'"><img class="instrument" alt="Twitter" title="Twitter account of '.$myName.'" src="img/contacts/twitter.png"></a>';
+      echo '<a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>';
+      echo '</span>';
+      echo '</div>';
   }
+
 
 // ⌨ ☺ ☠
 
