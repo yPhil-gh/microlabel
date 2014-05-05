@@ -659,6 +659,7 @@ function audioList($fileList, $albumPath) {
 
           echo '<img class="instrument" title="'.$myName.' plays '.$instrument.' on this album" alt="'.$myName.' plays '.$instrument.' on this album" src="'.$instrument_icon.'">';
       }
+
       echo '</span>';
 
       if (isset($myEmail) && (!empty($myEmail)) || isset($myTwitter) && (!empty($myTwitter))) {
