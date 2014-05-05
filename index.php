@@ -283,14 +283,17 @@ if (!empty($zong)) {
 
 $(document).ready(function() {
 
+
     $('div.musicien').hover(function () {
+        var div_width = $(this).children(".div_width").attr("title");
         $(this).stop(true,true).animate({
-            width: '+=400',
+            width: '+='+div_width,
             height: '+=45'
         }, 500);
     }, function () {
+        var div_width = $(this).children(".div_width").attr("title");
         $(this).stop(true,true).animate({
-            width: '-=400',
+            width: '-='+div_width,
             height: '-=45'
         },500)
     });
@@ -629,6 +632,7 @@ function audioList($fileList, $albumPath) {
       $myName = $name;
       $thisZikoInstrs = array();
       $numberOfIntruments = 0;
+      $numberOfContacts = 0;
       $myEmail = $muziko['email'][0];
       $myTwitter = $muziko['twitter'][0];
       $hash = md5(strtolower(trim($myEmail)));
@@ -646,13 +650,41 @@ function audioList($fileList, $albumPath) {
       echo '<h5 class="musicien"><a href="mailto:'.$myEmail.'"><img class="gravatar" alt="Email" title="Email '.$myName.'" src="'.$thisGravatar.'"></a>'.$myName.'</h5>
             <span class="instruments">';
       foreach ($thisZikoInstrs as $instrument) {
-          echo '<img class="instrument" title="'.$myName.' plays '.$instrument.' on this album" alt="'.$myName.' plays '.$instrument.' on this album" src="img/instruments/'.$instrument.'.png">';
+          $numberOfIntruments++;
+          if (file_exists('img/instruments/'.$instrument.'.png')) {
+              $instrument_icon = 'img/instruments/'.$instrument.'.png';
+          } else {
+              $instrument_icon = 'img/instruments/unknown_instrument.png';
+          }
+
+          echo '<img class="instrument" title="'.$myName.' plays '.$instrument.' on this album" alt="'.$myName.' plays '.$instrument.' on this album" src="'.$instrument_icon.'">';
       }
-      echo '</span>
-            <span class="contacts">
+      echo '</span>';
+
+      if (isset($myEmail) && (!empty($myEmail)) || isset($myTwitter) && (!empty($myTwitter))) {
+      echo '
+            <span class="contacts">';
+      }
+
+      if (isset($myEmail) && (!empty($myEmail))) {
+          $numberOfContacts++;
+      echo '
+            <a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>';
+      }
+
+      if (isset($myTwitter) && (!empty($myTwitter))) {
+          $numberOfContacts++;
+      echo '
             <a href="http://twitter.com/'.$myTwitter.'"><img class="instrument" alt="Twitter" title="Twitter account of '.$myName.'" src="img/contacts/twitter.png"></a>
-            <a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>
-            </span>
+';
+      }
+      if (isset($myEmail) && (!empty($myEmail)) || isset($myTwitter) && (!empty($myTwitter))) {
+      echo '
+            </span>';
+      }
+
+      echo '
+            <span title="'.($numberOfIntruments * $numberOfContacts * 24).'" class="div_width">The instruments div is '.($numberOfIntruments * 24).'px wide and the contacts div is '.($numberOfContacts * 24).'px wide </span>
         </div>';
   }
 
@@ -666,15 +698,10 @@ function audioList($fileList, $albumPath) {
 
 
   echo '
-<!--	<p id="searchLinks">Try changing it to <a href="#">bacon</a>, <a href="#">pasta</a> or <a href="#">celery</a>.</p> -->
         <script type="text/javascript">
-          //set some PagePlaer variables
           audio_volume=0.85; //default is 0.7
 
           MlPlayer("MlPlayer");
-          /*what happens when the page is loaded?
-          please see the "body" tag
-          */
         </script>
         <div id="message"></div>
     ';

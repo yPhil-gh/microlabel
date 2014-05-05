@@ -665,7 +665,7 @@ h5.musicien {
 
 img.instrument, img.contact {
     width:24px;
-    margin:.5em;
+    /* margin:.5em; */
 }
 
 img.gravatar {
@@ -677,6 +677,7 @@ img.gravatar {
 span.instruments {
     background-color:#ccc;
     display:block;
+    height:100%;
     float:left;
     width:75%;
     border:1px solid #ccc;
@@ -762,4 +763,8 @@ h1#error {
 
 #back_home a:hover {
     color:orange;
+}
+
+.div_width {
+    display:none;
 }
