@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<microlabel>
+  <musicien name="Philippe">
+    <instrument>leadvocal</instrument>
+    <instrument>vocal</instrument>
+    <instrument>guitar</instrument>
+    <instrument>bass</instrument>
+    <instrument>other</instrument>
+    <instrument>drums</instrument>
+    <twitter>xaccrocheur</twitter>
+    <email>xaccrocheur@gmail.com</email>
+  </musicien>
+  <musicien name="Florent">
+    <instrument>leadvocal</instrument>
+    <instrument>guitar</instrument>
+    <instrument>bass</instrument>
+    <instrument>research</instrument>
+  </musicien>
+  <video>
+    <name>Beta2vista (Tu fais le malin avec ta)</name>
+    <youtubeid>AD7L5T1lpbM</youtubeid>
+  </video>
+  <video>
+    <name>Coffe and TV (Blur)</name>
+    <youtubeid>cG-GbjYipio</youtubeid>
+  </video>
+  <video>
+    <name>Marcher dans le Blues (Live Pietri Rabat)</name>
+    <youtubeid>37JcQeXGeUA</youtubeid>
+  </video>
+  <video>
+    <name>L'ètrangere (Léo Férré)</name>
+    <youtubeid>eLzxcbYmEfE</youtubeid>
+  </video>
+  <video>
+    <name>LDN (Lilly Allen)</name>
+    <youtubeid>UykIhFXebyw</youtubeid>
+  </video>
+</microlabel>
