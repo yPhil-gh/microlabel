@@ -664,8 +664,8 @@ h5.musicien {
 }
 
 img.instrument, img.contact {
-    width:24px;
-    margin:2px;
+    width:2em;
+    /* margin:0 .em; */
 }
 
 img.gravatar {
@@ -674,19 +674,17 @@ img.gravatar {
     margin:0 .2em 0 0;
 }
 
-span.instruments {
+td.instruments {
     background-color:#ccc;
-    display:block;
+    /* display:block; */
     height:100%;
-    float:left;
-    width:75%;
+    /* float:left; */
+    /* width:75%; */
     border:1px solid #ccc;
     border-radius:0 5px 0 0;
 }
 
-span.contacts {
-    display:block;
-    float:right;
+td.contacts {
     background-color:#333;
 }
 

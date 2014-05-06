@@ -283,15 +283,14 @@ if (!empty($zong)) {
 
 $(document).ready(function() {
 
-
     $('div.musicien').hover(function () {
-        var div_width = $(this).children(".div_width").attr("title");
+        var div_width = ($(this).children().children().children().children().attr("title") * 3) + 'em';
         $(this).stop(true,true).animate({
             width: '+='+div_width,
             height: '+=45'
         }, 500);
     }, function () {
-        var div_width = $(this).children(".div_width").attr("title");
+        var div_width = ($(this).children().children().children().children().attr("title") * 3) + 'em';
         $(this).stop(true,true).animate({
             width: '-='+div_width,
             height: '-=45'
@@ -638,17 +637,26 @@ function audioList($fileList, $albumPath) {
       $hash = md5(strtolower(trim($myEmail)));
       $thisGravatar = 'http://www.gravatar.com/avatar/'.$hash.'?d=retro';
       foreach($muziko as $key => $value) {
-          foreach ($value as $val)
+          foreach ($value as $val) {
               if ($key == 'instrument') {
                   $thisZikoInstrs[] = $val;
               }
+              if ($key == 'email') {
+                  $thisZikoEmails[] = $val;
+              }
+              if ($key == 'twitter') {
+                  $thisZikoTwitters[] = $val;
+              }
+          }
       }
 
       echo '
     <div class="musicien">
 ';
       echo '<h5 class="musicien"><a href="mailto:'.$myEmail.'"><img class="gravatar" alt="Email" title="Email '.$myName.'" src="'.$thisGravatar.'"></a>'.$myName.'</h5>
-            <span class="instruments">';
+            <table class="muzikosTable">
+                <tr>
+                <td class="instruments" title="'.count($thisZikoInstrs).'">';
       foreach ($thisZikoInstrs as $instrument) {
           $numberOfIntruments++;
           if (file_exists('img/instruments/'.$instrument.'.png')) {
@@ -660,11 +668,11 @@ function audioList($fileList, $albumPath) {
           echo '<img class="instrument" title="'.$myName.' plays '.$instrument.' on this album" alt="'.$myName.' plays '.$instrument.' on this album" src="'.$instrument_icon.'">';
       }
 
-      echo '</span>';
+      echo '</td>';
 
       if (isset($myEmail) && (!empty($myEmail)) || isset($myTwitter) && (!empty($myTwitter))) {
       echo '
-            <span class="contacts">';
+            <td class="contacts" title="'.(count($thisZikoTwitters) + count($thisZikoEmails)).'">';
       }
 
       if (isset($myEmail) && (!empty($myEmail))) {
@@ -681,11 +689,14 @@ function audioList($fileList, $albumPath) {
       }
       if (isset($myEmail) && (!empty($myEmail)) || isset($myTwitter) && (!empty($myTwitter))) {
       echo '
-            </span>';
+            </td>
+                </tr>
+                </table>
+
+';
       }
 
       echo '
-            <span title="'.($numberOfIntruments * $numberOfContacts * 24).'" class="div_width">The instruments div is '.($numberOfIntruments * 24).'px wide and the contacts div is '.($numberOfContacts * 24).'px wide </span>
         </div>';
   }
 
@@ -945,7 +956,7 @@ function vc($element) {
 
     if ($current_commits) {
         $commits = json_decode($current_commits);
-        $ref_commit = "9c77e52bf30ec37dc5edbc6e79f12edca39541bf";
+        $ref_commit = "a0c8b2284939962e7f0110b2559e0575cd06542f";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
