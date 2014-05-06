@@ -82,6 +82,5 @@ echo '
 ';
 }
 
-echo 'Yo, '.MICROLABEL_CACHE_DIR;
 
 ?>

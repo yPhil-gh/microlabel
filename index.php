@@ -1050,6 +1050,8 @@ if (!isset($_GET['a'])) {
     fixedFooter($dirList);
 }
 
+echo 'Yo, '.MICROLABEL_CACHE_DIR;
+
 echo '
 
 </body>
