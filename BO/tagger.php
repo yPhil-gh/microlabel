@@ -708,7 +708,7 @@ function PoweredBygetID3($string='') {
                 <p>Powered by <a href="http://getid3.sourceforge.net">getID3() v<!--GETID3VER--><br/>http://getid3.sourceforge.net</a><br />Running on PHP v'.phpversion().' ('.(ceil(log(PHP_INT_MAX, 2)) + 1).'-bit)</p>
                 <p>('.$i.') pages cached in '.MICROLABEL_CACHE_DIR.'</p>
                 <p style="text-align:center;">
-                <a href="'.htmlentities($_SERVER['PHP_SELF']).'?deletedir='.MICROLABEL_ROOT_DIR.'/CACHE&keep=false" onClick="return confirm(\''.TXT_TAGGER_WARNING_DELETE.' ('.MICROLABEL_ROOT_DIR.'/CACHE)\');">
+                <a href="'.htmlentities($_SERVER['PHP_SELF']).'?deletedir='.MICROLABEL_CACHE_DIR.'/&keep=false" onClick="return confirm(\''.TXT_TAGGER_WARNING_DELETE.' ('.MICROLABEL_CACHE_DIR.')\');">
                 <img src="../img/icon_empty_cache.png" alt="'.TXT_EMPTY_CACHE_DIR.'" title="'.TXT_EMPTY_CACHE_DIR.'"><br />
                 '.TXT_EMPTY_CACHE_DIR.'
                 </a>
