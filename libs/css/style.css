@@ -653,6 +653,13 @@ div.musicien {
     border-radius:5px;
 }
 
+table.muzikosTable {
+    border-spacing:0;
+    border-collapse:collapse;
+    margin:0;
+    padding:0;
+}
+
 h5.musicien {
     background-color:#333;
     color:#ccc;
@@ -676,12 +683,9 @@ img.gravatar {
 
 td.instruments {
     background-color:#ccc;
-    /* display:block; */
     height:100%;
-    /* float:left; */
-    /* width:75%; */
-    border:1px solid #ccc;
     border-radius:0 5px 0 0;
+    border-bottom:1px solid #ccc;
 }
 
 td.contacts {

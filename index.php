@@ -283,14 +283,19 @@ if (!empty($zong)) {
 
 $(document).ready(function() {
 
+    var instr_w, conta_w;
+
     $('div.musicien').hover(function () {
-        var div_width = ($(this).children().children().children().children().attr("title") * 3) + 'em';
+        instr_w = parseFloat($(this).find('td.instruments').attr("title"));
+        conta_w = parseFloat($(this).find('td.contacts').attr("title"));
+        var div_width = (instr_w + conta_w * 4.5) + 'em';
+        // alert(instr_w + 'contacts : ' + conta_w);
         $(this).stop(true,true).animate({
             width: '+='+div_width,
             height: '+=45'
         }, 500);
     }, function () {
-        var div_width = ($(this).children().children().children().children().attr("title") * 3) + 'em';
+        var div_width = (instr_w + conta_w * 4.5) + 'em';
         $(this).stop(true,true).animate({
             width: '-='+div_width,
             height: '-=45'
@@ -630,6 +635,8 @@ function audioList($fileList, $albumPath) {
   foreach ($muzikos as $name => $muziko) {
       $myName = $name;
       $thisZikoInstrs = array();
+      $thisZikoEmails = array();
+      $thisZikoTwitters = array();
       $numberOfIntruments = 0;
       $numberOfContacts = 0;
       $myEmail = $muziko['email'][0];
@@ -676,13 +683,11 @@ function audioList($fileList, $albumPath) {
       }
 
       if (isset($myEmail) && (!empty($myEmail))) {
-          $numberOfContacts++;
       echo '
             <a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>';
       }
 
       if (isset($myTwitter) && (!empty($myTwitter))) {
-          $numberOfContacts++;
       echo '
             <a href="http://twitter.com/'.$myTwitter.'"><img class="instrument" alt="Twitter" title="Twitter account of '.$myName.'" src="img/contacts/twitter.png"></a>
 ';
@@ -956,7 +961,7 @@ function vc($element) {
 
     if ($current_commits) {
         $commits = json_decode($current_commits);
-        $ref_commit = "a0c8b2284939962e7f0110b2559e0575cd06542f";
+        $ref_commit = "3f320cd90a03c84838c5e74314ced7a9978e8898";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
