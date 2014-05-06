@@ -660,6 +660,12 @@ table.muzikosTable {
     padding:0;
 }
 
+
+table.muzikosTable tr td {
+    vertical-align: middle;
+}
+
+
 h5.musicien {
     background-color:#333;
     color:#ccc;
