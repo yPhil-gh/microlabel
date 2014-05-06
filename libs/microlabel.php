@@ -82,4 +82,6 @@ echo '
 ';
 }
 
+echo MICROLABEL_CACHE_DIR;
+
 ?>
