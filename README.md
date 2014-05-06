@@ -34,6 +34,7 @@ A CMS to manage albums
 
 #### Optional config
 - *chown .www-data CACHE && chmod g+w CACHE* to activate the caching system (faaaaster)
+- *chown -R .www-data MUSIC && chmod -R g+w MUSIC* to be able to write to your files / directories
 - Rename the microlabel dir with the name of your label (and keep on *git pull* from there)
 - Replace *img/label/label_logo_** with your record company's ;) logo
 - Edit the TEXT/* files to replace the text(s) with your own blurb

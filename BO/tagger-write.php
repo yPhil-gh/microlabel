@@ -1,29 +1,49 @@
 <?php
-/////////////////////////////////////////////////////////////////
-/// getID3() by James Heinrich <info@getid3.org>               //
-//  available at http://getid3.sourceforge.net                 //
-//            or http://www.getid3.org                         //
-/////////////////////////////////////////////////////////////////
-//                                                             //
-// /demo/demo.write.php - part of getID3()                     //
-// sample script for demonstrating writing ID3v1 and ID3v2     //
-// tags for MP3, or Ogg comment tags for Ogg Vorbis            //
-// See readme.txt for more details                             //
-//                                                            ///
-/////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////
+// Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
+// licensed GPL3 - http://www.gnu.org/licenses/gpl-3.0.html       //
+// Because all music should be free                               //
+// Please don't harm nobody w/ this code even if they ask to      //
+////////////////////////////////////////////////////////////////////
+// tagger-write.php - Based on demo.write.php - part of getID3()  //
+// sample script for demonstrating writing ID3v1 and ID3v2        //
+// tags for MP3, or Ogg comment tags for Ogg Vorbis               //
+// See readme.txt for more details                                //
+////////////////////////////////////////////////////////////////////
 
 //die('Due to a security issue, this demo has been disabled. It can be enabled by removing line '.__LINE__.' in '.$_SERVER['PHP_SELF']);
 
 $TaggingFormat = 'UTF-8';
 
+include('../libs/microlabel.php');
+
 header('Content-Type: text/html; charset='.$TaggingFormat);
-echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+echo '<!DOCTYPE HTML>
 <html>
 <head>
     <title>Microlabel - Tag writer</title>
+    <link rel="shortcut icon" href="'.MICROLABEL_LABEL_LOGO.'" />
     <style type="text/css" media="screen">@import "../libs/css/style.css";</style>
-    <body id="microlabel-tagger" class="microlabel-body">
+    <script src="../libs/jquery-1.5.1.min.js"></script>
+    <script>
+
+$(document).ready(function() {
+
+var fullHtml = $("#main").html();
+fullHtml.replace("#error");
+
+    if ( $("#error").is(":visible") ) {
+        $("#overlay").show();
+        $("#overlay").css("opacity", "0.5");
+    }
+});
+    </script>
+
+</head>
+<body id="microlabel-tagger" class="microlabel-body">
+<div id="overlay" class="overlay"></div>
+<div id="main">
 <div id="tagger-main">
 ';
 
@@ -44,7 +64,13 @@ if (isset($_POST['WriteTags'])) {
 
 	$TagFormatsToWrite = (isset($_POST['TagFormatsToWrite']) ? $_POST['TagFormatsToWrite'] : array());
 	if (!empty($TagFormatsToWrite)) {
-		echo 'starting to write tag(s)<BR>';
+        if (chmod($Filename, 0764) && is_writable(dirname($Filename))) {
+            return true;
+        } else {
+            $suggestion = TXT_TAGGER_ERROR_PERMISSION_SUGGESTION.' : <strong>'.dirname($Filename).'</strong> (<strong class="error">'.substr(sprintf('%o', fileperms(dirname($Filename))), -4).'</strong>)';
+            microlabelError(TXT_TAGGER_ERROR_PERMISSION, $suggestion);
+        }
+		echo 'starting to write tag(s)...';
 
 		$tagwriter = new getid3_writetags;
 		$tagwriter->filename       = $Filename;
@@ -55,7 +81,7 @@ if (isset($_POST['WriteTags'])) {
 			$tagwriter->remove_other_tags = true;
 		}
 
-		$commonkeysarray = array('Title', 'Artist', 'Album', 'Year', 'Comment');
+		$commonkeysarray = array('Title', 'Artist', 'Album', 'Year', 'Comment', 'Organisation');
 		foreach ($commonkeysarray as $key) {
 			if (!empty($_POST[$key])) {
 				$TagData[strtolower($key)][] = $_POST[$key];
@@ -174,6 +200,7 @@ if (!empty($Filename)) {
 		echo '<tr><td>Artist</td><td><input type="text" size="40" name="Artist" value="'.htmlentities((!empty($OldThisFileInfo['comments']['artist']) ? implode(', ', $OldThisFileInfo['comments']['artist']) : ''), ENT_QUOTES).'"></td></tr>';
 		echo '<tr><td>Album</td> <td><input type="text" size="40" name="Album"  value="'.htmlentities((!empty($OldThisFileInfo['comments']['album'])  ? implode(', ', $OldThisFileInfo['comments']['album'] ) : ''), ENT_QUOTES).'"></td></tr>';
 		echo '<tr><td>Year</td>  <td><input type="text" size="4"  name="Year"   value="'.htmlentities((!empty($OldThisFileInfo['comments']['year'])   ? implode(', ', $OldThisFileInfo['comments']['year']  ) : ''), ENT_QUOTES).'"></td></tr>';
+		echo '<tr><td>Organisation (Label)</td>  <td><input type="text" size="40"  name="Organisation"   value="'.htmlentities((!empty($OldThisFileInfo['comments']['organisation'])   ? implode(', ', $OldThisFileInfo['comments']['organisation']  ) : ''), ENT_QUOTES).'"></td></tr>';
 
 		$TracksTotal = '';
 		$TrackNumber = '';
@@ -269,7 +296,20 @@ if (!empty($Filename)) {
 	echo '
           </div>
           </table>
-          </form>';
+          </form>
+          </div>
+<div id="albumBrowser" class="main transparent">
+    <div class="left">
+    </div>
+    <div class="right">
+    </div>
+    <div class="middle">
+        <a title="'.$labelName.', '.TXT_BASELINE.'" href="'.MICROLABEL_ROOT_DIR.'"><img class="microlabel_logo" src="'.MICROLABEL_LABEL_LOGO.'" alt="label logo" /></a>
+    </div>
+</div>
+
+
+';
 
 }
 

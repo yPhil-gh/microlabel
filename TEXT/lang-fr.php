@@ -43,7 +43,7 @@ define('TXT_SERVER_ERROR', 'Une erreur regrettable vient de se produire');
 define('TXT_ERROR_404_SUGGESTION', 'J\'ai bien cherché tout partout.');
 define('TXT_ERROR_401_SUGGESTION', 'Un truc ne va pas avec les fichier .ht* à ta place je jetterai un coup d\'oeuil.');
 define('TXT_TAGGER_ERROR_PERMISSION', 'Erreur d\'écriture');
-define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'Tu n\'as probablement pas les droits sur le répertoire parent.');
+define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'Tu n\'as probablement pas les droits sur le répertoire parent');
 define('TXT_TAGGER_WARNING_DELETE', 'Détruire définitivement ce fichier ?');
 define('TXT_ERRORS', 'Erreur(s)');
 define('TXT_DEBUG_FILE_ERRORS', 'Erreurs de fichier');

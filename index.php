@@ -278,6 +278,10 @@ if (!empty($zong)) {
 
 $(document).ready(function() {
 
+    if ( $("#horizon").is(":visible") ) {
+        $("body > *").not("body > #horizon").remove();
+    }
+
     var instr_w, conta_w;
 
     $('div.musicien').hover(function () {
@@ -670,31 +674,18 @@ function audioList($fileList, $albumPath) {
           echo '<img class="instrument" title="'.$myName.' plays '.$instrument.' on this album" alt="'.$myName.' plays '.$instrument.' on this album" src="'.$instrument_icon.'">';
       }
 
-      echo '</td>';
+      echo '</td>
 
-      if (isset($myEmail) && (!empty($myEmail)) || isset($myTwitter) && (!empty($myTwitter))) {
-      echo '
-            <td class="contacts" title="'.(count($thisZikoTwitters) + count($thisZikoEmails)).'">';
-      }
+            <td class="contacts" title="'.(count($thisZikoTwitters) + count($thisZikoEmails)).'">
 
-      if (isset($myEmail) && (!empty($myEmail))) {
-      echo '
-            <a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>';
-      }
+            <a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>
 
-      if (isset($myTwitter) && (!empty($myTwitter))) {
-      echo '
             <a href="http://twitter.com/'.$myTwitter.'"><img class="instrument" alt="Twitter" title="Twitter account of '.$myName.'" src="img/contacts/twitter.png"></a>
-';
-      }
-      if (isset($myEmail) && (!empty($myEmail)) || isset($myTwitter) && (!empty($myTwitter))) {
-      echo '
             </td>
                 </tr>
                 </table>
 
 ';
-      }
 
       echo '
         </div>';
@@ -936,7 +927,7 @@ function albumBrowser($labelName) {
         <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse('next', 'nice').'" /></a>
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
-        <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img style="width:60px" src="'.MICROLABEL_LABEL_LOGO.'" alt="label logo" /></a>
+        <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img class="microlabel_logo" src="'.MICROLABEL_LABEL_LOGO.'" alt="label logo" /></a>
     </div>
 </div>
 <p id="footBr">&nbsp;</p>
@@ -956,7 +947,7 @@ function vc($element) {
 
     if ($current_commits) {
         $commits = json_decode($current_commits);
-        $ref_commit = "cb5ad3dba46560fe79c0d7c2a1ffd5779b658d5b";
+        $ref_commit = "0b7ebcde48a38b663a3c32030ce2e7e45e9efe2a";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;

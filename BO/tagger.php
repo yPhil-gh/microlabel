@@ -1,17 +1,16 @@
 <?php
-/////////////////////////////////////////////////////////////////
-/// getID3() by James Heinrich <info@getid3.org>               //
-//  available at http://getid3.sourceforge.net                 //
-//            or http://www.getid3.org                         //
-/////////////////////////////////////////////////////////////////
-//                                                             //
-// /demo/demo.browse.php - part of getID3()                     //
-// Sample script for browsing/scanning files and displaying    //
-// information returned by getID3()                            //
-// See readme.txt for more details                             //
-//                                                            ///
-/////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////
+// Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
+// licensed GPL3 - http://www.gnu.org/licenses/gpl-3.0.html       //
+// Because all music should be free                               //
+// Please don't harm nobody w/ this code even if they ask to      //
+////////////////////////////////////////////////////////////////////
+// tagger.php - Based on demo.browse.php - part of getID3()       //
+// Sample script for browsing/scanning files and displaying       //
+// information returned by getID3()                               //
+// See readme.txt for more details                                //
+////////////////////////////////////////////////////////////////////
 
 //die('Due to a security issue, this demo has been disabled. It can be enabled by removing line '.__LINE__.' in demos/'.basename(__FILE__));
 
@@ -49,7 +48,7 @@ function delTree($dir) {
     $files = array_diff(scandir($dir), array('.','..'));
     foreach ($files as $file) {
         error_log("Pl0oop!", 0);
-        if (chmod($file, 0755)) {
+        if (chmod($file, 0764)) {
             return true;
         } else {
             microlabelError(TXT_TAGGER_ERROR_PERMISSION, TXT_TAGGER_ERROR_PERMISSION_SUGGESTION);
@@ -84,13 +83,21 @@ echo '<!doctype html>
 <html>
 <head>
     <title>Microlabel - Tagger</title>
-    <link rel="shortcut icon" href="../img/label_logo_on.png" />
+    <link rel="shortcut icon" href="'.MICROLABEL_LABEL_LOGO.'" />
     <style type="text/css" media="screen">@import "../libs/css/style.css";</style>
     <script src="../libs/jquery-1.10.2.min.js"></script>
     <script src="../libs/jquery.expandable.js"></script>
     <script type="text/javascript">
 
 $(document).ready(function() {
+
+var fullHtml = $("#main").html();
+fullHtml.replace("#error");
+
+    if ( $("#error").is(":visible") ) {
+        $("#overlay").show();
+        $("#overlay").css("opacity", "0.5");
+    }
 
 $("input.input").expandable({
 	    		width: 500,
@@ -106,13 +113,15 @@ $("input.input").expandable({
 
 </head>
 <body id="microlabel-tagger" class="microlabel-body">
+<div id="overlay" class="overlay"></div>
+<div id="main">
 ';
 
 // echo '('.$lang.')'.$method;
 
 if (isset($_REQUEST['deletedir'])) {
     if (isset($_REQUEST['keep'])) {
-        delTree('/var/www/microlabel/CACHE');
+        delTree(MICROLABEL_CACHE_DIR);
     } else {
         rrmdir($_REQUEST['deletedir'], false);
     }
@@ -457,10 +466,19 @@ if (isset($_REQUEST['filename'])) {
 
 echo '
 </div>
-<div id="back_home">
-    <a class="house" href="'.MICROLABEL_ROOT_DIR.'/">&#8962;</a> - <a href="'.htmlentities($_SERVER['PHP_SELF']).'?deletedir='.MICROLABEL_ROOT_DIR.'/CACHE&keep=false" onClick="return confirm(\''.TXT_TAGGER_WARNING_DELETE.' ('.MICROLABEL_ROOT_DIR.'/CACHE)\');">'.TXT_EMPTY_CACHE_DIR.'</a>
+
+<div id="albumBrowser" class="main transparent" style="position: relative;">
+    <div class="left" style="position: relative; z-index: 2;">
+    </div>
+    <div class="right" style="position: relative; z-index: 2;">
+    </div>
+    <div class="middle" style="position: relative; z-index: 2;">
+        <a title="'.$labelName.', '.TXT_BASELINE.'" href="'.MICROLABEL_ROOT_DIR.'"><img style="width:60px" src="'.MICROLABEL_LABEL_LOGO.'" alt="label logo" /></a>
+    </div>
 </div>
 
+'.PoweredBygetID3().'
+</div>
 </body>
 </html>';
 
@@ -674,10 +692,36 @@ function MoreNaturalSort($ar1, $ar2) {
 
 function PoweredBygetID3($string='') {
 	global $getID3;
+
+    $i = 0;
+    $dir = MICROLABEL_CACHE_DIR;
+    if ($handle = opendir($dir)) {
+        while (($file = readdir($handle)) !== false){
+            if (!in_array($file, array('.', '..')) && !is_dir($dir.$file))
+                $i++;
+        }
+    }
+    // prints out how many were in the directory
 	if (!$string) {
-		$string = '<div class="powered-by">Powered by <a href="http://getid3.sourceforge.net">getID3() v<!--GETID3VER--><br/>http://getid3.sourceforge.net</a><br/>Running on PHP v'.phpversion().' ('.(ceil(log(PHP_INT_MAX, 2)) + 1).'-bit)</div>';
+		$string = '
+        <div class="powered-by">
+                <p>Powered by <a href="http://getid3.sourceforge.net">getID3() v<!--GETID3VER--><br/>http://getid3.sourceforge.net</a><br />Running on PHP v'.phpversion().' ('.(ceil(log(PHP_INT_MAX, 2)) + 1).'-bit)</p>
+                <p>('.$i.') pages cached in '.MICROLABEL_CACHE_DIR.'</p>
+                <p style="text-align:center;">
+                <a href="'.htmlentities($_SERVER['PHP_SELF']).'?deletedir='.MICROLABEL_ROOT_DIR.'/CACHE&keep=false" onClick="return confirm(\''.TXT_TAGGER_WARNING_DELETE.' ('.MICROLABEL_ROOT_DIR.'/CACHE)\');">
+                <img src="../img/icon_empty_cache.png" alt="'.TXT_EMPTY_CACHE_DIR.'" title="'.TXT_EMPTY_CACHE_DIR.'"><br />
+                '.TXT_EMPTY_CACHE_DIR.'
+                </a>
+
+</p>
+
+        </div>';
 	}
 	return str_replace('<!--GETID3VER-->', $getID3->version(), $string);
 }
+
+// echo '<pre>';
+// var_dump($_SERVER);
+// echo '</pre>';
 
 ?>

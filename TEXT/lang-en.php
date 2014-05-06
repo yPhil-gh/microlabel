@@ -40,7 +40,7 @@ define('TXT_SERVER_ERROR', 'A much infortunate error has occured');
 define('TXT_ERROR_404_SUGGESTION', 'Dude, I looked everywhere for that file, and could not find it.');
 define('TXT_ERROR_401_SUGGESTION', 'Something must be wrong with your .ht* files. Better check them now.');
 define('TXT_TAGGER_ERROR_PERMISSION', 'Write error');
-define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'You probably do not have rights to the parent directory.');
+define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'You probably do not have rights to the parent directory');
 define('TXT_TAGGER_WARNING_DELETE', 'Do you really want to permanently delete this file?');
 define('TXT_ERRORS', 'Error(s)');
 define('TXT_DEBUG_FILE_ERRORS', 'File errors');

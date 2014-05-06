@@ -49,7 +49,7 @@ $textFile = 'lang-'.$lang.'.php';
 
 include($textFile);
 
-$cachefile = './CACHE/'.basename($_SERVER['PHP_SELF'].'-lang-'.$lang.'.'.$_SERVER['QUERY_STRING']);
+$cachefile = MICROLABEL_CACHE_DIR.'/'.basename($_SERVER['PHP_SELF'].'-lang-'.$lang.'.'.$_SERVER['QUERY_STRING']);
 
 $cachetime = 365 * 24 * 3600;
 // Serve from the cache if it is younger than $cachetime
@@ -63,14 +63,19 @@ ob_start(); // start the output buffer
 
 function microlabelError($text, $suggestion) {
 echo '
-        <p id="suggestion">'.$suggestion.'</p>
+        <div id="suggestion">
+			<p><img class="error" id="cloud" src="'.MICROLABEL_ROOT_DIR.'/img/icon_cloud.png" alt="Error" />
+            '.$suggestion.'</p>
+        </div>
 		<div id="horizon">
 			<div id="error">
-			<img src="/microlabel/img/instruments/horns.png"/>
+			<img class="error" src="'.MICROLABEL_ROOT_DIR.'/img/instruments/horns.png" alt="Error" />
 				<h1 id="error">Uh-oh</h1>
                 '.$text.' :(
 			    <div id="back_home">
-                <a href="'.MICROLABEL_ROOT_DIR.'">&#8962;</a>
+                    <a title="'.$labelName.', '.TXT_BASELINE.'" href="'.MICROLABEL_ROOT_DIR.'">
+                        <img class="error" src="'.MICROLABEL_LABEL_LOGO.'" alt="label logo" />
+                    </a>
 			    </div>
 			</div>
 		</div>

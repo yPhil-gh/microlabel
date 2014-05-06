@@ -43,7 +43,7 @@ define('TXT_SERVER_ERROR', 'Eine viel infortunate Fehler aufgetreten :');
 define('TXT_ERROR_404_SUGGESTION', 'Dude, sah ich überall für diese Datei, und konnte es nicht finden.');
 define('TXT_ERROR_401_SUGGESTION', 'Es muss etwas falsch mit Ihrem .ht* Dateien sein. Besser überprüfen sie jetzt.');
 define('TXT_TAGGER_ERROR_PERMISSION', 'Schreibfehler');
-define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'Sie haben wahrscheinlich nicht die Rechte an dem übergeordneten Verzeichnis.');
+define('TXT_TAGGER_ERROR_PERMISSION_SUGGESTION', 'Sie haben wahrscheinlich nicht die Rechte an dem übergeordneten Verzeichnis');
 define('TXT_TAGGER_WARNING_DELETE', 'Dauerhaft diese Datei löschen?');
 define('TXT_ERRORS', 'Fehler');
 define('TXT_DEBUG_FILE_ERRORS', 'Dateifehler');
