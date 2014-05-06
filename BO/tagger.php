@@ -43,12 +43,28 @@ $getID3->setOption(array('encoding' => $PageEncoding));
 
 ///////////////////////////////////////////////////////////////////////////////
 
+// chmod("/somedir/somefile", 0755)
+
+function delTree($dir) {
+    $files = array_diff(scandir($dir), array('.','..'));
+    foreach ($files as $file) {
+        error_log("Pl0oop!", 0);
+        if (chmod($file, 0755)) {
+            return true;
+        } else {
+            microlabelError(TXT_TAGGER_ERROR_PERMISSION, TXT_TAGGER_ERROR_PERMISSION_SUGGESTION);
+        }
+        (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
+    }
+    return rmdir($dir);
+}
+
 function rrmdir($dir, $keep) {
     if (is_dir($dir)) {
         $objects = scandir($dir);
         foreach ($objects as $object) {
             if ($object != "." && $object != "..") {
-                if (is_writable($object)) {
+                if (chmod($object, 0755)) {
                     return true;
                 } else {
                     microlabelError(TXT_TAGGER_ERROR_PERMISSION, TXT_TAGGER_ERROR_PERMISSION_SUGGESTION);
@@ -96,7 +112,7 @@ $("input.input").expandable({
 
 if (isset($_REQUEST['deletedir'])) {
     if (isset($_REQUEST['keep'])) {
-        rrmdir($_REQUEST['deletedir'], true);
+        delTree('/var/www/microlabel/CACHE');
     } else {
         rrmdir($_REQUEST['deletedir'], false);
     }

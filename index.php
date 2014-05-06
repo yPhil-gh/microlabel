@@ -189,11 +189,6 @@ function getInfo($startPath, $element) {
 
 $myDumbVar=getInfo($rootMusicDir, 'musicDirs');
 
-$mtime = microtime();
-$mtime = explode(" ",$mtime);
-$mtime = $mtime['1'] + $mtime['0'];
-$starttime = $mtime;
-
 ////////////////////////////////
 
 
@@ -288,14 +283,14 @@ $(document).ready(function() {
     $('div.musicien').hover(function () {
         instr_w = parseFloat($(this).find('td.instruments').attr("title"));
         conta_w = parseFloat($(this).find('td.contacts').attr("title"));
-        var div_width = (instr_w + conta_w * 4.5) + 'em';
+        var div_width = (instr_w + conta_w * 5) + 'em';
         // alert(instr_w + 'contacts : ' + conta_w);
         $(this).stop(true,true).animate({
             width: '+='+div_width,
             height: '+=45'
         }, 500);
     }, function () {
-        var div_width = (instr_w + conta_w * 4.5) + 'em';
+        var div_width = (instr_w + conta_w * 5) + 'em';
         $(this).stop(true,true).animate({
             width: '-='+div_width,
             height: '-=45'
@@ -961,7 +956,7 @@ function vc($element) {
 
     if ($current_commits) {
         $commits = json_decode($current_commits);
-        $ref_commit = "75680b149466dc6f746b74b8b7dfa6427bfa3b5d";
+        $ref_commit = "9f7a278124e869d70bd0edcf4235396ec89f1b72";
 
         $current_commit_minus1 = $commits['1']->sha;
         $commit_message = "last message : ".$commits['0']->commit->message;
@@ -1043,13 +1038,6 @@ function fixedFooter($dirList) {
     ';
 }
 
-$mtime = microtime();
-$mtime = explode(" ",$mtime);
-$mtime = $mtime[1] + $mtime[0];
-$endtime = $mtime;
-$totaltime = ($endtime - $starttime);
-
-
 // Query string
 $friendlyPath = strip_tags($_GET['a']);
 $slash = "/";
@@ -1058,24 +1046,16 @@ $meanPath = $rootMusicDir.$slash.str_replace($dash, $slash, $friendlyPath);
 $directoryToScan = $meanPath;
 $directoryToScan = trim($directoryToScan, $slash);
 
-
-
 $fileList = getInfo($directoryToScan, 'musicFiles');
-
 
 // Main block
 if (!isset($_GET['a'])) {
     index($dirList, $labelName);
 } else {
-
-    /* twit('AzerOo0'); */
     spitTitle($dirList, $fileList);
     audioList($fileList, $directoryToScan);
     videoList($fileList, $directoryToScan);
     albumBrowser($labelName);
-    if (isset($_GET['debug'])) {
-        debugFooter($totaltime, $albums, $songs);
-    }
     fixedFooter($dirList);
 }
 
@@ -1089,7 +1069,8 @@ if ($cache) {
     $fp = fopen($cachefile, 'w');
     fwrite($fp, ob_get_contents());
     fclose($fp);
-    ob_end_flush(); // Send the output to the browser
+    chmod($cachefile, 0764);
+    ob_end_flush();
 }
 
 ?>

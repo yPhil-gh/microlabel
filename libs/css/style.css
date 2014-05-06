@@ -425,7 +425,6 @@ table.album-description tr:not(:last-child) {
 
 table.album-description td {
     padding:0 .2em;
-    width: 50%;
     text-align:left;
     color:#ccc;
 }
@@ -654,6 +653,7 @@ div.musicien {
 }
 
 table.muzikosTable {
+    width:100%;
     border-spacing:0;
     border-collapse:collapse;
     margin:0;

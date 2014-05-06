@@ -26,6 +26,7 @@
     text-align:left;
     cursor:pointer;
     margin:0;
+    opacity:1;
 }
 
 #MlPlayerDescription {
@@ -47,6 +48,7 @@
     color:#fff;
     background-color:#333;
     border:#FB0 1px solid;
+    opacity:.9;
 }
 
 .MlPlayerListItem {
@@ -54,6 +56,7 @@
     background-color:#555;
     border: 1px solid #FFBB00;
     border-radius: 4px;
+    opacity:.8;
 }
 
 .MlPlayerListItem, .MlPlayerListItemSelected {
