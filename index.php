@@ -1050,16 +1050,7 @@ if (!isset($_GET['a'])) {
     fixedFooter($dirList);
 }
 
-echo 'Yo, '.MICROLABEL_CACHE_DIR;
-
-
-echo '<pre>';
-var_dump($_SERVER);
-echo '</pre>';
-
-
 echo '
-
 </body>
 </html>
 ';
