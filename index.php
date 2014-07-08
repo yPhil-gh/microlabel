@@ -1058,7 +1058,7 @@ function fixedFooter($dirList) {
 paypal.use( ["login"], function(login) {
   login.render ({
     "appid": "AZKdmBDoHTGvYbMqxQdvwevfaKT3fCiSuvVd4qy4KWyH-pIKqhLwK0tVixVp",
-    "scopes": "profile email address phone https://uri.paypal.com/services/paypalattributes",
+    "scopes": "profile email https://uri.paypal.com/services/paypalattributes",
     "containerid": "PaypalSignContainer",
     "locale": "en-us",
     "theme": "neutral",
