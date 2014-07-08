@@ -822,6 +822,25 @@ echo '
 
     echo '
         </div>
+
+
+<span id="PaypalSignContainer"></span>
+<script src="https://www.paypalobjects.com/js/external/api.js"></script>
+<script>
+paypal.use( ["login"], function(login) {
+  login.render ({
+    "appid": "ATH7axAW1bxQT_D7qIxSEDxPZhbnNV5XDfGyTV30y6nNT7EgEKB7-o2zEN4e",
+    "authend": "sandbox",
+    "scopes": "profile email https://uri.paypal.com/services/paypalattributes",
+    "containerid": "PaypalSignContainer",
+    "locale": "en-us",
+    "theme": "neutral",
+    "returnurl": "http://opensimo.org/play/"
+  });
+});
+</script>
+
+
     ';
 }
 
@@ -1049,6 +1068,7 @@ function fixedFooter($dirList) {
 <input type="hidden" name="business" value="XECHR8TM2Y9YN">
 <input type="hidden" name="display" value="1">
 <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_viewcart_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+
 <span id="PaypalSignContainer"></span>
 <script src="https://www.paypalobjects.com/js/external/api.js"></script>
 <script>
