@@ -1062,7 +1062,7 @@ paypal.use( ["login"], function(login) {
     "containerid": "paypalLogin",
     "locale": "en-us",
     "theme": "neutral",
-    "returnurl": "https://uri.paypal.com/services/paypalattributes"
+    "returnurl": "https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize"
   });
 });
 </script>
