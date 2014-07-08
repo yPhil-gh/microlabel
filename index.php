@@ -1062,7 +1062,7 @@ paypal.use( ["login"], function(login) {
     "containerid": "paypalLogin",
     "locale": "en-us",
     "theme": "neutral",
-    "returnurl": "http://opensimo.com/play/auth_ok.html"
+    "returnurl": "https://uri.paypal.com/services/paypalattributes"
   });
 });
 </script>
