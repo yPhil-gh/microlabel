@@ -267,7 +267,7 @@ if (songToPlay !== undefined) {
 }
 
   var songToPlay = "<?php
-$zong = strip_tags($_GET['s']);
+$zong = strip_tags($_GET['play']);
 if (!empty($zong)) {
     echo $zong-1;
 } else {
@@ -550,12 +550,12 @@ function audioList($fileList, $albumPath) {
       // Note our use of ===.  Simply == would not work as expected
       // because the position of 'a' was the 0th (first) character.
       if ($pos === false) {
-          $unSafeLink = 'http://'.$host.$script.'?a='.$thisFileNicePath.'&amp;s='.$z++;
+          $unSafeLink = 'http://'.$host.$script.'?a='.$thisFileNicePath.'&amp;play='.$z++;
       } else {
-          $unSafeLink = 'http://'.$host.$myDir.'/?a='.$thisFileNicePath.'&amp;s='.$z++;
+          $unSafeLink = 'http://'.$host.$myDir.'/?a='.$thisFileNicePath.'&amp;play='.$z++;
       }
 
-      $shortLink = getTinyUrl($unSafeLink);
+      // $shortLink = getTinyUrl($unSafeLink);
 
       // $albumYear = isset($albumYear) ? $albumYear : "N / A";
 
@@ -601,13 +601,31 @@ function audioList($fileList, $albumPath) {
       echo '
             <form class="urlFields">
               <input type="text" class="loongURL" size="20" name="'.TAGS_SHARE.'" onClick="this.select();" value="'.$unSafeLink.'"><br/>
-              <input type="text" class="shortURL" size="20" onClick="this.select();" value="'.$shortLink.'" />
+              <!--input type="text" class="shortURL" size="20" onClick="this.select();" value="'.$shortLink.'" /-->
             </form>
 
             <table class="songMenu">
             <tr>
               <td><img src="img/icon_download.png" alt="'.TXT_DOWNLOAD.'" /><a title="' . $trackTitle.' ('.TXT_DOWNLOAD.')" href="download.php?d='.$thisFileNicePath.','.$fileName.'">'.TXT_DOWNLOAD.'</a></td>
-              <td><img src="img/icon_love.png" alt="'.TXT_BUY.'" /><a href="#">'.TXT_BUY.'</a></td>
+              <td><img src="img/icon_love.png" alt="'.TXT_BUY.'" /><a href="#">'.TXT_BUY.'</a>
+
+<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="CHTFK49LJPT8N">
+<table>
+<tr><td><input type="hidden" name="on0" value="Prix">Prix</td></tr><tr><td><select name="os0">
+	<option value="Auditor">Auditor €1,00 EUR</option>
+	<option value="Fan">Fan €3,00 EUR</option>
+	<option value="Sponsor">Sponsor €5,00 EUR</option>
+</select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="EUR">
+<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+</td>
             </tr>
             </table>
           </div>
@@ -1025,6 +1043,30 @@ function fixedFooter($dirList) {
          <img class="buttons" src="img/button_help_on.png" alt="'.TXT_HELP.'" /></a>
        <a title="Tag!" href="./?tag">
          <img class="buttons" src="img/button_tag.png" alt="'.TXT_HELP.'" /></a>
+
+<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
+<input type="hidden" name="cmd" value="_cart">
+<input type="hidden" name="business" value="XECHR8TM2Y9YN">
+<input type="hidden" name="display" value="1">
+<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_viewcart_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+<img class="buttons" alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<span id="paypalLogin"></span>
+<script src="https://www.paypalobjects.com/js/external/api.js"></script>
+<script>
+paypal.use( ["login"], function(login) {
+  login.render ({
+    "appid": "d3428641e41208c246d07b2e5f3cc7a5",
+    "scopes": "profile email address phone https://uri.paypal.com/services/paypalattributes",
+    "containerid": "paypalLogin",
+    "locale": "en-us",
+    "theme": "neutral",
+    "returnurl": "http://opensimo.com/play/auth_ok.html"
+  });
+});
+</script>
+
    </div>
     ';
 }
