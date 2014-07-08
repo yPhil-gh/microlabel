@@ -1052,17 +1052,17 @@ function fixedFooter($dirList) {
 <img class="buttons" alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
 </form>
 
-<span id="paypalLogin"></span>
+<span id="PaypalSignContainer"></span>
 <script src="https://www.paypalobjects.com/js/external/api.js"></script>
 <script>
 paypal.use( ["login"], function(login) {
   login.render ({
-    "appid": "d3428641e41208c246d07b2e5f3cc7a5",
+    "appid": "AZKdmBDoHTGvYbMqxQdvwevfaKT3fCiSuvVd4qy4KWyH-pIKqhLwK0tVixVp",
     "scopes": "profile email address phone https://uri.paypal.com/services/paypalattributes",
-    "containerid": "paypalLogin",
+    "containerid": "PaypalSignContainer",
     "locale": "en-us",
     "theme": "neutral",
-    "returnurl": "https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize"
+    "returnurl": "http://opensimo.org/play/"
   });
 });
 </script>
