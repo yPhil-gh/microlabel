@@ -1,5 +1,5 @@
 AuthName "Microlabel Back Office"
 DirectoryIndex tagger.php
 AuthType Basic
-AuthUserFile /var/www/microlabel/BO/.htpasswd
+AuthUserFile /home/pcoatmeur/opensimo/www/play/BO/.htpasswd
 Require valid-user

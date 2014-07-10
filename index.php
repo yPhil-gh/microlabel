@@ -831,11 +831,11 @@ paypal.use( ["login"], function(login) {
   login.render ({
     "appid": "ATH7axAW1bxQT_D7qIxSEDxPZhbnNV5XDfGyTV30y6nNT7EgEKB7-o2zEN4e",
     "authend": "sandbox",
-    "scopes": "profile email https://uri.paypal.com/services/paypalattributes",
+    "scopes": "openid profile email",
     "containerid": "PaypalSignContainer",
     "locale": "en-us",
     "theme": "neutral",
-    "returnurl": "http://opensimo.org/play/"
+    "returnurl": "http://opensimo.org/play/auth_ok.php"
   });
 });
 </script>
