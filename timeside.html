@@ -2,9 +2,28 @@
 <html>
 
   <head>
+    <title>TS test</title>
+
     <meta charset="UTF-8">
-      <script type="text/javascript" src="timeside-ui/lib/jquery-1.6.min.js"></script>
-      <script type="text/javascript" src="timeside-ui/lib/soundmanager2-nodebug-jsmin.js"></script>
-      <script type="text/javascript" src="timeside-ui/timeside.js"></script>
+      <script type="text/javascript" src="timeside-ui/js/libs/jquery-1.6.min.js"></script>
+      <script type="text/javascript" src="timeside-ui/js/libs/soundmanager2-nodebug-jsmin.js"></script>
+      <script type="text/javascript" src="timeside-ui/js/timeside.js"></script>
     </head>
+
+    <script type="text/javascript">
+       soundManager.url = 'timeside-ui/swf/';  // path (directory) where SM2 .SWF files will be found.
+    </script>
+
+    <div id="player">
+    <script type="text/javascript">
+        Timeside.load({
+            container: player,
+            sound: "MUSIC/Azer0/Counternatures/Azer0-Counternatures-01-Takaddum.ogg",
+            soundDuration: 149264,
+            soundImage: "MUSIC/Azer0/Counternatures/album.jpg",
+        }
+        );
+    </script>
+</div>
+
   </html>
