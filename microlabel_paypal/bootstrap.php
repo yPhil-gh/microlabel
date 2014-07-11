@@ -6,6 +6,10 @@
 
 define('PP_CONFIG_PATH', __DIR__);
 
+$microlabel_paypal_redirect_uri="http://opensimo.org/play/auth_ok.php";
+$microlabel_paypal_client_id='ATH7axAW1bxQT_D7qIxSEDxPZhbnNV5XDfGyTV30y6nNT7EgEKB7-o2zEN4e';
+$microlabel_paypal_client_secret='EEu3yBADgZHyfzlLCQKDDeFO4VuqpnwRLlDdPPj1PoPRag42OeV_VMyMnkzM';
+
 // Include the composer autoloader
 if(!file_exists(__DIR__ .'/vendor/autoload.php')) {
 	echo "The 'vendor' folder is missing. You must run 'composer update --no-dev' to resolve application dependencies.\nPlease see the README for more information.\n";
@@ -20,11 +24,6 @@ use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
 
 $apiContext = getApiContext();
-$microlabel_paypal_redirect_uri="http://opensimo.org/play/auth_ok.php";
-$microlabel_paypal_client_id='ATH7axAW1bxQT_D7qIxSEDxPZhbnNV5XDfGyTV30y6nNT7EgEKB7-o2zEN4e';
-$microlabel_paypal_client_secret='EEu3yBADgZHyfzlLCQKDDeFO4VuqpnwRLlDdPPj1PoPRag42OeV_VMyMnkzM';
-
-
 
 /**
  * Helper method for getting an APIContext for all calls
@@ -32,7 +31,7 @@ $microlabel_paypal_client_secret='EEu3yBADgZHyfzlLCQKDDeFO4VuqpnwRLlDdPPj1PoPRag
  * @return PayPal\Rest\ApiContext
  */
 function getApiContext() {
-global $microlabel_paypal_client_id,$microlabel_paypal_client_secret;
+global $microlabel_paypal_client_id, $microlabel_paypal_client_secret;
 	
 	// ### Api context
 	// Use an ApiContext object to authenticate 
@@ -60,7 +59,7 @@ global $microlabel_paypal_client_id,$microlabel_paypal_client_secret;
 			//'mode' => 'live',
 			'mode' => 'sandbox',
 			'http.ConnectionTimeOut' => 30,
-			'log.LogEnabled' => true,
+			'log.LogEnabled' => false,
 			'log.FileName' => '../PayPal.log',
 			'log.LogLevel' => 'FINE'
 		)
