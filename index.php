@@ -900,13 +900,13 @@ function albumBrowser($album_id) {
     echo '
 <div id="albumBrowser" class="main transparent" style="position: relative;">
     <div class="left" style="position: relative; z-index: 2;">
-        <a title="'.TXT_PREVIOUS_ALBUM.' = '.$album_list[$prev_album]["name"].'" href="?a='.$album_list[$next_album]["file_id"].'">
+        <a title="'.TXT_PREVIOUS_ALBUM.' = '.$album_list[$prev_album]["name"].'" href="?a='.$prev_album.'">
         <img class="thumb" src="'.$prevAlbumSleeve.'" alt="'.TXT_PREVIOUS_ALBUM.' = '.$album_list[$prev_album]["name"].'" /></a>
     </div>
     <div class="right" style="position: relative; z-index: 2;">
         <div class="fadeAlbums"><strong>'.TXT_NEXT_ALBUM.'</strong>
         </div>
-        <a title="'.TXT_NEXT_ALBUM.' = '.$album_list[$prev_album]["name"].'" href="?a='.$album_list[$next_album]["file_id"].'">
+        <a title="'.TXT_NEXT_ALBUM.' = '.$album_list[$prev_album]["name"].'" href="?a='.$next_album.'">
         <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.$album_list[$next_album]["name"].'" /></a>
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
