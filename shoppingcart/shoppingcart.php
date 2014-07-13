@@ -1,7 +1,10 @@
 <?php
+
 	include("includes/db.php");
 	include("includes/functions.php");
-	
+
+$msg='';
+
 	if($_REQUEST['command']=='delete' && $_REQUEST['pid']>0){
 		remove_product($_REQUEST['pid']);
 	}
@@ -74,10 +77,10 @@
 			?>
             		<tr bgcolor="#FFFFFF"><td><?php echo $i+1?></td><td><?php echo $pname?></td>
                     <td>$ <?php echo get_price($pid)?></td>
-                    <td><input type="text" name="product<?php echo $pid?>" value="<?php echo $q?>" maxlength="3" size="2" /></td>                    
+                    <td><input type="text" name="product<?php echo $pid?>" value="<?php echo $q?>" maxlength="3" size="2" /></td>
                     <td>$ <?php echo get_price($pid)*$q?></td>
                     <td><a href="javascript:del(<?php echo $pid?>)">Remove</a></td></tr>
-            <?php					
+            <?php
 				}
 			?>
 				<tr><td><b>Order Total: $<?php echo get_order_total()?></b></td><td colspan="5" align="right"><input type="button" value="Clear Cart" onclick="clear_cart()"><input type="button" value="Update Cart" onclick="update_cart()"><input type="button" value="Place Order" onclick="window.location='billing.php'"></td></tr>

@@ -282,8 +282,12 @@ function MlPlayer( list ) {
 
             //what is the audio_path?
             audio_path = audio_info[id]["audio_path"];
+            // audio_path = 1;
             //set the audio_elements src
             audio_element.src=audio_path;
+            // audio_element.src='get_file.php?id=' + audio_path;
+
+
             //load the new audio
             audio_element.load();
 

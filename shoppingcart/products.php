@@ -1,20 +1,21 @@
 <?php
 	include("includes/db.php");
 	include("includes/functions.php");
-	
+
+
 	if($_REQUEST['command']=='add' && $_REQUEST['productid']>0){
 		$pid=$_REQUEST['productid'];
 		addtocart($pid,1);
 		header("location:shoppingcart.php");
 		exit();
 	}
-	
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Products</title>
+<title>Productz</title>
 <script language="javascript">
 	function addtocart(pid){
 		document.form1.productid.value=pid;

@@ -1,7 +1,7 @@
 <?php
 
 // # Create Payment using PayPal as payment method
-// This sample code demonstrates how you can process a 
+// This sample code demonstrates how you can process a
 // PayPal Account based Payment.
 // API used: /v1/payments/payment
 
@@ -31,36 +31,60 @@ $currency="EUR";
 // tu dois réfléchir au problème de renommage de chanson ou d'album, impossible ensuite de faire le lien avec un article. A moins de gérer des id invariants pour les songs.
 // impossible en réalité de renommer/supprimer une chanson qui a un jour été achetée.
 $article= new Item();
-$article->setName('Song: Azero/Panopticon-demo/Good Game')
-	->setCurrency($currency)
-	->setQuantity(1)
-	->setPrice('1');
+$amount=1;
+$item_price=1;
+$product_type=1;
+$product_id=1;
+$article->setName('Song ('.round($amount/$item_price,2).'): Azero/Panopticon-demo/Good Game')
+        ->setCurrency($currency)
+        ->setQuantity(1)
+        ->setPrice(number_format($amount, 2, ".", "" ))
+        ->setSku("$product_type/$product_id")
+    ;
 $panier[]=$article;
-$total+=1;
+$total+=$amount;
 
 $article= new Item();
-$article->setName('Song Fan: Azero/Panopticon-demo/Day Patrol')
-	->setCurrency($currency)
-	->setQuantity(1)
-	->setPrice('5');
+$amount=6.1;
+$item_price=1;
+$product_type=1;
+$product_id=2;
+$article->setName('Song Fan('.round($amount/$item_price,2).'): Azero/Panopticon-demo/Day Patrol')
+        ->setCurrency($currency)
+        ->setQuantity(1)
+        ->setPrice(number_format($amount, 2, ".", "" ))
+        ->setSku("$product_type/$product_id")
+    ;
 $panier[]=$article;
-$total+=5;
+$total+=$amount;
 
 $article= new Item();
-$article->setName('Album: Azero/Counternatures')
-	->setCurrency($currency)
-	->setQuantity(1)
-	->setPrice('15');
+$amount=15;
+$item_price=10;
+$product_type=2;
+$product_id=5;
+$article->setName('Album('.round($amount/$item_price,2).'): Azero/Counternatures')
+        ->setCurrency($currency)
+        ->setQuantity(1)
+        ->setPrice(number_format($amount, 2, ".", "" ))
+        ->setSku("$product_type/$product_id")
+    ;
 $panier[]=$article;
-$total+=15;
+$total+=$amount;
 
 $article= new Item();
-$article->setName('Artist Adept: Azero')
-	->setCurrency($currency)
-	->setQuantity(1)
-	->setPrice('1000');
+$amount=1000;
+$item_price=10;
+$product_type=3;
+$product_id=7;
+$article->setName('Artist Adept('.round($amount/$item_price,2).'): Azero')
+        ->setCurrency($currency)
+        ->setQuantity(1)
+        ->setPrice(number_format($amount, 2, ".", "" ))
+        ->setSku("$product_type/$product_id")
+        ;
 $panier[]=$article;
-$total+=1000;
+$total+=$amount;
 
 $itemList = new ItemList();
 $itemList->setItems($panier);
@@ -71,19 +95,19 @@ $itemList->setItems($panier);
 // such as shipping, tax.
 $amount = new Amount();
 $amount->setCurrency($currency)
-	->setTotal($total);
+       ->setTotal(number_format($total,2,".",""));
 
 // ### Transaction
 // A transaction defines the contract of a
 // payment - what is the payment for and who
-// is fulfilling it. 
+// is fulfilling it.
 $transaction = new Transaction();
 $transaction->setAmount($amount)
 	->setItemList($itemList)
 	->setDescription("Achats Microlabel");
 
 // ### Redirect urls
-// Set the urls that the buyer must be redirected to after 
+// Set the urls that the buyer must be redirected to after
 // payment approval/ cancellation.
 $baseUrl = getBaseUrl();
 $redirectUrls = new RedirectUrls();
@@ -110,7 +134,7 @@ try {
 	$payment->create($apiContext);
 } catch (PayPal\Exception\PPConnectionException $ex) {
 	echo "Exception: " . $ex->getMessage() . PHP_EOL;
-	var_dump($ex->getData());	
+	var_dump($ex->getData());
 	exit(1);
 }
 
@@ -131,7 +155,7 @@ foreach($payment->getLinks() as $link) {
 // back to your website.
 //
 // It is not a great idea to store the payment id
-// in the session. In a real world app, you may want to 
+// in the session. In a real world app, you may want to
 // store the payment id in a database.
 $_SESSION['paymentId'] = $payment->getId();
 if(isset($redirectUrl)) {

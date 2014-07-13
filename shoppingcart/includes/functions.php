@@ -1,4 +1,5 @@
 <?php
+
 	function get_product_name($pid){
 		$result=mysql_query("select name from products where serial=$pid") or die("select name from products where serial=$pid"."<br/><br/>".mysql_error());
 		$row=mysql_fetch_array($result);
@@ -33,7 +34,7 @@
 	}
 	function addtocart($pid,$q){
 		if($pid<1 or $q<1) return;
-		
+
 		if(is_array($_SESSION['cart'])){
 			if(product_exists($pid)) return;
 			$max=count($_SESSION['cart']);

@@ -1,7 +1,7 @@
 <?php
-
 require_once('libs/microlabel.php');
 require_once('libs/getid3/getid3.php');
+require_once('mysql_connect.php');
 
 ////////////////////////////////////////////////////////////////////
 // Microlabel copyright 2010-2014 Phil CM <xaccrocheur@gmail.com> //
@@ -22,6 +22,16 @@ exit;
 
 $rootMusicDir = MICROLABEL_MUSIC_DIR;
 
+$album_list=array();
+foreach ($dbh->query('select albums.id as album_id, albums.name, files.id as file_id
+from
+albums
+left join files on files.id=albums.album_cover_file_id
+where albums.status=1
+order by albums.id
+') as $album) $album_list[$album["album_id"]]=$album;
+
+
 class ExcludeDotDirsFilterIterator extends FilterIterator {
     public function accept()  {
         $fileinfo = $this->getInnerIterator()->current();
@@ -33,7 +43,7 @@ class ExcludeDotDirsFilterIterator extends FilterIterator {
     }
 }
 
-function getInfo($startPath, $element) {
+function getInfo_old($startPath, $element) {
     $thisAlbumSleeves = array();
     $getID3 = new getID3;
     $sp = '&nbsp;';
@@ -187,47 +197,9 @@ function getInfo($startPath, $element) {
     }
 }
 
-$myDumbVar=getInfo($rootMusicDir, 'musicDirs');
+// $myDumbVar=getInfo($rootMusicDir, 'musicDirs');
 
 ////////////////////////////////
-
-
-function xmlInfos($element) {
-    $videoObjects = '';
-    $thisAlbumPath = browse('current', 'mean');
-
-    $file = $thisAlbumPath.'/info.xml';
-    $xml = simplexml_load_file($file);
-
-    if (count($xml->video) > 0) {
-        foreach ($xml->video as $video) {
-            $videoObjects[] = $video;
-        }
-    }
-
-
-
-    if (count($xml->musicien) > 0) {
-
-        foreach ($xml->musicien as $musicien) {
-
-            $xml = json_decode(json_encode((array) simplexml_load_string($musicien)), 1);
-
-            $myMusicians[] = $musicien;
-        }
-    }
-
-
-    switch ($element) {
-    case 'all_musicians':
-        return $myMusicians;
-        break;
-    case 'videos_object':
-        return $videoObjects;
-        break;
-    }
-}
-
 
 
 ?>
@@ -360,7 +332,7 @@ $(document).keydown(function(e){
 
 echo '<link rel="shortcut icon" href="'.MICROLABEL_LABEL_LOGO.'" />';
 
-$dirList = getInfo($rootMusicDir, 'musicDirs');
+// $dirList = getInfo($rootMusicDir, 'musicDirs');
 
 //spitTitle($dirList, $fileList)////////////////////////////////////////
 // Print album Sleeve if any
@@ -368,9 +340,11 @@ $dirList = getInfo($rootMusicDir, 'musicDirs');
 
 function spitTitle($dirList, $fileList) {
 
+    global $dbh,$album_list;
+
     $thisAlbumPath = browse('current', 'mean');
-    $thisAlbumTags = getInfo($thisAlbumPath, 'thisAlbumTags');
-    $thisAlbumSleeves = getInfo($thisAlbumPath, 'thisAlbumSleeves');
+    // $thisAlbumTags = getInfo($thisAlbumPath, 'thisAlbumTags');
+    // $thisAlbumSleeves = getInfo($thisAlbumPath, 'thisAlbumSleeves');
 
     $artistName = isset($thisAlbumTags['artist']) ? $thisAlbumTags['artist'] : '';
     $albumName = isset($thisAlbumTags['album']) ? $thisAlbumTags['album'] : '';
@@ -405,12 +379,27 @@ function spitTitle($dirList, $fileList) {
         $year = $years['0'];
     }
 
-    $thisAlbumBackgroundImages = getInfo($thisAlbumPath, 'thisAlbumBackgroundImages');
+    $album_id=strip_tags($_GET['a']);
+    foreach ($dbh->query("select distinct artists.name as artist_name, albums.name as album_name
+from
+albums
+inner join album_detail on albums.id=album_detail.album_id
+inner join songs on album_detail.song_id=songs.id
+inner join song_credits on songs.id=song_credits.song_id
+inner join artists on artists.id=song_credits.artist_id
+where
+albums.id=". $album_id
+    ) as $row) {
+        if($artistName!="")$artistName.=" &amp; ";
+        $artistName.=$row["artist_name"];
+    }
+    $albumName=$row["album_name"];
+
+    // $thisAlbumBackgroundImages = getInfo($thisAlbumPath, 'thisAlbumBackgroundImages');
 
     echo '
 <title>'.$artistName. ' "'.$albumName.'" ('.$albumLabel.')</title>
-<link rel="shortcut icon" type="image/x-icon" href="'.str_replace(" ", "%20", $thisAlbumSleeves['0']).'" />
-
+<link rel="shortcut icon" type="image/x-icon" href="get_file.php?id='.$album_list[$album_id]["file_id"].'" />
 
 <style type="text/css">
 html, body {
@@ -457,7 +446,7 @@ html, body {
         $path_parts = pathinfo($thisAlbumSleeves['0']);
         $thisAlbumSleeveFileName = $path_parts['filename'].'.'.$path_parts['extension'];
         echo '
-        <a href="'.str_replace(" ", "%20", $thisAlbumSleeves['0']).'" title="'.TXT_DOWNLOAD.' '.$thisAlbumSleeveFileName.'" class="sleeve"><img style="height:100%" src="'.str_replace(" ", "%20", $thisAlbumSleeves['0']).'" alt="'.$thisAlbumSleeveFileName.'" /></a>
+        <a href="'.str_replace(" ", "%20", $thisAlbumSleeves['0']).'" title="'.TXT_DOWNLOAD.' '.$thisAlbumSleeveFileName.'" class="sleeve"><img style="height:100%" src="get_file.php?id='.$album_list[$album_id]["file_id"].'" alt="'.$thisAlbumSleeveFileName.'" /></a>
 ';
 
     }
@@ -485,7 +474,9 @@ function getTinyUrl($url) {
 // $script = $_SERVER['SCRIPT_URI'];
 // global $script;
 
-function audioList($fileList, $albumPath) {
+function audioList($album_id) {
+
+    global $dbh,$album_list;
 
   //    Pour le browse() dans le player
   //   $dirList = getInfo("OGG/", musicDirs);
@@ -503,12 +494,13 @@ function audioList($fileList, $albumPath) {
   $myScriptPath = pathinfo($_SERVER["SCRIPT_NAME"]);
   $myDir = $myScriptPath['dirname'];
 
-  $numberOfSongsInThisDirectory = getInfo($albumPath, 'numberOfSongs');
+  // $numberOfSongsInThisDirectory = getInfo($albumPath, 'numberOfSongs');
 
-  $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
+  // $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
 
+//cela va disparaitre
   foreach ($fileList as $fullFileName => $myFileName) {
-    $thisFileTags = getInfo($fullFileName, 'thisFileTags');
+    // $thisFileTags = getInfo($fullFileName, 'thisFileTags');
     $trackNumbers[] = $thisFileTags['track'];
     $trackTitles[$fullFileName] = $thisFileTags['title'];
     $track['url'] = $fullFileName;
@@ -520,9 +512,19 @@ function audioList($fileList, $albumPath) {
         ';
 
   ksort($trackTitles);
+  foreach ($dbh->query("select songs.id,songs.name,files.size
+from album_detail
+inner join songs on songs.id=album_detail.song_id
+inner join files on files.id=songs.song_file_id
+where album_detail.album_id=$album_id
+") as $fileinfo){
+      // var_dump($fileinfo);
 
-  foreach ($trackTitles as $fullFileName => $trackTitle) {
-      $thisFileTags = getInfo($fullFileName, 'thisFileTags');
+//cela deviendra un fetch sql
+//  foreach ($trackTitles as $fullFileName => $trackTitle) {
+      $fullFileName=$fileinfo["name"];
+//      $thisFileTags = getInfo($fullFileName, 'thisFileTags');
+      $file_id=$fileinfo["id"]; //en prod sera issu du resultat sql
 
       $artistName = rawurldecode($thisAlbumTags['artist']);
       $albumName = rawurldecode($thisAlbumTags['album']);
@@ -534,7 +536,8 @@ function audioList($fileList, $albumPath) {
       $albumName = rawurldecode($thisFileTags['album']);
       $albumGenre = rawurldecode($thisFileTags['genre']);
       $albumYear = $thisFileTags['year'];
-      $trackTitle = rawurldecode($thisFileTags['title']);
+//      $trackTitle = rawurldecode($thisFileTags['title']);
+      $trackTitle = $fileinfo["name"];
       $trackPlayTime = $thisFileTags['playtime'];
       $trackFileSize = $thisFileTags['size'];
       $trackBitRate = $thisFileTags['bitrate'];
@@ -606,7 +609,7 @@ function audioList($fileList, $albumPath) {
 
             <table class="songMenu">
             <tr>
-              <td><img src="img/icon_download.png" alt="'.TXT_DOWNLOAD.'" /><a title="' . $trackTitle.' ('.TXT_DOWNLOAD.')" href="download.php?d='.$thisFileNicePath.','.$fileName.'">'.TXT_DOWNLOAD.'</a></td>
+              <td><img src="img/icon_download.png" alt="'.TXT_DOWNLOAD.'" /><a title="' . $trackTitle.' ('.TXT_DOWNLOAD.')" href="get_file.php?id='.$file_id.'">'.TXT_DOWNLOAD.'</a></td>
               <td><img src="img/icon_love.png" alt="'.TXT_BUY.'" /><a href="#">'.TXT_BUY.'</a>
 
 <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
@@ -629,7 +632,7 @@ function audioList($fileList, $albumPath) {
             </tr>
             </table>
           </div>
-          <a class="downloadTuneLink" href="'.$fullFileName.'">'.TXT_DOWNLOAD.' '.$trackTitle .'</a>
+          <a class="downloadTuneLink" href="get_file.php?id='.$file_id.'">'.TXT_DOWNLOAD.' '.$trackTitle .'</a>
         </li>
             ';
 
@@ -639,82 +642,82 @@ function audioList($fileList, $albumPath) {
     <div id="musiciens">
 ';
 
-  $musiciens = xmlInfos('all_musicians');
-  $xml = xmlInfos('all_musicians');
+  // $musiciens = xmlInfos('all_musicians');
+  // $xml = xmlInfos('all_musicians');
 
-  foreach ($xml as $musicien) {
-      foreach($musicien as $key => $value) {
-          $muzikos[(string) $musicien['name']][(string) $key][] = (string) $value;
-      }
-  }
+  // foreach ($xml as $musicien) {
+  //     foreach($musicien as $key => $value) {
+  //         $muzikos[(string) $musicien['name']][(string) $key][] = (string) $value;
+  //     }
+  // }
 
 
-  foreach ($muzikos as $name => $muziko) {
-      $myName = $name;
-      $thisZikoInstrs = array();
-      $thisZikoEmails = array();
-      $thisZikoTwitters = array();
-      $numberOfIntruments = 0;
-      $numberOfContacts = 0;
-      $myEmail = $muziko['email'][0];
-      $myTwitter = $muziko['twitter'][0];
-      $hash = md5(strtolower(trim($myEmail)));
-      $thisGravatar = 'http://www.gravatar.com/avatar/'.$hash.'?d=retro';
-      foreach($muziko as $key => $value) {
-          foreach ($value as $val) {
-              if ($key == 'instrument') {
-                  $thisZikoInstrs[] = $val;
-              }
-              if ($key == 'email') {
-                  $thisZikoEmails[] = $val;
-              }
-              if ($key == 'twitter') {
-                  $thisZikoTwitters[] = $val;
-              }
-          }
-      }
+//   foreach ($muzikos as $name => $muziko) {
+//       $myName = $name;
+//       $thisZikoInstrs = array();
+//       $thisZikoEmails = array();
+//       $thisZikoTwitters = array();
+//       $numberOfIntruments = 0;
+//       $numberOfContacts = 0;
+//       $myEmail = $muziko['email'][0];
+//       $myTwitter = $muziko['twitter'][0];
+//       $hash = md5(strtolower(trim($myEmail)));
+//       $thisGravatar = 'http://www.gravatar.com/avatar/'.$hash.'?d=retro';
+//       foreach($muziko as $key => $value) {
+//           foreach ($value as $val) {
+//               if ($key == 'instrument') {
+//                   $thisZikoInstrs[] = $val;
+//               }
+//               if ($key == 'email') {
+//                   $thisZikoEmails[] = $val;
+//               }
+//               if ($key == 'twitter') {
+//                   $thisZikoTwitters[] = $val;
+//               }
+//           }
+//       }
 
-      echo '
-    <div class="musicien">
-';
-      echo '<h5 class="musicien"><a href="mailto:'.$myEmail.'"><img class="gravatar" alt="Email" title="Email '.$myName.'" src="'.$thisGravatar.'"></a>'.$myName.'</h5>
-            <table class="muzikosTable">
-                <tr>
-                <td class="instruments" title="'.count($thisZikoInstrs).'">';
-      foreach ($thisZikoInstrs as $instrument) {
-          $numberOfIntruments++;
-          if (file_exists('img/instruments/'.$instrument.'.png')) {
-              $instrument_icon = 'img/instruments/'.$instrument.'.png';
-          } else {
-              $instrument_icon = 'img/instruments/unknown_instrument.png';
-          }
+//       echo '
+//     <div class="musicien">
+// ';
+//       echo '<h5 class="musicien"><a href="mailto:'.$myEmail.'"><img class="gravatar" alt="Email" title="Email '.$myName.'" src="'.$thisGravatar.'"></a>'.$myName.'</h5>
+//             <table class="muzikosTable">
+//                 <tr>
+//                 <td class="instruments" title="'.count($thisZikoInstrs).'">';
+//       foreach ($thisZikoInstrs as $instrument) {
+//           $numberOfIntruments++;
+//           if (file_exists('img/instruments/'.$instrument.'.png')) {
+//               $instrument_icon = 'img/instruments/'.$instrument.'.png';
+//           } else {
+//               $instrument_icon = 'img/instruments/unknown_instrument.png';
+//           }
 
-          echo '<img class="instrument" title="'.$myName.' plays '.$instrument.' on this album" alt="'.$myName.' plays '.$instrument.' on this album" src="'.$instrument_icon.'">';
-      }
+//           echo '<img class="instrument" title="'.$myName.' plays '.$instrument.' on this album" alt="'.$myName.' plays '.$instrument.' on this album" src="'.$instrument_icon.'">';
+//       }
 
-      echo '</td>
+//       echo '</td>
 
-            <td class="contacts" title="'.(count($thisZikoTwitters) + count($thisZikoEmails)).'">
+//             <td class="contacts" title="'.(count($thisZikoTwitters) + count($thisZikoEmails)).'">
 
-            <a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>
+//             <a href="mailto:'.$myEmail.'"><img class="contact" alt="Email" title="Email '.$myName.'" src="img/contacts/email.png"></a>
 
-            <a href="http://twitter.com/'.$myTwitter.'"><img class="instrument" alt="Twitter" title="Twitter account of '.$myName.'" src="img/contacts/twitter.png"></a>
-            </td>
-                </tr>
-                </table>
+//             <a href="http://twitter.com/'.$myTwitter.'"><img class="instrument" alt="Twitter" title="Twitter account of '.$myName.'" src="img/contacts/twitter.png"></a>
+//             </td>
+//                 </tr>
+//                 </table>
 
-';
+// ';
 
-      echo '
-        </div>';
-  }
+//       echo '
+//         </div>';
+//   }
 
-// ⌨ ☺ ☠
+// // ⌨ ☺ ☠
 
-  echo '
-</div>
-</div>
-';
+//   echo '
+// </div>
+// </div>
+// ';
 
 
 
@@ -725,7 +728,8 @@ function audioList($fileList, $albumPath) {
           MlPlayer("MlPlayer");
         </script>
         <div id="message"></div>
-    ';
+    '
+      ;
 }
 
 function videoList($fileList, $albumPath) {
@@ -755,9 +759,14 @@ if (!empty($videos_objects)) {
 // Build label "home" index page with all the CD Sleeves
 // Construit la page d'accueil en listant tous les albums
 
-function index($dirList, $labelName) {
+function index() {
 
-    $numberOfAlbums = count($dirList);
+    global $dbh,$album_list;
+
+    $stmt = $dbh->query('select count(*) as nb from albums where status=1');
+    $row = $stmt->fetch();
+
+    $numberOfAlbums = $row['nb'];
 
     $script = isset($_SERVER["PHP_SELF"]) ? $_SERVER["PHP_SELF"] : '';
 
@@ -787,27 +796,38 @@ echo '
 ';
 }
 
-    foreach ($dirList as $key => $albumPath) {
-        $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
+    // foreach ($dirList as $key => $albumPath) {
+        // $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
 
-        $artistName = $thisAlbumTags['artist'];
-        $albumName = $thisAlbumTags['album'];
+    foreach ($album_list as $album) {
+
+        $artistName = "";
+        foreach ($dbh->query("select distinct artists.name
+from
+album_detail
+inner join songs on album_detail.song_id=songs.id
+inner join song_credits on songs.id=song_credits.song_id
+inner join artists on artists.id=song_credits.artist_id
+where album_detail.album_id=". $album["album_id"]
+        ) as $artist){
+            if($artistName!="")$artistName.=" &amp; ";
+            $artistName.=$artist["name"];
+        }
+        $albumName = $album['name'];
         $albumGenre = $thisAlbumTags['genre'];
         $albumYear = $thisAlbumTags['year'];
-
+        $thisAlbumSleeve="get_file.php?id=".($album["file_id"]==""?"-4":$album["file_id"]);
         $labelName = isset($thisAlbumTags['organization']) ? $thisAlbumTags['organization'] : 'No Label';
         $labelName = ($labelName == " " || $labelName == "&nbsp;") ? 'No Label' : $thisAlbumTags['organization'];
 
         $newAlbumSexyUrlElements = explode("/", $dirList[$key]);
         $newAlbumSexyUrl = $newAlbumSexyUrlElements[1].",".$newAlbumSexyUrlElements['2'];
-        $thisAlbumSleeve = getInfo($albumPath, 'thisAlbumSleeve');
+        // $thisAlbumSleeve = getInfo($albumPath, 'thisAlbumSleeve');
 
         echo '
                 <li>
-                    <a href="?a='.$newAlbumSexyUrl.'">
+                    <a href="?a='.$album['album_id'].'">
                         <img class="content" src="'.$thisAlbumSleeve.'" alt="'.$artistName.' - '.$albumName.' ('.$labelName.')" />
-                    </a>
-                    <a href="?a='.$newAlbumSexyUrl.'">
                         <p class="caption">'.$artistName.' - '.$albumName.' ('.$labelName.')</p>
                     </a>
                 </li>
@@ -848,94 +868,18 @@ paypal.use( ["login"], function(login) {
 // Construit la logique précédent <= courant => suivant
 // Navigate through $dirList items
 
-function browse($position, $pathStyle) {
-
-    $rootMusicDir = MICROLABEL_MUSIC_DIR;
-
-    $dirList = getInfo($rootMusicDir, 'musicDirs');
-
-    $nicePath = strip_tags($_GET['a']);
-    $slash = "/";
-    $dash = ",";
-
-    $meanPath = $rootMusicDir.'/'.str_replace($dash, $slash, $nicePath);
-    $directoryToScan = $meanPath;
-
-    $dirListSize = count($dirList);
-
-    $firstDir = trim(rtrim($dirList[0], $slash), $slash);
-    $lastDir = trim(rtrim($dirList[$dirListSize-1], $slash), $slash);
-
-    $currentDir = trim(rtrim($directoryToScan, $slash), $slash);
-    $dirListKey = array_search($currentDir, $dirList);
-
-    $prevPathElements = explode($slash, $dirList[$dirListKey-1]);
-    $herePathElements = explode($slash, $dirList[$dirListKey]);
-    $nextPathElements = explode($slash, $dirList[$dirListKey+1]);
-
-    $firstDirPathElements = explode($slash, $dirList[0]);
-    $lastDirPathElements = explode($slash, $dirList[$dirListSize-1]);
-
-    $niceFirst = $firstDirPathElements[1].$dash.$firstDirPathElements[2];
-    $niceLast = $lastDirPathElements[1].$dash.$lastDirPathElements[2];
-
-    $nicePrev = $prevPathElements[1].$dash.$prevPathElements[2];
-    $niceHere = $herePathElements[1].$dash.$herePathElements[2];
-    $niceNext = $nextPathElements[1].$dash.$nextPathElements[2];
-
-    $meanPrev = $prevPathElements[1].$slash.$prevPathElements[2];
-    $meanNext = $nextPathElements[1].$slash.$nextPathElements[2];
-
-    switch ($pathStyle) {
-    case 'mean':
-        $prev = ltrim(ltrim($dirList[$dirListKey-1], '.'), $slash);
-        $here = ltrim(ltrim($dirList[$dirListKey], '.'), $slash);
-        $next = ltrim(ltrim($dirList[$dirListKey+1], '.'), $slash);
-        break;
-    case 'nice':
-        $prev = $nicePrev;
-        $here = $niceHere;
-        $next = $niceNext;
-        $firstDir = $niceFirst;
-        $lastDir = $niceLast;
-        break;
-    case 'extraNice':
-        $prev = strtr($nicePrev, "_", " ");
-        $here = strtr($niceHere, "_", " ");
-        $next = strtr($niceNext, "_", " ");
-        $firstDir = strtr($niceFirst, "_", " ");
-        $lastDir = strtr($niceLast, "_", " ");
-
-        $prev = str_replace(",", " - ", $prev);
-        $here = str_replace(",", " - ", $here);
-        $next = str_replace(",", " - ", $next);
-        $firstDir = str_replace(",", " - ", $firstDir);
-        $lastDir = str_replace(",", " - ", $lastDir);
-
-        break;
+function browse($album_id,$position) {
+    global $album_list;
+    reset($album_list);
+    if(!is_numeric($album_id))return 0;
+    while(current($album_list)["album_id"]!=$album_id)next($album_list);
+    if($position=='prev'){
+        if(!prev($album_list)) end($album_list);
     }
-
-    switch ($position) {
-    case 'prev':
-        if ($dirListKey === 0) {
-            return $lastDir;
-        }
-        else {
-            return $prev;
-        }
-        break;
-    case 'current':
-        return $here;
-        break;
-    case 'next':
-        if ($dirListKey === $dirListSize-1) {
-            return $firstDir;
-        }
-        else {
-            return $next;
-        }
-        break;
+    else{
+        if(!next($album_list)) reset($album_list);
     }
+    return current($album_list)["album_id"];
 }
 
 function bytestostring($size, $precision = 0) {
@@ -946,22 +890,24 @@ function bytestostring($size, $precision = 0) {
 }
 
 
-function albumBrowser($labelName) {
-
-    $prevAlbumSleeve = getInfo(browse('prev', 'mean'), 'thisAlbumSleeve');
-    $nextAlbumSleeve = getInfo(browse('next', 'mean'), 'thisAlbumSleeve');
+function albumBrowser($album_id) {
+    global $album_list;
+    $prev_album=browse($album_id,'prev');
+    $next_album=browse($album_id,'next');
+    $prevAlbumSleeve = "get_file.php?id=".$album_list[$prev_album]["file_id"];
+    $nextAlbumSleeve = "get_file.php?id=".$album_list[$next_album]["file_id"];
 
     echo '
 <div id="albumBrowser" class="main transparent" style="position: relative;">
     <div class="left" style="position: relative; z-index: 2;">
-        <a title="'.TXT_PREVIOUS_ALBUM.' = '.browse('prev', 'extraNice').'" href="?a='.browse('prev', 'nice').'">
-        <img class="thumb" src="'.$prevAlbumSleeve.'" alt="'.TXT_PREVIOUS_ALBUM.' = '.browse('prev', 'nice').'" /></a>
+        <a title="'.TXT_PREVIOUS_ALBUM.' = '.$album_list[$prev_album]["name"].'" href="?a='.$album_list[$next_album]["file_id"].'">
+        <img class="thumb" src="'.$prevAlbumSleeve.'" alt="'.TXT_PREVIOUS_ALBUM.' = '.$album_list[$prev_album]["name"].'" /></a>
     </div>
     <div class="right" style="position: relative; z-index: 2;">
         <div class="fadeAlbums"><strong>'.TXT_NEXT_ALBUM.'</strong>
-        <p>'.browse('next', 'extraNice').'</p></div>
-        <a title="'.TXT_NEXT_ALBUM.' = '.browse('next', 'extraNice').'" href="?a='.browse('next', 'nice').'">
-        <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.browse('next', 'nice').'" /></a>
+        </div>
+        <a title="'.TXT_NEXT_ALBUM.' = '.$album_list[$prev_album]["name"].'" href="?a='.$album_list[$next_album]["file_id"].'">
+        <img class="thumb" src="'.$nextAlbumSleeve.'" alt="'.TXT_NEXT_ALBUM.' = '.$album_list[$next_album]["name"].'" /></a>
     </div>
     <div class="middle" style="position: relative; z-index: 2;">
         <a title="'.$labelName.', '.TXT_BASELINE.'" href="./"><img class="microlabel_logo" src="'.MICROLABEL_LABEL_LOGO.'" alt="label logo" /></a>
@@ -1097,16 +1043,17 @@ $meanPath = $rootMusicDir.$slash.str_replace($dash, $slash, $friendlyPath);
 $directoryToScan = $meanPath;
 $directoryToScan = trim($directoryToScan, $slash);
 
-$fileList = getInfo($directoryToScan, 'musicFiles');
+// $fileList = getInfo($directoryToScan, 'musicFiles');
 
 // Main block
 if (!isset($_GET['a'])) {
-    index($dirList, $labelName);
+    index();
 } else {
+    $album_id = strip_tags($_GET['a']);
     spitTitle($dirList, $fileList);
-    audioList($fileList, $directoryToScan);
-    videoList($fileList, $directoryToScan);
-    albumBrowser($labelName);
+    audioList($album_id);
+    // videoList($fileList, $directoryToScan);
+    albumBrowser($album_id);
     fixedFooter($dirList);
 }
 

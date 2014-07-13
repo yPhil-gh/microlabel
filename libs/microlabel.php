@@ -17,7 +17,7 @@ $httpVars= isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']) ? $HTTP_SERVER_VARS[
 $browserPrefs = substr($httpVars,'0','2');
 $cookiePrefs = htmlspecialchars($_COOKIE["lang"]);
 
-$cache = true;
+$cache = false;
 
 global $nocache;
 
