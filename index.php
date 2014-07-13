@@ -511,8 +511,7 @@ function audioList($album_id) {
         <ul id="MlPlayer">
         ';
 
-  ksort($trackTitles);
-  foreach ($dbh->query("select songs.id,songs.name,files.size
+  foreach ($dbh->query("select songs.id,songs.name,files.size,files.id as song_file_id
 from album_detail
 inner join songs on songs.id=album_detail.song_id
 inner join files on files.id=songs.song_file_id
@@ -524,7 +523,7 @@ where album_detail.album_id=$album_id
 //  foreach ($trackTitles as $fullFileName => $trackTitle) {
       $fullFileName=$fileinfo["name"];
 //      $thisFileTags = getInfo($fullFileName, 'thisFileTags');
-      $file_id=$fileinfo["id"]; //en prod sera issu du resultat sql
+      $file_id=$fileinfo["song_file_id"];
 
       $artistName = rawurldecode($thisAlbumTags['artist']);
       $albumName = rawurldecode($thisAlbumTags['album']);

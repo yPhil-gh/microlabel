@@ -287,6 +287,7 @@ function MlPlayer( list ) {
             audio_element.src=audio_path;
             // audio_element.src='get_file.php?id=' + audio_path;
 
+            alert(audio_path);
 
             //load the new audio
             audio_element.load();
