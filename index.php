@@ -353,14 +353,14 @@ function spitTitle($dirList, $fileList) {
     $albumYear = isset($thisAlbumTags['year']) ? $thisAlbumTags['year'] : '';
     $albumLabel = isset($thisAlbumTags['organization']) ? $thisAlbumTags['organization'] : '';
 
-    $genres = array_unique($albumGenre);
-    $years = array_unique($albumYear);
+    // $genres = array_unique($albumGenre);
+    // $years = array_unique($albumYear);
 
-    foreach ($genres as $key => $value) {
-        if (is_null($value) || $value == "" || $value == " " || $value == "&nbsp;") {
-            unset($genres[$key]);
-        }
-    }
+    // foreach ($genres as $key => $value) {
+    //     if (is_null($value) || $value == "" || $value == " " || $value == "&nbsp;") {
+    //         unset($genres[$key]);
+    //     }
+    // }
 
     if (is_array($genres)) {
         $genre = implode(", ", $genres);
@@ -499,13 +499,13 @@ function audioList($album_id) {
   // $thisAlbumTags = getInfo($albumPath, 'thisAlbumTags');
 
 //cela va disparaitre
-  foreach ($fileList as $fullFileName => $myFileName) {
-    // $thisFileTags = getInfo($fullFileName, 'thisFileTags');
-    $trackNumbers[] = $thisFileTags['track'];
-    $trackTitles[$fullFileName] = $thisFileTags['title'];
-    $track['url'] = $fullFileName;
-    $numberOfSongs++;
-  }
+  // foreach ($fileList as $fullFileName => $myFileName) {
+  //   // $thisFileTags = getInfo($fullFileName, 'thisFileTags');
+  //   $trackNumbers[] = $thisFileTags['track'];
+  //   $trackTitles[$fullFileName] = $thisFileTags['title'];
+  //   $track['url'] = $fullFileName;
+  //   $numberOfSongs++;
+  // }
 
   echo '
         <ul id="MlPlayer">
@@ -872,7 +872,8 @@ function browse($album_id,$position) {
     global $album_list;
     reset($album_list);
     if(!is_numeric($album_id))return 0;
-    while(current($album_list)["album_id"]!=$album_id)next($album_list);
+    while((current($album_list)["album_id"]!=$album_id)&&(current($album_list)["album_id"]!=0))next($album_list);
+    if (current($album_list)["album_id"]==0) return 0;
     if($position=='prev'){
         if(!prev($album_list)) end($album_list);
     }
